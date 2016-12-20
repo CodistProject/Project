@@ -6,27 +6,18 @@
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>바부</title>
-		<style>		
+		<style>
+			@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+		
+			html, body, h1, h2, h3, h4, h5, h6, li, p, table {
+				font-family: 'Jeju Gothic', serif;
+				font-size: 13pt;
+			}	
 			#head {
 				margin-left: 10px;
 				margin-right: 10px;
 				height: 80px;			
 				text-align: center;
-			}
-			
-			#head h1 {
-				color: #6BADFF;
-				padding-left: 50px;
-			}
-			
-			#head h2 {
-				color: #6BFF7C;
-				padding-left: 100px;
-			}
-			
-			#head h3 {
-				color: #E5FF6B;
-				padding-left: 150px;
 			}
 			
 			#weather {
@@ -36,17 +27,16 @@
 				float: left;
 				margin-left: 10px;
 				width: 120px;
-				height: 800px;				
+				height: 800px;
+				font: bold; 				
 			}
 			
 			#weather a {
 				padding-top: 5px;
 				display: block;
 				height: 20px;
-				text-align: center;
-				color: #505050;
-				font-weight: bold;
-				text-decoration: none;
+				text-align: center;				
+				text-decoration: none;				
 			}
 			
 			#weather a.top:hover {
@@ -62,7 +52,7 @@
 			}
 			
 			#weather a:visited {
-				color: #505050;
+				color: black;
 			}
 			
 			#extra {
