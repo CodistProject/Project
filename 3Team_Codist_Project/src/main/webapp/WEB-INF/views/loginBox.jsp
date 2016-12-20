@@ -21,13 +21,13 @@
 				<tr >
 					<td class="login">ID</td>
 					<td class="login">
-						<input type="text" name="#"/>
+						<input type="text" name="userId"/>
 					</td>
 				</tr>
 				<tr>
 					<td class="login">PW</td>
 					<td class="login">
-						<input type="password" name="#"/>
+						<input type="password" name="userPass"/>
 					</td>
 				</tr>
 				<tr>

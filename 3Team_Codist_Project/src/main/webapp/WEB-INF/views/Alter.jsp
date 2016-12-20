@@ -37,23 +37,23 @@
       <table id="a">
          <thead>
             <tr>
-               <td colspan="5"> <h1>물물 교환 게시판</h1></td>
+               <td colspan="5"> <h1>물물교환 게시판</h1></td>
             </tr>
          
             <tr>
                <th class="b">번호</th>               
                <th class="b">제목</th>
-               <th class="b">이미지</th>
+               <th class="b">이미지</th>
                <th class="b">작성자</th>
-               <th class="b">조회수</th>
+               <th class="b">조회수</th>
             </tr>
          </thead>
          <tbody id="list">         
-            <!-- 리스트가 출력될 영역 -->
-         </tbody>
+        	<!-- 내용이 들어갈 자리 -->    
+        </tbody>
          <tr>
             <td colspan="5" id="paging">
-               <div id="pagenation">이전 1 2 3 4 5 6 다음</div>
+               <div id="pagenation">이전 1 2 3 4 5 6 다음</div>
             </td>
          </tr>
       </table>
