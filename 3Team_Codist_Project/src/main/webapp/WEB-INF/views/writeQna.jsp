@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Q & A 게시판<글쓰기 </title>
+		<title>Q & A 게시판 글쓰기 </title>
 		<script src ="//code.jquery.com/jquery-3.1.0.min.js"></script>
 		<style>
 		

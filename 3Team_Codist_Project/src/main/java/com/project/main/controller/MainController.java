@@ -34,6 +34,6 @@ private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@RequestMapping(value="/")
 	public String home(){
 		logger.info("");
-		return "FT_Board";
+		return "writeQna";
 	}
 }
