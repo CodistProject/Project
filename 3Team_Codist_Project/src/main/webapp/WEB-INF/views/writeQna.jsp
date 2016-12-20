@@ -20,6 +20,7 @@
         }
         #center2{
         	position: relative;
+        	font-size:30px;
             left:300px;
             top: 10px;
             width: 100px;
@@ -27,6 +28,7 @@
             margin-bottom: 5px;
             float: left;
             text-align: center;
+            
         }
         table{
 				width:100%;
@@ -55,7 +57,7 @@
 		}
 		.button{
 			position: relative;
-			left: 230px;
+			left: 280px;
 		}
 		/* 버튼 css */
 		.button
@@ -104,7 +106,7 @@
 	<body>
 			<jsp:include page="index.jsp"></jsp:include>
 		<div id="center">
-			<div id ="center2"><h1>Q & A</h1></div>
+			<div id ="center2">Q & A</div>
     		<table>
     			
     			<tr>
@@ -113,7 +115,7 @@
     			</tr>
     			<tr>
     				<td>작성자</td>
-    				<td><input type="text" value="${sessionScope.userId}" readonly/></td>
+    				<td><input type="text" value="로그인된 아이디" readonly/></td>
     			</tr>
     			<tr>
 					<td>내용</td>

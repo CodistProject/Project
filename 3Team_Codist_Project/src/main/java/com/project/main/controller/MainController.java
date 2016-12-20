@@ -14,6 +14,6 @@ private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@RequestMapping(value="/")
 	public String home(){
 		logger.info("메인 페이지  요청");
-		return "CodiWrite";
+		return "index";
 	}
 }
