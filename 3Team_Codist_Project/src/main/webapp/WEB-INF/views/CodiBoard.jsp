@@ -16,84 +16,89 @@
 <html>	
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>패션토크 게시판</title>
+		<title>코디 게시판</title>
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 		<style>			
-			.Ft_board1{
-				border : 1px solid white;			
-				border-top-color : black;				
+			.Cd_board1{				
+				width : 100%;			
+			}
+			.Cd_board2{												
 				border-bottom-color : black;
-				width : 100%;
+				width : 100%;				
 			}
-			.Ft_board2{
-				border : 1px solid white;								
-				border-bottom-color : black;
-				width : 100%;
-			}
-			.Ft_board2 td{
-				border : 1px solid;								
-			}
-			#btn_write, #Ft_pageNum{
+			
+			#Cd_pageNum{
 				border : 1px solid white;	
 				border-top-color : black;				
 				border-bottom-color : black;	
 			}		
-			#Ft_sub{
-				font-size : 30pt;			
-				text-align : center;									
-			}			
-			.Ft_subject{
+			#Cd_sub{
+				font-size : 30pt;				
 				text-align : center;
-			}
-			#Ft1{
-				border : 1px solid white;	
-				border-top-color : black;
-				border-right-color : black;				
-				border-bottom-color : black;
-			}
-			#Ft6{
-				border : 1px solid white;	
-				border-top-color : black;
-				border-left-color : black;				
-				border-bottom-color : black;
-			}
-			.Ft_subject{
-				background-color : yellow;
+				border : 1px solid white;
+				border-bottom-color : black;	
+				border-top-color : black;												
 			}			
+					
 		</style>
 	</head>
 	<body>		
 		<jsp:include page="index.jsp"/>
 		<div class="content">		
-		<table class="Ft_board1" align="center">
+		<table class="Cd_board1" align="center">
 			<tr>
-			 	<td id="Ft_sub" colspan="6">
-					<b>패션토크 게시판</b>												
+			 	<td id="Cd_sub" colspan="4">
+					<b>코디 게시판</b>												
 				</td>
 			</tr>				
 		</table>
 		</br>
-		<table class="Ft_board2" align="center">
+		<table class="Cd_board2" align="center">
 			<thead>		
 				<tr>
-					<td id="btn_write" colspan="6" align="right">
-						<button onclick="location.href='./컨트롤러 글쓰기 기능으로'">글쓰기</button>
+					<td colspan="4" align="right">
+						<button onclick="location.href='#'">글쓰기</button>
+						<button onclick="location.href='#'">등록</button>
 					</td>					
 				</tr>		
 				<tr>
-					<td class="Ft_subject" id="Ft1">글 번호</td>
-					<td class="Ft_subject" id="Ft2">제목</td>
-		    		<td class="Ft_subject" id="Ft3">작성자</td>				
-					<td class="Ft_subject" id="Ft4">이미지</td>
-					<td class="Ft_subject" id="Ft5">조회수</td>
-					<td class="Ft_subject" id="Ft6">추천수</td>
-				</tr>
+				<div class="img">
+					<td>
+					<input type="checkbox"/> 
+					사진1
+					</td>
+				</div>
+				<div class="img">
+					<td>
+					<input type="checkbox"/> 
+					사진2
+					</td>
+				</div>
+				<div class="img">
+					<td>
+					<input type="checkbox"/> 
+					사진3
+					</td>
+				</div>
+				<div class="img">
+					<td>
+					<input type="checkbox"/> 
+					사진4
+					</td>
+				</div>
+			</tr>
+			<tr>
+				<td>설명1</td>
+				<td>설명2</td>
+				<td>설명3</td>
+				<td>설명4</td>
+			</tr>
 			</thead>			
 			<tbody id="list">
 				<!-- 리스트가 출력될 내용 영역 tbody -->				
 			</tbody>
 			<tr>
-				<td id="Ft_pageNum" colspan="6" align="center">
+				<td id="Cd_pageNum" colspan="6" align="center">
 				<%
 					/* if(pg>BLOCK) { */
 				%>
