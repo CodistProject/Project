@@ -13,7 +13,7 @@ private Logger logger = LoggerFactory.getLogger(this.getClass());
 	//메인 페이지 이동
 	@RequestMapping(value="/")
 	public String home(){
-		logger.info("메인 페이지  요청");
-		return "index";
+		logger.info("");
+		return "FT_Board";
 	}
 }
