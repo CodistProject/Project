@@ -69,7 +69,8 @@
 				border-bottom-color : black;
 			}
 			.Ft_subject{
-				background-color : yellow;
+				background-color : #4C2FF0;
+				color: white;
 			}
 			#writeQna{
 			position: relative;
