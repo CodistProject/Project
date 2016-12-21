@@ -1,38 +1,47 @@
 package com.project.main.dto;
 
-public class MemberInfo {
-	//로그인 등에 사용되는 DTO
+public class MemberInfo {	
+
+	// 로그인, 회원정보 관련	
+	private int joinIdx;     // 회원idx
+	private String userId;   // 아이디
+	private String userPw;   // 비번
+	private String userName; // 이름
+	private int birth;       // 생년월일
+	private String gender;   // 성별
+	private String email;    // 이메일	
+	private String PW_QnA;   // 비밀번호 질문
+	private String PW_Ans;   // 비밀번호 답	
 	
-	private String id;
-	private String pw;
-	private String name;
-	private int age;
-	private String gender;
-	private String email;
-	
-	public String getId() {
-		return id;
+	public int getJoinIdx() {
+		return joinIdx;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setJoinIdx(int joinIdx) {
+		this.joinIdx = joinIdx;
 	}
-	public String getPw() {
-		return pw;
+	public String getUserId() {
+		return userId;
 	}
-	public void setPw(String pw) {
-		this.pw = pw;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-	public String getName() {
-		return name;
+	public String getUserPw() {
+		return userPw;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setUserPw(String userPw) {
+		this.userPw = userPw;
 	}
-	public int getAge() {
-		return age;
+	public String getUserName() {
+		return userName;
 	}
-	public void setAge(int age) {
-		this.age = age;
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public int getBirth() {
+		return birth;
+	}
+	public void setBirth(int birth) {
+		this.birth = birth;
 	}
 	public String getGender() {
 		return gender;
@@ -45,6 +54,17 @@ public class MemberInfo {
 	}
 	public void setEmail(String email) {
 		this.email = email;
-	}	
-
+	}
+	public String getPW_QnA() {
+		return PW_QnA;
+	}
+	public void setPW_QnA(String pW_QnA) {
+		PW_QnA = pW_QnA;
+	}
+	public String getPW_Ans() {
+		return PW_Ans;
+	}
+	public void setPW_Ans(String pW_Ans) {
+		PW_Ans = pW_Ans;
+	}
 }

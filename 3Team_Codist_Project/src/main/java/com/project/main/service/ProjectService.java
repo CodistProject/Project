@@ -9,22 +9,30 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.main.controller.SqlInterface;
 import com.project.main.dao.ProjectInterface;
+import com.spring.main.dao.BoardInterface;
 
 
 @Service
 public class ProjectService {
 
-	@Autowired SqlSession sqlSession;
+	@Autowired
+	SqlSession sqlSession;
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 
 	ProjectInterface inter = null;
 	
+<<<<<<< HEAD
 	//로그인 처리
+=======
+	// 로그인
+>>>>>>> 1168426a5467fa86804ecc714dd7d6df00db6b36
 	public ModelAndView login(Map<String, Object> params) {
 		String id = (String) params.get("userId");
 		String pw = (String) params.get("userPass");
@@ -51,6 +59,48 @@ public class ProjectService {
 		}
 		mav.setViewName(page);
 		return mav;
+	}	
+
+	// 회원 정보 수정 페이지 이동(보기)
+	public ModelAndView Mem_modify_view(String joinIdx) {
+		logger.info("회원정보 수정전 보기");		
+		inter = sqlSession.getMapper(ProjectInterface.class);		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("memberData", inter.Mem_ModiView(joinIdx));
+		mav.setViewName("Mypage_Member_Update");
+		// Mypage_View 에다가 memberData 이용해서 (MemberInfo Dtd에 담긴) 회원정보를 담아온다. 즉, 그 폼에 넣어주면됨		 
+		return mav;
 	}
+
+	// 회원정보 수정 기능
+	public ModelAndView Member_Modify(Map<String, String> params) {
+		logger.info("회원정보 수정 서비스 실행");
+		inter = sqlSession.getMapper(ProjectInterface.class);		
+		
+		int joinIdx = Integer.parseInt(params.get("joinIdx"));		
+		String userPw = params.get("userPw");
+		String userName = params.get("userName");
+		int userBirth = Integer.parseInt(params.get("birth"));
+		String userEmail = params.get("email");		
+		
+		String msg = "수정에 실패 했습니다.";
+		int success = inter.Member_Modify(joinIdx, userPw, userName, userBirth, userEmail);
+		if(success == 1){
+			msg = "수정에 성공 했습니다.";
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("msg", msg);
+		mav.setViewName("Mypage_View");
+		return mav;
+	}
+
+
+
+
+
+	
+	
+	
 
 }

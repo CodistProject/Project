@@ -24,44 +24,38 @@
 		}
 		.right{
 			text-align: right;
-		}
-		
-		
+		}		
 		</style>
  	</head>
   	<body>
   	<jsp:include page="../../resources/include/index.jsp"></jsp:include>
   	<div id="content">
-  	<div id="in">
-  	<jsp:include page="../../resources/include/Mypage.jsp"></jsp:include>
-  	</div>
-   		
-   		<table id="total" align="">
+  		<div id="in">
+  		<jsp:include page="../../resources/include/Mypage.jsp"></jsp:include>
+  		</div>
+  	</div>   		
+   		<table id="total">
    			<tr>
 				<td>
 					<div>
-				   		<table id="info">
-				   		 
+				   		<table id="info">				   		 
 				            <tr>
-				                <td>아이디 :<input type="text"/></td>
+				                <td>아이디 :<input type="text" name="userId"/>${sessionScope.userId}</td>
+				            </tr>			             
+				            <tr>
+				                <td>생년월일 :<input type="text" name="userBirth"/>${memberData.birth}</td>
 				            </tr>
-				             <tr>
-				                <td>가입일 :<input type="text"/></td>
+				            <tr>
+				                <td>성별 :<input type="text" name="userGender"/>${memberData.gender}</td>
 				            </tr>
-				             <tr>
-				                <td>생년월일 :<input type="text"/></td>
-				            </tr>
-				             <tr>
-				                <td>성별 :<input type="text"/></td>
-				            </tr>
-				             <tr>
-				                <td>작성글 :<input type="text"/> 개</td>
+				            <tr>
+				                <td>작성글 :<input type="text" name="writeCotent"/>개</td>
 				                
-				                <td>댓글 : <input type="text"/>개</td>
+				                <td>댓글 : <input type="text" name="repleContent"/>개</td>
 				            </tr>
 						    <tr>
 				            	<td colspan="2" class="right">
-				            		<input type="button" onclick="" value="회원 정보 수정"/>
+				            		<input type="button" onclick="location.href='./Member_modify'" value="회원 정보 수정"/>
 				            	</td>
 				            </tr>
 				            </table>
@@ -71,4 +65,11 @@
     		</table>
     		</div>    		
   	</body>
+  	<script>
+  	var msg = "${msg}";
+	
+	if(msg != ""){
+		alert(msg);
+	}
+  	</script>
 </html>
