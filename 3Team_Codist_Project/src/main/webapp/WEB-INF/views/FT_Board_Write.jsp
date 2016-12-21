@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>새로운 페이지</title>
+		<title>패션토크 게시판 글쓰기</title>
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 		<style>
 			table.boardwrite{
