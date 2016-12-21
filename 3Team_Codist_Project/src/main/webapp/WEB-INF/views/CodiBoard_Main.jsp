@@ -42,8 +42,9 @@
 					
 		</style>
 	</head>
-	<body>		
-		<jsp:include page="index.jsp"/>
+	<body>
+			
+		<jsp:include page="../../resources/include/index.jsp"/>
 		<div class="content">		
 		<table class="Cd_board1" align="center">
 			<tr>

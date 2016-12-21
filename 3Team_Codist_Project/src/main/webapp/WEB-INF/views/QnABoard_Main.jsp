@@ -121,7 +121,7 @@
 		</style>
 	</head>
 	<body>		
-		<jsp:include page="index.jsp"/>
+		<jsp:include page="../../resources/include/index.jsp"/>
 		<div class="center">		
 		<table class="Ft_board1" align="center">
 			<tr>

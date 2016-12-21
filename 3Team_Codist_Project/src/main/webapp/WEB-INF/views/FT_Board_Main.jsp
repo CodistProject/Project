@@ -62,8 +62,9 @@
 			}			
 		</style>
 	</head>
-	<body>		
-     <jsp:include page="index.jsp"/>
+	<body>
+			
+     <jsp:include page="../../resources/include/index.jsp"/>
  		<div class="content">
 		<table class="Ft_board1" align="center">
 			<tr>

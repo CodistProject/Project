@@ -31,7 +31,7 @@
 		</style>
 	</head>
 	<body>
-		<jsp:include page="index.jsp"/>
+		<jsp:include page="../../resources/include/index.jsp"/>
 		<div class="content">
 		<form action="#" method="post" enctype="multipart/form-data">		
 		<table class="boardwrite">

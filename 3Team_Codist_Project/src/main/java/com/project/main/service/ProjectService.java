@@ -24,6 +24,7 @@ public class ProjectService {
 
 	ProjectInterface inter = null;
 	
+	//로그인 처리
 	public ModelAndView login(Map<String, Object> params) {
 		String id = (String) params.get("userId");
 		String pw = (String) params.get("userPass");
@@ -33,15 +34,16 @@ public class ProjectService {
 		logger.info("id: {}",id);
 		logger.info("pw: {}",pw);
 		
-		String page = "index";		
+		String page = "ioi";		
 		if(id == null || pw == null){
-			page="index";
+			mav.addObject("msg","응 여기 안와..");
 		}else{
 			inter = sqlSession.getMapper(ProjectInterface.class);			
-			String idx=inter.login(id, pw);
-			System.out.println(idx);
+			
+			String result=inter.login(id, pw);
+			System.out.println(result);
+			
 			if(inter.login(id, pw) != null){
-				page = "AdminPage";
 				session.setAttribute("userId", id);
 			}else{
 				mav.addObject("msg","아이디 또는 비밀번호를 확인 하세요");

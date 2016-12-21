@@ -38,7 +38,7 @@
 		</style>
 	</head>
 	<body>
-	<jsp:include page="index.jsp"></jsp:include>
+	<jsp:include page="../../resources/include/index.jsp"></jsp:include>
 	<div id="center">
 	<form action="update" method="post">
 		<table>

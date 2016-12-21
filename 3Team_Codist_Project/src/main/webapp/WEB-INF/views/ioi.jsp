@@ -28,7 +28,9 @@
 		</style>
 	</head>
 	<body>
-		<jsp:include page="index.jsp"></jsp:include>
+		<div>
+			<jsp:include page="../../resources/include/index.jsp"></jsp:include>
+		</div>
 		<div class="content">
 			BEST 코디
 			<div class="bord">
@@ -47,5 +49,11 @@
 		</div>
 		
 	</body>
-	<script></script>
+	<script>
+		var msg = "${msg}";
+		console.log("msg : "+msg);
+		if(msg != ""){
+			alert(msg);
+			}
+	</script>
 </html>

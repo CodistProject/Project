@@ -169,9 +169,13 @@
 		</div>	
 		
 		<div id="extra">
-			<div>
-				<jsp:include page="loginBox.jsp"></jsp:include>
-				<jsp:include page="login_Session.jsp"></jsp:include>
+			<div id="loginSession">
+				<c:if test="${sessionScope.userId ==null}">
+					<jsp:include page="loginBox.jsp"></jsp:include>
+				</c:if>
+				<c:if test="${sessionScope.userId !=null}">
+					<jsp:include page="login_Session.jsp"></jsp:include>
+				</c:if>
 			</div>
 			<br/>
 				<table class="serch">
@@ -205,5 +209,10 @@
 			</table>
 		</div>
 					
-	</body>	
+	</body>
+	<script>
+		var msg = "${msg}";
+		var userId ="${sessionScope.userId}";
+		
+	</script>	
 </html>

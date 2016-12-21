@@ -35,7 +35,7 @@
 	</head>
 	<body>
 	<div>
-		<jsp:include page="index.jsp"/>
+		<jsp:include page="../../resources/include/index.jsp"/>
 	</div>
 		<table id="SignUp_sub" align="center">
 			<tr>

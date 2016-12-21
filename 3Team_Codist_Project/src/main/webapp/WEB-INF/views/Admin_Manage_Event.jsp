@@ -16,8 +16,9 @@
 			}
 		</style>
 	</head>
-	<body>
-		<jsp:include page="index.jsp"/>
+	<body>		
+		
+		<jsp:include page="../../resources/include/index.jsp"/>
 		<div class="content">
 		<h3>VS 이벤트</h3>
 		<p>사진 선택</p>
