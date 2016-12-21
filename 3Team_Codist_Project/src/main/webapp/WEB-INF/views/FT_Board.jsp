@@ -39,7 +39,8 @@
 				border-bottom-color : black;	
 			}		
 			#Ft_sub{
-				font-size : 30pt;			
+				font-size : 30pt;
+				font-family : 굴림체;
 				text-align : center;									
 			}			
 			.Ft_subject{
@@ -63,8 +64,9 @@
 		</style>
 	</head>
 	<body>		
+
 		<jsp:include page="index.jsp"/>
-		<div class="content">		
+		<div class="content">
 		<table class="Ft_board1" align="center">
 			<tr>
 			 	<td id="Ft_sub" colspan="6">
