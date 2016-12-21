@@ -171,7 +171,7 @@
 		<div id="extra">
 			<div>
 				<jsp:include page="loginBox.jsp"></jsp:include>
-				<jsp:include page="login.jsp"></jsp:include>
+				<jsp:include page="login_Session.jsp"></jsp:include>
 			</div>
 			<br/>
 				<table class="serch">

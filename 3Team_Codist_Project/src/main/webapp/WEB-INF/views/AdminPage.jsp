@@ -5,7 +5,7 @@
    <head>
       <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <title>Insert title here</title>
+      <title>관리자 페이지 메뉴</title>
       <style>
          #Admin
          {

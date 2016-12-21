@@ -33,7 +33,7 @@
   	<jsp:include page="index.jsp"></jsp:include>
   	<div id="content">
   	<div id="in">
-  	<jsp:include page="mypagehome.jsp"></jsp:include>
+  	<jsp:include page="Mypage.jsp"></jsp:include>
   	</div>
    		
    		<table id="total" align="">

@@ -31,7 +31,9 @@
 			
 			.winner{
 				float: right;
-				padding: 15px;			
+				padding: 15px;
+		
+				width:50px;			
 			}
 			
 			.event{				
@@ -50,9 +52,25 @@
 	</head>
 	<body>		
 		<div id="popup">
-			<div class="winner">				
-				<a class= "winnerclick" href="#">당첨확인</a>				
-				
+			<div class="winner">
+			<table>
+			<tr>
+				<td>				
+				<a class= "winnerclick" href="#">Daily Event</a>				
+				</td>
+			</tr>
+			
+			<tr>
+				<td>	
+				<a class= "winnerclick" href="#">Time Event</a>	
+				</td>
+			</tr>	
+			<tr>
+				<td>
+				<a class= "winnerclick" href="#">당첨확인</a>	
+				</td>
+			</tr>
+			</table>
 			</div>	
 			<div class="event">						
 				<p>VS 이벤트</p>

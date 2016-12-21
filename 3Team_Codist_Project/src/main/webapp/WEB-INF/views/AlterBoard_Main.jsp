@@ -3,7 +3,7 @@
    <head>
       <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <title>Insert title here</title>
+      <title>물물 교환 게시판 </title>
       <style>
       .b,#a
       {
@@ -37,7 +37,7 @@
       <table id="a">
          <thead>
             <tr>
-               <td colspan="5"> <h1>물물교환 게시판</h1></td>
+               <td colspan="5"> <h1>물물 교환</h1></td>
             </tr>
          
             <tr>
