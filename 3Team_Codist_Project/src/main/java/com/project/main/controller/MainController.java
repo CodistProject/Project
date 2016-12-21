@@ -35,6 +35,19 @@ private Logger logger = LoggerFactory.getLogger(this.getClass());
 		params.put("session", session);
 		return service.login(params);
 	}
+	//아이디찾기 이동
+	@RequestMapping(value="/Find_Id")
+	public String findId(){
+		logger.info("아이디찾기 이동");
+	return "Find_Id";
+	}
+	//비밀번호 찾기 이동
+		@RequestMapping(value="/Find_Pw")
+		public String findPw(){
+			logger.info("비밀번호찾기 이동");
+		return "Find_Pw";
+		}
+
 
 
 	
