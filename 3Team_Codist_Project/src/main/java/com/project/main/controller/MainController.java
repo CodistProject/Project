@@ -19,6 +19,13 @@ public class MainController {
 	@Autowired
 	ProjectService service;
 private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	//메인 페이지 이동
+	@RequestMapping(value="/")
+	public String home(){
+		logger.info("메인 페이지 요청");
+		return "main";
+	}
 	
 	//로그인 처리
 	@RequestMapping(value="/login")
@@ -30,10 +37,5 @@ private Logger logger = LoggerFactory.getLogger(this.getClass());
 	}
 
 
-	//메인 페이지 이동
-	@RequestMapping(value="/")
-	public String home(){
-		logger.info("");
-		return "writeQna";
-	}
+	
 }

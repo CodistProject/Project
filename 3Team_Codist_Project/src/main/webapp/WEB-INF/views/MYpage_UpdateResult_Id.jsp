@@ -67,7 +67,7 @@
 	<body>
 	<jsp:include page="index.jsp"></jsp:include>
 	<div id="center2">
-            <h2>비밀번호를 이메일로 전송 하였습니다.</h2>
+            <h2>아이디를 이메일로 전송 하였습니다.</h2>
         <center><input id="btn1" type="button" onclick="move()" value="확인"/></center>
         </div>
     </body>
