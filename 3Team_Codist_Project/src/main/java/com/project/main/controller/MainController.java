@@ -24,7 +24,7 @@ private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@RequestMapping(value="/")
 	public String home(){
 		logger.info("메인 페이지 요청");
-		return "main";
+		return "ioi";
 	}
 	
 	//로그인 처리
@@ -35,6 +35,7 @@ private Logger logger = LoggerFactory.getLogger(this.getClass());
 		params.put("session", session);
 		return service.login(params);
 	}
+<<<<<<< HEAD
 	//아이디찾기 이동
 	@RequestMapping(value="/Find_Id")
 	public String findId(){
@@ -50,5 +51,16 @@ private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
 
+=======
+>>>>>>> bac42583f9c93c5faabe22af7daf3746130e09fb
 	
+	//회원가입 페이지 이동
+	@RequestMapping(value="/join")
+	public String join(){
+		logger.info("회원가입 폼으로 이동");
+		return "JoinForm";
+	}
+	
+	
+
 }

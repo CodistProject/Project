@@ -19,7 +19,7 @@
  	</head>
   	<body>
   	<div id="in">
-  	<jsp:include page="Mypage.jsp"></jsp:include>
+  <jsp:include page="../../resources/include/Mypage.jsp"></jsp:include>
   	</div>
   	
    		<table>

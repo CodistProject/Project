@@ -36,7 +36,7 @@
       </style>
    </head>
    <body>
-   <jsp:include page="AdminPage.jsp"></jsp:include>
+   <jsp:include page="../../resources/include/AdminPage.jsp"></jsp:include>
       <div class="messageDiv">
        <span id="i">쪽지 확인</span>
         <table id="o">

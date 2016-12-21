@@ -16,7 +16,7 @@
 	<body>		
 			<table>
 				<tr >
-					<td>***님 반갑습니다.</td>				
+					<td>${sessionScope.userId}님 반갑습니다.</td>				
 				</tr>
 				<br/>
 				<tr>

@@ -16,9 +16,9 @@
  	</head>
   	<body>
    	<body>
-   	<jsp:include page="index.jsp"></jsp:include>
+   	<jsp:include page="../../resources/include/index.jsp"></jsp:include>
   		<div id="in">
-  	<jsp:include page="Mypage.jsp"></jsp:include>
+  	<jsp:include page="../../resources/include/Mypage.jsp"></jsp:include>
   	</div>
   	<div id="mem">
   		<table>

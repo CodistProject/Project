@@ -104,7 +104,7 @@
 		</style>
 	</head>
 	<body>
-			<jsp:include page="index.jsp"></jsp:include>
+			<jsp:include page="../../resources/include/index.jsp"></jsp:include>
 		<div id="center">
 			<div id ="center2">Q & A</div>
     		<table>

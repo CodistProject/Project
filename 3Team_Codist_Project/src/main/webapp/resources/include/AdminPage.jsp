@@ -34,6 +34,7 @@
       </style>
    </head>
    <body>
+   
    <jsp:include page="index.jsp"></jsp:include>
   
         <div id="Admin">

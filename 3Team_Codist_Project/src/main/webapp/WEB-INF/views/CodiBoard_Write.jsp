@@ -16,7 +16,8 @@
 		</style>
  	</head>
   	<body>
-  	<jsp:include page="index.jsp"></jsp:include>
+  	
+  	<jsp:include page="../../resources/include/index.jsp"></jsp:include>
    		<div class="content">
    		<table>
    			코디 계시판

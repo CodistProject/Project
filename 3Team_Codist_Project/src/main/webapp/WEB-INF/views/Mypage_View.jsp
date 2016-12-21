@@ -30,10 +30,10 @@
 		</style>
  	</head>
   	<body>
-  	<jsp:include page="index.jsp"></jsp:include>
+  	<jsp:include page="../../resources/include/index.jsp"></jsp:include>
   	<div id="content">
   	<div id="in">
-  	<jsp:include page="Mypage.jsp"></jsp:include>
+  	<jsp:include page="../../resources/include/Mypage.jsp"></jsp:include>
   	</div>
    		
    		<table id="total" align="">
