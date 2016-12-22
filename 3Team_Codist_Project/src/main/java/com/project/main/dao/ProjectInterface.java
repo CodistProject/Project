@@ -17,10 +17,12 @@ public interface ProjectInterface {
 	public void upHit(String idx);
 	
 	//패션토크 상세보기
-	public Object FtcontentView(String idx);
+	public Object FT_Board_Detail(String board_idx);
 	
 	//코디게시판 상세보기
-	public Object CdcontentView(String idx);	
+	public Object CodiBoard_Detail(String board_idx);
+
+		
 
 }
 

@@ -22,19 +22,19 @@
  	</update>
  	
  	<!--패션토크 상세보기  -->
- 	<!-- <select id="FT_Board_Detail" resultType="com.project.main.dto.BoardDTO">
- 		SELECT * FROM TOTAL_BOARD WHERE idx = #{param1}
- 	</select> -->
+ 	<select id="FT_Board_Detail" resultType="com.project.main.dto.BoardDto">
+ 		SELECT * FROM TOTAL_BOARD WHERE board_idx = #{param1}
+ 	</select>
  	
- 	<!--패션토크 조회수 증가  -->
+ 	<!-- 조회수 증가  -->
  	<!-- <update id="upHit">
  		UPDATE TOTAL_BOARD SET bHit = bHit+1 WHERE idx = #{param1}
  	</update> -->
  	
  	<!--코디게시판 상세보기  -->
- 	<!-- <select id="CodiBoard_Detail" resultType="com.spring.main.dto.BoardDTO">
- 		SELECT * FROM TOTAL_BOARD WHERE idx = #{param1}
- 	</select> -->
+ 	<select id="CodiBoard_Detail" resultType="com.project.main.dto.BoardDto">
+ 		SELECT * FROM TOTAL_BOARD WHERE board_idx = #{param1}
+ 	</select>
  	
  	
 </mapper>

@@ -98,28 +98,29 @@ public class ProjectService {
 	
 	//패션토크 상세보기
 	@Transactional
-	public ModelAndView FtContentView(String idx) {
+	public ModelAndView FT_Board_Detail(String board_idx) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		ModelAndView mav = new ModelAndView();
 		//조회수
-		inter.upHit(idx);
+		//inter.upHit(idx);
 		//불러오기
-		mav.addObject("content", inter.FtcontentView(idx));
-		mav.setViewName("Ft_Board_Detail");		
+		mav.addObject("content", inter.FT_Board_Detail(board_idx));
+		mav.setViewName("FT_Board_Detail");		
 		return mav;
 		
 	}
 	//코디게시판 상세보기
 	@Transactional
-	public ModelAndView CdContentView(String idx) {
+	public ModelAndView CodiBoard_Detail(String board_idx) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		ModelAndView mav = new ModelAndView();
 		//불러오기
-		mav.addObject("content", inter.CdcontentView(idx));
+		mav.addObject("content", inter.CodiBoard_Detail(board_idx));
 		mav.setViewName("CodiBoard_Detail");		
 		return mav;
 	}
 
+	
 
 
 

@@ -81,19 +81,19 @@ public class MainController {
 		return "JoinForm";
 	}
 	
-	/*//패션 토크 상세보기
+	//패션 토크 상세보기
 	@RequestMapping(value="/FT_Board_Detail")
-	public ModelAndView FtBoardDetail(@RequestParam("idx") String idx ){
+	public ModelAndView FT_Board_Detail(@RequestParam("board_idx") String board_idx ){
 	logger.info("상세보기");
-	return service.FtContentView(idx);
+	return service.FT_Board_Detail(board_idx);
 	}
 	
 	//코디게시판  상세보기
 	@RequestMapping(value="/CodiBoard_Detail")
-	public ModelAndView CodiBoardDetail(@RequestParam("idx") String idx ){
+	public ModelAndView CodiBoard_Detail(@RequestParam("board_idx") String board_idx ){
 	logger.info("상세보기");
-	return service.CdContentView(idx);
-	}*/
+	return service.CodiBoard_Detail(board_idx);
+	}
 			
 		
 			
