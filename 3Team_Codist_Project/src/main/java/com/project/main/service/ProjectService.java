@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.main.dao.ProjectInterface;
-import com.spring.main.dao.BoardInterface;
+
 
 
 

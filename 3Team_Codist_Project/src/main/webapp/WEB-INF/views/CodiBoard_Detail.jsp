@@ -67,7 +67,7 @@
 		</style>
  	</head>
   	<body>
-  	<jsp:include page="index.jsp"></jsp:include>
+  	<jsp:include page="../../resources/include/index.jsp"/>
    	<div class="content">
    		<div class="img1">
    			<img src="#" width="300" height="335" alt="이미지1"/>

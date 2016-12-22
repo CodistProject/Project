@@ -56,7 +56,7 @@
 		</style>
 	</head>
 	<body>
-		<jsp:include page="index.jsp"></jsp:include>
+		<jsp:include page="../../resources/include/index.jsp"/>
 		<div id="center">
 		<table>
 			<tr>
