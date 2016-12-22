@@ -5,6 +5,7 @@ public class MemberInfo {
 	// 로그인, 회원정보 관련	
 	private int joinIdx;     // 회원idx
 	private String userId;   // 아이디
+	private String nickName;  // 닉네임
 	private String userPw;   // 비번
 	private String userName; // 이름
 	private int birth;       // 생년월일
@@ -24,6 +25,12 @@ public class MemberInfo {
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 	public String getUserPw() {
 		return userPw;

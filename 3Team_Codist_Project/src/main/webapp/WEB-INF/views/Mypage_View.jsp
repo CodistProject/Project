@@ -40,18 +40,24 @@
 					<div>
 				   		<table id="info">				   		 
 				            <tr>
-				                <td>아이디 :<input type="text" name="userId"/>${sessionScope.userId}</td>
+				                <td>아이디 : ${sessionScope.userId}</td>
+				            </tr>
+				            <tr>
+				                <td>닉네임 : ${MemberData.nickName}</td>
+				            </tr>
+				            <tr>
+				                <td>이름 : ${MemberData.userId}</td>
 				            </tr>			             
 				            <tr>
-				                <td>생년월일 :<input type="text" name="userBirth"/>${memberData.birth}</td>
+				                <td>생년월일 :${MemberData.birth}</td>
 				            </tr>
 				            <tr>
-				                <td>성별 :<input type="text" name="userGender"/>${memberData.gender}</td>
+				                <td>성별 : ${MemberData.gender}</td>
 				            </tr>
 				            <tr>
-				                <td>작성글 :<input type="text" name="writeCotent"/>개</td>
+				                <td>작성글 : 개</td>
 				                
-				                <td>댓글 : <input type="text" name="repleContent"/>개</td>
+				                <td>댓글 : 개</td>
 				            </tr>
 						    <tr>
 				            	<td colspan="2" class="right">

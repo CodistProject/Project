@@ -11,10 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.project.main.controller.SqlInterface;
 import com.project.main.dao.ProjectInterface;
-import com.spring.main.dao.BoardInterface;
+import com.project.main.dto.MemberInfo;
+
 
 
 @Service
@@ -24,20 +23,16 @@ public class ProjectService {
 	SqlSession sqlSession;
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	
 
-	ProjectInterface inter = null;
-	
-<<<<<<< HEAD
-	//로그인 처리
-=======
+	ProjectInterface inter = null;	
+
 	// 로그인
->>>>>>> 1168426a5467fa86804ecc714dd7d6df00db6b36
-	public ModelAndView login(Map<String, Object> params) {
+	public ModelAndView login(Map<String, Object> params) {	
+		
 		String id = (String) params.get("userId");
 		String pw = (String) params.get("userPass");
 		HttpSession session = (HttpSession) params.get("session");
-		ModelAndView mav = new ModelAndView();		
+		ModelAndView mav = new ModelAndView();	
 		
 		logger.info("id: {}",id);
 		logger.info("pw: {}",pw);
@@ -52,7 +47,7 @@ public class ProjectService {
 			System.out.println(result);
 			
 			if(inter.login(id, pw) != null){
-				session.setAttribute("userId", id);
+				session.setAttribute("userId", id);				
 			}else{
 				mav.addObject("msg","아이디 또는 비밀번호를 확인 하세요");
 			}			
@@ -95,12 +90,13 @@ public class ProjectService {
 		return mav;
 	}
 
-
-
-
-
-	
-	
-	
-
+	// 회원 정보 보기
+	public ModelAndView MemberData_View(String userId) {
+		logger.info("마이페이지-회원정보 보기 기능실행");
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav = new ModelAndView();		
+		mav.addObject("MemberData", inter.MemberData_View(userId));
+		mav.setViewName("Mypage_View");
+		return mav;
+	}
 }
