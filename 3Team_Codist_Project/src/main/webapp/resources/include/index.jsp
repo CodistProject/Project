@@ -169,12 +169,12 @@
 		</div>	
 		
 		<div id="extra">
-<<<<<<< HEAD:3Team_Codist_Project/src/main/webapp/WEB-INF/views/index.jsp
+
 			<div>
 				<jsp:include page="loginBox.jsp"></jsp:include>
 				<a href="Find_Id">아이디/비밀번호 찾기</a> 
 				<jsp:include page="login_Session.jsp"></jsp:include>
-=======
+
 			<div id="loginSession">
 				<c:if test="${sessionScope.userId ==null}">
 					<jsp:include page="loginBox.jsp"></jsp:include>
@@ -182,7 +182,6 @@
 				<c:if test="${sessionScope.userId !=null}">
 					<jsp:include page="login_Session.jsp"></jsp:include>
 				</c:if>
->>>>>>> bac42583f9c93c5faabe22af7daf3746130e09fb:3Team_Codist_Project/src/main/webapp/resources/include/index.jsp
 			</div>
 			<br/>
 				<table class="serch">

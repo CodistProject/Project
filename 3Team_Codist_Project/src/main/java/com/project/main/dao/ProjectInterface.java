@@ -1,10 +1,26 @@
 package com.project.main.dao;
 
+import com.project.main.dto.MemberInfo;
+
 public interface ProjectInterface {
 	
 	//로그인 처리
-	String login(String id, String pw);
+	public String login(String id, String pw);
+
+	// 회원정보 수정 보기
+	public MemberInfo Mem_ModiView(String joinIdx);
+
+	// 회원 정보 수정
+	public int Member_Modify(int joinIdx, String userPw, String userName, int userBirth, String userEmail);
 	
+	//조회수 증가
+	public void upHit(String idx);
+	
+	//패션토크 상세보기
+	public Object FtcontentView(String idx);
+	
+	//코디게시판 상세보기
+	public Object CdcontentView(String idx);	
 
 }
 

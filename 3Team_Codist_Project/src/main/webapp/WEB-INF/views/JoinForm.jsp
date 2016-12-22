@@ -248,7 +248,7 @@ Codist는 회원관리, 서비스 개발・제공 및 향상, 안전한 인터�
 				</tr>
 				<tr>
 					<td>
-						닉네임 : <input name="SignUp_id" type="text"/>
+						닉네임 : <input name="SignUp_NickName" type="text"/>
 						<button id="nick_chk">중복 체크</button>		
 					</td>
 				</tr>
@@ -259,7 +259,7 @@ Codist는 회원관리, 서비스 개발・제공 및 향상, 안전한 인터�
 				</tr>
 				<tr>
 					<td>
-						비밀번호 확인 : <input name="PW_check" type="text"/>			
+						비밀번호 확인 : <input name="PW_check" type="text"/> <font>(비밀번호가)</font>			
 					</td>
 				</tr>
 				<tr>
@@ -290,7 +290,7 @@ Codist는 회원관리, 서비스 개발・제공 및 향상, 안전한 인터�
 				<tr>
 					<td>
 						생년월일 :				
-						<select>
+						<select name="year">
 							<option value="">----</option>
 							<option value="1997">1997</option>
 							<option value="1996">1996</option>
@@ -311,7 +311,7 @@ Codist는 회원관리, 서비스 개발・제공 및 향상, 안전한 인터�
 							<option value="1981">1981</option>
 							<option value="1980">1980</option>
 						</select>년
-						<select>
+						<select name="month">
 							<option value="">--</option>
 							<option value="12">12</option>
 							<option value="11">11</option>
@@ -326,7 +326,7 @@ Codist는 회원관리, 서비스 개발・제공 및 향상, 안전한 인터�
 							<option value="2">2</option>								
 							<option value="1">1</option>
 						</select>월
-						<select>
+						<select name="day">
 							<option value="">--</option>
 							<option value="31">31</option>
 							<option value="30">30</option>
@@ -387,4 +387,96 @@ Codist는 회원관리, 서비스 개발・제공 및 향상, 안전한 인터�
 			</table>						
 		</form>
 	</body>
+	<script>
+		var data;
+		var overChk = false;
+		var url;
+		
+		//중복체크
+		$("#chk").click(function(){		
+			url="./rest/overlay";
+			data={};
+			data.id=$("input[name='userId']").val();
+			console.log(data);
+			ajaxCall(url, data);
+		});
+		
+		//회원가입
+		$("#join").click(function(){
+			url="./rest/join";
+			data={};
+			data.id = $("input[name='SignUp_id']").val();
+			data.nickname=$("input[name='SignUp_NickName']").val();
+			data.pw = $("input[name='SignUp_pw']").val();
+			data.pwq=$("input[name='PW_Q']").val();
+			data.pwa=$("select[name='PW_Qs']").val();
+			data.pwa=$("input[name='PW_answer']").val();
+			data.name = $("input[name='SignUp_name']").val();
+			data.birth=$("select[name='year']").val()+"/"+$("select[name='month']").val()+"/"+$("select[name='day']").val()
+			data.gender = $("input[name='SignUp_gender']").val();
+			data.email = $("input[name='SignUp_email']").val();+$("select[name='mailName']").val()
+			console.log(data);
+			
+			if(validation()){
+				ajaxCall(url, data);
+			}
+		});
+		
+		//유효성 검사
+		function validation(){
+			
+			if(overChk == false){
+				alert("중복 체크를 해 주세요!!");
+				return false;
+			}else if(data.id == null || data.id == ""){
+				alert("아이디는 필수 입력 사항 입니다.");
+				return false;
+			}else if(data.pw == null || data.pw == ""){
+				alert("비밀번호는 필수 입력 사항 입니다.");
+				return false;
+			}else if(data.name == null || data.name == ""){
+				alert("이름은 필수 입력 사항 입니다.");
+				return false;
+			}else{
+				return true;
+			}		
+			
+		}	
+		
+		//요청 전송
+		function ajaxCall(reqUrl, reqData){
+			$.ajax({
+				url:reqUrl,
+				type:'get',
+				data:reqData,
+				dataType:'json',
+				success:function(d){
+					result(reqUrl, d);
+				},error:function(e){
+					console.log(e);
+				}
+			});
+		}
+		
+		function result(url, data){
+			console.log(url);
+			if(url=="./rest/overlay"){
+				if(data.use=="Y"){
+					overChk = true;
+					alert("사용 가능한 아이디 입니다.");
+				}else{
+					alert("이미 사용중인 아이디 입니다.");
+					$("input[name='userId']").val("");
+				}
+			}
+			if(url =="./rest/join"){
+				$("#popup").css("display","block");
+				$("#memberId").html(data.id);
+				$("#memberName").html(data.name);
+				$("#memberAge").html(data.age);
+				$("#memberGender").html(data.gender);
+				$("#memberEmail").html(data.email);
+			}
+		}
+	</script>
 </html>
