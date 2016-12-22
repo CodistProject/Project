@@ -38,13 +38,31 @@ public class MainController {
 		
 	}	
 	
-	// 회원정보 보기(마이페이지)
+	/*// 회원정보 보기(마이페이지)
 	@RequestMapping(value = "/MemberData_view")
 	public ModelAndView MemberData_view() {	
 		logger.info("회원정보 보기 페이지 이동");	
 		return service.MemberData_View();
+	}*/
+
+	//아이디찾기 이동
+	@RequestMapping(value="/Find_Id")
+	public String findId(){
+		logger.info("아이디찾기 이동");
+	return "Find_Id";
 	}
+<<<<<<< HEAD
 	
+=======
+	//비밀번호 찾기 이동
+		@RequestMapping(value="/Find_Pw")
+		public String findPw(){
+			logger.info("비밀번호찾기 이동");
+		return "Find_Pw";
+		}
+
+
+>>>>>>> fb8d75e06c6b05aeb2eff209457a2632b57dd449
 	// 회원정보 수정기능 실행 전 보기 (수정보기 페이지이동)
 	@RequestMapping(value = "/Member_modify_view")
 	public ModelAndView Member_modify_view(@RequestParam("joinIdx") String joinIdx) {	
@@ -59,13 +77,33 @@ public class MainController {
 		return service.Member_Modify(params);
 	}
 	
+<<<<<<< HEAD
 	
+=======
+>>>>>>> fb8d75e06c6b05aeb2eff209457a2632b57dd449
 	//회원가입 페이지 이동
 	@RequestMapping(value="/join")
 	public String join(){
 		logger.info("회원가입 폼으로 이동");
 		return "JoinForm";
 	}
+	
+	//패션 토크 상세보기
+	@RequestMapping(value="/FT_Board_Detail")
+	public ModelAndView FT_Board_Detail(@RequestParam("board_idx") String board_idx ){
+	logger.info("상세보기");
+	return service.FT_Board_Detail(board_idx);
+	}
+	
+	//코디게시판  상세보기
+	@RequestMapping(value="/CodiBoard_Detail")
+	public ModelAndView CodiBoard_Detail(@RequestParam("board_idx") String board_idx ){
+	logger.info("상세보기");
+	return service.CodiBoard_Detail(board_idx);
+	}
+			
+		
+			
 	
 	
 

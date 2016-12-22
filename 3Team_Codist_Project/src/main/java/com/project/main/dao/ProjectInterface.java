@@ -19,6 +19,19 @@ public interface ProjectInterface {
 	// 회원 정보 수정
 	public int Member_Modify(int joinIdx, String userPw, String userName, int userBirth, String userEmail);
 	
+<<<<<<< HEAD
+=======
+	//조회수 증가
+	public void upHit(String idx);
+	
+	//패션토크 상세보기
+	public Object FT_Board_Detail(String board_idx);
+	
+	//코디게시판 상세보기
+	public Object CodiBoard_Detail(String board_idx);
+
+		
+>>>>>>> fb8d75e06c6b05aeb2eff209457a2632b57dd449
 
 }
 
