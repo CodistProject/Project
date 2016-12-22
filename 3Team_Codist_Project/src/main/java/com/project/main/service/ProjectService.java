@@ -1,5 +1,6 @@
 package com.project.main.service;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -9,12 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.project.main.controller.SqlInterface;
 import com.project.main.dao.ProjectInterface;
-import com.spring.main.dao.BoardInterface;
 
 
 @Service
@@ -28,11 +26,37 @@ public class ProjectService {
 
 	ProjectInterface inter = null;
 	
-<<<<<<< HEAD
+
+	//중복 체크(ID)
+	public Map<String, String> overlayId(String id) {
+		Map<String, String> obj= new HashMap<String, String>();
+		inter=sqlSession.getMapper(ProjectInterface.class);
+		String use="N";
+		if(inter.overlayId(id) ==null)
+		{
+			use="Y";
+		}
+		obj.put("useId", use);
+		
+		return obj;
+	}
+	
+	//중복 체크(NickName)
+	public Map<String, String> overlayNick(String nick) {
+		Map<String, String> obj= new HashMap<String, String>();
+		inter=sqlSession.getMapper(ProjectInterface.class);
+		String use="N";
+		if(inter.overlayNick(nick) ==null)
+		{
+			use="Y";
+		}
+		obj.put("useNick", use);
+		
+		return obj;
+	}
+		
+	
 	//로그인 처리
-=======
-	// 로그인
->>>>>>> 1168426a5467fa86804ecc714dd7d6df00db6b36
 	public ModelAndView login(Map<String, Object> params) {
 		String id = (String) params.get("userId");
 		String pw = (String) params.get("userPass");
@@ -94,6 +118,12 @@ public class ProjectService {
 		mav.setViewName("Mypage_View");
 		return mav;
 	}
+
+	public ModelAndView MemberData_View() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 

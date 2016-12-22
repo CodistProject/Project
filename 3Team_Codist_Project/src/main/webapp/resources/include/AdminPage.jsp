@@ -10,7 +10,7 @@
          #Admin
          {
            
-            position: absolute;
+           position: absolute;
          top: 15%;
          clear: left;
          float: left;
