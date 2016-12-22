@@ -51,18 +51,14 @@ public class MainController {
 		logger.info("아이디찾기 이동");
 	return "Find_Id";
 	}
-<<<<<<< HEAD
 	
-=======
 	//비밀번호 찾기 이동
-		@RequestMapping(value="/Find_Pw")
+	@RequestMapping(value="/Find_Pw")
 		public String findPw(){
 			logger.info("비밀번호찾기 이동");
 		return "Find_Pw";
 		}
 
-
->>>>>>> fb8d75e06c6b05aeb2eff209457a2632b57dd449
 	// 회원정보 수정기능 실행 전 보기 (수정보기 페이지이동)
 	@RequestMapping(value = "/Member_modify_view")
 	public ModelAndView Member_modify_view(@RequestParam("joinIdx") String joinIdx) {	
@@ -76,11 +72,7 @@ public class MainController {
 		logger.info("회원정보 수정 기능 실행");
 		return service.Member_Modify(params);
 	}
-	
-<<<<<<< HEAD
-	
-=======
->>>>>>> fb8d75e06c6b05aeb2eff209457a2632b57dd449
+
 	//회원가입 페이지 이동
 	@RequestMapping(value="/join")
 	public String join(){

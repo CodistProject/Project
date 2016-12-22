@@ -10,19 +10,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-<<<<<<< HEAD
-import org.springframework.web.servlet.ModelAndView;
-
-import com.project.main.dao.ProjectInterface;
-=======
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.main.dao.ProjectInterface;
-
-
->>>>>>> fb8d75e06c6b05aeb2eff209457a2632b57dd449
 
 
 @Service
@@ -37,7 +28,6 @@ public class ProjectService {
 	ProjectInterface inter = null;
 	
 
-<<<<<<< HEAD
 	//중복 체크(ID)
 	public Map<String, String> overlayId(String id) {
 		Map<String, String> obj= new HashMap<String, String>();
@@ -68,12 +58,6 @@ public class ProjectService {
 		
 	
 	//로그인 처리
-=======
-	//로그인 처리
-
-	// 로그인
-
->>>>>>> fb8d75e06c6b05aeb2eff209457a2632b57dd449
 	public ModelAndView login(Map<String, Object> params) {
 		String id = (String) params.get("userId");
 		String pw = (String) params.get("userPass");
@@ -160,16 +144,11 @@ public class ProjectService {
 		return mav;
 	}
 
-<<<<<<< HEAD
+
 	public ModelAndView MemberData_View() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
-=======
-	
->>>>>>> fb8d75e06c6b05aeb2eff209457a2632b57dd449
 
 
 
