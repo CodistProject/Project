@@ -1,18 +1,17 @@
 package com.project.main.controller;
 
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.project.main.service.ProjectService;
 
 @Controller("MainController")
@@ -39,16 +38,30 @@ public class MainController {
 		
 	}	
 	
-	// 회원정보 보기(마이페이지)
+	//탈퇴 페이지 이동
+	@RequestMapping(value="/withdrawapage")
+	public String withdrawapage(){
+		logger.info("탈퇴 페이지 요청");
+		return "Mypage_Withdrawal";
+	}
+	
+	//탈퇴
+		@RequestMapping(value = "/withdrawa")
+		public ModelAndView withdrawa(@RequestParam("userId") String userId){
+			logger.info("삭제 : {}",userId);
+			return service.withdrawa(userId);
+		}
+
+
+	
+/*	// 회원정보 보기(마이페이지)
 	@RequestMapping(value = "/MemberData_view")
 	public ModelAndView MemberData_view() {	
 		logger.info("회원정보 보기 페이지 이동");	
 		return service.MemberData_View();
-	}
-<<<<<<< HEAD
-=======
-	
-	// 회원정보 수정기능 실행 전 보기 (수정보기 페이지이동)
+	}*/
+
+/*	// 회원정보 수정기능 실행 전 보기 (수정보기 페이지이동)
 	@RequestMapping(value = "/Member_modify_view")
 	public ModelAndView Member_modify_view(@RequestParam("joinIdx") String joinIdx) {	
 		logger.info("회원정보 수정 보기 페이지 이동");	
@@ -62,14 +75,12 @@ public class MainController {
 		return service.Member_Modify(params);
 	}
 	
->>>>>>> 1168426a5467fa86804ecc714dd7d6df00db6b36
-	
 	//회원가입 페이지 이동
 	@RequestMapping(value="/join")
 	public String join(){
 		logger.info("회원가입 폼으로 이동");
 		return "JoinForm";
-	}
+	}*/
 	
 	
 

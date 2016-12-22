@@ -9,12 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.project.main.controller.SqlInterface;
 import com.project.main.dao.ProjectInterface;
-import com.spring.main.dao.BoardInterface;
 
 
 @Service
@@ -27,12 +24,8 @@ public class ProjectService {
 	
 
 	ProjectInterface inter = null;
-	
-<<<<<<< HEAD
-	//로그인 처리
-=======
-	// 로그인
->>>>>>> 1168426a5467fa86804ecc714dd7d6df00db6b36
+
+	//로그인
 	public ModelAndView login(Map<String, Object> params) {
 		String id = (String) params.get("userId");
 		String pw = (String) params.get("userPass");
@@ -93,6 +86,17 @@ public class ProjectService {
 		mav.addObject("msg", msg);
 		mav.setViewName("Mypage_View");
 		return mav;
+	}
+
+	//탈퇴하기
+	public ModelAndView withdrawa(String userId) {
+		ModelAndView mav = new ModelAndView();
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		logger.info(userId);
+		inter.withdrawa(userId);		
+		mav.setViewName("redirect:/ioi");				
+		return mav;
+		
 	}
 
 

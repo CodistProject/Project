@@ -20,4 +20,11 @@
  		UPDATE join_reg SET userPw = #{param2}, userName = #{param3}, userBirth = #{param4}, userEmail = #{param5} 
  			WHERE join_idx = #{param1}
  	</update>
+ 	
+ 	  <!-- 탈퇴 -->
+	  <delete id="withdrawa">
+	  	DELETE FROM join_reg WHERE ID = #{param1}
+	  </delete>
+ 	
+ 	
 </mapper>

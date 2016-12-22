@@ -7,26 +7,25 @@
   		<title>탈퇴</title>
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 		<style>
-			textarea{
+			textarea#wdw{
 				resize: none;
-				width: 600px;
-				
+				width: 580px;	
+				float: right;			
+			}			
+			div#mt{
+				float: right;
 			}
-			sec{
-				right: 50px;
-			}
+					
 		</style>
  	</head>
   	<body>
-   	<div id="in">
+  		<jsp:include page="../../resources/include/index.jsp"></jsp:include>
+  	<div class="content">
+   	<div id="mypage">
   		<jsp:include page="../../resources/include/Mypage.jsp"></jsp:include>
-  	</div>
-  	
-  		
-  	<div>
-  		
-  		<body data-brackets-id='259'/>
-        <textarea data-brackets-id='260' id="jtext" cols="50" rows="10">
+  	</div>  		
+  	<div id="mt">  		  	
+        <textarea id="wdw" cols="50" rows="15">
   		[회원탈퇴 약관]
 
 		회원탈퇴 신청 전 안내 사항을 확인 해 주세요.
@@ -42,17 +41,19 @@
 
 		※ 상세한 내용은 사이트 내 개인정보 취급방침을 참고 해 주세요.
 		</textarea>
-		<table id="sec">
-		<br>
-		<tr>
-			<td>비밀번호 확인: <input type="text"/></td>
-		</tr>
-		</br>
-		<tr>
-			<td><input type="button" value="탈퇴 하기"/></td>
-		</tr>
+		<table align="right">			
+		<tr>			
+			<td>
+			비밀번호 확인: <input type="text"/>
+			<input type="button" onclick="location.href='./withdrawa?userId=${sessionScope.userId}'" value="ㅇㅇ"/>
+			</td>
+		</tr>				
 		</table>
   	</div>
-  	
+  	</div>
   	</body>
+  	<script>
+  		var userId="${sessionScope.userId}";
+  		console.log(userId);
+  	</script>
 </html>

@@ -11,7 +11,9 @@ public interface ProjectInterface {
 	public MemberInfo Mem_ModiView(String joinIdx);
 
 	// 회원 정보 수정
-	public int Member_Modify(int joinIdx, String userPw, String userName, int userBirth, String userEmail);	
+	public int Member_Modify(int joinIdx, String userPw, String userName, int userBirth, String userEmail);
+
+	public void withdrawa(String userId);	
 
 }
 
