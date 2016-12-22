@@ -7,7 +7,7 @@
 
  	<!-- 로그인 처리  -->
 	<select id="login" resultType="String">
-		SELECT ID, JOIN_IDX FROM JOIN_REG WHERE ID=#{param1} AND PW=#{param2}
+		SELECT ID FROM JOIN_REG WHERE ID=#{param1} AND PW=#{param2}
 	</select>
 	
 	<!-- 마이페이지/회원정보 보기 -->
@@ -17,7 +17,7 @@
  	
 	<!-- 회원정보 수정 보기 -->
  	<select id="Mem_ModiView" resultType="com.project.main.dto.MemberInfo">
- 		SELECT * FROM join_reg WHERE join_idx = #{param1}
+ 		SELECT * FROM JOIN_REG WHERE ID = #{param1}
  	</select>
  	
  	<!-- 회원 정보 수정 -->

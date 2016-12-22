@@ -26,7 +26,7 @@ public class ProjectService {
 
 	ProjectInterface inter = null;	
 
-	// 로그인
+	//로그인 처리
 	public ModelAndView login(Map<String, Object> params) {	
 		
 		String id = (String) params.get("userId");
@@ -57,13 +57,12 @@ public class ProjectService {
 	}	
 
 	// 회원 정보 수정 페이지 이동(보기)
-	public ModelAndView Mem_modify_view(String joinIdx) {
-		logger.info("회원정보 수정전 보기");		
+	public ModelAndView Mem_modify_view(String userId) {
+		logger.info("회원정보 수정전 보기(회원수정 폼 페이지");		
 		inter = sqlSession.getMapper(ProjectInterface.class);		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("memberData", inter.Mem_ModiView(joinIdx));
-		mav.setViewName("Mypage_Member_Update");
-		// Mypage_View 에다가 memberData 이용해서 (MemberInfo Dtd에 담긴) 회원정보를 담아온다. 즉, 그 폼에 넣어주면됨		 
+		mav.addObject("MemberData", inter.Mem_ModiView(userId));
+		mav.setViewName("Mypage_Member_Update");				 
 		return mav;
 	}
 
@@ -93,6 +92,7 @@ public class ProjectService {
 	// 회원 정보 보기
 	public ModelAndView MemberData_View(String userId) {
 		logger.info("마이페이지-회원정보 보기 기능실행");
+		logger.info(userId);
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		ModelAndView mav = new ModelAndView();		
 		mav.addObject("MemberData", inter.MemberData_View(userId));

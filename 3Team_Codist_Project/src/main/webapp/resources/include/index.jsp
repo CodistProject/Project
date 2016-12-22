@@ -5,7 +5,7 @@
 	<head>
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>바부</title>
+		<title>인덱스</title>
 		<style>
 			@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
 		
@@ -194,8 +194,7 @@
 				<input type="button" value="이메일">
 				</div>
 			</div>
-		</div>
-		
+		</div>		
 		<div id="menu">		
 			<table class="menu">
 				<tr class="menu">
@@ -212,7 +211,6 @@
 	</body>
 	<script>
 		var msg = "${msg}";
-		var userId ="${sessionScope.userId}";
-		
+		var userId ="${sessionScope.userId}";		
 	</script>	
 </html>

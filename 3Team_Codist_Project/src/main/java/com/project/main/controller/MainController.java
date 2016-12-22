@@ -44,9 +44,9 @@ public class MainController {
 	
 	// 회원정보 수정기능 실행 전 보기 (수정보기 페이지이동)
 	@RequestMapping(value = "/Member_modify_view")
-	public ModelAndView Member_modify_view(@RequestParam("joinIdx") String joinIdx) {	
+	public ModelAndView Member_modify_view(@RequestParam("userId") String userId) {	
 		logger.info("회원정보 수정 보기 페이지 이동");	
-		return service.Mem_modify_view(joinIdx);
+		return service.Mem_modify_view(userId);
 	}
 	
 	// 회원정보 수정 기능 
