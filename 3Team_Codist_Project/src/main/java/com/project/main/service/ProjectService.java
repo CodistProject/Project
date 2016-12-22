@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.main.dao.ProjectInterface;
+import com.project.main.dto.MemberInfo;
 
 
 @Service
@@ -86,6 +87,25 @@ public class ProjectService {
 		return mav;
 	}	
 
+	//회원가입
+	public MemberInfo join(Map<String, String> params) {
+		inter=sqlSession.getMapper(ProjectInterface.class);
+		MemberInfo info =new MemberInfo();
+		info.setId(params.get("id"));
+		info.setNickname(params.get("nickname"));
+		info.setPw(params.get("pw"));
+		info.setPW_QnA(params.get("PW_QnA"));
+		info.setPW_ANSWER(params.get("PW_ANSWER"));
+		info.setName(params.get("name"));
+		info.setPhone(params.get("phone"));
+		info.setBirth(params.get("birth"));
+		info.setGender(params.get("gender"));
+		info.setEmail(params.get("email"));
+		inter.memberJoin(info);
+		return info;
+	}
+			
+	
 	// 회원 정보 수정 페이지 이동(보기)
 	public ModelAndView Mem_modify_view(String joinIdx) {
 		logger.info("회원정보 수정전 보기");		
@@ -143,6 +163,7 @@ public class ProjectService {
 		mav.setViewName("CodiBoard_Detail");		
 		return mav;
 	}
+	
 
 
 	public ModelAndView MemberData_View() {
@@ -150,6 +171,7 @@ public class ProjectService {
 		return null;
 	}
 
+	
 
 
 

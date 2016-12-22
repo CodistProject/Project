@@ -30,6 +30,17 @@
 			#SignUp_table td{
 				font-size : 8pt; 
 				font-family : 굴림체;
+			}
+			#popup{
+				position:absolute;
+				z-index:2;
+				width: 260px;
+				height: 300px;
+				background-color:white;
+				border: 1px solid gray;
+				top: 15%;
+				left: 25%;
+				display:none;
 			}			
 		</style>
 	</head>
@@ -238,7 +249,59 @@ Codist는 회원관리, 서비스 개발・제공 및 향상, 안전한 인터�
 				</td>
 			</tr>
 		</table>		
-		</br>		
+		</br>
+		<!-- 가입 정보 확인 -->		
+		<div id="popup">
+			<!-- 가입정보 -->			
+			<center>
+			<h3> 회원가입을 축하 합니다.</h3>
+			<table>
+				<tr>
+					<td>ID</td>
+					<td id="memberId"></td>
+				</tr>
+				<tr>
+					<td>이름</td>
+					<td id="memberName"></td>
+				</tr>
+				<tr>
+					<td>닉네임</td>
+					<td id="memberNickName"></td>
+				</tr>
+				<tr>
+					<td>성별</td>
+					<td id="memberGender"></td>
+				</tr>
+				<tr>
+					<td>생년월일</td>
+					<td id="memberBirth"></td>
+				</tr>
+				<tr>
+					<td>이메일</td>
+					<td id="memberEmail"></td>
+				</tr>
+				<tr>
+					<td>전화번호</td>
+					<td id="memberPhone"></td>
+				</tr>
+				<tr>
+					<td>비밀번호 질문</td>
+					<td id="memberPwQ"></td>
+				</tr>
+				<tr>
+					<td>비밀번호 답</td>
+					<td id="memberPwA"></td>
+				</tr>
+				
+				<tr>
+					<td colspan="2">
+						<input type="button" value="확인"
+							onclick="location.href='./'"/>
+					</td>
+				</tr>
+			</table>
+			</center>
+		</div>
 		
 			<table id="SignUp_table" align="center">
 				<tr>
@@ -287,6 +350,37 @@ Codist는 회원관리, 서비스 개발・제공 및 향상, 안전한 인터�
 				<tr>
 					<td>
 						이름 : <input name="SignUp_name" type="text"/>			
+					</td>
+				</tr>
+				<tr>
+					<td>
+						전화번호 : 
+						<select name="PhoneFirst" >
+							<option value="">----</option>
+							<option value="010">010</option>
+							<option value="011">011</option>
+							<option value="02">02</option>
+							<option value="031">031</option>
+							<option value="032">032</option>
+							<option value="033">033</option>
+							<option value="041">041</option>
+							<option value="042">042</option>
+							<option value="043">043</option>
+							<option value="044">044</option>
+							<option value="051">051</option>
+							<option value="052">052</option>
+							<option value="053">053</option>
+							<option value="054">054</option>
+							<option value="055">055</option>
+							<option value="061">061</option>
+							<option value="062">062</option>
+							<option value="063">063</option>
+							<option value="064">064</option>
+						</select>
+						-
+						<input name="PhoneMiddle" type="text" />
+						-
+						<input name="PhoneLast" type="text" />					
 					</td>
 				</tr>
 				<tr>
@@ -373,7 +467,7 @@ Codist는 회원관리, 서비스 개발・제공 및 향상, 안전한 인터�
 				<tr>
 					<td>
 						메일주소 : <input name="SignUp_email" type="text"/>	
-						<select name="mailName" onchange="Emailchange()">
+						<select name="mailName">
 							<option value="">임의로 작성</option>
 							<option value="@naver.com">@naver.com</option>
 							<option value="@daum.com">@daum.net</option>
@@ -431,6 +525,23 @@ Codist는 회원관리, 서비스 개발・제공 및 향상, 안전한 인터�
 		        	$("#PW_checker").html("비밀번호가 일치하지 않습니다.");
 		        	}
 		     }
+		//숫자만 입력받게 하기
+		$("input[name='PhoneMiddle']").keypress(function(event){
+			if(event.which &&( event.which <=47 || event.which >=58) && event.which !=8)
+				{
+				event.preventDefault();
+				alert("숫자만 입력 가능합니다!!");
+				}
+		});
+		
+		$("input[name='PhoneLast']").keypress(function(event){
+			if(event.which &&( event.which <=47 || event.which >=58) && event.which !=8)
+				{
+				event.preventDefault();
+				alert("숫자만 입력 가능합니다!!");
+				}
+		});
+							
 		
 		//유효성 검사
 		function validation(){
@@ -458,22 +569,6 @@ Codist는 회원관리, 서비스 개발・제공 및 향상, 안전한 인터�
 			}		
 			
 		}	
-		
-		//요청 전송
-		function ajaxCall(reqUrl, reqData){
-			$.ajax({
-				url:reqUrl,
-				type:'get',
-				data:reqData,
-				dataType:'json',
-				success:function(d){
-					result(reqUrl, d);
-				},error:function(e){
-					console.log(e);
-				}
-			});
-		}
-		
 		//회원가입
 		$("#regist_btn").click(function(){
 			url="./rest/join";
@@ -483,14 +578,15 @@ Codist는 회원관리, 서비스 개발・제공 및 향상, 안전한 인터�
 			data.pw = $("input[name='SignUp_pw']").val();
 			if($("input[name='PW_Qs']").val()=="")
 				{
-				data.pwq=$("input[name='PW_Q']").val();	
+				data.PW_QnA=$("input[name='PW_Q']").val();	
 				}
 			else
 				{
-				data.pwq=$("input[name='PW_Qs']").val();	
+				data.PW_QnA=$("select[name='PW_Qs']").val();	
 				}
-			data.pwa=$("input[name='PW_answer']").val();
+			data.PW_ANSWER=$("input[name='PW_answer']").val();
 			data.name = $("input[name='SignUp_name']").val();
+			data.phone= $("select[name='PhoneFirst']").val()+"-"+$("input[name='PhoneMiddle']").val()+"-"+$("input[name='PhoneLast']").val();
 			data.birth=$("select[name='year']").val()+"/"+$("select[name='month']").val()+"/"+$("select[name='day']").val()
 			data.gender = $("input[name='SignUp_gender']").val();
 			if($("select[name='mailName']").val()=="")
@@ -507,6 +603,22 @@ Codist는 회원관리, 서비스 개발・제공 및 향상, 안전한 인터�
 				ajaxCall(url, data);
 			}
 		});
+		
+		//요청 전송
+		function ajaxCall(reqUrl, reqData){
+			$.ajax({
+				url:reqUrl,
+				type:'get',
+				data:reqData,
+				dataType:'json',
+				success:function(d){
+					result(reqUrl, d);
+				},error:function(e){
+					console.log(e);
+				}
+			});
+		}
+
 		
 		//아작스
 		function result(url, data){
@@ -531,15 +643,21 @@ Codist는 회원관리, 서비스 개발・제공 및 향상, 안전한 인터�
 					$("input[name='SignUp_NickName']").val("");
 				}
 			}
-			
+			//회원 정보 확인
 			if(url =="./rest/join"){
 				$("#popup").css("display","block");
 				$("#memberId").html(data.id);
 				$("#memberName").html(data.name);
-				$("#memberAge").html(data.age);
+				$("#memberNickName").html(data.nickname);
 				$("#memberGender").html(data.gender);
+				$("#memberBirth").html(data.birth);
 				$("#memberEmail").html(data.email);
+				$("#memberPhone").html(data.phone);
+				$("#memberPwQ").html(data.pW_qna);
+				$("#memberPwA").html(data.PW_ANSWER);
 			}
+			
+			
 		}
 	</script>
 </html>

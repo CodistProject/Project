@@ -13,6 +13,9 @@ public interface ProjectInterface {
 	//중복 체크(Nick)
 	public String overlayNick(String id);	
 	
+	//회원가입
+	public void memberJoin(MemberInfo info);
+		
 	// 회원정보 수정 보기
 	public MemberInfo Mem_ModiView(String joinIdx);
 
@@ -27,7 +30,7 @@ public interface ProjectInterface {
 	
 	//코디게시판 상세보기
 	public Object CodiBoard_Detail(String board_idx);
-		
+
 
 }
 

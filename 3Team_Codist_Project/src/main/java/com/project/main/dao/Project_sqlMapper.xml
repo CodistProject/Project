@@ -19,6 +19,11 @@
 	<select id="overlayNick" resultType="String">
 		SELECT NICKNAME FROM JOIN_REG WHERE NICKNAME=#{param1}
 	</select>
+	<!-- 회원가입  -->
+	<insert id="memberJoin">
+		INSERT INTO JOIN_REG(JOIN_IDX,ID,NICKNAME,PW,PW_QNA,PW_ANSWER,NAME,PHONE,BIRTH,GENDER,EMAIL) 
+		VALUES(SEQ_JOIN_REG.NEXTVAL,#{id},#{nickname},#{pw},#{PW_QnA},#{PW_ANSWER},#{name},#{phone},#{birth},#{gender},#{email})
+	</insert>
 	
 	<!-- 회원정보 수정 보기 -->
  	<select id="Mem_ModiView" resultType="com.project.main.dto.MemberInfo">

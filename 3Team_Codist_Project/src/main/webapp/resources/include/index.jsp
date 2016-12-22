@@ -169,20 +169,17 @@
 		</div>	
 		
 		<div id="extra">
-
-			<div>
-				<jsp:include page="loginBox.jsp"></jsp:include>
-				<a href="Find_Id">아이디/비밀번호 찾기</a> 
-				<jsp:include page="login_Session.jsp"></jsp:include>
-
 			<div id="loginSession">
 				<c:if test="${sessionScope.userId ==null}">
 					<jsp:include page="loginBox.jsp"></jsp:include>
 				</c:if>
+				
 				<c:if test="${sessionScope.userId !=null}">
 					<jsp:include page="login_Session.jsp"></jsp:include>
 				</c:if>
+				<a href="Find_Id">아이디/비밀번호 찾기</a> 
 			</div>
+			
 			<br/>
 				<table class="serch">
 					<tr>

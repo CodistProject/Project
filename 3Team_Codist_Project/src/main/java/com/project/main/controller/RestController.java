@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.main.dto.MemberInfo;
 import com.project.main.service.ProjectService;
 
 @Controller("RestController")
@@ -34,6 +35,14 @@ public class RestController {
 			@RequestParam("nick") String nick){
 			logger.info("NickName중복체크");
 		return service.overlayNick(nick);
+	}
+	
+	//회원가입
+	@RequestMapping(value="/join")
+	public @ResponseBody MemberInfo join(
+			@RequestParam Map<String, String> params){
+		logger.info("회원 가입");
+		return service.join(params);
 	}
 
 }
