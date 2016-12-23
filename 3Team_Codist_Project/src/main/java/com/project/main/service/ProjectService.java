@@ -1,5 +1,6 @@
 package com.project.main.service;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -9,9 +10,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.main.dao.ProjectInterface;
+import com.project.main.util.UploadFile;
+
 
 
 @Service
@@ -25,7 +30,35 @@ public class ProjectService {
 
 	ProjectInterface inter = null;
 
-	//로그인
+	//중복 체크(ID)
+	public Map<String, String> overlayId(String id) {
+		Map<String, String> obj= new HashMap<String, String>();
+		inter=sqlSession.getMapper(ProjectInterface.class);
+		String use="N";
+		if(inter.overlayId(id) ==null)
+		{
+			use="Y";
+		}
+		obj.put("useId", use);
+		
+		return obj;
+	}
+	
+	//중복 체크(NickName)
+	public Map<String, String> overlayNick(String nick) {
+		Map<String, String> obj= new HashMap<String, String>();
+		inter=sqlSession.getMapper(ProjectInterface.class);
+		String use="N";
+		if(inter.overlayNick(nick) ==null)
+		{
+			use="Y";
+		}
+		obj.put("useNick", use);
+		
+		return obj;
+	}
+		
+	
 	public ModelAndView login(Map<String, Object> params) {
 		String id = (String) params.get("userId");
 		String pw = (String) params.get("userPass");
@@ -46,6 +79,7 @@ public class ProjectService {
 			
 			if(inter.login(id, pw) != null){
 				session.setAttribute("userId", id);
+				session.setAttribute("userPass", pw);			
 			}else{
 				mav.addObject("msg","아이디 또는 비밀번호를 확인 하세요");
 			}			
@@ -87,24 +121,82 @@ public class ProjectService {
 		mav.setViewName("Mypage_View");
 		return mav;
 	}
+	
+	//패션토크 상세보기
+	@Transactional
+	public ModelAndView FT_Board_Detail(String board_idx) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav = new ModelAndView();
+		//조회수
+		//inter.upHit(idx);
+		//불러오기
+		mav.addObject("content", inter.FT_Board_Detail(board_idx));
+		mav.setViewName("FT_Board_Detail");		
+		return mav;
+		
+	}
+	//코디게시판 상세보기
+	@Transactional
+	public ModelAndView CodiBoard_Detail(String board_idx) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav = new ModelAndView();
+		//불러오기
+		mav.addObject("content", inter.CodiBoard_Detail(board_idx));
+		mav.setViewName("CodiBoard_Detail");		
+		return mav;
+	}
 
+	public ModelAndView MemberData_View() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	//탈퇴하기
 	public ModelAndView withdrawa(String userId) {
 		ModelAndView mav = new ModelAndView();
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		logger.info(userId);
 		inter.withdrawa(userId);		
-		mav.setViewName("redirect:/ioi");				
+		mav.setViewName("redirect:/logout");				
 		return mav;
 		
 	}
 
-
-
-
-
-	
-	
-	
-
-}
+	//Q&A 글쓰기
+	public ModelAndView QnABoard_Writes(MultipartHttpServletRequest multi, HttpSession session)  {		
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav = new ModelAndView();		
+			
+		String subject = multi.getParameter("subject");
+		String content = multi.getParameter("content");
+		String nickname = multi.getParameter("nickname");	
+		String filename = multi.getParameter("filename");		
+		String newfilename = null;
+		logger.info(subject+" / "+content+" / "+nickname+"/"+filename+"/"+newfilename);
+		String userId = (String) session.getAttribute("userId");
+		
+		logger.info("아이디"+userId);
+		
+		if(filename != null){
+			//파일 업로드
+			UploadFile upload = new UploadFile();
+			
+			newfilename = upload.fileUp(multi, filename);
+		}
+		inter.QnABoard_Writes(nickname, subject, content,filename, newfilename);
+		String page = "";
+		String msg = "";
+		
+		if(userId != null){
+			logger.info(userId);
+			msg = "등록에 성공 하였습니다.";
+			page = "QnABoard_Main";						
+		}else{
+			page = "QnABoard_Write";
+			msg = "등록에 실패 하였습니다.";			
+		}
+		mav.addObject("msg",msg);
+		mav.setViewName(page);
+		return mav;		
+		}			
+	}

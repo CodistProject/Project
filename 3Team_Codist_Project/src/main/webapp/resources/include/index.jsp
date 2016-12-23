@@ -199,11 +199,11 @@
 		<div id="menu">		
 			<table class="menu">
 				<tr class="menu">
-					<td class="menu">코디 게시판</td>
+					<td class="menu" ><a href="CodiBoard_Main">코디 게시판</a></td>
 					<td class="menu">패션토크 게시판</td>
 					<td class="menu">코디를 부탁해</td>
 					<td class="menu">나만의 옷장</td>
-					<td class="menu">Q&A</td>
+					<td class="menu"><a href="QnABoard_Main">Q&A</a></td>
 					<td class="menu">물물 교환</td>					
 				</tr>
 			</table>

@@ -225,7 +225,8 @@ Codist는 회원관리, 서비스 개발・제공 및 향상, 안전한 인터�
 					</textarea>
 				</td>
 			</tr>
-		</table>		
+		</table>
+				
 		</br>
 		<table id="agree_chk" align="center">
 			<tr>
@@ -238,35 +239,36 @@ Codist는 회원관리, 서비스 개발・제공 및 향상, 안전한 인터�
 			</tr>
 		</table>		
 		</br>		
-		<form action="Regist.jsp" method="post">			
+		
 			<table id="SignUp_table" align="center">
 				<tr>
 					<td>
 						아이디 : <input name="SignUp_id" type="text"/>
-						<button id="id_chk">중복 체크</button>
+						<input id="Id_Chk" type="button" value="중복체크"/>
 					</td>
 				</tr>
 				<tr>
 					<td>
 						닉네임 : <input name="SignUp_NickName" type="text"/>
-						<button id="nick_chk">중복 체크</button>		
+						<input id="Nick_Chk" type="button" value="중복체크"/>		
 					</td>
 				</tr>
 				<tr>
 					<td>
-						비밀번호 : <input name="SignUp_pw" type="text"/> <font>(8자 이상)</font>		
+						비밀번호 : <input name="SignUp_pw" id="Pw" type="text" onkeyup="Check()"/> <font>(8자 이상)</font>		
 					</td>
 				</tr>
 				<tr>
 					<td>
-						비밀번호 확인 : <input name="PW_check" type="text"/> <font>(비밀번호가)</font>			
+						비밀번호 확인 : <input name="SignUp_pw_check" id="PwC" type="text" onkeyup="Check()"/>
+						<font id="PW_checker"></font>			
 					</td>
 				</tr>
 				<tr>
 					<td>
 						비밀번호 질문 : <input name="PW_Q" type="text" value=""/>
 						<select name="PW_Qs">
-							<option value="">원하는 질문을 고르시오.</option>
+							<option value="">임의로 작성</option>
 							<option value="아버지의 성함은?">아버지의 성함은?</option>
 							<option value="어머니의 성함은?">어머니의 성함은?</option>
 							<option value="나의 첫사랑의 이름은?">나의 첫사랑의 이름은?</option>
@@ -371,7 +373,7 @@ Codist는 회원관리, 서비스 개발・제공 및 향상, 안전한 인터�
 				<tr>
 					<td>
 						메일주소 : <input name="SignUp_email" type="text"/>	
-						<select name="mailNmae">
+						<select name="mailName" onchange="Emailchange()">
 							<option value="">임의로 작성</option>
 							<option value="@naver.com">@naver.com</option>
 							<option value="@daum.com">@daum.net</option>
@@ -381,52 +383,66 @@ Codist는 회원관리, 서비스 개발・제공 및 향상, 안전한 인터�
 				</tr>
 				<tr>
 					<td align="right">
-						<input name="regist_btn" type="submit" value="등록"/>				
+						<input id="regist_btn" type="button" value="회원가입"/>				
 					</td>
 				</tr>
 			</table>						
-		</form>
+	
 	</body>
 	<script>
 		var data;
-		var overChk = false;
+		var overChkId = false;
+		var overChkNick = false;
+		var PWChk = false;
 		var url;
 		
-		//중복체크
-		$("#chk").click(function(){		
-			url="./rest/overlay";
+		//중복(Id)체크
+		$("#Id_Chk").click(function(){
+			url="./rest/overlayId";
 			data={};
-			data.id=$("input[name='userId']").val();
+			data.id=$("input[name='SignUp_id']").val();
 			console.log(data);
 			ajaxCall(url, data);
 		});
 		
-		//회원가입
-		$("#join").click(function(){
-			url="./rest/join";
+		//중복(Nick)체크Nick_Chk
+		$("#Nick_Chk").click(function(){
+			url="./rest/overlayNick";
 			data={};
-			data.id = $("input[name='SignUp_id']").val();
-			data.nickname=$("input[name='SignUp_NickName']").val();
-			data.pw = $("input[name='SignUp_pw']").val();
-			data.pwq=$("input[name='PW_Q']").val();
-			data.pwa=$("select[name='PW_Qs']").val();
-			data.pwa=$("input[name='PW_answer']").val();
-			data.name = $("input[name='SignUp_name']").val();
-			data.birth=$("select[name='year']").val()+"/"+$("select[name='month']").val()+"/"+$("select[name='day']").val()
-			data.gender = $("input[name='SignUp_gender']").val();
-			data.email = $("input[name='SignUp_email']").val();+$("select[name='mailName']").val()
+			data.nick=$("input[name='SignUp_NickName']").val();
 			console.log(data);
-			
-			if(validation()){
-				ajaxCall(url, data);
-			}
+			ajaxCall(url, data);
 		});
+		
+		//비밀번호 확인
+		function Check(){
+			var PW = $("#Pw").val();
+			var PW_C = $("#PwC").val();
+			console.log(PW);
+			console.log(PW_C);
+		        if(PW==PW_C)
+		            {
+		        	PWChk=true;
+		        	$("#PW_checker").html("비밀번호가 일치합니다.");
+		            }
+		        else
+		        	{
+		        	PWChk=false;
+		        	$("#PW_checker").html("비밀번호가 일치하지 않습니다.");
+		        	}
+		     }
 		
 		//유효성 검사
 		function validation(){
 			
-			if(overChk == false){
-				alert("중복 체크를 해 주세요!!");
+			if(overChkId == false){
+				alert("아이디 중복 체크를 해 주세요!!");
+				return false;
+			}else	if(overChkNick == false){
+				alert("닉네임 중복 체크를 해 주세요!!");
+				return false;
+			}else if(PWChk == false){
+				alert("비밀번호가 일치 해야 합니다!");
 				return false;
 			}else if(data.id == null || data.id == ""){
 				alert("아이디는 필수 입력 사항 입니다.");
@@ -458,17 +474,64 @@ Codist는 회원관리, 서비스 개발・제공 및 향상, 안전한 인터�
 			});
 		}
 		
+		//회원가입
+		$("#regist_btn").click(function(){
+			url="./rest/join";
+			data={};
+			data.id = $("input[name='SignUp_id']").val();
+			data.nickname=$("input[name='SignUp_NickName']").val();
+			data.pw = $("input[name='SignUp_pw']").val();
+			if($("input[name='PW_Qs']").val()=="")
+				{
+				data.pwq=$("input[name='PW_Q']").val();	
+				}
+			else
+				{
+				data.pwq=$("input[name='PW_Qs']").val();	
+				}
+			data.pwa=$("input[name='PW_answer']").val();
+			data.name = $("input[name='SignUp_name']").val();
+			data.birth=$("select[name='year']").val()+"/"+$("select[name='month']").val()+"/"+$("select[name='day']").val()
+			data.gender = $("input[name='SignUp_gender']").val();
+			if($("select[name='mailName']").val()=="")
+				{
+				data.email = $("input[name='SignUp_email']").val();
+				}
+			else
+				{
+				data.email = $("input[name='SignUp_email']").val()+$("select[name='mailName']").val();
+				}
+			console.log(data);
+			
+			if(validation()){
+				ajaxCall(url, data);
+			}
+		});
+		
+		//아작스
 		function result(url, data){
 			console.log(url);
-			if(url=="./rest/overlay"){
-				if(data.use=="Y"){
-					overChk = true;
+			//아이디 체크
+			if(url=="./rest/overlayId"){
+				if(data.useId=="Y"){
+					overChkId= true;
 					alert("사용 가능한 아이디 입니다.");
 				}else{
 					alert("이미 사용중인 아이디 입니다.");
-					$("input[name='userId']").val("");
+					$("input[name='SignUp_id']").val("");
 				}
 			}
+			//닉네임 체크
+			if(url=="./rest/overlayNick"){
+				if(data.useNick=="Y"){
+					overChkNick = true;
+					alert("사용 가능한 닉네임 입니다.");
+				}else{
+					alert("이미 사용중인 닉네임 입니다.");
+					$("input[name='SignUp_NickName']").val("");
+				}
+			}
+			
 			if(url =="./rest/join"){
 				$("#popup").css("display","block");
 				$("#memberId").html(data.id);

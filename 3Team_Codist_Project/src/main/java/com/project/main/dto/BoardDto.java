@@ -4,7 +4,8 @@ import java.util.Date;
 
 public class BoardDto {
 
-	  private String category_name;
+	//게시판 내용
+     private String category_name;
       private int board_idx;
       private String nickname;
       private String subject;
@@ -13,11 +14,12 @@ public class BoardDto {
       private Date reg_date;
       private String sysdate;
       private String filename;
+      private String newfilename;     
       private String gender;
       private String weather;
       private int ft_like;
-      private int ft_hate;
-      
+      private int ft_hate;      
+
 	public String getCategory_name() {
 		return category_name;
 	}
@@ -97,4 +99,10 @@ public class BoardDto {
 	public void setSub_subject(String sub_subject) {
 		this.sub_subject = sub_subject;
 	} 
+	public String getNewfilename() {
+		return newfilename;
+	}
+	public void setNewfilename(String newfilename) {
+		this.newfilename = newfilename;
+	}
 }

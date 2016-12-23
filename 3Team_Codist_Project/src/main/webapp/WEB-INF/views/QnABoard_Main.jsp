@@ -135,7 +135,7 @@
 			<thead>		
 				<tr>
 					<td id="btn_write" colspan="5" align="right">
-						<button id="writeQna"onclick="location.href='./컨트롤러 글쓰기 기능으로'">글쓰기</button>
+						<button id="writeQna"onclick="location.href='./QnABoard_Write'">글쓰기</button>
 					</td>					
 				</tr>		
 				<tr>

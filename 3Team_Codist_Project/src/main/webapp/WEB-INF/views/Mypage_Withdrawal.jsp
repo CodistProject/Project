@@ -14,6 +14,7 @@
 			}			
 			div#mt{
 				float: right;
+				width: 100%
 			}
 					
 		</style>
@@ -44,8 +45,8 @@
 		<table align="right">			
 		<tr>			
 			<td>
-			비밀번호 확인: <input type="text"/>
-			<input type="button" onclick="location.href='./withdrawa?userId=${sessionScope.userId}'" value="ㅇㅇ"/>
+			비밀번호 확인: <input id="Pw" type="text"/>
+			<input id="PW_checker" type="button" onclick="Check()" value="탈퇴"/>
 			</td>
 		</tr>				
 		</table>
@@ -53,7 +54,40 @@
   	</div>
   	</body>
   	<script>
-  		var userId="${sessionScope.userId}";
-  		console.log(userId);
+  	
+  	var PWChk = false;
+  	
+  	
+  //비밀번호 확인
+	function Check(){
+		var PW = $("#Pw").val();
+		var PW_C = "${sessionScope.userPass}";
+			console.log(PW);
+			console.log(PW_C);
+			
+		        if(PW==PW_C)
+		            {
+		        	PWChk=true;		        	
+		            }
+		        else
+		        	{
+		        	PWChk=false;		        	
+		        	}
+		        validation();
+		     }
+	
+		//유효성 검사
+		function validation(){
+		
+		if(PWChk == false){
+			alert("비밀번호가 일치 해야 합니다!");			
+			return false;		
+		}else{
+			location.href="./withdrawa?userId=${sessionScope.userId}";
+			return true;
+		}		
+		
+	}  		
+  		
   	</script>
 </html>

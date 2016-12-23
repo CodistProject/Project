@@ -58,7 +58,7 @@
 			<thead>		
 				<tr>
 					<td colspan="4" align="right">
-						<button onclick="location.href='#'">글쓰기</button>
+						<button onclick="location.href='./CodiBoard_Write'">글쓰기</button>
 						<button onclick="location.href='#'">등록</button>
 					</td>					
 				</tr>		

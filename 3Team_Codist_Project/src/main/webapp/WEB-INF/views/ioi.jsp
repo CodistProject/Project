@@ -19,6 +19,7 @@
 				width: 47%;
 				height: 150px;
 			}
+			
 			div.bord2{
 				float: right;	
 				border: 1px solid;
@@ -32,20 +33,25 @@
 			<jsp:include page="../../resources/include/index.jsp"></jsp:include>
 		</div>
 		<div class="content">
+		
 			BEST 코디
 			<div class="bord">
 				코디 게시판 목록
 			</div>
 			회원 추천 코디
+			
 			<div class="bord">
 				회원 추천 코디 목록
 			</div>
+			
 			<div class="bord1">
 				코디를 부탁해 게시판 노출
 			</div>
+			
 			<div class="bord2">
 				Q&A 게시판 노출
 			</div>		
+		
 		</div>
 		
 	</body>

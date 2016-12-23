@@ -6,52 +6,33 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Q & A 게시판 글쓰기 </title>
 		<script src ="//code.jquery.com/jquery-3.1.0.min.js"></script>
-		<style>
-		
-		#center {
-            position: relative;
-            left:150px;
-            top: 10px;
-            width: 750px;
-            padding: 15px;
-            margin-bottom: 20px;
-            float: left;
-            border: 1px solid #bcbcbc;
-        }
-        #center2{
-        	position: relative;
-        	font-size:30px;
-            left:300px;
-            top: 10px;
-            width: 100px;
-            padding: 5px;
-            margin-bottom: 5px;
-            float: left;
+		<style>				
+        #center{      
+        	font-size:30px;           
+            text-align: center;
             text-align: center;
             
         }
-        table{
+        
+        table#QnA{
 				width:100%;
 			}
-		table, td, th{
+			
+		table#QnA td{
 				border :0.5px solid gray;
 				border-collapse : collapse;
 				padding: 5px;
 				text-align: center;
 			}
-		input[type='text']{
+		input.text{
 			width:100%;
 		}
-		textarea{
-			width:100%;
-			resize:none;
 		
+		textarea#content{
+			width:100%;
+			resize:none;				
 		}
-		a {
-		    text-decoration: none;
-		    color: black;
-		    font-size: 13px;
-		}
+		
 		#paging{
 			text-align: center;
 		}
@@ -105,27 +86,29 @@
 	</head>
 	<body>
 			<jsp:include page="../../resources/include/index.jsp"></jsp:include>
-		<div id="center">
-			<div id ="center2">Q & A</div>
-    		<table>
-    			
+		<div class="content">
+			<form action="QnABoard_Writes" method="post" enctype="multipart/form-data">		
+    		<table id="QnA">
+    			<tr>
+    				<td colspan="2">Q & A</td>
+    			</tr>    			
     			<tr>
     				<td>제목</td>
-    				<td><input type="text"/> </td>
+    				<td><input name="subject" type="text"/> </td>
     			</tr>
     			<tr>
     				<td>작성자</td>
-    				<td><input type="text" value="로그인된 아이디" readonly/></td>
+    				<td><input name="nickname" type="text" value="${sessionScope.userId}" readonly/></td>
     			</tr>
     			<tr>
 					<td>내용</td>
-					<td><textarea  name="content" rows="30"></textarea></td>
+					<td><textarea name="content" id="content" rows="30"></textarea></td>
 				</tr>
 				<tr>
 				<td>첨부 파일</td>
 				<td>
 					<input type="file"  name="file" value="첨부" onchange="fileView(this)"/>
-					<input  id="fileName"  type="hidden" name="fileName"/>
+					<input  id="filename"  type="hidden" name="filename"/>
 				</td>
 			</tr>
 			<tr>
@@ -135,11 +118,23 @@
 				</td>
 			</tr>
     		</table>
-		</div>
-	
+    		</form>	
+		</div>	
 	</body>
 	<script>
-		
+	var msg = "${msg}";
+	
+	if(msg != ""){
+		alert(msg);
+	}
+	
+	function fileView(elem){
+		console.log(elem.value);
+		var fullPath = elem.value;
+		var filename = fullPath.substring(12);
+		console.log(filename);
+		$("#filename").val(filename);
+	}
 	</script>
 
 </html>

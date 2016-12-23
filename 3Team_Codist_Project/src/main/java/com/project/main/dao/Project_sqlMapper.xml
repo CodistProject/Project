@@ -10,6 +10,16 @@
 		SELECT ID FROM JOIN_REG WHERE ID=#{param1} AND PW=#{param2}
 	</select>
 	
+	<!-- 중복 체크(Id) -->
+	<select id="overlayId" resultType="String">
+		SELECT ID FROM JOIN_REG WHERE ID=#{param1}
+	</select>
+	
+	<!-- 중복 체크(Nick) -->
+	<select id="overlayNick" resultType="String">
+		SELECT NICKNAME FROM JOIN_REG WHERE NICKNAME=#{param1}
+	</select>
+	
 	<!-- 회원정보 수정 보기 -->
  	<select id="Mem_ModiView" resultType="com.project.main.dto.MemberInfo">
  		SELECT * FROM join_reg WHERE join_idx = #{param1}
@@ -19,12 +29,34 @@
  	<update id="Member_Modify">
  		UPDATE join_reg SET userPw = #{param2}, userName = #{param3}, userBirth = #{param4}, userEmail = #{param5} 
  			WHERE join_idx = #{param1}
- 	</update>
- 	
+ 	</update> 	
+
  	  <!-- 탈퇴 -->
 	  <delete id="withdrawa">
 	  	DELETE FROM join_reg WHERE ID = #{param1}
 	  </delete>
+	  
+ 	<!--패션토크 상세보기  -->
+ 	<select id="FT_Board_Detail" resultType="com.project.main.dto.BoardDto">
+ 		SELECT * FROM TOTAL_BOARD WHERE board_idx = #{param1}
+ 	</select>
+ 	
+ 	<!-- 조회수 증가  -->
+ 	<!-- <update id="upHit">
+ 		UPDATE TOTAL_BOARD SET bHit = bHit+1 WHERE idx = #{param1}
+ 	</update> -->
+ 	
+ 	<!--코디게시판 상세보기  -->
+ 	<select id="CodiBoard_Detail" resultType="com.project.main.dto.BoardDto">
+ 		SELECT * FROM TOTAL_BOARD WHERE board_idx = #{param1}
+ 	</select>
+
+	<!-- 글쓰기 -->
+ 	<insert id="QnABoard_Writes">
+ 		INSERT INTO TOTAL_BOARD(
+ 			board_idx, nickname, subject, content, filename, newfilename)VALUES(
+ 			seq_total_board.NEXTVAL, #{param1}, #{param2}, #{param3},#{param4},#{params5})
+ 	</insert>
  	
  	
 </mapper>
