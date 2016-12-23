@@ -120,12 +120,13 @@
        <input type="button" value="목록">
       <td>&nbsp;</td>
       </tr>
- 
-  		
   	
    </table>
    
    </div>
    </div>
   	</body>
+  	<script>
+  	
+  	</script>
 </html>

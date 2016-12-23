@@ -1,16 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-	final int ROWSIZE = 4;
-	final int BLOCK = 5;
-	int pg = 1;
-	
-	int allPage = 0;
-	
-	int startPage = ((pg-1)/BLOCK*BLOCK)+1;
-	int endPage = ((pg-1)/BLOCK*BLOCK)+BLOCK;
-%>    
+
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>	
@@ -139,40 +130,146 @@
 			</tbody>
 			<tr>
 				<td id="Ft_pageNum" colspan="6" align="center">
-				<%
-					/* if(pg>BLOCK) { */
-				%>
-						[<a href="list.jsp?pg=1">◀◀</a>]
-						[<a href="list.jsp?pg=<%=startPage-1%>">◀</a>]
-				<%
-					/* } */
-				%>		
-				<%
-					for(int i=startPage;i<=endPage;i++){
-						if(i==pg){
-				%>
-							<u><b>[<%=i %>]</b></u>
-				<%
-						}else{
-				%>
-							[<a href="list.jsp?pg=<%=i %>"><%=i %></a>]
-				<%
-						}
-				}
-				%>		
-				<%
-					/* if(endPage<allPage){ */
-				%>
-						[<a href="list.jsp?pg=<%=endPage+1%>">▶</a>]
-						[<a href="list.jsp?pg=<%=allPage%>">▶▶</a>]
-				<%
-					/* } */
-				%>					
+							<div id="FT_pagenation"></div>
 				</td>				
 			</tr>						
 		</table>
 		</div>		
 	</body>
-	<script>	
+	<script>
+	var msg = "${msg}";
+	console.log("msg : "+msg);
+	if(msg != ""){
+		alert(msg);
+	}
+	
+	var currPage = 1;
+	
+	listCall(currPage);
+	
+	$("#Ft_pageNum").change(function(){
+		listCall(currPage);
+	});
+	
+	function listCall(currPage){
+		var url="./rest/listCall";
+		var data = {};
+		data.page = currPage;
+		data.pagePerNum = $("#pagePerNum").val();
+		reqServer(url, data);
+	}
+	
+	function del(idx){
+		var url="./rest/delete";
+		var data ={};
+		data.idx = idx;
+		reqServer(url, data);
+	}
+	
+	function reqServer(url, data){
+		console.log(url);
+		$.ajax({
+			url:url,
+			type:"post",
+			data:data,
+			dataType:"json",
+			success:function(d){
+				console.log(d)
+				if(url == "./rest/listCall"){
+					printList(d.jsonList.list);
+					currPage = d.currPage;
+					printPaging(d.allCnt, d.page);
+				}
+				if(url == "./rest/delete"){
+					alert(d.msg);
+					listCall(currPage);
+				}
+				
+			},
+			error:function(e){
+				console.log(e)
+			}
+		});
+	}
+	
+	function printList(list){
+		console.log(list);
+		var content = "";
+		for(var i=0; i<list.length; i++){
+			content +="<tr>"
+			+"<td>"+list[i].idx+"</td>"
+			+"	<td>"
+				+"<a href='./detail?idx="+list[i].idx+"'>"
+				+list[i].subject+"</a>";
+			if(list[i].replies >0){
+				content += " <b>["+list[i].replies+"]</b>";
+			}
+			/*
+			if(list[i].newFileName != null){
+				content += "<img width='15px' src='resources/img/default.png'/>";
+			}	
+			*/
+			content +="</td>"
+			+"<td>"+list[i].user_name+"</td>"
+			+"<td>"+list[i].reg_date+"</td>"
+			+"<td>"+list[i].bHit+"</td>"
+			+"	<td>"
+				+"<a href='#' onclick='del("+list[i].idx+")'>삭제</a>"
+			+"</td>"
+			+"</tr>"
+		}
+		$("#list").empty();
+		$("#list").append(content);
+	}
+	일반 페이징 방식		
+		function printPaging(allCnt, pageNum){
+		console.log("전체 게시물 :"+allCnt );
+		console.log("생성 가능 페이지 :"+pageNum );
+		console.log("현재 페이지 :"+currPage);
+		
+		$("#paging").empty();
+		var start;	//페이지 시작
+		var end;	//페이지 끝
+		var range = (currPage/5);	//다음 페이지 있는지 여부
+		var content = "";
+		
+		if(range >1){//5페이지 넘었을 경우
+			end = currPage%5 == 0 ?
+					(Math.floor(range))*5
+					:(Math.floor(range)+1)*5;
+			start = Math.floor(end-4);
+		}else{//5페이지 미만일 경우
+			start = 1;
+			end = 5;
+		}
+		
+		//페이징 표시			
+		//< 이전
+		if(currPage > 5){
+			content +="<a href='#' onclick='listCall("
+				+(start-1)+")'>이전</a> | "
+		}
+		
+		
+		
+		for(var i=start; i<=end;i++){
+			if(i<=pageNum){
+				if(currPage ==i){
+					content +="<b>"+i+"</b>";
+				}else{
+					content += " <a href='#' onclick='listCall("+i+")'>"
+					+i+"</a> "
+				}					
+			}			
+		}
+		//마지막 페이지가 전체 페이지 수 보다 적으면 다음 링크 생성
+		if(end<pageNum){
+			content +=" | <a href='#' onclick='listCall("
+					+(end+1)+")'>다음</a> "
+		}
+		
+		$("#paging").append(content);
+		
+	}
 	</script>
 </html>
