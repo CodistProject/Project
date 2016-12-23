@@ -19,6 +19,10 @@
 	<select id="overlayNick" resultType="String">
 		SELECT NICKNAME FROM JOIN_REG WHERE NICKNAME=#{param1}
 	</select>
+	<!-- 닉네임 찾기(ID >> 닉네임)  -->
+	<select id="FindNick" resultType="String">
+		SELECT NICKNAME FROM JOIN_REG WHERE ID=#{param1}
+	</select>
 	<!-- 회원가입  -->
 	<insert id="memberJoin">
 		INSERT INTO JOIN_REG(JOIN_IDX,ID,NICKNAME,PW,PW_QNA,PW_ANSWER,NAME,PHONE,BIRTH,GENDER,EMAIL) 

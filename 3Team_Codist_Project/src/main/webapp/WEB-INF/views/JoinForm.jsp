@@ -489,7 +489,6 @@ Codist는 회원관리, 서비스 개발・제공 및 향상, 안전한 인터�
 		var overChkNick = false;
 		var PWChk = false;
 		var url;
-		
 		//중복(Id)체크
 		$("#Id_Chk").click(function(){
 			url="./rest/overlayId";

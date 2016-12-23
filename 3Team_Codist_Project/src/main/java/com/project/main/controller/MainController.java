@@ -36,8 +36,42 @@ public class MainController {
 		params.put("session", session);
 		return service.login(params);
 		
-	}	
+	}
 	
+	//코디 게시판 이동
+	@RequestMapping(value="/CodiBoard")
+	public String CodiBoard(){
+		logger.info("코디게시판 이동 ");
+		return "CodiBoard_Main";
+	}
+	
+	//패션 토크 게시판 이동
+	@RequestMapping(value="/FTBoard")
+	public String FTBoard(){
+		logger.info("패션 토크 게시판 이동");
+		return "FT_Board_Main";
+	}
+	
+	//코디를 부탁해 게시판 이동
+	@RequestMapping(value="/CoplzBoard")
+	public String CoplzBoard(){
+		logger.info("코디를 부탁해 게시판 이동 ");
+		return "Coplz_Main";
+	}
+	
+	//Q&A 게시판 이동
+	@RequestMapping(value="/QnABoard")
+	public String QnABoard(){
+		logger.info("Q&A 게시판 이동");
+		return "QnABoard_Main";
+	}
+	
+	//물물교환 게시판 이동
+	@RequestMapping(value="/AlterBoard")
+	public String AlterBoard(){
+		logger.info("물물교환 게시판 이동 ");
+		return "AlterBoard_Main";
+	}
 	/*// 회원정보 보기(마이페이지)
 	@RequestMapping(value = "/MemberData_view")
 	public ModelAndView MemberData_view() {	
@@ -45,19 +79,26 @@ public class MainController {
 		return service.MemberData_View();
 	}*/
 
-	//아이디찾기 이동
+	//아이디찾기
 	@RequestMapping(value="/Find_Id")
 	public String findId(){
 		logger.info("아이디찾기 이동");
 	return "Find_Id";
 	}
 	
-	//비밀번호 찾기 이동
+	//비밀번호 찾기
 	@RequestMapping(value="/Find_Pw")
-		public String findPw(){
-			logger.info("비밀번호찾기 이동");
-		return "Find_Pw";
-		}
+	public String findPw(){
+		logger.info("비밀번호찾기 이동");
+	return "Find_Pw";
+	}
+	
+	//닉네입 찾기
+	@RequestMapping(value="/Find_Nick")
+	public ModelAndView findNick(HttpSession session){
+		logger.info("닉네임 찾기");
+	return service.FindNick(session);
+	}
 
 	// 회원정보 수정기능 실행 전 보기 (수정보기 페이지이동)
 	@RequestMapping(value = "/Member_modify_view")

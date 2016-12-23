@@ -97,12 +97,26 @@
 				padding-right: 5px;
 			}	
 			
+			a.board{
+			text-decoration: none;
+			}
+			
 			#menu {				
 				margin-left: 130px;
 				margin-right: 130px;				
 				width: 850px;
 				height: 100px;												
 			}
+			
+			.menuTd:hover{
+				background: #6BADFF;
+				font-weight: bold;
+			}
+			
+			.menuTd:visited{
+			color: black;
+			}
+			
 			table.menu{
 				width: 100%;				
 				border-collapse: collapse;
@@ -157,15 +171,15 @@
 		</div>
 		
 		<div id="weather">
-			<a class="top" href="#" title="">이벤트</a>
+			<a class="top" href="#">이벤트</a>
 			<br/>
-			<a class="top" href="#" title="">월</a>
-			<a class="top" href="#" title="">화</a>			
-			<a class="middle" href="#" title="">수</a>
-			<a class="middle" href="#" title="">목</a>
-			<a class="middle" href="#" title="">금</a>
-			<a class="bottom" href="#" title="">토</a>
-			<a class="bottom" href="#" title="">일</a>			
+			<a class="top" href="#">월</a>
+			<a class="top" href="#">화</a>			
+			<a class="middle" href="#">수</a>
+			<a class="middle" href="#">목</a>
+			<a class="middle" href="#">금</a>
+			<a class="bottom" href="#">토</a>
+			<a class="bottom" href="#">일</a>			
 		</div>	
 		
 		<div id="extra">
@@ -202,12 +216,12 @@
 		<div id="menu">		
 			<table class="menu">
 				<tr class="menu">
-					<td class="menu">코디 게시판</td>
-					<td class="menu">패션토크 게시판</td>
-					<td class="menu">코디를 부탁해</td>
-					<td class="menu">나만의 옷장</td>
-					<td class="menu">Q&A</td>
-					<td class="menu">물물 교환</td>					
+					<td class="menuTd"><a class="board" href="./CodiBoard">코디 게시판</a></td>
+					<td class="menuTd"><a class="board" href="./FTBoard">패션토크 게시판</a></td>
+					<td class="menuTd"><a class="board" href="./CoplzBoard">코디를 부탁해</a></td>
+					<td class="menuTd"><a class="board" href="#">나만의 옷장</a></td>
+					<td class="menuTd"><a class="board" href="./QnABoard">Q&A</a></td>
+					<td class="menuTd"><a class="board" href="./AlterBoard">물물 교환</a></td>					
 				</tr>
 			</table>
 		</div>

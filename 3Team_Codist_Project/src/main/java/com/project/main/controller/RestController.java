@@ -2,6 +2,8 @@ package com.project.main.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.project.main.dto.MemberInfo;
 import com.project.main.service.ProjectService;
@@ -35,6 +38,13 @@ public class RestController {
 			@RequestParam("nick") String nick){
 			logger.info("NickName중복체크");
 		return service.overlayNick(nick);
+	}
+	
+	//닉네입 찾기
+	@RequestMapping(value="/Find_Nick")
+	public @ResponseBody Map<String, String> findNick(HttpSession session){
+		logger.info("닉네임 찾기");
+	return service.FindNick(session);
 	}
 	
 	//회원가입

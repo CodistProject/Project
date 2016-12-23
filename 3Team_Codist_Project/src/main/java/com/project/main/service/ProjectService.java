@@ -163,13 +163,25 @@ public class ProjectService {
 		mav.setViewName("CodiBoard_Detail");		
 		return mav;
 	}
-	
+	//닉네임 찾기
+	public  Map<String, String> FindNick(HttpSession session) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		 Map<String, String> mav =new HashMap<String, String>();
+		String userId=(String) session.getAttribute("userId");
+		logger.info(userId);
+		String NickName=inter.FindNick(userId);
+		logger.info(NickName);
+		mav.put("nickname",NickName);
+		return mav;
+	}
 
 
 	public ModelAndView MemberData_View() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 	
 
