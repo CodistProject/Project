@@ -9,8 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.project.main.dto.MemberInfo;
 import com.project.main.service.ProjectService;
 
 @Controller("MainController")
@@ -24,7 +22,7 @@ public class MainController {
 	@RequestMapping(value="/")
 	public String home(){
 		logger.info("메인 페이지 요청");
-		return "ioi";
+		return "CodiBoard_Write";
 	}
 	
 	//로그인 처리

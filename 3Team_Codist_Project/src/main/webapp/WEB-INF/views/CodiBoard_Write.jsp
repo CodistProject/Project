@@ -20,7 +20,7 @@
   	<jsp:include page="../../resources/include/index.jsp"></jsp:include>
    		<div class="content">
    		<table>
-   			코디 계시판
+   			코디 게시판
    			<div class="te">
    				<tr>
    					<td>제목 :</td>
