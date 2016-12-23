@@ -44,8 +44,12 @@
  	<update id="Member_Modify">
  		UPDATE JOIN_REG SET NICKNAME=#{param2}, PW=#{param3}, NAME=#{param4}, BIRTH=#{param5}, GENDER=#{param6}, EMAIL=#{param7} WHERE ID=#{param1} 
  	</update>
- 	
-
+ 
+ 	<!-- 탈퇴 -->
+	<delete id="withdrawa">
+	 	DELETE FROM join_reg WHERE ID = #{param1}
+	</delete>
+	  
  	<!--패션토크 상세보기  -->
  	<select id="FT_Board_Detail" resultType="com.project.main.dto.BoardDto">
  		SELECT * FROM TOTAL_BOARD WHERE board_idx = #{param1}
@@ -60,6 +64,13 @@
  	<select id="CodiBoard_Detail" resultType="com.project.main.dto.BoardDto">
  		SELECT * FROM TOTAL_BOARD WHERE board_idx = #{param1}
  	</select>
+
+	<!-- 글쓰기 -->
+ 	<insert id="QnABoard_Writes">
+ 		INSERT INTO TOTAL_BOARD(
+ 			board_idx, nickname, subject, content, filename, newfilename)VALUES(
+ 			seq_total_board.NEXTVAL, #{param1}, #{param2}, #{param3},#{param4},#{params5})
+ 	</insert>
  	
  	
 </mapper>

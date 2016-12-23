@@ -6,7 +6,7 @@ public class MemberInfo {
 
 	private int join_Idx;     // 회원idx
 	private String id;   // 아이디
-	private String nickname; //닉네임
+	private String nickName; //닉네임
 	private String pw;   // 비번
 	private String name; // 이름
 	private String phone;	//폰번호
@@ -28,11 +28,11 @@ public class MemberInfo {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getNickname() {
-		return nickname;
+	public String getNickName() {
+		return nickName;
 	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 	public String getPw() {
 		return pw;

@@ -221,6 +221,7 @@
 					<td class="menuTd"><a class="board" href="#">나만의 옷장</a></td>
 					<td class="menuTd"><a class="board" href="./QnABoard">Q&A</a></td>
 					<td class="menuTd"><a class="board" href="./AlterBoard">물물 교환</a></td>					
+
 				</tr>
 			</table>
 		</div>

@@ -20,7 +20,10 @@
 				</tr>
 				<br/>
 				<tr>
-					<td><a href="./MemberData_view?userId=${sessionScope.userId}">마이페이지</a> / <a href="#">로그아웃</a></td>				
+					<td>
+						<a href="./MemberData_view?userId=${sessionScope.userId}">마이페이지</a>  
+					 	<a href="./logout?userId=${sessionScope.userId}">로그아웃</a>
+					 </td>				
 			</table>	
 	</body>
 	<script></script>

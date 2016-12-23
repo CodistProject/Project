@@ -27,6 +27,8 @@ public interface ProjectInterface {
 	// 회원정보 수정
 	public int Member_Modify(String userId, String nickName, String pw, String name, String birth, String gender,
 			String email);
+	//탈퇴
+	public void withdrawa(String userId);	
 
 	//조회수 증가
 	public void upHit(String idx);
@@ -37,9 +39,10 @@ public interface ProjectInterface {
 	//코디게시판 상세보기
 	public Object CodiBoard_Detail(String board_idx);
 	
-	
+	//QnA 글쓰기
+	public int QnABoard_Writes(String nickname, String subject, String content, String filename, String newfilename);
 
-			
+
 }
 
 
