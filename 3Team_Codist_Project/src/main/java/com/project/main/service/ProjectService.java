@@ -66,28 +66,7 @@ public class ProjectService {
 		return mav;
 	}
 
-	// 회원정보 수정 기능
-	public ModelAndView Member_Modify(Map<String, String> params) {
-		logger.info("회원정보 수정 서비스 실행");
-		inter = sqlSession.getMapper(ProjectInterface.class);		
-		
-		int joinIdx = Integer.parseInt(params.get("joinIdx"));		
-		String userPw = params.get("userPw");
-		String userName = params.get("userName");
-		int userBirth = Integer.parseInt(params.get("birth"));
-		String userEmail = params.get("email");		
-		
-		String msg = "수정에 실패 했습니다.";
-		int success = inter.Member_Modify(joinIdx, userPw, userName, userBirth, userEmail);
-		if(success == 1){
-			msg = "수정에 성공 했습니다.";
-		}
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("msg", msg);
-		mav.setViewName("Mypage_View");
-		return mav;
-	}
+	
 
 	// 회원 정보 보기
 	public ModelAndView MemberData_View(String userId) {
@@ -97,6 +76,37 @@ public class ProjectService {
 		ModelAndView mav = new ModelAndView();		
 		mav.addObject("MemberData", inter.MemberData_View(userId));
 		mav.setViewName("Mypage_View");
+		return mav;
+	}
+
+	// 회원정보 수정 기능
+	public ModelAndView Member_Modify(Map<String, String> params) {
+		logger.info("회원정보 수정 기능 처리");
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		
+		ModelAndView mav = new ModelAndView();				
+		String userId = params.get("userId");
+		String nickName = params.get("nickName");
+		String Pw = params.get("pw");		
+		String Name = params.get("name");
+		String Birth = params.get("birth");
+		String Gender = params.get("gender");		
+		String Email = params.get("email");	
+		
+		logger.info(userId+"/"+nickName+"/"+Pw+"/"+Name+"/"+Birth+"/"+Gender+"/"+Email);
+		// 수정 성공 결과 담기
+		int success = inter.Member_Modify(userId, nickName, Pw, Name, Birth, Gender, Email);
+		// 수정 결과 메시지 만들기
+		String msg = "수정에 실패하였습니다.";
+		// 수정 결과 성공시 msg 띄우기
+		if(success==1){
+			msg="수정에 성공하였습니다!";
+		}
+		// msg 담아서 보내기 (얼럿뜨는건 Mypage_View에서 script에서 띄우게 코딩)
+		mav.addObject("MemberData", params);
+		mav.addObject("msg", msg);
+		mav.setViewName("Mypage_View");
+		
 		return mav;
 	}
 }

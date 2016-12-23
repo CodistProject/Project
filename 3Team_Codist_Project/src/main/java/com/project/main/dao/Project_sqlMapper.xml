@@ -20,9 +20,9 @@
  		SELECT * FROM JOIN_REG WHERE ID = #{param1}
  	</select>
  	
- 	<!-- 회원 정보 수정 -->
+ 	<!-- 회원정보 수정 --> 	
  	<update id="Member_Modify">
- 		UPDATE join_reg SET userPw = #{param2}, userName = #{param3}, userBirth = #{param4}, userEmail = #{param5} 
- 			WHERE join_idx = #{param1}
+ 		UPDATE JOIN_REG SET NICKNAME=#{param2}, PW=#{param3}, NAME=#{param4}, BIRTH=#{param5}, GENDER=#{param6}, EMAIL=#{param7} WHERE ID=#{param1} 
  	</update>
+ 	
 </mapper>

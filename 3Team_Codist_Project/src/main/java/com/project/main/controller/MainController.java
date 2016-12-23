@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.project.main.dto.MemberInfo;
 import com.project.main.service.ProjectService;
 
 @Controller("MainController")
@@ -61,8 +63,5 @@ public class MainController {
 	public String join(){
 		logger.info("회원가입 폼으로 이동");
 		return "JoinForm";
-	}
-	
-	
-
+	}	 
 }

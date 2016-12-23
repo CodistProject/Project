@@ -36,7 +36,7 @@
 			    	<td>아이디 : <b id="userId">${sessionScope.userId}</b></td>
 		        </tr>
 		        <tr>
-		            <td>닉네임 : <b id="userNickName">${MemberData.nickName}"</b></td>
+		            <td>닉네임 : <b id="userNickName">${MemberData.nickName}</b></td>
 		        </tr>
 		        <tr>
 		            <td>이름 : <b id="userName">${MemberData.name}</b></td>
