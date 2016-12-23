@@ -43,13 +43,14 @@
   				<td>기존 비밀번호 :<input type="text" name="presentPw" value="${MemberData.pw}"/></td>
   			</tr>
   			<tr>
-  				<td>새 비밀번호 :<input type="text" name="pw"/></td>
+  				<td>새 비밀번호 :<input type="text" name="pw" onchange="pwCheck()"/></td>
   			</tr>
   			<tr>  				
-  				<td>비밀번호 확인 :<input type="text" name="pw1"/><font id="Pw_chk"></font></td>
+  				<td>비밀번호 확인 :<input type="text" name="pw1" onchange="pwCheck()"/>
+  				<font id="Pw_chk"></font></td>
   			</tr>
   			<tr>
-  				<td>이름 :<input type="text" name="name" value="${MemberData.name}"/></td>
+  				<td>이름 :<input type="text" name="name" value="${MemberData.name}" /></td>
   			</tr>
   			<tr>
   				<td>생년월일 :<input type="text" name="birth" value="${MemberData.birth}"/></td>
@@ -88,6 +89,24 @@
   		</form>  
   		</div>			
   	</body>
-  	<script>  	
+  	<script>  
+  //비밀번호 확인
+  var PWChk=false;
+	function pwCheck(){
+		var PW = $("input[name='pw']").val();
+		var PW_C = $("input[name='pw1']").val();
+		console.log(PW);
+		console.log(PW_C);
+	        if(PW==PW_C)
+	            {
+	        	PWChk=true;
+	        	$("#Pw_chk").html("비밀번호가 일치합니다.");
+	            }
+	        else
+	        	{
+	        	PWChk=false;
+	        	$("#Pw_chk").html("비밀번호가 일치하지 않습니다.");
+	        	}
+	     }
   	</script>
 </html>

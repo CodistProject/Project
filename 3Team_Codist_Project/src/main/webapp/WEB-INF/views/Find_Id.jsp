@@ -112,10 +112,7 @@
 		</style>
 	</head>
 	<body>
-		<div>
-			<jsp:include page="../../resources/include/loginBox.jsp"></jsp:include>
-			<jsp:include page="../../resources/include/login_Session.jsp"></jsp:include>
-		</div>
+		
 		<jsp:include page="../../resources/include/index.jsp"></jsp:include>
 		 <div id="center">
     <div id="list">

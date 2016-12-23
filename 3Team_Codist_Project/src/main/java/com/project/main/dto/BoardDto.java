@@ -6,7 +6,7 @@ public class BoardDto {
 	//게시판 내용
      private String category_name;
       private int board_idx;
-      private String nickname;
+      private String nickName;
       private String subject;
       private String sub_subject;
       private String content;
@@ -30,11 +30,11 @@ public class BoardDto {
    public void setBoard_idx(int board_idx) {
       this.board_idx = board_idx;
    }
-   public String getNickname() {
-      return nickname;
+   public String getNickName() {
+	return nickName;
    }
-   public void setNickname(String nickname) {
-      this.nickname = nickname;
+   public void setNickName(String nickName) {
+	   this.nickName = nickName;
    }
    public String getSubject() {
       return subject;

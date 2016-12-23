@@ -83,13 +83,6 @@ public class MainController {
 	return "Find_Id";
 	}
 	
-	//
-	public ModelAndView MemberData_view(@RequestParam("userId") String userId) {	
-		logger.info(userId);
-		logger.info("회원정보 보기(마이 페이지) 이동");	
-		return service.MemberData_View(userId);
-
-	}
 	
 	//비밀번호 찾기
 	@RequestMapping(value="/Find_Pw")
@@ -98,6 +91,13 @@ public class MainController {
 	return "Find_Pw";
 	}
 
+	//회정보 보기(마이 페이지) 이동
+	@RequestMapping(value="/MemberData_view")
+	public ModelAndView MemberData_view(@RequestParam("userId") String userId) {	
+		logger.info(userId);
+		logger.info("회원정보 보기(마이 페이지) 이동");	
+		return service.MemberData_View(userId);
+	}
 
 	// 회원정보 수정기능 실행 전 보기 (수정보기 페이지이동)
 	@RequestMapping(value = "/Member_modify_view")

@@ -164,7 +164,6 @@ public class ProjectService {
 
 	
 	//패션토크 상세보기
-	@Transactional
 	public ModelAndView FT_Board_Detail(String board_idx) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		ModelAndView mav = new ModelAndView();
@@ -177,7 +176,6 @@ public class ProjectService {
 		
 	}
 	//코디게시판 상세보기
-	@Transactional
 	public ModelAndView CodiBoard_Detail(String board_idx) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		ModelAndView mav = new ModelAndView();

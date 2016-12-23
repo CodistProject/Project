@@ -15,6 +15,7 @@ public class MemberInfo {
 	private String email;    // 이메일	
 	private String PW_QnA;   // 비밀번호 질문
 	private String PW_ANSWER;   // 비밀번호 답	
+	
 	public int getJoin_Idx() {
 		return join_Idx;
 	}
