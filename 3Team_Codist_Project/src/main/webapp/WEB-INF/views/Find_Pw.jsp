@@ -116,16 +116,12 @@
 	</head>
 	<body>
 	
-		<div>
-			<jsp:include page="../../resources/include/loginBox.jsp"></jsp:include>
-			<jsp:include page="../../resources/include/login_Session.jsp"></jsp:include>
-		</div>
 	<jsp:include page="../../resources/include/index.jsp"></jsp:include>
 		<div id="center">
            <div id="list">
                <ul id="topUi">
-                   <li id="topLi"><a href="findId" >아이디 찾기</a></li>
-                   <li id="topLi"><a href="findPw">비밀번호 찾기</a></li>
+                   <li id="topLi"><a href="Find_Id" >아이디 찾기</a></li>
+                   <li id="topLi"><a href="Find_Pw">비밀번호 찾기</a></li>
                </ul>
            </div>
         <div id="center2">

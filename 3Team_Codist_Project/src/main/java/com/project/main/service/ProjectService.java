@@ -1,20 +1,16 @@
 package com.project.main.service;
 
+import java.util.HashMap;
 import java.util.Map;
-
 import javax.servlet.http.HttpSession;
-
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.project.main.dao.ProjectInterface;
 import com.project.main.dto.MemberInfo;
-
-
 
 @Service
 public class ProjectService {
@@ -24,8 +20,37 @@ public class ProjectService {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	ProjectInterface inter = null;	
+	ProjectInterface inter = null;
+	
 
+	//중복 체크(ID)
+	public Map<String, String> overlayId(String id) {
+		Map<String, String> obj= new HashMap<String, String>();
+		inter=sqlSession.getMapper(ProjectInterface.class);
+		String use="N";
+		if(inter.overlayId(id) ==null)
+		{
+			use="Y";
+		}
+		obj.put("useId", use);
+		
+		return obj;
+	}
+	
+	//중복 체크(NickName)
+	public Map<String, String> overlayNick(String nick) {
+		Map<String, String> obj= new HashMap<String, String>();
+		inter=sqlSession.getMapper(ProjectInterface.class);
+		String use="N";
+		if(inter.overlayNick(nick) ==null)
+		{
+			use="Y";
+		}
+		obj.put("useNick", use);
+		
+		return obj;
+	}	
+	
 	//로그인 처리
 	public ModelAndView login(Map<String, Object> params) {	
 		
@@ -56,6 +81,25 @@ public class ProjectService {
 		return mav;
 	}	
 
+	//회원가입
+	public MemberInfo join(Map<String, String> params) {
+		inter=sqlSession.getMapper(ProjectInterface.class);
+		MemberInfo info =new MemberInfo();
+		info.setId(params.get("id"));
+		info.setNickName(params.get("nickName"));
+		info.setPw(params.get("pw"));
+		info.setPW_QnA(params.get("PW_QnA"));
+		info.setPW_ANSWER(params.get("PW_ANSWER"));
+		info.setName(params.get("name"));
+		info.setPhone(params.get("phone"));
+		info.setBirth(params.get("birth"));
+		info.setGender(params.get("gender"));
+		info.setEmail(params.get("email"));
+		inter.memberJoin(info);
+		return info;
+	}
+			
+	
 	// 회원 정보 수정 페이지 이동(보기)
 	public ModelAndView Mem_modify_view(String userId) {
 		logger.info("회원정보 수정전 보기(회원수정 폼 페이지");		
@@ -109,4 +153,40 @@ public class ProjectService {
 		
 		return mav;
 	}
+
+	
+	//패션토크 상세보기
+	public ModelAndView FT_Board_Detail(String board_idx) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav = new ModelAndView();
+		//조회수
+		//inter.upHit(idx);
+		//불러오기
+		mav.addObject("content", inter.FT_Board_Detail(board_idx));
+		mav.setViewName("FT_Board_Detail");		
+		return mav;
+		
+	}
+	//코디게시판 상세보기
+	public ModelAndView CodiBoard_Detail(String board_idx) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav = new ModelAndView();
+		//불러오기
+		mav.addObject("content", inter.CodiBoard_Detail(board_idx));
+		mav.setViewName("CodiBoard_Detail");		
+		return mav;
+	}
+	
+	//닉네임 찾기
+	public  Map<String, String> FindNick(HttpSession session) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		 Map<String, String> mav =new HashMap<String, String>();
+		String userId=(String) session.getAttribute("userId");
+		logger.info(userId);
+		String NickName=inter.FindNick(userId);
+		logger.info(NickName);
+		mav.put("nickname",NickName);
+		return mav;
+	}
+
 }

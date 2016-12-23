@@ -3,37 +3,44 @@ package com.project.main.dto;
 public class MemberInfo {	
 
 	// 로그인, 회원정보 관련	
-	private int join_idx;     // 회원idx
+
+	private int join_Idx;     // 회원idx
 	private String id;   // 아이디
-	private String nickName;  // 닉네임
+	private String nickName; //닉네임
 	private String pw;   // 비번
 	private String name; // 이름
-	private String phone;
-	private String birth;    // 생년월일
+	private String phone;	//폰번호
+	private String birth;       // 생년월일
 	private String gender;   // 성별
 	private String email;    // 이메일	
 	private String PW_QnA;   // 비밀번호 질문
-	private String PW_Answer;   // 비밀번호 답
+	private String PW_ANSWER;   // 비밀번호 답	
 	
-	
-	public int getJoin_idx() {
-		return join_idx;
+	public int getJoin_Idx() {
+		return join_Idx;
 	}
-	public void setJoin_idx(int join_idx) {
-		this.join_idx = join_idx;
+	public void setJoin_Idx(int join_Idx) {
+		this.join_Idx = join_Idx;
 	}
 	public String getId() {
 		return id;
 	}
-	public void setId(String id) {
-		this.id = id;
-	}
+	/**
+	 * @return the nickName
+	 */
 	public String getNickName() {
 		return nickName;
 	}
+	/**
+	 * @param nickName the nickName to set
+	 */
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public String getPw() {
 		return pw;
 	}
@@ -76,12 +83,13 @@ public class MemberInfo {
 	public void setPW_QnA(String pW_QnA) {
 		PW_QnA = pW_QnA;
 	}
-	public String getPW_Answer() {
-		return PW_Answer;
+	public String getPW_ANSWER() {
+		return PW_ANSWER;
 	}
-	public void setPW_Answer(String pW_Answer) {
-		PW_Answer = pW_Answer;
+	public void setPW_ANSWER(String pW_ANSWER) {
+		PW_ANSWER = pW_ANSWER;
 	}
+	
 	
 
 }
