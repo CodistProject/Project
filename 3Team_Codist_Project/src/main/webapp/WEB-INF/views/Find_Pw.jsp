@@ -7,13 +7,14 @@
 		<title>비밀번호 찾기</title>
 		<script src ="//code.jquery.com/jquery-3.1.0.min.js"></script>
 		<style>
-			#center {
-	        width: 500px;
-	        position: relative;
-            left:350px;
-            bottom:10px;
-	        padding: 10px;
-	        margin-bottom: 10px;
+			
+		 #content {
+	        width: 600px;
+	        position: absolute;
+            left:230px;
+          	bottom: 130px;
+	        padding: 15px;
+	        margin-bottom: 20px;
 	        float: left;
 	        border: 1px solid #bcbcbc;
 	      }
@@ -21,31 +22,33 @@
 				list-style-type: none;
 				padding: 3px;
 			 }
-			#center2 {
-				        width: 130px;
-				        padding: 5px;
-				        margin-left: 0px;
-				        
-				      }
-			#center3 {
-				        width: 430px;
-				        padding: 10px;
-				        margin: 10px;
-				        border: 1px solid #bcbcbc;
-				      }
-			#center4 {
-				        width: 430px;
-				        padding: 10px;
-				        margin: 10px;
-				        border: 1px solid #bcbcbc;
-				      }
+		#content2 {
+		position: absolute;
+		width: 200px;
+		padding: 5px;
+		
+		 }
+		
+		#content3 {
+		position: absolute;
+		 width: 500px;
+		padding: 10px;
+		margin: 10px;
+		border: 1px solid #bcbcbc;
+		}
+		#content4 {
+		position: absolute;
+		width: 500px;
+		padding: 10px;
+		margin: 10px;
+		border: 1px solid #bcbcbc;
+		}
 			#list {
-				        width: 500px;
-				        padding: 10px;
-				        margin-bottom: 20px;
-				        float: left;
-				        
-				      }
+		  width: 500px;
+		 padding: 10px;
+		margin-bottom: 20px;
+		 float: left;
+		}
 			#topLi{
 			    list-style-type: none;
 			    margin: 5px;
@@ -66,7 +69,7 @@
 			}
 			hr.one{
 					border: 1px solid red;
-			        width: 500px;
+			        width: 600px;
 				}
 			/* 버튼 css */
 		.submit
@@ -115,22 +118,23 @@
 		</style>
 	</head>
 	<body>
-	
-	<jsp:include page="../../resources/include/index.jsp"></jsp:include>
-		<div id="center">
+		<div>
+				<jsp:include page="../../resources/include/index.jsp"></jsp:include>
+		</div>
+		<div id="content">
            <div id="list">
                <ul id="topUi">
                    <li id="topLi"><a href="Find_Id" >아이디 찾기</a></li>
                    <li id="topLi"><a href="Find_Pw">비밀번호 찾기</a></li>
                </ul>
            </div>
-        <div id="center2">
-        <h4 id="idf">비밀번호 찾기</h4>
+        <div id="#content2">
+        
         </div>
         <hr class="one">
-       
+       <h4 id="idf">비밀번호 찾기</h4>
             <p id=p1>■비밀번호 힌트로 비밀번호 찾기</p>
-            <div id="center3">
+            <div id="#content3">
                <form action="#" id="pwFinder">
                 <ul>
                     <li>아이디 : <input id="userId" type="text" size="15" maxlength="15"/></li>
@@ -150,7 +154,7 @@
                   <center><input class="submit" id="sendpw1" type=submit value="확인"/></center>
                 </form>
             </div>    
-            <div id="center4">
+            <div id="#content4">
              <p id=p2>■회원정보로 비밀번호 찾기</p>
                 <form action="#" id="pwFinder2" >
             <ul>

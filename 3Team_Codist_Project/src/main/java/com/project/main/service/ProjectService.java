@@ -1,5 +1,6 @@
 package com.project.main.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
 
 import com.project.main.dao.ProjectInterface;
 import com.project.main.dto.MemberInfo;
@@ -182,7 +184,7 @@ public class ProjectService {
 		mav.setViewName("CodiBoard_Detail");		
 		return mav;
 	}
-	
+
 	//닉네임 찾기
 	public  Map<String, String> FindNick(HttpSession session) {
 		inter = sqlSession.getMapper(ProjectInterface.class);

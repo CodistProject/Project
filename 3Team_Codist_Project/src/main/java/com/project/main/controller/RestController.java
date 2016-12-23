@@ -1,5 +1,6 @@
 package com.project.main.controller;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.main.dto.MemberInfo;
 import com.project.main.service.ProjectService;
+
 
 @Controller("RestController")
 @RequestMapping(value="/rest")
@@ -39,7 +41,6 @@ public class RestController {
 			logger.info("NickName중복체크");
 		return service.overlayNick(nick);
 	}
-	
 	//닉네입 찾기
 	@RequestMapping(value="/Find_Nick")
 	public @ResponseBody Map<String, String> findNick(HttpSession session){
@@ -54,5 +55,6 @@ public class RestController {
 		logger.info("회원 가입");
 		return service.join(params);
 	}
+
 
 }

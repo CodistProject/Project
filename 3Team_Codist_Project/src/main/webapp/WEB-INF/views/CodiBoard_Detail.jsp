@@ -7,12 +7,12 @@
   		<title>코디게시판 상세보기</title>
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 		<style>
-		.table1,.td1,.td2,.td3,.td4,.td5,.td6{
+		table.table1,td.td1,td.td2,td.td3,td.td4,td.td5,td.td6{
 			border: 2px solid #bcbcbc;
 			border-collapse: collapse;
 			width: 700px;
 		}
-		.td2,.td4,.td6{
+		td.td2,td.td4,td.td6{
 			height: 300px;
 			display: none;
 		}
@@ -95,7 +95,7 @@
    				<tr>
    					<td class="td2" >
              		 <div  class="img5">
-             		 <input type="checkbox"  value="외투1"/>
+             		 <input  type="checkbox"  value="외투1"/>
    					<img src="#" id="img1"width="150" height="150" alt="외투1" />
    					<input type="checkbox"  value="외투2"/>
    					<img src="#" id="img1" width="150" height="150" alt="외투2"/>
@@ -135,13 +135,15 @@
    					</td>
    				</tr>	
    				</table>
+   				<c:if test="${sessionScope.userId == ADMIN}">
    						<input type="button" id="button1" value="수정"/>
-   					 	<input type="button" id="button1" value="담기"/>
+   				</c:if>
+   					 	<input type="button" id="button1" onclick="PopUp_Mycloth()" value="담기"/>
    				
    		</div>
    </div>
   	</body>
-  	<script>
+  	<script type="text/javascript">
   	 $(".td1").click(function(){
   		 $(".td2").toggle();
   		 return false;
@@ -154,6 +156,12 @@
  		 $(".td6").toggle();
  		 return false;
  	 });
-  		
+  	
+  	var userId ="${sessionScope.userId}";
+  	
+  	function PopUp_Mycloth(){
+  	   // 팝업을 띄우기
+  	   window.open("PopUp_Mycloth.jsp", '나만의 옷장', 'width=300, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;'); 
+  	};
   	</script>
 </html>

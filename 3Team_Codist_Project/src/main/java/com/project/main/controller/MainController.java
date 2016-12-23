@@ -186,7 +186,14 @@ public class MainController {
 	logger.info("상세보기");
 	return service.CodiBoard_Detail(board_idx);
 	}
-			
-	
+
+	//팝업 나만의 옷장
+	@RequestMapping(value="/PopUp_Mycloth")
+	public String PopUp_Mycloth(){
+		logger.info("나만의 옷장 이동");
+	return "PopUp_Mycloth";
+	}
+
+
 
 }

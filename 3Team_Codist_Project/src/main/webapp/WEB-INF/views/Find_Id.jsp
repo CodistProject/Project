@@ -8,11 +8,11 @@
 		<script src ="//code.jquery.com/jquery-3.1.0.min.js"></script>
 		<style>
 		
-		#center {
-            position: relative;
-            left:350px;
-            top: 50px;
-            width: 500px;
+		div#content {
+            position: absolute;
+            left:230px;
+          	bottom: 300px;
+            width: 600px;
             padding: 15px;
             margin-bottom: 20px;
             float: left;
@@ -24,12 +24,13 @@
 		    padding: 5px;
 		}
 		
-		#sendId {
+		button#sendId {
 		    position: center;
 		}
 		
 		hr.one {
 		    border: 1px solid red;
+		    width: 600px;
 		}
 		
 		p.p1 {
@@ -41,14 +42,14 @@
 		}
 		
 		
-		#list {
+		div#list {
 		    width: 500px;
 		    padding: 10px;
 		    margin-bottom: 20px;
 		    float: left;
 		}
 		
-		#topLi {
+		li#topLi {
 		    list-style-type: none;
 		    margin: 5px;
 		    padding: 5px;
@@ -56,7 +57,7 @@
 		    float: left;
 		}
 		
-		#topUi {
+		ul#topUi {
 		    list-style: none;
 		    margin: 0px;
 		    padding: 0;
@@ -112,17 +113,21 @@
 		</style>
 	</head>
 	<body>
-		
-		<jsp:include page="../../resources/include/index.jsp"></jsp:include>
-		 <div id="center">
+		<div>
+			<jsp:include page="../../resources/include/index.jsp"></jsp:include>
+		</div>
+		 <div id="content">
     <div id="list">
         <ul id="topUi">
             <li id="topLi"><a href="Find_Id" >아이디 찾기</a></li>
             <li id="topLi"><a href="Find_Pw">비밀번호 찾기</a></li>
         </ul>
+        
     </div>
-    <h4 id="idf">아이디 찾기</h4>
+    
+    <br/>
     <hr class="one">
+    <h4 id="idf">아이디 찾기</h4>
     <p class="p1">회원 가입시, 입력하신 회원 정보 또는 본인 인증으로 아이디를 확인할 수 있습니다.
         <br/> 아이디는 가입시 적어주신 이메일로 보내 드립니다.</p>
     <br/>
@@ -133,23 +138,20 @@
             <li>이름 :
                 <input id="userName" type="text" size="14" maxlength="14" />
             </li>
-            <li>phone :
-                <select id="phone1">
-                        <option value="">선택하세요</option>
-                        <option value="010">010</option>
-                        <option value="011">011</option>
-                        <option value="016">016</option>
-                        <option value="017">017</option>
-                        <option value="018">018</option>
-                        <option value="019">019</option>
-               </select>
-               - <input id="phone2" type="text" size="6" maxlength="6"/>
-                - <input id="phone3" type="text" size="6" maxlength="6"/>       
-            </li>
-            <li>이메일 :
-                <input id="email1" type="text" size="16" maxlength="16" /> @
-                <input id="email2" type="text" size="15" maxlength="16" /> </li>
-            <p class="p2">*회원 가입시 작성한 이름과 전화번호, 이메일을 입력하세요.</p>
+            <li>
+            	이메일:
+            	<form name="form" method="post">
+					<input name="email1" type="text" class="box" id="email1" size="15"> @ <input name="email2" type="text" class="box" id="email2" size="20">
+					<select name="email_select" class="box" id="email_select" onChange="checkemailaddy();">
+				    <option value="" selected>선택하세요</option>
+				    <option value="naver.com">naver.com</option>
+					<option value="daum.com">daum.net</option>
+					<option value="gmail.com">gmail.com</option>	
+				    <option value="1">직접입력</option>
+					</select>
+				</form>
+            <p class="p2">*회원 가입시 작성한 이름과  이메일을 입력하세요.</p>
+           </li>
         </ul>
         <center>
             <input id="sendId" type="submit" value="확인" />
@@ -159,8 +161,16 @@
 	
 	</body>
 	<script>
-	 
-		
-	
+		function checkemailaddy(){
+	        if (form.email_select.value == '1') {
+	            form.email2.readonly = false;
+	            form.email2.value = '';
+	            form.email2.focus();
+	        }
+	        else {
+	            form.email2.readonly = true;
+	            form.email2.value = form.email_select.value;
+	        }
+	    }
 	</script>
 </html>
