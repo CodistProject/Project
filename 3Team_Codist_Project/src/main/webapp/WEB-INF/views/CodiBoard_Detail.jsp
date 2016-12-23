@@ -46,6 +46,19 @@
 			position: relative;
 			left:50px;
 		}
+		div#popUp{
+			 	position:absolute;
+				z-index:2;
+				width: 260px;
+				height: 300px;
+				background-color:white;
+				border: 1px solid gray;
+				top: 15%;
+				left: 25%;
+				display:none;
+		}
+		
+		
 		#img1{
 		 padding-left: 10px;
 		}
@@ -138,12 +151,12 @@
    				<c:if test="${sessionScope.userId == ADMIN}">
    						<input type="button" id="button1" value="수정"/>
    				</c:if>
-   					 	<input type="button" id="button1" onclick="PopUp_Mycloth()" value="담기"/>
-   				
+   					 	<input type="button" id="button1" onclick="popUp()" value="담기"/>
+   				<div id="popUp">팝업창</div>
    		</div>
    </div>
   	</body>
-  	<script type="text/javascript">
+  	<script>
   	 $(".td1").click(function(){
   		 $(".td2").toggle();
   		 return false;
@@ -159,9 +172,11 @@
   	
   	var userId ="${sessionScope.userId}";
   	
-  	function PopUp_Mycloth(){
-  	   // 팝업을 띄우기
-  	   window.open("PopUp_Mycloth.jsp", '나만의 옷장', 'width=300, height=400, resizable=no, scrollbars=no, status=no, location=no, directories=no;'); 
-  	};
+  	function popUp() {
+  		$("#popup").css("display","block");
+	}
+  		
+  		
+  	
   	</script>
 </html>
