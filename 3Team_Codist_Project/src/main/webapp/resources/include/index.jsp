@@ -169,7 +169,6 @@
 		</div>	
 		
 		<div id="extra">
-
 			<div>
 				<jsp:include page="loginBox.jsp"></jsp:include>
 				<a href="Find_Id">아이디/비밀번호 찾기</a> 
@@ -195,13 +194,13 @@
 			<br/>
 			<div id="ask">
 				<textarea id="askBox" cols="25px" rows="7px"></textarea>			
-				<div id="ask1">
-				<input  type="button" value="쪽지">
-				<input type="button" value="이메일">
+					<div id="ask1">
+						<input  type="button" value="쪽지">
+						<input type="button" value="이메일">
+					</div>
 				</div>
 			</div>
 		</div>
-		
 		<div id="menu">		
 			<table class="menu">
 				<tr class="menu">
@@ -214,7 +213,7 @@
 				</tr>
 			</table>
 		</div>
-					
+				
 	</body>
 	<script>
 		var msg = "${msg}";

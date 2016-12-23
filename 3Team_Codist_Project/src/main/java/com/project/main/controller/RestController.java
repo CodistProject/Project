@@ -1,5 +1,6 @@
 package com.project.main.controller;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.main.service.ProjectService;
+
 
 @Controller("RestController")
 @RequestMapping(value="/rest")
@@ -35,5 +37,6 @@ public class RestController {
 			logger.info("NickName중복체크");
 		return service.overlayNick(nick);
 	}
-
+	
+	
 }
