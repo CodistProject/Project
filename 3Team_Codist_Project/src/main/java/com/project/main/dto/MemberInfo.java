@@ -3,6 +3,7 @@ package com.project.main.dto;
 public class MemberInfo {	
 
 	// 로그인, 회원정보 관련	
+
 	private int join_Idx;     // 회원idx
 	private String id;   // 아이디
 	private String nickname; //닉네임
@@ -14,27 +15,29 @@ public class MemberInfo {
 	private String email;    // 이메일	
 	private String PW_QnA;   // 비밀번호 질문
 	private String PW_ANSWER;   // 비밀번호 답	
-	
+	public int getJoin_Idx() {
+		return join_Idx;
+	}
+	public void setJoin_Idx(int join_Idx) {
+		this.join_Idx = join_Idx;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getNickname() {
 		return nickname;
 	}
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-
-	
-	public int getJoinIdx() {
-		return join_Idx;
+	public String getPw() {
+		return pw;
 	}
-	public void setJoinIdx(int joinIdx) {
-		this.join_Idx = joinIdx;
-	}
-	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
+	public void setPw(String pw) {
+		this.pw = pw;
 	}
 	public String getName() {
 		return name;
@@ -42,12 +45,11 @@ public class MemberInfo {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public String getPw() {
-		return pw;
+	public String getPhone() {
+		return phone;
 	}
-	public void setPw(String pw) {
-		this.pw = pw;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	public String getBirth() {
 		return birth;
@@ -79,13 +81,7 @@ public class MemberInfo {
 	public void setPW_ANSWER(String pW_ANSWER) {
 		PW_ANSWER = pW_ANSWER;
 	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
 	
 	
-	
+
 }

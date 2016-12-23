@@ -17,6 +17,7 @@ import com.project.main.dao.ProjectInterface;
 import com.project.main.dto.MemberInfo;
 
 
+
 @Service
 public class ProjectService {
 
@@ -24,7 +25,6 @@ public class ProjectService {
 	SqlSession sqlSession;
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	
 
 	ProjectInterface inter = null;
 	
@@ -58,12 +58,14 @@ public class ProjectService {
 	}
 		
 	
+
 	//로그인 처리
-	public ModelAndView login(Map<String, Object> params) {
+	public ModelAndView login(Map<String, Object> params) {	
+		
 		String id = (String) params.get("userId");
 		String pw = (String) params.get("userPass");
 		HttpSession session = (HttpSession) params.get("session");
-		ModelAndView mav = new ModelAndView();		
+		ModelAndView mav = new ModelAndView();	
 		
 		logger.info("id: {}",id);
 		logger.info("pw: {}",pw);
@@ -78,7 +80,7 @@ public class ProjectService {
 			System.out.println(result);
 			
 			if(inter.login(id, pw) != null){
-				session.setAttribute("userId", id);
+				session.setAttribute("userId", id);				
 			}else{
 				mav.addObject("msg","아이디 또는 비밀번호를 확인 하세요");
 			}			
@@ -107,38 +109,59 @@ public class ProjectService {
 			
 	
 	// 회원 정보 수정 페이지 이동(보기)
-	public ModelAndView Mem_modify_view(String joinIdx) {
-		logger.info("회원정보 수정전 보기");		
+	public ModelAndView Mem_modify_view(String userId) {
+		logger.info("회원정보 수정전 보기(회원수정 폼 페이지");		
 		inter = sqlSession.getMapper(ProjectInterface.class);		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("memberData", inter.Mem_ModiView(joinIdx));
-		mav.setViewName("Mypage_Member_Update");
-		// Mypage_View 에다가 memberData 이용해서 (MemberInfo Dtd에 담긴) 회원정보를 담아온다. 즉, 그 폼에 넣어주면됨		 
+		mav.addObject("MemberData", inter.Mem_ModiView(userId));
+		mav.setViewName("Mypage_Member_Update");				 
+		return mav;
+	}
+
+	
+
+	// 회원 정보 보기
+	public ModelAndView MemberData_View(String userId) {
+		logger.info("마이페이지-회원정보 보기 기능실행");
+		logger.info(userId);
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav = new ModelAndView();		
+		mav.addObject("MemberData", inter.MemberData_View(userId));
+		mav.setViewName("Mypage_View");
 		return mav;
 	}
 
 	// 회원정보 수정 기능
 	public ModelAndView Member_Modify(Map<String, String> params) {
-		logger.info("회원정보 수정 서비스 실행");
-		inter = sqlSession.getMapper(ProjectInterface.class);		
+		logger.info("회원정보 수정 기능 처리");
+		inter = sqlSession.getMapper(ProjectInterface.class);
 		
-		int joinIdx = Integer.parseInt(params.get("joinIdx"));		
-		String userPw = params.get("userPw");
-		String userName = params.get("userName");
-		int userBirth = Integer.parseInt(params.get("birth"));
-		String userEmail = params.get("email");		
+		ModelAndView mav = new ModelAndView();				
+		String userId = params.get("userId");
+		String nickName = params.get("nickName");
+		String Pw = params.get("pw");		
+		String Name = params.get("name");
+		String Birth = params.get("birth");
+		String Gender = params.get("gender");		
+		String Email = params.get("email");	
 		
-		String msg = "수정에 실패 했습니다.";
-		int success = inter.Member_Modify(joinIdx, userPw, userName, userBirth, userEmail);
-		if(success == 1){
-			msg = "수정에 성공 했습니다.";
+		logger.info(userId+"/"+nickName+"/"+Pw+"/"+Name+"/"+Birth+"/"+Gender+"/"+Email);
+		// 수정 성공 결과 담기
+		int success = inter.Member_Modify(userId, nickName, Pw, Name, Birth, Gender, Email);
+		// 수정 결과 메시지 만들기
+		String msg = "수정에 실패하였습니다.";
+		// 수정 결과 성공시 msg 띄우기
+		if(success==1){
+			msg="수정에 성공하였습니다!";
 		}
-		
-		ModelAndView mav = new ModelAndView();
+		// msg 담아서 보내기 (얼럿뜨는건 Mypage_View에서 script에서 띄우게 코딩)
+		mav.addObject("MemberData", params);
 		mav.addObject("msg", msg);
 		mav.setViewName("Mypage_View");
+		
 		return mav;
 	}
+
 	
 	//패션토크 상세보기
 	@Transactional
@@ -163,6 +186,7 @@ public class ProjectService {
 		mav.setViewName("CodiBoard_Detail");		
 		return mav;
 	}
+	
 	//닉네임 찾기
 	public  Map<String, String> FindNick(HttpSession session) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
@@ -174,21 +198,5 @@ public class ProjectService {
 		mav.put("nickname",NickName);
 		return mav;
 	}
-
-
-	public ModelAndView MemberData_View() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
-
-	
-
-
-
-	
-	
-	
 
 }

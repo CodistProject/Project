@@ -34,6 +34,7 @@ public class MainController {
 			, HttpSession session){
 		logger.info("로그인 처리");
 		params.put("session", session);
+
 		return service.login(params);
 		
 	}
@@ -52,6 +53,7 @@ public class MainController {
 		return "FT_Board_Main";
 	}
 	
+
 	//코디를 부탁해 게시판 이동
 	@RequestMapping(value="/CoplzBoard")
 	public String CoplzBoard(){
@@ -72,18 +74,21 @@ public class MainController {
 		logger.info("물물교환 게시판 이동 ");
 		return "AlterBoard_Main";
 	}
-	/*// 회원정보 보기(마이페이지)
-	@RequestMapping(value = "/MemberData_view")
-	public ModelAndView MemberData_view() {	
-		logger.info("회원정보 보기 페이지 이동");	
-		return service.MemberData_View();
-	}*/
-
+	
 	//아이디찾기
 	@RequestMapping(value="/Find_Id")
 	public String findId(){
 		logger.info("아이디찾기 이동");
+
 	return "Find_Id";
+	}
+	
+	//
+	public ModelAndView MemberData_view(@RequestParam("userId") String userId) {	
+		logger.info(userId);
+		logger.info("회원정보 보기(마이 페이지) 이동");	
+		return service.MemberData_View(userId);
+
 	}
 	
 	//비밀번호 찾기
@@ -92,19 +97,13 @@ public class MainController {
 		logger.info("비밀번호찾기 이동");
 	return "Find_Pw";
 	}
-	
-	//닉네입 찾기
-	@RequestMapping(value="/Find_Nick")
-	public ModelAndView findNick(HttpSession session){
-		logger.info("닉네임 찾기");
-	return service.FindNick(session);
-	}
+
 
 	// 회원정보 수정기능 실행 전 보기 (수정보기 페이지이동)
 	@RequestMapping(value = "/Member_modify_view")
-	public ModelAndView Member_modify_view(@RequestParam("joinIdx") String joinIdx) {	
+	public ModelAndView Member_modify_view(@RequestParam("userId") String userId) {	
 		logger.info("회원정보 수정 보기 페이지 이동");	
-		return service.Mem_modify_view(joinIdx);
+		return service.Mem_modify_view(userId);
 	}
 	
 	// 회원정보 수정 기능 
@@ -119,6 +118,7 @@ public class MainController {
 	public String join(){
 		logger.info("회원가입 폼으로 이동");
 		return "JoinForm";
+
 	}
 	
 	//패션 토크 상세보기
@@ -135,9 +135,4 @@ public class MainController {
 	return service.CodiBoard_Detail(board_idx);
 	}
 			
-		
-			
-	
-	
-
 }

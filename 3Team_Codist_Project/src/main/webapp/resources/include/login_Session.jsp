@@ -5,7 +5,7 @@
 	<head>
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Insert title here</title>
+		<title>로그인 후 변경</title>
 		<style>		
 			table.login,td.login{
 				padding: 5px;
@@ -20,7 +20,7 @@
 				</tr>
 				<br/>
 				<tr>
-					<td><a href="#">마이페이지</a> / <a href="#">로그아웃</a></td>				
+					<td><a href="./MemberData_view?userId=${sessionScope.userId}">마이페이지</a> / <a href="#">로그아웃</a></td>				
 			</table>	
 	</body>
 	<script></script>

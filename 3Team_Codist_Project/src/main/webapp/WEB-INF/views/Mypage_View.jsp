@@ -7,65 +7,68 @@
   		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   		<title>마이페이지</title>
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-		<style>
-			#info{
-				width: 600px;
-				position: absolute;
-				left: 300px;
-				top: 215px;
-                border-width: 10px;              
-                text-align: center;
-
-		}
-		#total{
-		text-align: center;
-            left: 10%;
-            text-align: right;    
-		}
-		.right{
-			text-align: right;
-		}		
+		<style>			
+			#Mypage_div, .Mypage_table, .Mypage_btn{							
+				padding : 5px;
+			}
+			#Mypage_div{				
+				border : 1px solid;
+				border-collapse : collapse;
+				background-color : yellow;
+				padding-right: 100px;				
+																
+			}
+			#Mypage_div, #Mypage_div2{
+				width : 600px;
+				float: right;																	
+			}					
 		</style>
  	</head>
-  	<body>
-  	<jsp:include page="../../resources/include/index.jsp"></jsp:include>
-  	<div id="content">
-  		<div id="in">
-  		<jsp:include page="../../resources/include/Mypage.jsp"></jsp:include>
-  		</div>
-  	</div>   		
-   		<table id="total">
-   			<tr>
-				<td>
-					<div>
-				   		<table id="info">				   		 
-				            <tr>
-				                <td>아이디 :<input type="text" name="userId"/>${sessionScope.userId}</td>
-				            </tr>			             
-				            <tr>
-				                <td>생년월일 :<input type="text" name="userBirth"/>${memberData.birth}</td>
-				            </tr>
-				            <tr>
-				                <td>성별 :<input type="text" name="userGender"/>${memberData.gender}</td>
-				            </tr>
-				            <tr>
-				                <td>작성글 :<input type="text" name="writeCotent"/>개</td>
-				                
-				                <td>댓글 : <input type="text" name="repleContent"/>개</td>
-				            </tr>
-						    <tr>
-				            	<td colspan="2" class="right">
-				            		<input type="button" onclick="location.href='./Member_modify'" value="회원 정보 수정"/>
-				            	</td>
-				            </tr>
-				            </table>
-    				</div>
-				</td>   			
-   			</tr>    		
-    		</table>
-    		</div>    		
+  	<body>  	  		
+  		<div class="Mypage_include">
+  			<jsp:include page="../../resources/include/index.jsp"/>  			
+  			<jsp:include page="../../resources/include/Mypage.jsp"/>
+  		</div>  		  		  		
+  		<div class="content">  		  			
+  		<div id="Mypage_div">
+  			<table class="Mypage_table">  			  						   		 
+				<tr>
+			    	<td>아이디 : <b id="userId">${sessionScope.userId}</b></td>
+		        </tr>
+		        <tr>
+		            <td>닉네임 : <b id="userNickName">${MemberData.nickName}</b></td>
+		        </tr>
+		        <tr>
+		            <td>이름 : <b id="userName">${MemberData.name}</b></td>
+		        </tr>			             
+		        <tr>
+		            <td>생년월일 :<b id="userBirth">${MemberData.birth}</b></td>
+		        </tr>
+		        <tr>
+		            <td>성별 : <b id="userGender">${MemberData.gender}</b></td>
+		        </tr>
+		        <tr>
+		            <td>작성글 : <b id="writeContent">개</b></td>
+		        </tr>
+		        <tr>    
+		            <td>댓글 : <b id="repleContent">개</b></td>
+		        </tr>
+	        </table>
+	        </br>	        
+		</div>
+		</br>
+		<div id="Mypage_div2">
+	       	 <table class="Mypage_btn" align="right">				            
+				 <tr>
+		       	 	<td>
+			       		<input type="button" onclick="location.href='./Member_modify_view?userId=${sessionScope.userId}'" value="회원 정보 수정"/>
+			     	</td>
+				 </tr>			
+		   	 </table>
+		 </div>  	
+  	</div>  			    		
   	</body>
-  	<script>
+  	<script> 	  	
   	var msg = "${msg}";
 	
 	if(msg != ""){

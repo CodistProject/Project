@@ -10,6 +10,7 @@
 		SELECT ID FROM JOIN_REG WHERE ID=#{param1} AND PW=#{param2}
 	</select>
 	
+<<<<<<< HEAD
 	<!-- 중복 체크(Id) -->
 	<select id="overlayId" resultType="String">
 		SELECT ID FROM JOIN_REG WHERE ID=#{param1}
@@ -29,17 +30,24 @@
 		VALUES(SEQ_JOIN_REG.NEXTVAL,#{id},#{nickname},#{pw},#{PW_QnA},#{PW_ANSWER},#{name},#{phone},#{birth},#{gender},#{email})
 	</insert>
 	
-	<!-- 회원정보 수정 보기 -->
- 	<select id="Mem_ModiView" resultType="com.project.main.dto.MemberInfo">
- 		SELECT * FROM join_reg WHERE join_idx = #{param1}
+=======
+	<!-- 마이페이지/회원정보 보기 -->
+ 	<select id="MemberData_View" resultType="com.project.main.dto.MemberInfo">
+ 		SELECT * FROM JOIN_REG WHERE ID = #{param1}
  	</select>
  	
- 	<!-- 회원 정보 수정 -->
+>>>>>>> 3879213a9b549178d9c9f3c9dd200803f9656f17
+	<!-- 회원정보 수정 보기 -->
+ 	<select id="Mem_ModiView" resultType="com.project.main.dto.MemberInfo">
+ 		SELECT * FROM JOIN_REG WHERE ID = #{param1}
+ 	</select>
+ 	
+ 	<!-- 회원정보 수정 --> 	
  	<update id="Member_Modify">
- 		UPDATE join_reg SET userPw = #{param2}, userName = #{param3}, userBirth = #{param4}, userEmail = #{param5} 
- 			WHERE join_idx = #{param1}
+ 		UPDATE JOIN_REG SET NICKNAME=#{param2}, PW=#{param3}, NAME=#{param4}, BIRTH=#{param5}, GENDER=#{param6}, EMAIL=#{param7} WHERE ID=#{param1} 
  	</update>
  	
+<<<<<<< HEAD
  	<!--패션토크 상세보기  -->
  	<select id="FT_Board_Detail" resultType="com.project.main.dto.BoardDto">
  		SELECT * FROM TOTAL_BOARD WHERE board_idx = #{param1}
@@ -56,4 +64,6 @@
  	</select>
  	
  	
+=======
+>>>>>>> 3879213a9b549178d9c9f3c9dd200803f9656f17
 </mapper>
