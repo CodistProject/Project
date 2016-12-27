@@ -5,7 +5,7 @@
 	<head>
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Insert title here</title>
+		<title>이벤트 페이지(팝업)</title>
 		<style></style>
 	</head>
 	<style>
@@ -17,15 +17,11 @@
 			}
 			
 			#popup{		
-				padding: 20px;		
-				position:absolute;
-				z-index:2;
-				width: 500px;
+				padding: 10px;			
+				width: 450px;
 				height: 550px;
 				background-color:white;
-				border: 1px solid gray;
-				top: 15%;
-				left: 25%;
+				border: 1px solid gray;			
 				/* display:none; */
 			}
 			
@@ -110,4 +106,12 @@
 			<input id="eventclose" type="button" value="닫기">		
 		</div>		
 	</body>
+	<script>
+	
+	// 이벤트 팝업창 닫기
+	$("#eventclose").click(function(){					
+		self.close();		
+	})
+	
+	</script>
 </html>

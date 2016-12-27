@@ -55,10 +55,8 @@ public class ProjectService {
 		obj.put("useNick", use);
 		
 		return obj;
-	}
-		
+	}	
 	
-
 	//로그인 처리
 	public ModelAndView login(Map<String, Object> params) {
 		String id = (String) params.get("userId");

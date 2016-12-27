@@ -16,6 +16,7 @@ public class MemberInfo {
 	private String PW_QnA;   // 비밀번호 질문
 	private String PW_ANSWER;   // 비밀번호 답	
 	
+	
 	public int getJoin_Idx() {
 		return join_Idx;
 	}
@@ -82,6 +83,7 @@ public class MemberInfo {
 	public void setPW_ANSWER(String pW_ANSWER) {
 		PW_ANSWER = pW_ANSWER;
 	}
+	
 	
 	
 

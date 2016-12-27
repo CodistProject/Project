@@ -74,13 +74,43 @@
 		#button1{
 		position: relative;
 		left:590px;
-		margin:5px;
-	
+		margin:5px;	
+		}		
+		#td7{
+			border-color-right : white;
+			border-color-left : white;
+			border-color-bottom : white;
+		}
+		
+		.PopUpCloth{
+		    position : absoulte;
+		    z-index : 3;
+		    width : 250px;									
+			background-color : yellow;
+			border : 1px solid;
+			top : 20%;
+			left : 25%;
+			display : none;	
+			padding : 10px;					
+		}
+		.PopUp2Cloth{
+		    position : absoulte;
+		    z-index : 3;
+		    width : 250px;									
+			background-color : yellow;
+			border : 1px solid;
+			top : 50%;
+			left : 50%;
+			display : none;	
+			padding : 10px;					
+		}
+		.btn_table{
+		
 		}
 		</style>
  	</head>
-  	<body>
-  	<jsp:include page="../../resources/include/index.jsp"/>
+  	<body>  	
+  	<jsp:include page="../../resources/include/index.jsp"/>  	
    	<div class="content">
    		<div class="img1">
    			<img src="#" width="300" height="335" alt="이미지1"/>
@@ -117,6 +147,7 @@
    					</div>
    					</td>
    				</tr>
+   				<tr>
    					<td class="td3"><a href="#">상의</a></td>
    				</tr>
    				<tr>
@@ -142,22 +173,90 @@
    					<input type="checkbox"  value="하의2"/>
    					<img src="#" id="img1" width="150" height="150" alt="하의2"/>
    					<input type="checkbox"  value="하의3"/>
-   					<img src="#" id="img1"width="150" height="150" alt="하의3"/>
-   					</div>
-   					
+   					<img src="#" id="img1"width="150" height="150" alt="하의3"/> 
+   					</div>   					
    					</td>
-   				</tr>	
+   				</tr>   					
    				</table>
+   				<table class="btn_table">
+   				<tr>
+   					<td id="btn_td" align="right">
+   						<input type="button" name="mod_btn" value="수정" />
+   					 	<input type="button" name="put_btn" value="담기"/>
+   					</td>   					
+   				</tr>
+   				</table>
+   				
    				<c:if test="${sessionScope.userId == ADMIN}">
    						<input type="button" id="button1" value="수정"/>
    				</c:if>
    					 	<input type="button" id="button1" onclick="popUp()" value="담기"/>
    				<div id="popUp">팝업창</div>
+   				
    		</div>
    </div>
+   <div class="PopUpCloth">
+   		<table id="PopUp_table" align="center">
+   			<tr>
+   				<td>
+   					날짜 :  <input type="text"  name="Date" value=""/>
+   				</td>
+   			</tr>
+   			<tr>
+   				<td>
+   					제목 :  <input type="text"  name="Subject" value=""/>
+   				</td>
+   			</tr>
+   			<tr>
+   				<td align="center">
+   					<input type="button"  name="myCloth_Move" value="나만의 옷장으로 이동"/>
+   					<input type="button"  name="Cencel" value="취소"  onclick="cancel()'"/>			
+   				</td>
+   			</tr>   			
+   		</table>
+   </div>
+   
+   
+   <div class="PopUp2Cloth">
+   		<table id="PopUp2_table" align="center">
+   			<tr>
+   				<td>
+   					<b>나만의 옷장으로 이동되었습니다!</b>
+   				</td>
+   			</tr>   			
+   			<tr>
+   				<td align="center">
+   					<input type="button"  name="myCloth_Move" value="나만의 옷장에 담기" onclick="location.href='./'"/>
+   					<input type="button"  name="Cencel2" value="취소"  onclick="cancel2()'"/>			
+   				</td>
+   			</tr>   			
+   		</table>
+   </div>
+   
   	</body>
   	<script>
-  	 $(".td1").click(function(){
+  	
+  	// 코디 담기 버튼실행- 나만의 옷장으로 보내기 팝업 띄우기(날짜/이름작성 팝업창)
+  	$("input[name='put_btn']").click(function(){
+  		$(".PopUpCloth").css("display", "block");
+  	})
+  	
+  	// 코디 담기 버튼실행- 나만의 옷장으로 보내기 팝업 띄우기(날짜/이름작성 팝업창)
+  	$("input[name='myCloth_Move']").click(function(){
+  		$(".PopUp2Cloth").css("display", "block");
+  	})
+  	
+  	// 코디 담기 취소 기능(날짜/이름 작성 취소) - 취소누르면 팝업창 없애기
+  	$("input[name='Cencel']").click(function(){
+  		$(".PopUpCloth").css("display", "none");
+  	})
+  	
+  	// 코디 담기 취소 기능2(나만의 옷장이동-캘린더 취소)
+  	$("input[name='Cencel2']").click(function(){
+  		$(".PopUp2Cloth").css("display", "none");
+  	})
+  	
+  	$(".td1").click(function(){
   		 $(".td2").toggle();
   		 return false;
   	 });
@@ -174,9 +273,6 @@
   	
   	function popUp() {
   		$("#popup").css("display","block");
-	}
-  		
-  		
-  	
+	};
   	</script>
 </html>

@@ -1,9 +1,7 @@
 package com.project.main.controller;
 
 import java.util.Map;
-
 import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.project.main.service.ProjectService;
 
 
@@ -27,7 +24,7 @@ public class MainController {
 	//메인 페이지 이동
 	@RequestMapping(value="/")
 	public String home(){
-		logger.info("메인 페이지 요청");
+		logger.info("페이지 테스트 요청(메인페이지 이동)");
 		return "ioi";
 	}
 	
@@ -37,6 +34,12 @@ public class MainController {
 		logger.info("회원가입 폼으로 이동");
 		return "JoinForm";
 	}
+	// 이벤트 팝업창 띄우기
+	@RequestMapping(value="/Event_Popup")
+	public String Event_Popup(){
+	logger.info("이벤트 팝업창 이동");
+	return "PoPup_Event";
+	}
 	
 	//로그인 처리
 	@RequestMapping(value="/login")
@@ -45,6 +48,7 @@ public class MainController {
 		logger.info("로그인 처리");
 		params.put("session", session);
 		return service.login(params);
+
 	}
 	
 	//코디 게시판 이동
@@ -68,6 +72,7 @@ public class MainController {
 		logger.info("회원정보 보기(마이 페이지) 이동");	
 		return service.MemberData_View(userId);
 	}
+	
 	//회원정보 수정기능 실행 전 보기 (수정보기 페이지이동)
 	@RequestMapping(value = "/Member_modify_view")
 	public ModelAndView Member_modify_view(@RequestParam("userId") String userId) {	
