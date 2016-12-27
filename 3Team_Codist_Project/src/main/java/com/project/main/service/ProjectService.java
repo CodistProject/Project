@@ -244,5 +244,35 @@ public class ProjectService {
 		mav.addObject("msg",msg);
 		mav.setViewName(page);
 		return mav;		
-		}			
+		}
+	//게시글 추천
+		public ModelAndView  ft_like(String ft_like) {
+			inter = sqlSession.getMapper(ProjectInterface.class);
+			ModelAndView mav = new ModelAndView();	
+			inter.ft_like(ft_like);	
+			//불러오기
+			mav.setViewName("ft_like");		
+			
+			
+		return mav;
+	}
+	//게시글 비추천
+		public ModelAndView  ft_hate(String ft_hate) {
+			inter = sqlSession.getMapper(ProjectInterface.class);
+			ModelAndView mav = new ModelAndView();
+			inter.ft_hate(ft_hate);	
+			//불러오기
+			mav.setViewName("ft_hate");	
+		return mav;
+	}
+	//댓글 등록
+	public Map<String, Integer> replyRegist(Map<String, String> params) {
+	
+		return null;
+		}
+	//댓글 삭제
+	public Map<String, Integer> replyDel(Map<String, String> params) {
+		// TODO Auto-generated method stub
+		return null;
+	}			
 	}

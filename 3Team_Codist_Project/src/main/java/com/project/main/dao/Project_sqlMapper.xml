@@ -72,5 +72,15 @@
  			seq_total_board.NEXTVAL, #{param1}, #{param2}, #{param3},#{param4},#{params5})
  	</insert>
  	
+ 	<!--추천수 증가  -->
+ 	<update id="ft_like">
+ 		UPDATE TOTAL_BOARD SET ft_like = ft_like+1 WHERE BOARD_IDX = #{param1}
+ 	</update>
+ 	
+ 	<!--비추천수 증가  -->
+ 	<update id="ft_hate">
+ 		UPDATE TOTAL_BOARD SET ft_hate = ft_hate+1 WHERE BOARD_IDX = #{param1}
+ 	</update>
+ 	
  	
 </mapper>

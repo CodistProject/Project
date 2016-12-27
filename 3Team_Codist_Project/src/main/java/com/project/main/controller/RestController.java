@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.main.dto.MemberInfo;
 import com.project.main.service.ProjectService;
+import com.project.main.dto.ReplyDto;
 
 
 @Controller("RestController")
@@ -55,6 +56,33 @@ public class RestController {
 		logger.info("회원 가입");
 		return service.join(params);
 	}
-
-
+	//추천
+	@RequestMapping(value="/ft_like")
+	public @ResponseBody ModelAndView ft_like(
+			@RequestParam("like") String ft_like){
+			logger.info("추천수 증가");
+		return service.ft_like(ft_like);
+	}
+	//비추천
+	@RequestMapping(value="/ft_hate")
+	public @ResponseBody ModelAndView ft_hate(
+			@RequestParam("hate") String ft_hate){
+			logger.info("비추천수 증가");
+		return service.ft_hate(ft_hate);
+	}
+	//댓글 등록
+		@RequestMapping(value="/replyRegist")
+		public @ResponseBody Map<String, Integer> replyRegist(
+			@RequestParam Map<String, String> params){
+			logger.info("댓글 달기 요청");
+			return service.replyRegist(params);
+		}	
+		
+		//댓글 삭제
+		@RequestMapping(value="/repleDel")
+		public @ResponseBody Map<String, Integer> repleDel(
+				@RequestParam Map<String, String> params){
+			logger.info("댓글 삭제 요청");
+			return service.replyDel(params);
+		}
 }

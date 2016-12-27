@@ -7,7 +7,7 @@
 		<title>패션토크 게시판 상세보기</title>
 		<script src ="//code.jquery.com/jquery-3.1.0.min.js"></script>
 		<style>
-		#center {
+		div.content {
             position: relative;
             left:150px;
             top: 10px;
@@ -58,7 +58,7 @@
 	</head>
 	<body>
 		<jsp:include page="../../resources/include/index.jsp"/>
-		<div id="center">
+		<div class="content">
 		<table>
 			<tr>
 				<td>글번호</td>
@@ -85,8 +85,8 @@
 				</td>
 			<tr>
 				<td colspan="6">
-				<a href="#" id="up">추천</a>0
-				<a href="#" id="down">비추천</a>0
+				<a href="like" id="ft_like">추천</a>${content.like}
+				<a href="hade" id="ft_hate">비추천</a>${content.hate}
 				</td>
 			</tr>
 			</tr>
@@ -208,6 +208,18 @@
 		$("#repleZone").append(content);
 	}
 	//추천 .비추천
+	function like(){
+		url = "./rest/ft_like"
+		data = {};
+		data.idx = $("#like").html();
+		sendServer(data,url);
+	}
+	function hate(){
+		url = "./rest/ft_hate"
+		data = {};
+		data.idx = $("#hate").html();
+		sendServer(data,url);
+	}
 	
 	</script>
 </html>

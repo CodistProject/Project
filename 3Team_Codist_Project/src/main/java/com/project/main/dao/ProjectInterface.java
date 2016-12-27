@@ -42,7 +42,11 @@ public interface ProjectInterface {
 	//QnA 글쓰기
 	public int QnABoard_Writes(String nickname, String subject, String content, String filename, String newfilename);
 
-
+	//추천수 증가
+	public void ft_like(String ft_like);
+	
+	//비추천수 증가
+	public void ft_hate(String ft_hate);
 }
 
 
