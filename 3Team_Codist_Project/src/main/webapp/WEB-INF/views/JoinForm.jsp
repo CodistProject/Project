@@ -300,13 +300,14 @@ Codist는 회원관리, 서비스 개발・제공 및 향상, 안전한 인터�
 					</td>
 				</tr>
 			</table>
-			</center>
+		</center>
 		</div>
 		
 			<table id="SignUp_table" align="center">
 				<tr>
 					<td>
-						아이디 : <input name="SignUp_id" type="text"/>
+						<!-- placeholder:바탕에 쓰기?  -->
+						아이디 : <input name="SignUp_id" type="text" placeholder="정우철"/>
 						<input id="Id_Chk" type="button" value="중복체크"/>
 					</td>
 				</tr>

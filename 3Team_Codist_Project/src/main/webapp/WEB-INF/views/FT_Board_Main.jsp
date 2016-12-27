@@ -151,18 +151,11 @@
 		listCall(currPage);
 	});
 	
-	function listCall(currPage){
-		var url="./rest/listCall";
+	function FTlistCall(currPage){
+		var url="./rest/FTlistCall";
 		var data = {};
 		data.page = currPage;
-		data.pagePerNum = $("#pagePerNum").val();
-		reqServer(url, data);
-	}
-	
-	function del(idx){
-		var url="./rest/delete";
-		var data ={};
-		data.idx = idx;
+		data.pagePerNum = $("#Ft_pageNum").val();
 		reqServer(url, data);
 	}
 	
@@ -175,16 +168,12 @@
 			dataType:"json",
 			success:function(d){
 				console.log(d)
-				if(url == "./rest/listCall"){
+				if(url == "./rest/FTlistCall"){
 					printList(d.jsonList.list);
+					//페이지 세팅
 					currPage = d.currPage;
 					printPaging(d.allCnt, d.page);
 				}
-				if(url == "./rest/delete"){
-					alert(d.msg);
-					listCall(currPage);
-				}
-				
 			},
 			error:function(e){
 				console.log(e)
@@ -197,22 +186,24 @@
 		var content = "";
 		for(var i=0; i<list.length; i++){
 			content +="<tr>"
-			+"<td>"+list[i].idx+"</td>"
+			+"<td>"+list[i].board_idx+"</td>"
 			+"	<td>"
-				+"<a href='./detail?idx="+list[i].idx+"'>"
-				+list[i].subject+"</a>";
+			+"<a href='./detail?idx="+list[i].board_idx+"'>"
+			+list[i].subject+"</a>";
+			
 			if(list[i].replies >0){
-				content += " <b>["+list[i].replies+"]</b>";
+				content += " <b>["+list[i].reples+"]</b>";
 			}
-			/*
+			
+			/* 사진 표시
 			if(list[i].newFileName != null){
 				content += "<img width='15px' src='resources/img/default.png'/>";
 			}	
 			*/
 			content +="</td>"
-			+"<td>"+list[i].user_name+"</td>"
+			+"<td>"+list[i].name+"</td>"
 			+"<td>"+list[i].reg_date+"</td>"
-			+"<td>"+list[i].bHit+"</td>"
+			+"<td>"+list[i].bhit+"</td>"
 			+"	<td>"
 				+"<a href='#' onclick='del("+list[i].idx+")'>삭제</a>"
 			+"</td>"
@@ -221,7 +212,8 @@
 		$("#list").empty();
 		$("#list").append(content);
 	}
-	일반 페이징 방식		
+	
+		//일반 페이징 방식		
 		function printPaging(allCnt, pageNum){
 		console.log("전체 게시물 :"+allCnt );
 		console.log("생성 가능 페이지 :"+pageNum );
