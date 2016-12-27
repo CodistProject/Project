@@ -147,22 +147,15 @@
 	
 	listCall(currPage);
 	
-	$("#Ft_pageNum").change(function(){
+	/* $("#Ft_page").change(function(){
 		listCall(currPage);
-	});
+	}); */
 	
 	function listCall(currPage){
-		var url="./rest/listCall";
+		var url="./rest/FT_list";
 		var data = {};
 		data.page = currPage;
-		data.pagePerNum = $("#pagePerNum").val();
-		reqServer(url, data);
-	}
-	
-	function del(idx){
-		var url="./rest/delete";
-		var data ={};
-		data.idx = idx;
+		data.pagePerNum = 5;//$("#Ft_pageNum").val();
 		reqServer(url, data);
 	}
 	
@@ -175,16 +168,12 @@
 			dataType:"json",
 			success:function(d){
 				console.log(d)
-				if(url == "./rest/listCall"){
+				if(url == "./rest/FT_list"){
 					printList(d.jsonList.list);
 					currPage = d.currPage;
 					printPaging(d.allCnt, d.page);
 				}
-				if(url == "./rest/delete"){
-					alert(d.msg);
-					listCall(currPage);
-				}
-				
+			
 			},
 			error:function(e){
 				console.log(e)
@@ -196,38 +185,37 @@
 		console.log(list);
 		var content = "";
 		for(var i=0; i<list.length; i++){
-			content +="<tr>"
-			+"<td>"+list[i].idx+"</td>"
-			+"	<td>"
-				+"<a href='./detail?idx="+list[i].idx+"'>"
-				+list[i].subject+"</a>";
-			if(list[i].replies >0){
-				content += " <b>["+list[i].replies+"]</b>";
-			}
-			/*
-			if(list[i].newFileName != null){
-				content += "<img width='15px' src='resources/img/default.png'/>";
-			}	
-			*/
-			content +="</td>"
-			+"<td>"+list[i].user_name+"</td>"
-			+"<td>"+list[i].reg_date+"</td>"
-			+"<td>"+list[i].bHit+"</td>"
-			+"	<td>"
-				+"<a href='#' onclick='del("+list[i].idx+")'>삭제</a>"
-			+"</td>"
-			+"</tr>"
+				content +="<tr>"
+							+"<td>"+list[i].board_idx+"</td>"
+							+"	<td>"
+							+"<a href='./detail?idx="+list[i].board_idx+"'>"
+							+list[i].subject
+							+"</a>";
+							if(list[i].replies >0){
+								content += " <b>["+list[i].replies+"]</b>";
+							}
+							/*
+							if(list[i].newFileName != null){
+							content += "<img width='15px' src='resources/img/default.png'/>";
+							}	
+							*/
+				content +="</td>"
+							+"<td>"+list[i].nickname+"</td>"
+							+"<td>"+list[i].reg_date+"</td>"
+							+"<td>"+list[i].bhit+"</td>"
+							+"</tr>"
 		}
 		$("#list").empty();
 		$("#list").append(content);
 	}
-	일반 페이징 방식		
+		
+		//일반 페이징 방식		
 		function printPaging(allCnt, pageNum){
 		console.log("전체 게시물 :"+allCnt );
 		console.log("생성 가능 페이지 :"+pageNum );
 		console.log("현재 페이지 :"+currPage);
 		
-		$("#paging").empty();
+		$("#Ft_pageNum").empty();
 		var start;	//페이지 시작
 		var end;	//페이지 끝
 		var range = (currPage/5);	//다음 페이지 있는지 여부
@@ -235,6 +223,7 @@
 		
 		if(range >1){//5페이지 넘었을 경우
 			end = currPage%5 == 0 ?
+					//Math.floor 소수점 다버림 
 					(Math.floor(range))*5
 					:(Math.floor(range)+1)*5;
 			start = Math.floor(end-4);
@@ -252,8 +241,10 @@
 		
 		
 		
-		for(var i=start; i<=end;i++){
-			if(i<=pageNum){
+		/* for(var i=start; i<=end;i++)
+		{
+			if(i<=pageNum)
+			{
 				if(currPage ==i){
 					content +="<b>"+i+"</b>";
 				}else{
@@ -261,15 +252,19 @@
 					+i+"</a> "
 				}					
 			}			
-		}
+		} */
+		
 		//마지막 페이지가 전체 페이지 수 보다 적으면 다음 링크 생성
-		if(end<pageNum){
+		if(end<pageNum)
+		{
 			content +=" | <a href='#' onclick='listCall("
 					+(end+1)+")'>다음</a> "
 		}
 		
-		$("#paging").append(content);
+		$("#Ft_pageNum").append(content);
 		
 	}
+	
+
 	</script>
 </html>

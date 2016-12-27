@@ -1,18 +1,16 @@
 package com.project.main.controller;
 
-import java.util.ArrayList;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.project.main.dto.MemberInfo;
 import com.project.main.service.ProjectService;
@@ -55,6 +53,15 @@ public class RestController {
 		logger.info("회원 가입");
 		return service.join(params);
 	}
+	
+	//패션토크 리스트 보여주기
+	@RequestMapping(value="/FT_list")
+	public @ResponseBody Map<String, Object> listCall(@RequestParam Map<String, String> params){
+		
+		logger.info("리스트 보여주기");
+		
+		return service.FT_list(params);
+	}	
 
 
 }

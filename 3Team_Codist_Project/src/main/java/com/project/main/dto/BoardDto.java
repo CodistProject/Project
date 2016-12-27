@@ -17,9 +17,25 @@ public class BoardDto {
     private String newfilename;     
     private String gender;
     private String weather;
+    private int replies;	//추가
     private int ft_like;
     private int ft_hate;
+    private int bhit;		//추가
       
+    
+    
+	public int getReplies() {
+		return replies;
+	}
+	public void setReplies(int replies) {
+		this.replies = replies;
+	}
+	public int getBhit() {
+		return bhit;
+	}
+	public void setBhit(int bhit) {
+		this.bhit = bhit;
+	}
 	public String getCategory_name() {
 		return category_name;
 	}
