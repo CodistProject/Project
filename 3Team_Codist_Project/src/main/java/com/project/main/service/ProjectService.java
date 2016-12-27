@@ -191,7 +191,7 @@ public class ProjectService {
 		logger.info(userId);
 		String NickName=inter.FindNick(userId);
 		logger.info(NickName);
-		mav.put("nickname",NickName);
+		mav.put("nickname",NickName);	
 		return mav;
 	}
 	
@@ -206,38 +206,45 @@ public class ProjectService {
 		
 	}
 
-	//Q&A 글쓰기
-	public ModelAndView QnABoard_Writes(MultipartHttpServletRequest multi, HttpSession session)  {		
+	// 글쓰기
+	public ModelAndView Board_Write(MultipartHttpServletRequest multi, HttpSession session)  {		
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		ModelAndView mav = new ModelAndView();		
 			
 		String subject = multi.getParameter("subject");
 		String content = multi.getParameter("content");
-		String nickname = multi.getParameter("nickName");	
-		String filename = multi.getParameter("filename");		
-		String newfilename = null;
-		logger.info(subject+" / "+content+" / "+nickname+"/"+filename+"/"+newfilename);
-		String userId = (String) session.getAttribute("userId");
-		logger.info("아이디 :"+userId);
+		String nickName = multi.getParameter("nickName");	
+		String filename = multi.getParameter("filename");
+		String newfilename = "";		
+		String category_name = multi.getParameter("category");		
+		String userId = (String) session.getAttribute("userId");	
 		
-		if(filename != null){
+		if(filename.equals("")){
+			logger.info("파일이 없어요");
+		}else {
 			//파일 업로드
+			logger.info("파일 업로드");
 			UploadFile upload = new UploadFile();
-			
 			newfilename = upload.fileUp(multi, filename);
-		}
-		inter.QnABoard_Writes(nickname, subject, content,filename, newfilename);
-		String page = "";
-		String msg = "";
+		}		
+		logger.info(nickName+" / "+ subject+" / "+ content+" / "+filename+" / "+ newfilename+" / "+category_name);
+		inter.Board_Write(nickName, subject, content,filename, newfilename,category_name);		
+		String page = "QnABoard_Write";
+		String msg = "로그인을 해주세요.";		
 		
-		if(userId != null){
-			logger.info(userId);
+		if(userId != null){	
+			logger.info("userId:{}",userId);
+			
 			msg = "등록에 성공 하였습니다.";
-			page = "QnABoard_Main";						
-		}else{
-			page = "QnABoard_Write";
-			msg = "등록에 실패 하였습니다.";			
+			if(category_name.equals("QnA")){
+				page = "QnABoard_Main";
+			}else if(category_name.equals("Alter")){
+				page = "AlterBoard_Main";
+			}else if(category_name.equals("FT")){
+				page = "FT_Board_Main";
+			}
 		}
+		
 		mav.addObject("msg",msg);
 		mav.setViewName(page);
 		return mav;		
@@ -277,4 +284,47 @@ public class ProjectService {
 		return json;
 	}			
 	
+
+	//Q&A 닉네임 찾기
+	public ModelAndView QnABoard_Write(String userId) {		
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav = new ModelAndView();
+		String nickName = inter.FindNick(userId);
+		logger.info("닉네임:"+nickName);
+		mav.addObject("nickName", nickName);
+		mav.setViewName("QnABoard_Write");
+		return mav;
+	}
+	
+	//코디를 부탁해 닉네임 찾기
+	public ModelAndView Coplz_Write(String userId) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav = new ModelAndView();
+		String nickName = inter.FindNick(userId);
+		logger.info("닉네임:"+nickName);
+		mav.addObject("nickName", nickName);
+		mav.setViewName("Coplz_Write");
+		return mav;		
+	}
+	//물물교환 닉네임 찾기
+	public ModelAndView Alter_Write(String userId) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav = new ModelAndView();
+		String nickName = inter.FindNick(userId);
+		logger.info("닉네임:"+nickName);
+		mav.addObject("nickName", nickName);
+		mav.setViewName("AlterBoard_Write");
+		return mav;	
+	}
+	
+	//패션토크 닉네임 찾기
+	public ModelAndView FTboard_Write(String userId) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav = new ModelAndView();
+		String nickName = inter.FindNick(userId);
+		logger.info("닉네임:"+nickName);
+		mav.addObject("nickName", nickName);
+		mav.setViewName("FT_Board_Write");
+		return mav;		
+	}			
 }

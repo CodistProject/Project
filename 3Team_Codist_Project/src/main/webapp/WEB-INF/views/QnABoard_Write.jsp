@@ -87,18 +87,20 @@
 	<body>
 			<jsp:include page="../../resources/include/index.jsp"></jsp:include>
 		<div class="content">
-			<form action="QnABoard_Writes" method="post" enctype="multipart/form-data">		
+			<form action="Board_Write" method="post" enctype="multipart/form-data">		
     		<table id="QnA">
     			<tr>
     				<td colspan="2">Q & A</td>
     			</tr>    			
     			<tr>
     				<td>제목</td>
-    				<td><input name="subject" type="text"/> </td>
+    				<td><input name="subject" type="text"/>
+    					<input type="hidden" name="category" value="QnA" />
+    				 </td>
     			</tr>
     			<tr>
     				<td>작성자</td>
-    				<td><input name="nickname" type="text" value="${sessionScope.userId}" readonly/></td>
+    				<td><input name="nickName" type="text" value="${nickName}" readonly/></td>
     			</tr>
     			<tr>
 					<td>내용</td>
@@ -106,17 +108,19 @@
 				</tr>
 				<tr>
 				<td>첨부 파일</td>
-				<td>
-					<input type="file"  name="file" value="첨부" onchange="fileView(this)"/>
-					<input  id="filename"  type="hidden" name="filename"/>
+				<td>				
+					<input type="file" name="file" value="첨부" onchange="fileView(this)"/>
+					<input  id="filenames"  type="hidden" name="filename"/>
 				</td>
 			</tr>
+			
 			<tr>
-				<td colspan="2">
+				<td colspan="2">					
 					<input type="submit" class="button" value="등록"/>
-					<input type="reset"  class="button" value="취소"/>
+					<input type="reset"  class="button" value="취소"/>				
 				</td>
 			</tr>
+			
     		</table>
     		</form>	
 		</div>	
@@ -133,7 +137,7 @@
 		var fullPath = elem.value;
 		var filename = fullPath.substring(12);
 		console.log(filename);
-		$("#filename").val(filename);
+		$("#filenames").val(filename);
 	}
 	</script>
 

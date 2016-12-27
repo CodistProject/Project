@@ -51,9 +51,11 @@ public interface ProjectInterface {
 	//FT_ 리스트 전체 갯수
 	public int FTCount(String category_name);
 
+	//게시판 글쓰기
+	public int Board_Write(String nickName, String subject, String content, String filename, String newfilename,
+			String category_name);
 
-
-
+	
 }
 
 
