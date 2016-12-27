@@ -1,9 +1,7 @@
 package com.project.main.controller;
 
 import java.util.Map;
-
 import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.project.main.service.ProjectService;
 
 @Controller("MainController")
@@ -24,8 +21,15 @@ public class MainController {
 	//메인 페이지 이동
 	@RequestMapping(value="/")
 	public String home(){
-		logger.info("메인 페이지 요청");
+		logger.info("페이지 테스트 요청(메인페이지 이동)");
 		return "ioi";
+	}
+	
+	// 이벤트 팝업창 띄우기
+	@RequestMapping(value="/Event_Popup")
+	public String Event_Popup(){
+	logger.info("이벤트 팝업창 이동");
+	return "PoPup_Event";
 	}
 	
 	//로그인 처리
@@ -35,8 +39,7 @@ public class MainController {
 		logger.info("로그인 처리");
 		params.put("session", session);
 
-		return service.login(params);
-		
+		return service.login(params);		
 	}
 	
 	//코디 게시판 이동
@@ -53,7 +56,6 @@ public class MainController {
 		return "FT_Board_Main";
 	}
 	
-
 	//코디를 부탁해 게시판 이동
 	@RequestMapping(value="/CoplzBoard")
 	public String CoplzBoard(){
@@ -81,8 +83,7 @@ public class MainController {
 		logger.info("아이디찾기 이동");
 
 	return "Find_Id";
-	}
-	
+	}	
 	
 	//비밀번호 찾기
 	@RequestMapping(value="/Find_Pw")

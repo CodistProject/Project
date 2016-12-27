@@ -171,7 +171,7 @@
 		</div>
 		
 		<div id="weather">
-			<a class="top" href="#">이벤트</a>
+			<a class="top" href="javascript:Event();">이벤트</a>
 			<br/>
 			<a class="top" href="#">월</a>
 			<a class="top" href="#">화</a>			
@@ -229,5 +229,13 @@
 	<script>
 		var msg = "${msg}";
 		var userId ="${sessionScope.userId}";		
+		
+		// 이벤트 팝업
+		function Event(){
+			var Popup_url = "./Event_Popup";
+			var Popup_option = "width=500px, height=600px, resizalbe=no, top=500px, left=500px";
+			window.open(Popup_url,"",Popup_option);
+		}
+		
 	</script>	
 </html>

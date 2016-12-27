@@ -24,23 +24,16 @@ public class MemberInfo {
 	}
 	public String getId() {
 		return id;
-	}
-	/**
-	 * @return the nickName
-	 */
+	}	
 	public String getNickName() {
 		return nickName;
-	}
-	/**
-	 * @param nickName the nickName to set
-	 */
+	}	
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
-
 	public String getPw() {
 		return pw;
 	}
