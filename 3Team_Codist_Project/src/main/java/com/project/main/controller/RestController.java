@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.main.dto.MemberInfo;
-import com.project.main.service.ProjectService;
 import com.project.main.dto.ReplyDto;
+import com.project.main.service.ProjectService;
 
 
 @Controller("RestController")
@@ -76,13 +76,14 @@ public class RestController {
 			@RequestParam Map<String, String> params){
 			logger.info("댓글 달기 요청");
 			return service.replyRegist(params);
+		}
+	//댓글 리스트 보기
+	@RequestMapping(value="/replyList")
+	public @ResponseBody Map<String, ArrayList<ReplyDto>> replyList(
+			@RequestParam ("idx") String idx){
+		logger.info("댓글 달기 요청");
+		return service.replyList(idx);
 		}	
 		
-		//댓글 삭제
-		@RequestMapping(value="/repleDel")
-		public @ResponseBody Map<String, Integer> repleDel(
-				@RequestParam Map<String, String> params){
-			logger.info("댓글 삭제 요청");
-			return service.replyDel(params);
-		}
+
 }

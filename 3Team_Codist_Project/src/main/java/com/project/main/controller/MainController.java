@@ -26,7 +26,7 @@ public class MainController {
 	@RequestMapping(value="/")
 	public String home(){
 		logger.info("메인 페이지 요청");
-		return "ioi";
+		return "FT_Board_Detail";
 	}
 	
 	//회원가입 페이지 이동

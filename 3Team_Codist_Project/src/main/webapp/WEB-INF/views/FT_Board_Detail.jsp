@@ -118,6 +118,10 @@
 				</td>
 				<td class="data">
 				</td>
+				<td class="user">
+				</td>
+				<td class="user">
+				</td>
 				
 			</tr>
 		
@@ -177,15 +181,7 @@
 			dataType:"json",
 			success:function(d){
 				console.log(d);	
-				if(url == "./rest/replyRegist"){
-					if(d.success == 1){
-						alert("댓글이 등록 되었습니다.");
-						$("#content").val("");
-						replyList();
-					}else{
-						alert("다시 시도해 주세요!");
-					}
-				}
+
 				if(url =="./rest/replyList"){
 					printReple(d.list);
 				}
@@ -201,8 +197,10 @@
 		var content = "";
 		for(var i=0; i<list.length;i++){
 			content +="<tr>"
-				+"<td class='user'>"+list[i].replyer+"</td>"
-				+"<td class='data left'>"+list[i].reple+"</td>"
+				+"<td class='user'>"+list[i].nickname+"</td>"
+				+"<td class='data left'>"+list[i].peple_content+"</td>"
+				+"<td class='data left'>"+list[i].reple_date+"</td>"
+				+"<td class='data left'>"+list[i].reple_like+"</td>"
 			+"</tr>"
 		}
 		$("#repleZone").append(content);

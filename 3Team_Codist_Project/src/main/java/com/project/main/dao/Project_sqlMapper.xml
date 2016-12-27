@@ -81,6 +81,10 @@
  	<update id="ft_hate">
  		UPDATE TOTAL_BOARD SET ft_hate = ft_hate+1 WHERE BOARD_IDX = #{param1}
  	</update>
+ 	<!--  댓글 가져오기 -->
+ 	<select id="replyList" resultType="com.project.main.dto.ReplyDto">
+ 	 	SELECT * FROM total_reple WHERE board_idx= #{param1}
+ 	</select>
  	
  	
 </mapper>

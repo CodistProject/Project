@@ -1,5 +1,8 @@
 package com.project.main.dao;
+import java.util.ArrayList;
+
 import com.project.main.dto.MemberInfo;
+import com.project.main.dto.ReplyDto;
 
 public interface ProjectInterface {
 	
@@ -47,6 +50,8 @@ public interface ProjectInterface {
 	
 	//비추천수 증가
 	public void ft_hate(String ft_hate);
+	//댓글 가져오기
+	public ArrayList<ReplyDto> replyList(String idx);
 }
 
 

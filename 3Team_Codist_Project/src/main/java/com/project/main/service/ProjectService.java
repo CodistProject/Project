@@ -14,12 +14,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import com.project.main.dao.ProjectInterface;
 import com.project.main.dto.MemberInfo;
+import com.project.main.dto.ReplyDto;
 import com.project.main.util.UploadFile;
-
-
 
 @Service
 public class ProjectService {
@@ -265,14 +263,22 @@ public class ProjectService {
 			mav.setViewName("ft_hate");	
 		return mav;
 	}
-	//댓글 등록
+	//댓글 동록
 	public Map<String, Integer> replyRegist(Map<String, String> params) {
+			
+		return null;
+		}			
 	
-		return null;
-		}
-	//댓글 삭제
-	public Map<String, Integer> replyDel(Map<String, String> params) {
-		// TODO Auto-generated method stub
-		return null;
-	}			
+	//댓글리스트
+	public Map<String, ArrayList<ReplyDto>> replyList(
+			String idx) {
+			inter = sqlSession.getMapper(ProjectInterface.class);
+			Map<String, ArrayList<ReplyDto>> obj 
+				= new HashMap<String, ArrayList<ReplyDto>>();
+			obj.put("list", inter.replyList(idx));
+			
+			return obj;
+	}
+
+	
 	}
