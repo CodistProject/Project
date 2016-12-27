@@ -95,6 +95,7 @@
     			<tr>
     				<td>제목</td>
     				<td><input name="subject" type="text"/> </td>
+    				<input type="hidden" name="category" value="CP" />
     			</tr>
     			<tr>
     				<td>작성자</td>

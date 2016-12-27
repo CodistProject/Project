@@ -166,6 +166,14 @@ public class MainController {
 		return "QnABoard_Main";
 	}
 	
+	//코디를 부탁해 게시판 이동
+		@RequestMapping(value="/Coplz_Main")
+		public String Coplz_Main(){
+			logger.info("탈퇴 페이지 요청");
+			return "Coplz_Main";
+		}	
+	
+	
 	//QnA 게시판 글쓰기 이동	
 		@RequestMapping(value="/QnABoard_Write")
 		public ModelAndView QnABoard_Write(@RequestParam("userId") String userId){
