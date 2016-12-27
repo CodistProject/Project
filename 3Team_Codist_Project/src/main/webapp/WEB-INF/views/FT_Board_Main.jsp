@@ -185,7 +185,7 @@
 				content +="<tr>"
 							+"<td>"+list[i].board_idx+"</td>"
 							+"	<td>"
-							+"<a href='./detail?idx="+list[i].board_idx+"'>"
+							+"<a href='./FT_Board_Detail?board_idx="+list[i].board_idx+"'>"
 							+list[i].subject
 							+"</a>";
 							if(list[i].replies >0){
@@ -260,6 +260,7 @@
 		
 		$("#Ft_pageNum").append(content);
 		
+	
 	}
 	
 

@@ -100,6 +100,10 @@
 			a.board{
 			text-decoration: none;
 			}
+			a.a2{
+			text-decoration: none;
+		    color: black;
+			}
 			
 			#menu {				
 				margin-left: 130px;
@@ -187,7 +191,7 @@
 			<div id="loginSession">
 				<c:if test="${sessionScope.userId ==null}">
 					<jsp:include page="loginBox.jsp"></jsp:include>
-					<a href="Find_Id">아이디/비밀번호 찾기</a> 
+					<a href="Find_Id" class="a2">아이디/비밀번호 찾기</a> 
 				</c:if>
 				
 				<c:if test="${sessionScope.userId !=null}">

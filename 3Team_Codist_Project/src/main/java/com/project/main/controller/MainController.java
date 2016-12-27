@@ -24,7 +24,7 @@ public class MainController {
 	//메인 페이지 이동
 	@RequestMapping(value="/")
 	public String home(){
-		logger.info("페이지 테스트 요청(메인페이지 이동)");
+		logger.info("메인 페이지 요청");
 		return "ioi";
 	}
 	

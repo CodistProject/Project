@@ -79,6 +79,22 @@
 		 SELECT COUNT(*) FROM TOTAL_BOARD WHERE CATEGORY_NAME = #{category_name}
  	</select>
  	
+ 	<!--추천수 증가  -->
+ 	<update id="ft_like">
+ 		UPDATE TOTAL_BOARD SET ft_like = ft_like+1 WHERE BOARD_IDX = #{param1}
+ 	</update>
+ 	
+ 	<!--비추천수 증가  -->
+ 	<update id="ft_hate">
+ 		UPDATE TOTAL_BOARD SET ft_hate = ft_hate+1 WHERE BOARD_IDX = #{param1}
+ 	</update>
+ 	
+ 	<!--  댓글 가져오기 -->
+ 	<select id="replyList" resultType="com.project.main.dto.ReplyDto">
+ 	 	SELECT * FROM total_reple WHERE board_idx= #{param1}
+ 	</select>
+ 	
+ 	
  	<!-- FT 리스트 보이기 -->
  	<select id="FT_list" resultType="com.project.main.dto.BoardDto">
  		SELECT BOARD_IDX, NICKNAME ,SUBJECT ,REG_DATE ,NEWFILENAME,BHIT,REPLES,ft_like FROM (

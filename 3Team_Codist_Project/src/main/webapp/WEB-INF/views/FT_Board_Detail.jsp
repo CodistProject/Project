@@ -7,7 +7,7 @@
 		<title>패션토크 게시판 상세보기</title>
 		<script src ="//code.jquery.com/jquery-3.1.0.min.js"></script>
 		<style>
-		#center {
+		/* div.content {
             position: relative;
             left:150px;
             top: 10px;
@@ -16,7 +16,7 @@
             margin-bottom: 20px;
             float: left;
             border: 1px solid #bcbcbc;
-        }
+        } */
 		table{
 			width:100%;
 			margin-top: 10px;
@@ -58,13 +58,13 @@
 	</head>
 	<body>
 		<jsp:include page="../../resources/include/index.jsp"/>
-		<div id="center">
+		<div class="content">
 		<table>
 			<tr>
 				<td>글번호</td>
-				<td id="idx">${content.idx}</td>
+				<td id="idx">${content.board_idx}</td>
 				<td>작성자</td>
-				<td>${content.user_name}</td>
+				<td>${content.nickName}</td>
 				<td>조회수</td>
 				<td>${content.bhit}</td>
 			</tr>
@@ -85,15 +85,15 @@
 				</td>
 			<tr>
 				<td colspan="6">
-				<a href="#" id="up">추천</a>0
-				<a href="#" id="down">비추천</a>0
+				<a href="like" id="ft_like">추천</a>${content.ft_like}
+				<a href="hade" id="ft_hate">비추천</a>${content.ft_hate}
 				</td>
 			</tr>
 			</tr>
 			<tr>
 				<td colspan="6">
 				<input type="button" onclick="location.href='./list'" value="목록"/>
-				<input type="button" onclick="location.href='./updateQna?idx=${content.idx}'" value="수정"/>
+				<input type="button" onclick="location.href='./updateQna?board_idx=${content.board_idx}'" value="수정"/>
 				<input type="button" onclick="location.href='./list'" value="취소"/>
 				
 				</td>
@@ -118,6 +118,10 @@
 				</td>
 				<td class="data">
 				</td>
+				<td class="user">
+				</td>
+				<td class="user">
+				</td>
 				
 			</tr>
 		
@@ -130,35 +134,7 @@
 	
 	replyList();
 
-	$("#go").click(function(){
-		url = "./rest/replyRegist";
-		data = {};
-		data.idx = $("#idx").html();
-		data.replyer = "${sessionScope.userId}";
-		data.content = $("#content").val();
-		sendServer(data,url);
-	});
-	/*사진만 보였을때 뜨게 하기  */
-	$(document).ready(function(){
-			var fileName = "${content.fileName}";
-			var newFileName = "${content.newFileName}";
-			if(fileName == ""){
-				$("#attach").html("첨부된 파일이 없습니다.");
-			}else{
-				//var ext = newFileName.substring(newFileName.length-3,newFileName.length);
-				var ext = newFileName.substring(newFileName.lastIndexOf(".")+1);
-				console.log(ext);
-				if(ext=="jpg"||ext=="png"||ext=="gif"){
-					var content = "<img width='450px' src='resources/upload/"+newFileName+"'/>";
-				}else{
-					var content = "<a href='./download?file="+newFileName+"'>"
-						+"<img width='15px' src='resources/img/default.png'/>"
-						+"${content.fileName}</a>";
-				}
-				$("#attach").append(content);
-			}
-		});
-	
+
 	
 	function replyList(){
 		url = "./rest/replyList";
@@ -177,15 +153,7 @@
 			dataType:"json",
 			success:function(d){
 				console.log(d);	
-				if(url == "./rest/replyRegist"){
-					if(d.success == 1){
-						alert("댓글이 등록 되었습니다.");
-						$("#content").val("");
-						replyList();
-					}else{
-						alert("다시 시도해 주세요!");
-					}
-				}
+
 				if(url =="./rest/replyList"){
 					printReple(d.list);
 				}
@@ -201,13 +169,27 @@
 		var content = "";
 		for(var i=0; i<list.length;i++){
 			content +="<tr>"
-				+"<td class='user'>"+list[i].replyer+"</td>"
-				+"<td class='data left'>"+list[i].reple+"</td>"
+				+"<td class='user'>"+list[i].nickname+"</td>"
+				+"<td class='data left'>"+list[i].reple_content+"</td>"
+				+"<td class='data left'>"+list[i].reple_date+"</td>"
+				+"<td class='data left'>"+list[i].reple_like+"</td>"
 			+"</tr>"
 		}
 		$("#repleZone").append(content);
 	}
 	//추천 .비추천
+	function like(){
+		url = "./rest/ft_like"
+		data = {};
+		data.idx = $("#like").html();
+		sendServer(data,url);
+	}
+	function hate(){
+		url = "./rest/ft_hate"
+		data = {};
+		data.idx = $("#hate").html();
+		sendServer(data,url);
+	}
 	
 	</script>
 </html>

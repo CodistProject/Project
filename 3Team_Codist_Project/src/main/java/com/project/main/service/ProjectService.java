@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.project.main.dao.ProjectInterface;
 import com.project.main.dto.BoardDto;
 import com.project.main.dto.MemberInfo;
+import com.project.main.dto.ReplyDto;
 import com.project.main.util.UploadFile;
 
 @Service
@@ -247,7 +248,6 @@ public class ProjectService {
 		mav.setViewName(page);
 		return mav;		
 		}
-	
 	//FT리스트 보여주기
 	public Map<String, Object> FT_list(Map<String, String> params) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
@@ -324,5 +324,44 @@ public class ProjectService {
 		mav.addObject("nickName", nickName);
 		mav.setViewName("FT_Board_Write");
 		return mav;		
-	}			
-}
+	}		
+	
+	//게시글 추천
+	public ModelAndView  ft_like(String ft_like) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav = new ModelAndView();	
+		inter.ft_like(ft_like);	
+		//불러오기
+		mav.setViewName("ft_like");		
+			
+			
+		return mav;
+	}
+	//게시글 비추천
+		public ModelAndView  ft_hate(String ft_hate) {
+			inter = sqlSession.getMapper(ProjectInterface.class);
+			ModelAndView mav = new ModelAndView();
+			inter.ft_hate(ft_hate);	
+			//불러오기
+			mav.setViewName("ft_hate");	
+		return mav;
+	}
+	//댓글 동록
+	public Map<String, Integer> replyRegist(Map<String, String> params) {
+			
+		return null;
+		}			
+	
+	//댓글리스트
+	public Map<String, ArrayList<ReplyDto>> replyList(
+			String idx) {
+			inter = sqlSession.getMapper(ProjectInterface.class);
+			Map<String, ArrayList<ReplyDto>> obj 
+				= new HashMap<String, ArrayList<ReplyDto>>();
+			obj.put("list", inter.replyList(idx));
+			
+			return obj;
+	}
+
+	
+	}

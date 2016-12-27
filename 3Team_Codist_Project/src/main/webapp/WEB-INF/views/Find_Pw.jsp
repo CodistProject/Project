@@ -61,7 +61,7 @@
 			    margin:0px;
 			    padding:0;
 			}
-			a{
+			a.a1{
 			    text-decoration:none;
 			    color: black;
 			    font-size: 13px;
@@ -124,8 +124,8 @@
 		<div id="content">
            <div id="list">
                <ul id="topUi">
-                   <li id="topLi"><a href="Find_Id" >아이디 찾기</a></li>
-                   <li id="topLi"><a href="Find_Pw">비밀번호 찾기</a></li>
+                   <li id="topLi"><a class="a1" href="Find_Id" >아이디 찾기</a></li>
+                   <li id="topLi"><a class="a1" href="Find_Pw">비밀번호 찾기</a></li>
                </ul>
            </div>
         <div id="#content2">

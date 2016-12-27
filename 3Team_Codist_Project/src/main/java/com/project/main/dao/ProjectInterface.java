@@ -3,6 +3,8 @@ import java.util.ArrayList;
 
 import com.project.main.dto.BoardDto;
 import com.project.main.dto.MemberInfo;
+import com.project.main.dto.ReplyDto;
+
 
 public interface ProjectInterface {
 	
@@ -37,10 +39,10 @@ public interface ProjectInterface {
 	public void upHit(String idx);
 	
 	//패션토크 상세보기
-	public Object FT_Board_Detail(String board_idx);
+	public BoardDto FT_Board_Detail(String board_idx);
 	
 	//코디게시판 상세보기
-	public Object CodiBoard_Detail(String board_idx);
+	public BoardDto CodiBoard_Detail(String board_idx);
 	
 	//QnA 글쓰기
 	public int QnABoard_Writes(String nickname, String subject, String content, String filename, String newfilename);
@@ -54,8 +56,14 @@ public interface ProjectInterface {
 	//게시판 글쓰기
 	public int Board_Write(String nickName, String subject, String content, String filename, String newfilename,
 			String category_name);
-
 	
+	//추천수 증가
+	public void ft_like(String ft_like);
+	
+	//비추천수 증가
+	public void ft_hate(String ft_hate);
+	//댓글 가져오기
+	public ArrayList<ReplyDto> replyList(String idx);
 }
 
 

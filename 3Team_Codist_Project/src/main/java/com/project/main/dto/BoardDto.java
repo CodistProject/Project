@@ -1,6 +1,6 @@
 package com.project.main.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class BoardDto {
 
