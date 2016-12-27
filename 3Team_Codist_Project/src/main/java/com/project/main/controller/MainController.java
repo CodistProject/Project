@@ -161,16 +161,16 @@ public class MainController {
 		
 	//Q&A 글쓰기
 	@RequestMapping(value="/QnABoard_Writes")
-	public ModelAndView QnABoard_Writes(HttpSession session, MultipartHttpServletRequest multi ){				
+	public ModelAndView QnABoard_Writes(HttpSession session, MultipartHttpServletRequest multi){				
 		logger.info("Q&A 글쓰기 요청");
 		return service.QnABoard_Writes(multi, session);
 	}
 	
-	//코디글쓰기 페이지 이동
+	//QnA 게시판 글쓰기 이동	
 	@RequestMapping(value="/QnABoard_Write")
-	public String QnABoard_Write(){
-		logger.info("Q&A게시판 글쓰기 이동");
-		return "QnABoard_Write";
+	public ModelAndView QnABoard_Write(@RequestParam("userId") String userId){
+		logger.info("Q&A게시판 글쓰기 이동");		
+		return service.QnABoard_Write(userId);
 	}
 	
 	//패션 토크 상세보기

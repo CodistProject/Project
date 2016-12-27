@@ -167,7 +167,7 @@
 	</head>
 	<body>
 		<div id="head">
-			<img alt="로고" src="rr.jpg">
+			<img alt="로고">
 		</div>
 		
 		<div id="weather">

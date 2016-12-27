@@ -135,7 +135,7 @@
 			<thead>		
 				<tr>
 					<td id="btn_write" colspan="5" align="right">
-						<button id="writeQna"onclick="location.href='./QnABoard_Write'">글쓰기</button>
+						<button id="writeQna" onclick="location.href='./QnABoard_Write?userId=${sessionScope.userId}'">글쓰기</button>
 					</td>					
 				</tr>		
 				<tr>

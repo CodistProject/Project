@@ -193,7 +193,7 @@ public class ProjectService {
 		logger.info(userId);
 		String NickName=inter.FindNick(userId);
 		logger.info(NickName);
-		mav.put("nickname",NickName);
+		mav.put("nickname",NickName);	
 		return mav;
 	}
 	
@@ -215,34 +215,43 @@ public class ProjectService {
 			
 		String subject = multi.getParameter("subject");
 		String content = multi.getParameter("content");
-		String nickname = multi.getParameter("nickName");	
+		String nickName = multi.getParameter("nickName");	
 		String filename = multi.getParameter("filename");		
-		String newfilename = null;
-		logger.info(subject+" / "+content+" / "+nickname+"/"+filename+"/"+newfilename);
-		String userId = (String) session.getAttribute("userId");
+		String newfilename = null;		
+		String userId = (String) session.getAttribute("userId");	
 		
-		logger.info("아이디 :"+userId);
-		
-		if(filename != null){
+		if(filename.equals("")){
+			logger.info("파일이 없어요");
+		}else {
 			//파일 업로드
+			logger.info("파일 업로드");
 			UploadFile upload = new UploadFile();
-			
 			newfilename = upload.fileUp(multi, filename);
-		}
-		inter.QnABoard_Writes(nickname, subject, content,filename, newfilename);
-		String page = "";
-		String msg = "";
+		}		
 		
-		if(userId != null){
-			logger.info(userId);
+		inter.QnABoard_Writes(nickName, subject, content,filename, newfilename);		
+		String page = "QnABoard_Write";
+		String msg = "로그인을 해주세요.";		
+		
+		if(userId != null){	
+			logger.info("userId:{}",userId);
+			
 			msg = "등록에 성공 하였습니다.";
 			page = "QnABoard_Main";						
-		}else{
-			page = "QnABoard_Write";
-			msg = "등록에 실패 하였습니다.";			
 		}
+		
 		mav.addObject("msg",msg);
 		mav.setViewName(page);
 		return mav;		
-		}			
+		}
+
+	public ModelAndView QnABoard_Write(String userId) {		
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav = new ModelAndView();
+		String nickName = inter.FindNick(userId);
+		logger.info("닉네임:"+nickName);
+		mav.addObject("nickName", nickName);
+		mav.setViewName("QnABoard_Write");
+		return mav;
+	}			
 	}

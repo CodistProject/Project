@@ -543,8 +543,7 @@ Codist는 회원관리, 서비스 개발・제공 및 향상, 안전한 인터�
 							
 		
 		//유효성 검사
-		function validation(){
-			
+		function validation(){			
 			if(overChkId == false){
 				alert("아이디 중복 체크를 해 주세요!!");
 				return false;
