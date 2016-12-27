@@ -17,19 +17,17 @@ public class BoardDto {
     private String newfilename;     
     private String gender;
     private String weather;
-    private int reples;
-    private int bhit; 
+    private int replies;	//추가
     private int ft_like;
     private int ft_hate;
-      
+    private int bhit;		//추가
     
-	public int getReples() {
-		return reples;
+	public int getReplies() {
+		return replies;
 	}
-	public void setReples(int reples) {
-		this.reples = reples;
+	public void setReplies(int replies) {
+		this.replies = replies;
 	}
-
 	public int getBhit() {
 		return bhit;
 	}

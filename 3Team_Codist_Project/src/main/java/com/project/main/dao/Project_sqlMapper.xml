@@ -72,5 +72,24 @@
  			seq_total_board.NEXTVAL, #{param1}, #{param2}, #{param3},#{param4},#{params5})
  	</insert>
  	
+ 	 <!-- FT 게시물 수 -->
+ 	<select id="allCount" resultType="Integer">
+ 		SELECT COUNT(*) FROM TOTAL_BOARD WHERE CATEGORY_NAME= FT
+ 	</select>
+ 	
+ 	<!-- FT 리스트 보이기 -->
+ 	<select id="listCall" resultType="com.spring.main.dto.BoardDTO">
+ 		SELECT BOARD_IDX, NICKNAME ,SUBJECT ,REG_DATE ,NEWFILENAME,BHIT,REPLIES FROM (
+ 					  SELECT BOARD_IDX, 
+ 					  		NICKNAME ,
+ 					  		SUBJECT ,
+ 					  		REG_DATE ,
+ 					  		BHIT,
+ 					  		REPLIES,
+ 					  		NEWFILENAME,
+					  		ROW_NUMBER() OVER(ORDER BY IDX ASC) AS RNUM FROM TOTAL_BOARD
+   							)WHERE RNUM BETWEEN #{param1} AND #{param2}  
+
+ 	</select>
  	
 </mapper>

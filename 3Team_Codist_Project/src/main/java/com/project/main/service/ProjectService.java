@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import com.project.main.dao.ProjectInterface;
+import com.project.main.dto.BoardDto;
 import com.project.main.dto.MemberInfo;
 import com.project.main.util.UploadFile;
 
@@ -220,15 +220,14 @@ public class ProjectService {
 		String newfilename = null;
 		logger.info(subject+" / "+content+" / "+nickname+"/"+filename+"/"+newfilename);
 		String userId = (String) session.getAttribute("userId");
-		
 		logger.info("아이디 :"+userId);
 		
-		if(filename != null){
+		/*if(filename != null){
 			//파일 업로드
 			UploadFile upload = new UploadFile();
 			
 			newfilename = upload.fileUp(multi, filename);
-		}
+		}*/
 		inter.QnABoard_Writes(nickname, subject, content,filename, newfilename);
 		String page = "";
 		String msg = "";
@@ -244,5 +243,39 @@ public class ProjectService {
 		mav.addObject("msg",msg);
 		mav.setViewName(page);
 		return mav;		
-		}			
-	}
+		}
+	
+	//FT리스트 보여주기
+	public Map<String, Object> FT_list(Map<String, String> params) {
+		//현재페이지
+		int currPage =Integer.parseInt(params.get("page"));
+				
+		//페이지당 보여줄 게시문 갯수
+		int pagePerNum =Integer.parseInt(params.get("pagePerNum"));
+		logger.info("현재 페이지 : {}",currPage);
+		logger.info("페이지 당 보여줄 수 : {}",pagePerNum);
+				
+		int end = currPage*pagePerNum;		//게시문 끝 번호
+		int start = end-pagePerNum+1;			//게시물 시작 번호
+		int allCnt = inter.allCount();				//전체 개시물 수
+		logger.info("전체 게시물수 : {}",allCnt);
+				
+		int page =allCnt%pagePerNum>0? 
+				Math.round(allCnt/pagePerNum)+1:
+					Math.round(allCnt/pagePerNum); // 생성 할 수 있는 페이지
+				
+		inter=sqlSession.getMapper(ProjectInterface.class);
+		Map<String, Object> json = new HashMap<String, Object>();
+		Map<String, ArrayList<BoardDto>> obj 
+			= new HashMap<String, ArrayList<BoardDto>>();
+		obj.put("list", inter.FT_list(start, end));
+				
+		json.put("jsonList", obj);
+		json.put("currPage", currPage);
+		json.put("allCnt", allCnt);		
+		json.put("page", page);		
+					
+		return json;
+	}			
+	
+}
