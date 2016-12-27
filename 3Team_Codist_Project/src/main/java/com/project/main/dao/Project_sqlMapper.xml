@@ -49,7 +49,7 @@
  
  	<!-- 탈퇴 -->
 	<delete id="withdrawa">
-	 	DELETE FROM join_reg WHERE ID = #{param1}
+	 	DELETE FROM join_reg WHERE JOIN_IDX=(SELECT JOIN_IDX FROM JOIN_REG WHERE ID = #{param1}) CASCADE
 	</delete>
 	  
  	<!--패션토크 상세보기  -->

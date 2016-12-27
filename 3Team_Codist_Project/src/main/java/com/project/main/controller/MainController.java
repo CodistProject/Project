@@ -124,7 +124,7 @@ public class MainController {
 	}
 	
 	//탈퇴 페이지 이동
-	@RequestMapping(value="/withdrawapage")
+	@RequestMapping(value="/Mypage_Withdrawal")
 	public String withdrawapage(){
 		logger.info("탈퇴 페이지 요청");
 		return "Mypage_Withdrawal";

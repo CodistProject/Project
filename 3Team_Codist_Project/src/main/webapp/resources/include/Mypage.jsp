@@ -36,7 +36,7 @@
           <a href="./Member_modify_view?userId=${sessionScope.userId}">회원정보 수정</a>
           <a href="#"> 마일리지 </a>
           <a href="#"> 쿠폰함 </a>
-          <a href="#"> 회원 탈퇴 </a>
+          <a href="./Mypage_Withdrawal?userId=${sessionScope.userId}"> 회원 탈퇴 </a>
         </div>
       <div>      
       <table>
