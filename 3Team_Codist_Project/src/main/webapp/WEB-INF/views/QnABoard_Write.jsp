@@ -87,7 +87,7 @@
 	<body>
 			<jsp:include page="../../resources/include/index.jsp"></jsp:include>
 		<div class="content">
-			<form action="QnABoard_Writes" method="post" enctype="multipart/form-data">		
+			<form action="Board_Write" method="post" enctype="multipart/form-data">		
     		<table id="QnA">
     			<tr>
     				<td colspan="2">Q & A</td>

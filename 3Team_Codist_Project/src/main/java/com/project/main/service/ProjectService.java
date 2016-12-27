@@ -1,6 +1,5 @@
 package com.project.main.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-
 
 import com.project.main.dao.ProjectInterface;
 import com.project.main.dto.MemberInfo;
@@ -209,15 +207,16 @@ public class ProjectService {
 	}
 
 	//Q&A 글쓰기
-	public ModelAndView QnABoard_Writes(MultipartHttpServletRequest multi, HttpSession session)  {		
+	public ModelAndView Board_Write(MultipartHttpServletRequest multi, HttpSession session)  {		
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		ModelAndView mav = new ModelAndView();		
 			
 		String subject = multi.getParameter("subject");
 		String content = multi.getParameter("content");
 		String nickName = multi.getParameter("nickName");	
-		String filename = multi.getParameter("filename");		
+		String filename = multi.getParameter("filename");
 		String newfilename = null;		
+		String category_name = "QnA";		
 		String userId = (String) session.getAttribute("userId");	
 		
 		if(filename.equals("")){
@@ -229,7 +228,7 @@ public class ProjectService {
 			newfilename = upload.fileUp(multi, filename);
 		}		
 		
-		inter.QnABoard_Writes(nickName, subject, content,filename, newfilename);		
+		inter.Board_Write(nickName, subject, content,filename, newfilename,category_name);		
 		String page = "QnABoard_Write";
 		String msg = "로그인을 해주세요.";		
 		

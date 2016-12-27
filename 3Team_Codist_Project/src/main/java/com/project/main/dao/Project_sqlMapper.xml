@@ -68,11 +68,10 @@
  	</select>
 
 	<!-- 글쓰기 -->
- 	<insert id="QnABoard_Writes">
+ 	<insert id="Board_Write">
  		INSERT INTO TOTAL_BOARD(
- 			board_idx, nickname, subject, content, filename)VALUES(
- 			seq_total_board.NEXTVAL, #{param1}, #{param2}, #{param3},#{param4})
- 	</insert>
- 	
+ 			board_idx, nickname, subject, content, filename, newfilename, category_name)VALUES(
+ 			seq_total_board.NEXTVAL, #{param1}, #{param2}, #{param3},#{param4},#{param5},#{param6})
+ 	</insert> 	
  	
 </mapper>

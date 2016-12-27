@@ -160,10 +160,10 @@ public class MainController {
 	}
 		
 	//Q&A 글쓰기
-	@RequestMapping(value="/QnABoard_Writes")
+	@RequestMapping(value="/Board_Write")
 	public ModelAndView QnABoard_Writes(HttpSession session, MultipartHttpServletRequest multi){				
 		logger.info("Q&A 글쓰기 요청");
-		return service.QnABoard_Writes(multi, session);
+		return service.Board_Write(multi, session);
 	}
 	
 	//QnA 게시판 글쓰기 이동	
