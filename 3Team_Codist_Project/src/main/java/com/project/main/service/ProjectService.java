@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import javax.sound.midi.MidiDevice.Info;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -206,7 +207,7 @@ public class ProjectService {
 		
 	}
 
-	//Q&A 글쓰기
+	// 글쓰기
 	public ModelAndView Board_Write(MultipartHttpServletRequest multi, HttpSession session)  {		
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		ModelAndView mav = new ModelAndView();		
@@ -215,8 +216,8 @@ public class ProjectService {
 		String content = multi.getParameter("content");
 		String nickName = multi.getParameter("nickName");	
 		String filename = multi.getParameter("filename");
-		String newfilename = null;		
-		String category_name = "QnA";		
+		String newfilename = "";		
+		String category_name = multi.getParameter("category");		
 		String userId = (String) session.getAttribute("userId");	
 		
 		if(filename.equals("")){
@@ -227,7 +228,7 @@ public class ProjectService {
 			UploadFile upload = new UploadFile();
 			newfilename = upload.fileUp(multi, filename);
 		}		
-		
+		logger.info(nickName+" / "+ subject+" / "+ content+" / "+filename+" / "+ newfilename+" / "+category_name);
 		inter.Board_Write(nickName, subject, content,filename, newfilename,category_name);		
 		String page = "QnABoard_Write";
 		String msg = "로그인을 해주세요.";		
@@ -236,7 +237,13 @@ public class ProjectService {
 			logger.info("userId:{}",userId);
 			
 			msg = "등록에 성공 하였습니다.";
-			page = "QnABoard_Main";						
+			if(category_name.equals("QnA")){
+				page = "QnABoard_Main";
+			}else if(category_name.equals("Alter")){
+				page = "AlterBoard_Main";
+			}else if(category_name.equals("Ft")){
+				page = "FT_Board_Main";
+			}
 		}
 		
 		mav.addObject("msg",msg);
@@ -244,6 +251,7 @@ public class ProjectService {
 		return mav;		
 		}
 
+	//Q&A 닉네임 찾기
 	public ModelAndView QnABoard_Write(String userId) {		
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		ModelAndView mav = new ModelAndView();
@@ -252,5 +260,36 @@ public class ProjectService {
 		mav.addObject("nickName", nickName);
 		mav.setViewName("QnABoard_Write");
 		return mav;
-	}			
 	}
+	
+	//코디를 부탁해 닉네임 찾기
+	public ModelAndView Coplz_Write(String userId) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav = new ModelAndView();
+		String nickName = inter.FindNick(userId);
+		logger.info("닉네임:"+nickName);
+		mav.addObject("nickName", nickName);
+		mav.setViewName("Coplz_Write");
+		return mav;		
+	}
+	//물물교환 닉네임 찾기
+	public ModelAndView Alter_Write(String userId) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav = new ModelAndView();
+		String nickName = inter.FindNick(userId);
+		logger.info("닉네임:"+nickName);
+		mav.addObject("nickName", nickName);
+		mav.setViewName("AlterBoard_Write");
+		return mav;	
+	}
+	//패션토크 닉네임 찾기
+	public ModelAndView FTboard_Write(String userId) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav = new ModelAndView();
+		String nickName = inter.FindNick(userId);
+		logger.info("닉네임:"+nickName);
+		mav.addObject("nickName", nickName);
+		mav.setViewName("FT_Board_Write");
+		return mav;		
+	}			
+}

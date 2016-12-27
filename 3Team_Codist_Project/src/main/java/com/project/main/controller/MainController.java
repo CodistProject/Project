@@ -158,20 +158,41 @@ public class MainController {
 		logger.info("탈퇴 페이지 요청");
 		return "QnABoard_Main";
 	}
-		
-	//Q&A 글쓰기
-	@RequestMapping(value="/Board_Write")
-	public ModelAndView QnABoard_Writes(HttpSession session, MultipartHttpServletRequest multi){				
-		logger.info("Q&A 글쓰기 요청");
-		return service.Board_Write(multi, session);
-	}
 	
 	//QnA 게시판 글쓰기 이동	
-	@RequestMapping(value="/QnABoard_Write")
-	public ModelAndView QnABoard_Write(@RequestParam("userId") String userId){
+		@RequestMapping(value="/QnABoard_Write")
+		public ModelAndView QnABoard_Write(@RequestParam("userId") String userId){
 		logger.info("Q&A게시판 글쓰기 이동");		
 		return service.QnABoard_Write(userId);
 	}
+		
+	//코디를 부탁해 게시판 글쓰기 이동	
+		@RequestMapping(value="/Coplz_Write")
+		public ModelAndView Coplz_Write(@RequestParam("userId") String userId){
+		logger.info("코디를 부탁해게시판 글쓰기 이동");		
+		return service.Coplz_Write(userId);
+	}
+		
+	//패션토크 게시판 글쓰기 이동	
+		@RequestMapping(value="/FTboard_Write")
+		public ModelAndView FTboard_Write(@RequestParam("userId") String userId){
+		logger.info("코디를 부탁해게시판 글쓰기 이동");		
+		return service.FTboard_Write(userId);
+			}
+			
+	//물물교환 게시판 글쓰기 이동	
+		@RequestMapping(value="/Alter_Write")
+		public ModelAndView Alter(@RequestParam("userId") String userId){
+		logger.info("물물교환 게시판 글쓰기 이동");		
+		return service.Alter_Write(userId);
+	}
+		
+	//글쓰기
+	@RequestMapping(value="/Board_Write")
+	public ModelAndView QnABoard_Writes(HttpSession session, MultipartHttpServletRequest multi){				
+		logger.info("글쓰기 요청");
+		return service.Board_Write(multi, session);
+	}		
 	
 	//패션 토크 상세보기
 	@RequestMapping(value="/FT_Board_Detail")

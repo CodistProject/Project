@@ -38,6 +38,7 @@ public interface ProjectInterface {
 	
 	//코디게시판 상세보기
 	public Object CodiBoard_Detail(String board_idx);
+	
 	//글쓰기
 	public int Board_Write(String nickName, String subject, String content, String filename, String newfilename,
 			String category_name);

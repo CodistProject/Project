@@ -113,7 +113,7 @@
 			<thead>		
 				<tr>
 					<td id="btn_write" colspan="6" align="right">
-						<button id="FTQna" onclick="location.href='./컨트롤러 글쓰기 기능으로'">글쓰기</button>
+						<button id="FTQna" onclick="location.href='./FTboard_Write?userId=${sessionScope.userId}'">글쓰기</button>
 					</td>					
 				</tr>		
 				<tr>

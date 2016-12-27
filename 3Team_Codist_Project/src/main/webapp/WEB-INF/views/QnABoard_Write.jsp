@@ -94,7 +94,9 @@
     			</tr>    			
     			<tr>
     				<td>제목</td>
-    				<td><input name="subject" type="text"/> </td>
+    				<td><input name="subject" type="text"/>
+    					<input type="hidden" name="category" value="QnA" />
+    				 </td>
     			</tr>
     			<tr>
     				<td>작성자</td>
