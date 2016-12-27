@@ -319,7 +319,7 @@ Codist는 회원관리, 서비스 개발・제공 및 향상, 안전한 인터�
 				</tr>
 				<tr>
 					<td>
-						비밀번호 : <input name="SignUp_pw" id="Pw" type="text" onkeyup="Check()"/> <font>(8자 이상)</font>		
+						비밀번호 : <input name="SignUp_pw" id="Pw" type="text" onkeyup="Check()" placeholder="비밀번호는 8자 이상입니다."/> 	
 					</td>
 				</tr>
 				<tr>

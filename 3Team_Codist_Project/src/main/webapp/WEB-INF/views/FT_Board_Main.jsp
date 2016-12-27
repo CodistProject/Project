@@ -201,9 +201,10 @@
 							}	
 							*/
 				content +="</td>"
-							+"<td>"+list[i].nickname+"</td>"
+							+"<td>"+list[i].nickName+"</td>"
 							+"<td>"+list[i].reg_date+"</td>"
 							+"<td>"+list[i].bhit+"</td>"
+							+"<td>"+list[i].ft_like+"</td>"
 							+"</tr>";
 		}
 		$("#list").empty();
