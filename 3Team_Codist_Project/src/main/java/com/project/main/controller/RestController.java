@@ -58,7 +58,7 @@ public class RestController {
 	@RequestMapping(value="/FT_list")
 	public @ResponseBody Map<String, Object> listCall(
 					@RequestParam Map<String, String> params){
-		logger.info("리스트 보여주기");
+		logger.info("패션 토크리스트 보여주기");
 		return service.FT_list(params);
 	}	
 

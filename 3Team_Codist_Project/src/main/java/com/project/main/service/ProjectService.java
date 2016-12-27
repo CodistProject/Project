@@ -19,8 +19,6 @@ import com.project.main.dto.BoardDto;
 import com.project.main.dto.MemberInfo;
 import com.project.main.util.UploadFile;
 
-
-
 @Service
 public class ProjectService {
 
@@ -222,12 +220,12 @@ public class ProjectService {
 		String userId = (String) session.getAttribute("userId");
 		logger.info("아이디 :"+userId);
 		
-		/*if(filename != null){
+		if(filename != null){
 			//파일 업로드
 			UploadFile upload = new UploadFile();
 			
 			newfilename = upload.fileUp(multi, filename);
-		}*/
+		}
 		inter.QnABoard_Writes(nickname, subject, content,filename, newfilename);
 		String page = "";
 		String msg = "";
@@ -247,6 +245,7 @@ public class ProjectService {
 	
 	//FT리스트 보여주기
 	public Map<String, Object> FT_list(Map<String, String> params) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
 		//현재페이지
 		int currPage =Integer.parseInt(params.get("page"));
 				
@@ -254,17 +253,17 @@ public class ProjectService {
 		int pagePerNum =Integer.parseInt(params.get("pagePerNum"));
 		logger.info("현재 페이지 : {}",currPage);
 		logger.info("페이지 당 보여줄 수 : {}",pagePerNum);
-				
-		int end = currPage*pagePerNum;		//게시문 끝 번호
-		int start = end-pagePerNum+1;			//게시물 시작 번호
-		int allCnt = inter.allCount();				//전체 개시물 수
+	
+		String category_name ="FT";
+		int end = currPage*pagePerNum; 				//게시문 끝 번호
+		int start = end-pagePerNum+1;					//게시물 시작 번호
+		int allCnt = inter.FTCount(category_name);	//전체 개시물 수
 		logger.info("전체 게시물수 : {}",allCnt);
 				
 		int page =allCnt%pagePerNum>0? 
 				Math.round(allCnt/pagePerNum)+1:
 					Math.round(allCnt/pagePerNum); // 생성 할 수 있는 페이지
-				
-		inter=sqlSession.getMapper(ProjectInterface.class);
+		logger.info("생성 할수 있는 게시물 수:{}",page);
 		Map<String, Object> json = new HashMap<String, Object>();
 		Map<String, ArrayList<BoardDto>> obj 
 			= new HashMap<String, ArrayList<BoardDto>>();

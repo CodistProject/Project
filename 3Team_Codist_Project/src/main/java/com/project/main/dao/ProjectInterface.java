@@ -44,12 +44,14 @@ public interface ProjectInterface {
 	
 	//QnA 글쓰기
 	public int QnABoard_Writes(String nickname, String subject, String content, String filename, String newfilename);
-	
-	//FT_리스트 전체갯수
-	public int allCount();
-	
+
 	//FT_리스트 호출
 	public ArrayList<BoardDto> FT_list(int start, int end);
+	
+	//FT_ 리스트 전체 갯수
+	public int FTCount(String category_name);
+
+
 
 
 }

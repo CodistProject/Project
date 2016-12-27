@@ -156,6 +156,7 @@
 		var url="./rest/FT_list";
 		var data = {};
 		data.page = currPage;
+		console.log(currPage);
 		data.pagePerNum = 5;//$("#Ft_pageNum").val();
 		reqServer(url, data);
 	}
@@ -174,7 +175,8 @@
 					//페이지 세팅
 					currPage = d.currPage;
 					printPaging(d.allCnt, d.page);
-					},error:function(e){
+					}
+				},error:function(e){
 						console.log(e)
 					}
 		});

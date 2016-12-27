@@ -69,27 +69,23 @@
  	<insert id="QnABoard_Writes">
  		INSERT INTO TOTAL_BOARD(
  			board_idx, nickname, subject, content, filename, newfilename)VALUES(
- 			seq_total_board.NEXTVAL, #{param1}, #{param2}, #{param3},#{param4},#{params5})
+ 			seq_total_board.NEXTVAL, #{param1}, #{param2}, #{param3},#{param4},#{param5})
  	</insert>
  	
- 	 <!-- FT 게시물 수 -->
- 	<select id="allCount" resultType="Integer">
- 		SELECT COUNT(*) FROM TOTAL_BOARD WHERE CATEGORY_NAME= FT
+ 	<!-- FT 게시물 수 -->
+ 	<select id="FTCount" resultType="Integer">
+		 SELECT COUNT(*) FROM TOTAL_BOARD WHERE CATEGORY_NAME = #{category_name}
  	</select>
  	
  	<!-- FT 리스트 보이기 -->
- 	<select id="listCall" resultType="com.spring.main.dto.BoardDTO">
- 		SELECT BOARD_IDX, NICKNAME ,SUBJECT ,REG_DATE ,NEWFILENAME,BHIT,REPLIES FROM (
- 					  SELECT BOARD_IDX, 
- 					  		NICKNAME ,
- 					  		SUBJECT ,
- 					  		REG_DATE ,
- 					  		BHIT,
- 					  		REPLIES,
- 					  		NEWFILENAME,
-					  		ROW_NUMBER() OVER(ORDER BY IDX ASC) AS RNUM FROM TOTAL_BOARD
+ 	<select id="FT_list" resultType="com.project.main.dto.BoardDto">
+ 		SELECT BOARD_IDX, NICKNAME ,SUBJECT ,REG_DATE ,NEWFILENAME,BHIT,REPLES FROM (
+ 					  SELECT BOARD_IDX ,NICKNAME ,SUBJECT 
+ 							,REG_DATE ,BHIT,REPLES,NEWFILENAME
+ 							,ROW_NUMBER() OVER(ORDER BY BOARD_IDX ASC) AS RNUM FROM (SELECT BOARD_IDX, NICKNAME ,SUBJECT ,REG_DATE ,NEWFILENAME,BHIT,REPLES FROM TOTAL_BOARD WHERE CATEGORY_NAME = 'FT' )
    							)WHERE RNUM BETWEEN #{param1} AND #{param2}  
-
  	</select>
+ 	
+ 	
  	
 </mapper>

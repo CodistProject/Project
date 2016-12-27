@@ -15,10 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.main.service.ProjectService;
 
+
 @Controller("MainController")
 public class MainController {
 	
-	@Autowired
+
+	@Autowired	
 	ProjectService service;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
