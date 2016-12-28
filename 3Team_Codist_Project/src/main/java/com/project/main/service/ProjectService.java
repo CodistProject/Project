@@ -237,12 +237,14 @@ public class ProjectService {
 			msg = "등록에 성공 하였습니다.";
 			if(category_name.equals("QnA")){
 				page = "QnABoard_Main";
-			}else if(category_name.equals("Alter")){
+			}else if(category_name.equals("AT")){
 				page = "AlterBoard_Main";
 			}else if(category_name.equals("FT")){
 				page = "FT_Board_Main";
 			}else if(category_name.equals("CP")){
 				page = "Coplz_Main";
+			}else if(category_name.equals("CB")){
+				page = "CodiBoard_Main";
 			}
 		}
 		
@@ -305,6 +307,7 @@ public class ProjectService {
 		mav.addObject("nickName", nickName);
 		mav.setViewName("Coplz_Write");
 		return mav;		
+	
 	}
 	//물물교환 닉네임 찾기
 	public ModelAndView Alter_Write(String userId) {
@@ -326,7 +329,18 @@ public class ProjectService {
 		mav.addObject("nickName", nickName);
 		mav.setViewName("FT_Board_Write");
 		return mav;		
-	}		
+	}
+	
+	//코디게시판 닉네임 찾기
+		public ModelAndView CodiBoard_Write(String userId) {
+			inter = sqlSession.getMapper(ProjectInterface.class);
+			ModelAndView mav = new ModelAndView();
+			String nickName = inter.FindNick(userId);
+			logger.info("닉네임:"+nickName);
+			mav.addObject("nickName", nickName);
+			mav.setViewName("CodiBoard_Write");
+			return mav;		
+		}
 	
 	//게시글 추천
 	public ModelAndView  ft_like(String ft_like) {

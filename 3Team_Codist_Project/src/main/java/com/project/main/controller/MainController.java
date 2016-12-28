@@ -48,14 +48,6 @@ public class MainController {
 		logger.info("로그인 처리");
 		params.put("session", session);
 		return service.login(params);
-
-	}
-	
-	//코디 게시판 이동
-	@RequestMapping(value="/CodiBoard")
-	public String CodiBoard(){
-		logger.info("코디게시판 이동 ");
-		return "CodiBoard_Main";
 	}
 	
 	//비밀번호 찾기
@@ -106,7 +98,7 @@ public class MainController {
 	public String QnABoard(){
 		logger.info("Q&A 게시판 이동");
 		return "QnABoard_Main";
-	}
+	}	
 	
 	//물물교환 게시판 이동
 	@RequestMapping(value="/AlterBoard")
@@ -150,15 +142,8 @@ public class MainController {
 		public String CodiBoard_Main(){
 			logger.info("탈퇴 페이지 요청");
 			return "CodiBoard_Main";
-		}
-		
-	//코디글쓰기 페이지 이동
-	@RequestMapping(value="/CodiBoard_Write")
-	public String CodiBoard_Write(){
-		logger.info("코디게시판 글쓰기 이동");
-		return "CodiBoard_Write";
-	}
-	
+		}		
+
 	//Q&A 게시판 이동
 	@RequestMapping(value="/QnABoard_Main")
 	public String QnABoard_Main(){
@@ -193,7 +178,7 @@ public class MainController {
 		public ModelAndView FTboard_Write(@RequestParam("userId") String userId){
 		logger.info("코디를 부탁해게시판 글쓰기 이동");		
 		return service.FTboard_Write(userId);
-			}
+	}
 			
 	//물물교환 게시판 글쓰기 이동	
 		@RequestMapping(value="/Alter_Write")
@@ -201,6 +186,14 @@ public class MainController {
 		logger.info("물물교환 게시판 글쓰기 이동");		
 		return service.Alter_Write(userId);
 	}
+		
+	//코디 게시판 글쓰기 이동	
+		@RequestMapping(value="/CodiBoard_Write")
+		public ModelAndView CodiBoard_Write(@RequestParam("userId") String userId){
+			logger.info("물물교환 게시판 글쓰기 이동");		
+			return service.CodiBoard_Write(userId);
+		}
+		
 		
 	//글쓰기
 	@RequestMapping(value="/Board_Write")

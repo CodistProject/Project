@@ -220,7 +220,7 @@
 		<div id="menu">		
 			<table class="menu">
 				<tr class="menu">
-					<td class="menuTd"><a class="board" href="./CodiBoard">코디 게시판</a></td>
+					<td class="menuTd"><a class="board" href="CodiBoard_Main">코디 게시판</a></td>
 					<td class="menuTd"><a class="board" href="./FTBoard">패션토크 게시판</a></td>
 					<td class="menuTd"><a class="board" href="./CoplzBoard">코디를 부탁해</a></td>
 					<td class="menuTd"><a class="board" href="#">나만의 옷장</a></td>

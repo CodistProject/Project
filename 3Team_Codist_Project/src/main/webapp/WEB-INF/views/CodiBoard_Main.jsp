@@ -58,7 +58,7 @@
 			<thead>		
 				<tr>
 					<td colspan="4" align="right">
-						<button onclick="location.href='./CodiBoard_Write'">글쓰기</button>
+						<button id="admin" style="display: none" onclick="location.href='./CodiBoard_Write?userId=${sessionScope.userId}'">글쓰기</button>						
 						<button onclick="location.href='#'">등록</button>
 					</td>					
 				</tr>		
@@ -134,6 +134,16 @@
 		</table>
 		</div>		
 	</body>
-	<script>	
+	<script>
+	   
+		hide();	   
+	   var userId = "${sessionScope.userId}";	   
+	   	
+		function hide() {
+			console.log(userId);
+			if(userId=="ADMIN"){
+				$("#admin").css("display","inline");				
+			}					
+		}
 	</script>
 </html>
