@@ -223,7 +223,7 @@ Codist는 회원관리, 서비스 개발・제공 및 향상, 안전한 인터�
 			</tr>
 			<tr>
 				<td colspan="2">
-				 	<button id="next">다음</button>
+				 	<button id="next" onclick="location.href='./joinForm'">다음</button>
 				</td>
 			</tr>
 		</table>

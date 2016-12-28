@@ -28,7 +28,7 @@
 	<!-- 회원가입  -->
 	<insert id="memberJoin">
 		INSERT INTO JOIN_REG(JOIN_IDX,ID,NICKNAME,PW,PW_QNA,PW_ANSWER,NAME,PHONE,BIRTH,GENDER,EMAIL) 
-		VALUES(SEQ_JOIN_REG.NEXTVAL,#{id},#{nickname},#{pw},#{PW_QnA},#{PW_ANSWER},#{name},#{phone},#{birth},#{gender},#{email})
+		VALUES(SEQ_JOIN_REG.NEXTVAL,#{id},#{nickName},#{pw},#{PW_QnA},#{PW_ANSWER},#{name},#{phone},#{birth},#{gender},#{email})
 	</insert>
 	
 	<!-- 마이페이지/회원정보 보기 -->

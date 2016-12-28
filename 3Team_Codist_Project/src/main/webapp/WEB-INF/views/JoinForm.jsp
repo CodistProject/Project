@@ -375,7 +375,7 @@
 			url="./rest/join";
 			data={};
 			data.id = $("input[name='SignUp_id']").val();
-			data.nickname=$("input[name='SignUp_NickName']").val();
+			data.nickName=$("input[name='SignUp_NickName']").val();
 			data.pw = $("input[name='SignUp_pw']").val();
 			if($("input[name='PW_Qs']").val()=="")
 				{

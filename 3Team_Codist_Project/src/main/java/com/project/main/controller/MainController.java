@@ -36,7 +36,7 @@ public class MainController {
 	}
 	
 	//회원가입 페이지 이동
-	@RequestMapping(value="/join")
+	@RequestMapping(value="/joinForm")
 	public String join(){
 		logger.info("회원가입 폼으로 이동");
 		return "JoinForm";
