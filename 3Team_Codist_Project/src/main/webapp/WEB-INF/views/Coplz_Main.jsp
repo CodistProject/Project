@@ -104,7 +104,7 @@
 		<table class="CP_board1" align="center">
 			<tr>
 			 	<td id="CP_sub" colspan="6">
-					<b>패션토크 게시판</b>												
+					<b>코디를부탁해 게시판</b>												
 				</td>
 			</tr>				
 		</table>
@@ -113,7 +113,7 @@
 			<thead>		
 				<tr>
 					<td id="btn_write" colspan="6" align="right">
-						<button id="CPQna" onclick="location.href='./컨트롤러 글쓰기 기능으로'">글쓰기</button>
+						<button id="CPQna" onclick="location.href='./Coplz_Write?userId=${sessionScope.userId}'">글쓰기</button>
 					</td>					
 				</tr>		
 				<tr>
@@ -137,11 +137,6 @@
 		</div>		
 	</body>
 	<script>
-	var msg = "${msg}";
-	console.log("msg : "+msg);
-	if(msg != ""){
-		alert(msg);
-	}
 	
 	var currPage = 1;
 	

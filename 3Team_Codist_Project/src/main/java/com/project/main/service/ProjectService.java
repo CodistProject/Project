@@ -241,6 +241,8 @@ public class ProjectService {
 				page = "AlterBoard_Main";
 			}else if(category_name.equals("FT")){
 				page = "FT_Board_Main";
+			}else if(category_name.equals("CP")){
+				page = "Coplz_Main";
 			}
 		}
 		
