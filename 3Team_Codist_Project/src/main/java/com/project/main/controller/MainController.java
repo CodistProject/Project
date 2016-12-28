@@ -28,17 +28,18 @@ public class MainController {
 		return "ioi";
 	}
 	
+	//회원가입 약관 이동
+	@RequestMapping(value="/joinCheck")
+	public String joinCheck(){
+		logger.info("회원가입 약관으로 이동");
+		return "joinFormCheck";
+	}
+	
 	//회원가입 페이지 이동
 	@RequestMapping(value="/join")
 	public String join(){
 		logger.info("회원가입 폼으로 이동");
 		return "JoinForm";
-	}
-	// 이벤트 팝업창 띄우기
-	@RequestMapping(value="/Event_Popup")
-	public String Event_Popup(){
-	logger.info("이벤트 팝업창 이동");
-	return "PoPup_Event";
 	}
 	
 	//로그인 처리
@@ -48,21 +49,6 @@ public class MainController {
 		logger.info("로그인 처리");
 		params.put("session", session);
 		return service.login(params);
-
-	}
-	
-	//코디 게시판 이동
-	@RequestMapping(value="/CodiBoard")
-	public String CodiBoard(){
-		logger.info("코디게시판 이동 ");
-		return "CodiBoard_Main";
-	}
-	
-	//비밀번호 찾기
-	@RequestMapping(value="/Find_Pw")
-	public String findPw(){
-		logger.info("비밀번호찾기 이동");
-		return "Find_Pw";
 	}
 	
 	//회원정보 보기(마이 페이지) 이동
@@ -72,19 +58,40 @@ public class MainController {
 		logger.info("회원정보 보기(마이 페이지) 이동");	
 		return service.MemberData_View(userId);
 	}
-	
+		
 	//회원정보 수정기능 실행 전 보기 (수정보기 페이지이동)
 	@RequestMapping(value = "/Member_modify_view")
 	public ModelAndView Member_modify_view(@RequestParam("userId") String userId) {	
 		logger.info("회원정보 수정 보기 페이지 이동");	
 		return service.Mem_modify_view(userId);
 	}
-	
+		
 	// 회원정보 수정 기능 
 	@RequestMapping(value = "/Member_modify")
 	public ModelAndView Member_modify(@RequestParam Map<String, String> params) {	
 		logger.info("회원정보 수정 기능 실행");
 		return service.Member_Modify(params);
+	}
+	
+	//아이디 찾기
+	@RequestMapping(value="/Find_Id")
+	public String findId(){
+		logger.info("아이디찾기 이동");
+		return "Find_Id";
+	}
+	
+	//비밀번호 찾기
+	@RequestMapping(value="/Find_Pw")
+	public String findPw(){
+		logger.info("비밀번호찾기 이동");
+		return "Find_Pw";
+	}
+		
+	//코디 게시판 이동
+	@RequestMapping(value="/CodiBoard")
+	public String CodiBoard(){
+		logger.info("코디게시판 이동 ");
+		return "CodiBoard_Main";
 	}
 	
 	//패션 토크 게시판 이동
@@ -113,14 +120,6 @@ public class MainController {
 	public String AlterBoard(){
 		logger.info("물물교환 게시판 이동 ");
 		return "AlterBoard_Main";
-	}
-	
-	//아이디 찾기
-	@RequestMapping(value="/Find_Id")
-	public String findId(){
-		logger.info("아이디찾기 이동");
-
-	return "Find_Id";
 	}
 	
 	//탈퇴 페이지 이동
@@ -204,24 +203,31 @@ public class MainController {
 	//패션 토크 상세보기
 	@RequestMapping(value="/FT_Board_Detail")
 	public ModelAndView FT_Board_Detail(@RequestParam("board_idx") String board_idx ){
-	logger.info("상세보기");
-	return service.FT_Board_Detail(board_idx);
+		logger.info("상세보기");
+		return service.FT_Board_Detail(board_idx);
 	}
 	
 	//코디게시판  상세보기
 	@RequestMapping(value="/CodiBoard_Detail")
 	public ModelAndView CodiBoard_Detail(@RequestParam("board_idx") String board_idx ){
-	logger.info("상세보기");
-	return service.CodiBoard_Detail(board_idx);
+		logger.info("상세보기");
+		return service.CodiBoard_Detail(board_idx);
 	}
 
 	//팝업 나만의 옷장
 	@RequestMapping(value="/PopUp_Mycloth")
 	public String PopUp_Mycloth(){
 		logger.info("나만의 옷장 이동");
-	return "PopUp_Mycloth";
+		return "PopUp_Mycloth";
 	}
 
+	// 이벤트 팝업창 띄우기
+	@RequestMapping(value="/Event_Popup")
+	public String Event_Popup(){
+		logger.info("이벤트 팝업창 이동");
+		return "PoPup_Event";
+	}
+		
 
 
 }

@@ -338,19 +338,21 @@ public class ProjectService {
 		return mav;
 	}
 	//게시글 비추천
-		public ModelAndView  ft_hate(String ft_hate) {
-			inter = sqlSession.getMapper(ProjectInterface.class);
-			ModelAndView mav = new ModelAndView();
-			inter.ft_hate(ft_hate);	
-			//불러오기
-			mav.setViewName("ft_hate");	
-		return mav;
+	public ModelAndView  ft_hate(String ft_hate) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav = new ModelAndView();
+		inter.ft_hate(ft_hate);	
+		//불러오기
+		mav.setViewName("ft_hate");	
+	return mav;
 	}
+	
 	//댓글 동록
 	public Map<String, Integer> replyRegist(Map<String, String> params) {
 			
 		return null;
 		}			
+	
 	
 	//댓글리스트
 	public Map<String, ArrayList<ReplyDto>> replyList(

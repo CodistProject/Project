@@ -144,7 +144,7 @@
 				border: 1px solid;
 				padding: 5px;
 			}
-
+			/* div는 class를 content */
 			.content{				
 				margin-left: 130px;
 				margin-right: 130px;				
@@ -191,7 +191,7 @@
 			<div id="loginSession">
 				<c:if test="${sessionScope.userId ==null}">
 					<jsp:include page="loginBox.jsp"></jsp:include>
-					<a href="Find_Id" class="a2">아이디/비밀번호 찾기</a> 
+					<a href="Find_Id" class="a2">아이디</a><a href="Find_Pw" class="a2">/비밀번호 찾기</a> 
 				</c:if>
 				
 				<c:if test="${sessionScope.userId !=null}">
