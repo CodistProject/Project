@@ -61,5 +61,14 @@
  		SELECT * FROM TOTAL_BOARD WHERE board_idx = #{param1}
  	</select>
  	
+ 	<!-- 유저 이메일 찾기 -->
+ 	<select id="email" resultType="String">
+ 		SELECT EMAIL FROM JOIN_REG WHERE ID = #{param1}
+ 	</select> 	
+ 	
+ 	<!-- 유저 비밀번호 찾기 -->
+ 	<select id="pw" resultType="String">
+ 		SELECT PW FROM JOIN_REG WHERE ID = #{param1}
+ 	</select>
  	
 </mapper>

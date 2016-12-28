@@ -24,6 +24,14 @@
 	 </repositories>		
 	 
 	<dependencies>
+	
+		<!-- java mail -->
+		<dependency>
+    	<groupId>javax.mail</groupId>
+    	<artifactId>mail</artifactId>
+    	<version>1.4.7</version>
+		</dependency>
+	
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>

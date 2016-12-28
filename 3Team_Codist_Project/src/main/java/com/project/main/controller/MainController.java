@@ -134,6 +134,5 @@ public class MainController {
 	public ModelAndView CodiBoard_Detail(@RequestParam("board_idx") String board_idx ){
 	logger.info("상세보기");
 	return service.CodiBoard_Detail(board_idx);
-	}
-			
+	}			
 }

@@ -36,9 +36,13 @@ public interface ProjectInterface {
 	
 	//코디게시판 상세보기
 	public Object CodiBoard_Detail(String board_idx);
-	
-	
 
+	// 유저 이메일 담기(로그인시 세션 담기)
+	public String email(String id);
+
+	// 유저 비밀번호 담기(로그인시 세션에 담기)
+	public String pw(String id);
+	
 			
 }
 

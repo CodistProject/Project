@@ -54,5 +54,12 @@ public class RestController {
 		logger.info("회원 가입");
 		return service.join(params);
 	}
-
+	
+	// 이메일 문의(Gmail)
+	@RequestMapping(value="/Email")
+	public @ResponseBody Map<String, String> Email(			
+			@RequestParam Map<String, String> params){
+		logger.info("구글 이메일 문의");
+		return service.Email(params);
+	}
 }

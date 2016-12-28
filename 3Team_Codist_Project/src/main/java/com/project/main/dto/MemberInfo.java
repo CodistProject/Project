@@ -82,7 +82,4 @@ public class MemberInfo {
 	public void setPW_ANSWER(String pW_ANSWER) {
 		PW_ANSWER = pW_ANSWER;
 	}
-	
-	
-
 }

@@ -205,11 +205,11 @@
 				</table>
 			<br/>
 			<div id="ask">
-				<textarea id="askBox" cols="25px" rows="7px"></textarea>			
+				<textarea id="askBox" cols="25px" rows="7px">답변 받을 이메일 주소 입력 : </textarea>			
 				<div id="ask1">
-				<input  type="button" value="쪽지">
-				<input type="button" value="이메일">
-				</div>
+				<input  type="button" value="쪽지" />
+				<input type="button" value="이메일" name="email"/>				
+				</div>				
 			</div>
 		</div>		
 		<div id="menu">		
@@ -226,9 +226,10 @@
 		</div>
 					
 	</body>
-	<script>
-		var msg = "${msg}";
-		var userId ="${sessionScope.userId}";		
+	<script>	
+		
+	   // 유저 아이디, 유저 메일, 관리자 메일 담기
+		var userId ="${sessionScope.userId}";					
 		
 		// 이벤트 팝업
 		function Event(){
@@ -236,6 +237,45 @@
 			var Popup_option = "width=500px, height=600px, resizalbe=no, top=500px, left=500px";
 			window.open(Popup_url,"",Popup_option);
 		}
+		
+		// 이메일 문의(url, data 담아서 아작스처리)
+		$("input[name='email']").click(function(){
+			console.log("작동 된다!");
+			url = "./rest/Email";
+			data={};
+			data.userId = userId;			
+			data.content=$("#askBox").val();		
+			
+			// console 로 data 담은 것들 제대로 담겼는지 체크
+			// 유저 정보
+			console.log(data.userId);	
+			console.log(data.content);				
+			
+			// 아작스로 보내서 처리(url, data)
+			ajaxCall(url, data);
+		});		
+		
+		// 아작스 처리(이메일 문의)
+		function ajaxCall(reqUrl, reqData){
+			console.log(reqUrl);			
+			$.ajax({
+				url : reqUrl,				
+				type : "post",
+				data : reqData,
+				dataType : "json",
+				success:function(data){
+					console.log(data);
+					console.log("성공");
+					if(url=="./rest/Email"){									
+						alert("문의하신 내용이 이메일 전송이 완료되었습니다.");
+					}else{
+						alert("이메일 전송이 실패하였습니다!");			
+					}					
+				}, error : function(e){
+					console.log("에러");
+				}
+			});
+		}		
 		
 	</script>	
 </html>
