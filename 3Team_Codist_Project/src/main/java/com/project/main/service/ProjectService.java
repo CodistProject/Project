@@ -252,6 +252,24 @@ public class ProjectService {
 		mav.setViewName(page);
 		return mav;		
 		}
+	
+	//코디 글쓰기
+		public ModelAndView CodiBoard_Write(MultipartHttpServletRequest multi)  {		
+			inter = sqlSession.getMapper(ProjectInterface.class);
+			ModelAndView mav = new ModelAndView();		
+				
+			String file1 = multi.getParameter("file1");
+			String file2 = multi.getParameter("file2");
+			String file3 = multi.getParameter("file3");	
+			String file4 = multi.getParameter("file4");
+			String newfilename = "";		
+
+				
+			
+			
+			return mav;		
+		}		
+	
 	//FT리스트 보여주기
 	public Map<String, Object> FT_list(Map<String, String> params) {
 		inter = sqlSession.getMapper(ProjectInterface.class);

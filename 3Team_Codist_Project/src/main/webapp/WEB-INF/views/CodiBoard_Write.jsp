@@ -119,19 +119,19 @@
     			<table class="boardwrite" id="outter1" style="display: none;"> 
     			<tr >
     				<td class="align">외투</td>
-    				<td class="align1"><input name="file1" type="file"/> </td>
+    				<td class="align1"><input name="file2" type="file"/> </td>
     			</tr>
     			</table>
     			<table class="boardwrite" id="top1" style="display: none;"> 
     			<tr>
     				<td class="align">상의</td>
-    				<td class="align1"><input name="file1" type="file"/> </td>
+    				<td class="align1"><input name="file3" type="file"/> </td>
     			</tr>
     			</table>
     			<table class="boardwrite" id="bottom1" style="display: none;"> 
     			<tr>
     				<td class="align">하의</td>
-    				<td class="align1"><input name="file1" type="file"/> </td>
+    				<td class="align1"><input name="file4" type="file"/> </td>
     			</tr>
     			</table>
     			<table class="boardwrite"> 			
