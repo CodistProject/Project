@@ -71,4 +71,9 @@
  		SELECT PW FROM JOIN_REG WHERE ID = #{param1}
  	</select>
  	
+ 	<!-- 유저 아이디 찾기 -->
+ 	<select id="Find_Id" resultType="String">
+ 		SELECT ID FROM JOIN_REG WHERE EMAIL = #{param1}
+ 	</select>	
+ 	
 </mapper>

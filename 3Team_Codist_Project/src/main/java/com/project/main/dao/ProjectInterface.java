@@ -1,4 +1,6 @@
 package com.project.main.dao;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.project.main.dto.MemberInfo;
 
 public interface ProjectInterface {
@@ -42,8 +44,9 @@ public interface ProjectInterface {
 
 	// 유저 비밀번호 담기(로그인시 세션에 담기)
 	public String pw(String id);
-	
-			
+
+	// 유저 아이디 찾기(이메일 받아서)
+	public String Find_Id(String userEmail);			
 }
 
 

@@ -119,7 +119,6 @@ public class MainController {
 	public String join(){
 		logger.info("회원가입 폼으로 이동");
 		return "JoinForm";
-
 	}
 	
 	//패션 토크 상세보기
@@ -135,4 +134,11 @@ public class MainController {
 	logger.info("상세보기");
 	return service.CodiBoard_Detail(board_idx);
 	}			
+	
+	// 유저 아이디 찾기(이메일 받아서) - 고급 버젼(찾은 아이디 이메일 쏘는거까지)
+	@RequestMapping(value="/FindId_userEmail")
+	public ModelAndView Find_Id(@RequestParam Map<String, String> params){
+	logger.info("유저 이메일 찾기 컨트롤러");
+	return service.Find_Id(params);
+	}
 }

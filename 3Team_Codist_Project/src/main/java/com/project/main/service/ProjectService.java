@@ -196,18 +196,30 @@ public class ProjectService {
 		return mav;
 	}
 
-	// 이메일 문의(G mail 전용)
+	// 이메일 보내기(G mail 전용)
 	public Map<String, String> Email(Map<String, String> params) {
-		  // 메일 관련 정보    	    	
+		
+		// 1:1 문의용 관련 정보
     	final String userEmail = params.get("userEmail"); // 유저 이메일    	
     	final String content = params.get("content"); // 유저 문의 내용
     	final String userId = params.get("userId"); // 유저 아이디 담기(보낸 이)
     	
+    	// 아이디 찾아서 메일로 보내주기 용 관련 정보(내용:유저아이디 / 받을 유저 메일 주소)
+    	final String content_userId = params.get("content_userId"); // 유저아이디가 담긴 컨텐트
+    	final String FindId_userEmail = params.get("FindId_userEmail"); // 아이디 찾을때 쓴 유저 이메일 주소
+    	
+    	
     	// 유저 및 관리자 정보 가져오기 확인
+    	logger.info("------------1:1 문의용 정보 ---------");
     	logger.info("유저 아이디(보내는 이):"+userId);
     	logger.info("유저 이메일(보내는 이 메일주소):"+userEmail);
     	logger.info("문의 내용 :"+content);    	
          
+    	// 아이디 찾고 메일 담아 보내주기용 로거
+    	logger.info("------------아이디 찾아 메일 쏘기 정보 ---------");
+    	logger.info("메일내용(담은 유저 아이디) :"+content_userId);
+    	logger.info("받을 유저 메일주소 :"+FindId_userEmail);
+    	
         Properties props = System.getProperties();          
           
         props.put("mail.smtp.host", "smtp.gmail.com"); 
@@ -228,12 +240,22 @@ public class ProjectService {
 		}});		
 		
 		Map<String, String> map = new HashMap<String, String>();
-		try{
+		
+		try{					
 			Message message = new MimeMessage(session); 
 			message.setFrom(new InternetAddress("0304kiss@gmail.com")); // 작성자 메일주소(유저/보낸사람 이메일주소) - 구글이메일만 가능(하지만 결국 관리자로 할꺼임)
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("starcsiran0@naver.com"));  // 관리자 메일주소(받는 사람)
-			message.setSubject(userId+"님께서 1:1 문의를 하셨습니다."); // 제목
-			message.setText(content); // 문의내용 
+			// 유저 메일주소(아이디 찾기용)이 빈값이 아닐경우 - 유저 아이디 찾아 보내기용
+			if(userId==null){
+				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(FindId_userEmail)); // 찾은 아이디 받을 사람(유저 메일주소)
+				message.setSubject("잃어버린 아이디를 찾았습니다. 확인 바랍니다."); // 제목
+				message.setText("찾으시는 아이디:"+content_userId); // 찾은 유저아이디 담은 내용 	
+			}
+			// 유저 아이디(로그인한)가 빈값이 아닐 경우  - 1:1 문의용
+			if(FindId_userEmail==null){
+				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("starcsiran0@naver.com"));  // 관리자 메일주소(받는 사람)
+				message.setSubject(userId+"님께서 1:1 문의를 하셨습니다."); // 제목
+				message.setText(content); // 문의내용
+			}			 
 			
  //message.setContent("내용","text/html; charset=utf-8");//글내용을 html타입 charset설정
 			
@@ -246,5 +268,24 @@ public class ProjectService {
 			e.printStackTrace();
 		}					
 		return map;
+	}
+	
+	// 유저 아이디 찾기 서비스
+	public ModelAndView Find_Id(Map<String, String> params) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		String E = params.get("userEmail1");
+		String E2 = params.get("userEmail2");
+		String userEmail = E+"@"+E2;  // 유저 메일 주소(아이디 찾을용+아이디 담아 보내줄 멜주소)
+		// 완성된 유저 이메일 주소
+		logger.info("유저 메일주소(아이디 찾기용/아이디 담아서 보내줄 멜주소:"+userEmail);
+		
+		// params에 찾은 아이디와 이메일 주소 담아주기(Email 클래스에서 갖다쓰게)
+		params.put("content_userId", inter.Find_Id(userEmail));
+		params.put("FindId_userEmail", userEmail);
+		
+		ModelAndView mav = new ModelAndView();				
+		mav.addObject("Find_Id", Email(params));		
+		mav.setViewName("ioi");
+		return mav;
 	}
 }
