@@ -101,6 +101,29 @@ public class MainController {
 		return "FT_Board_Main";
 	}
 	
+	//게시판 상세보기
+	@RequestMapping(value="/Board_Detail")
+	public ModelAndView Board_Detail(@RequestParam("board_idx") String board_idx ){
+		logger.info("상세보기");
+		return service.Board_Detail(board_idx);
+	}
+	
+	//게시판 수정 이동 
+	@RequestMapping(value = "/Board_update")
+	public ModelAndView Board_update(@RequestParam("board_idx") String board_idx) {	
+		logger.info("회원정보 수정 기능 실행");
+		return service.Board_update(board_idx);
+	}
+	
+	//게시판 수정
+	@RequestMapping(value="/update")
+	public ModelAndView update(
+			@RequestParam Map<String, String> params
+			){
+		logger.info("수정 요청");
+		return service.update(params);
+	}
+		
 	//코디를 부탁해 게시판 이동
 	@RequestMapping(value="/CoplzBoard")
 	public String CoplzBoard(){
@@ -208,19 +231,6 @@ public class MainController {
 		return service.Board_Write(multi, session);
 	}		
 	
-	//패션 토크 상세보기
-	@RequestMapping(value="/FT_Board_Detail")
-	public ModelAndView FT_Board_Detail(@RequestParam("board_idx") String board_idx ){
-		logger.info("상세보기");
-		return service.FT_Board_Detail(board_idx);
-	}
-	
-	//코디게시판  상세보기
-	@RequestMapping(value="/CodiBoard_Detail")
-	public ModelAndView CodiBoard_Detail(@RequestParam("board_idx") String board_idx ){
-		logger.info("상세보기");
-		return service.CodiBoard_Detail(board_idx);
-	}
 
 	//팝업 나만의 옷장
 	@RequestMapping(value="/PopUp_Mycloth")

@@ -86,7 +86,7 @@
 			<tr>
 				<td colspan="6">
 				<input type="button" onclick="location.href='./list'" value="목록"/>
-				<input type="button" onclick="location.href='./updateQna?idx=${content.idx}'" value="수정"/>
+				<input type="button" onclick="location.href='./Board_update?idx=${content.idx}'" value="수정"/>
 				<input type="button" onclick="location.href='./list'" value="취소"/>
 				
 				</td>

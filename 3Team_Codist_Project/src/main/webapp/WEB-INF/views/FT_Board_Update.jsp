@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Q & A 수정하기</title>
+		<title>패션 토크 수정하기</title>
 		<script src ="//code.jquery.com/jquery-3.1.0.min.js"></script>
 		<style>
 			#center {
@@ -40,7 +40,7 @@
 	<body>
 	<jsp:include page="../../resources/include/index.jsp"></jsp:include>
 	<div id="center">
-	<form action="Board_update" method="post">
+	<form action="update" method="post">
 		<table>
 			<tr>
 				<td>제목</td>
@@ -52,8 +52,8 @@
 			<!--세션에 아이디가 엇으면 저장하지 못하도록 함  -->
 				<td>작성자</td>
 				<td >
-				<input type="hidden" name="idx" value="${content.idx}"/>
-				<input type="text" name="user_name" value="${content.user_name}" readonly/>
+				<input type="hidden" name="idx" value="${content.board_idx}"/>
+				<input type="text" name="nickname" value="${content.nickName}" readonly/>
 				</td>
 			</tr>
 			<tr>

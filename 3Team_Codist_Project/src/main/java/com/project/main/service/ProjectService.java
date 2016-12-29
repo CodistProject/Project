@@ -132,7 +132,6 @@ public class ProjectService {
 	public ModelAndView Member_Modify(Map<String, String> params) {
 		logger.info("회원정보 수정 기능 처리");
 		inter = sqlSession.getMapper(ProjectInterface.class);
-		
 		ModelAndView mav = new ModelAndView();				
 		String userId = params.get("userId");
 		String nickName = params.get("nickName");
@@ -160,27 +159,69 @@ public class ProjectService {
 	}
 
 	
-	//패션토크 상세보기
-	public ModelAndView FT_Board_Detail(String board_idx) {
+	//게시판 상세보기
+	public ModelAndView Board_Detail(String board_idx) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		ModelAndView mav = new ModelAndView();
 		//조회수
 		//inter.upHit(idx);
 		//불러오기
-		mav.addObject("content", inter.FT_Board_Detail(board_idx));
-		mav.setViewName("FT_Board_Detail");		
+		String page="main";
+		switch(inter.CategoryName(board_idx))
+		{
+		case "FT":
+			page="FT_Board_Detail";
+		break;
+		
+		case "CP":
+			page="CodiBoard_Detail";
+		break;
+			
+		case 	"QnA":
+			page="QnABoard_Detail";
+		break;
+		
+		case "Alter":
+			page="AlterBoard_Detail";
+		break;
+		
+		}
+		mav.addObject("content", inter.Board_Detail(board_idx));
+		mav.setViewName(page);		
 		return mav;
 		
 	}
-	//코디게시판 상세보기
-	public ModelAndView CodiBoard_Detail(String board_idx) {
-		inter = sqlSession.getMapper(ProjectInterface.class);
-		ModelAndView mav = new ModelAndView();
-		//불러오기
-		mav.addObject("content", inter.CodiBoard_Detail(board_idx));
-		mav.setViewName("CodiBoard_Detail");		
+	
+	
+	//패션 토크 수정페이지
+	public ModelAndView Board_update(String board_idx) {
+		inter= sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav =new ModelAndView();
+		String page="main";
+		switch(inter.CategoryName(board_idx))
+		{
+		case "FT":
+			page="FT_Board_Update";
+		break;
+		
+		case "CP":
+			page="CodiBoard_Update";
+		break;
+			
+		case 	"QnA":
+			page="QnABoard_Update";
+		break;
+		
+		case "Alter":
+			page="AlterBoard_Update";
+		break;
+		
+		}
+		mav.addObject("content",inter.Board_Detail(board_idx));
+		mav.setViewName(page);
 		return mav;
 	}
+
 
 	//닉네임 찾기
 	public  Map<String, String> FindNick(HttpSession session) {
@@ -250,6 +291,7 @@ public class ProjectService {
 		mav.setViewName(page);
 		return mav;		
 		}
+	
 	//FT리스트 보여주기
 	public Map<String, Object> FT_list(Map<String, String> params) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
@@ -335,8 +377,6 @@ public class ProjectService {
 		inter.ft_like(ft_like);	
 		//불러오기
 		mav.setViewName("ft_like");		
-			
-			
 		return mav;
 	}
 	//게시글 비추천
@@ -353,8 +393,7 @@ public class ProjectService {
 	public Map<String, Integer> replyRegist(Map<String, String> params) {
 			
 		return null;
-		}			
-	
+	}			
 	
 	//댓글리스트
 	public Map<String, ArrayList<ReplyDto>> replyList(
@@ -363,9 +402,28 @@ public class ProjectService {
 			Map<String, ArrayList<ReplyDto>> obj 
 				= new HashMap<String, ArrayList<ReplyDto>>();
 			obj.put("list", inter.replyList(idx));
-			
 			return obj;
+	}
+	//게시판 수정하기
+	public ModelAndView update(Map<String, String> params) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav = new ModelAndView();		
+		String subject = params.get("subject");
+		String content = params.get("content");
+		String idx = params.get("idx");
+		String nickname = params.get("nickname");
+		String msg = "수정에 실패 했습니다.";
+		
+		int success = inter.update(subject, content, idx,nickname);
+		
+		if(success == 1){
+			msg = "수정에 성공 했습니다.";
+		}
+		mav.addObject("msg", msg);
+		mav.setViewName("list");
+
+		return mav;
 	}
 
 	
-	}
+}

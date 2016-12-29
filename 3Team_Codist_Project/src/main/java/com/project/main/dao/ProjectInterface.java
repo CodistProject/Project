@@ -38,11 +38,11 @@ public interface ProjectInterface {
 	//조회수 증가
 	public void upHit(String idx);
 	
-	//패션토크 상세보기
-	public BoardDto FT_Board_Detail(String board_idx);
-	
-	//코디게시판 상세보기
-	public BoardDto CodiBoard_Detail(String board_idx);
+	//카테고리 네임 가져오기
+	public String CategoryName(String board_idx);
+		
+	//패션토크 상세보기,FT_수정하기 가져오기
+	public BoardDto Board_Detail(String board_idx);
 	
 	//QnA 글쓰기
 	public int QnABoard_Writes(String nickname, String subject, String content, String filename, String newfilename);
@@ -62,8 +62,14 @@ public interface ProjectInterface {
 	
 	//비추천수 증가
 	public void ft_hate(String ft_hate);
+	
 	//댓글 가져오기
 	public ArrayList<ReplyDto> replyList(String idx);
+
+	//게시판 수정
+	public int update(String subject, String content, String idx, String nickname);
+	
+	
 }
 
 
