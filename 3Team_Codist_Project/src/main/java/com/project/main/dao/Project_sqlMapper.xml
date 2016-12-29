@@ -25,6 +25,12 @@
 		SELECT NICKNAME FROM JOIN_REG WHERE ID=#{param1}		
 	</select>
 	
+	<!--아이디 찾기( 닉네임 >> ID )  -->
+	<select id="FindId" resultType="com.project.main.dto.ReplyDto">
+		SELECT ID FROM JOIN_REG WHERE JOIN_IDX=
+		(SELECT JOIN_IDX FROM TOTAL_BOARD WHERE BOARD_IDX=#{param1})		
+	</select>
+	
 	<!-- 회원가입  -->
 	<insert id="memberJoin">
 		INSERT INTO JOIN_REG(JOIN_IDX,ID,NICKNAME,PW,PW_QNA,PW_ANSWER,NAME,PHONE,BIRTH,GENDER,EMAIL) 
@@ -79,19 +85,19 @@
 		 SELECT COUNT(*) FROM TOTAL_BOARD WHERE CATEGORY_NAME = #{category_name}
  	</select>
  	
- 	<!--추천수 증가  -->
- 	<update id="ft_like">
- 		UPDATE TOTAL_BOARD SET ft_like = ft_like+1 WHERE BOARD_IDX = #{param1}
+ 	<!--댓글추천수 증가  -->
+ 	<update id="reple_like">
+ 		UPDATE total_reple SET reple_like = reple_like+1 WHERE reple_idx = #{param1}
  	</update>
  	
  	<!--비추천수 증가  -->
- 	<update id="ft_hate">
- 		UPDATE TOTAL_BOARD SET ft_hate = ft_hate+1 WHERE BOARD_IDX = #{param1}
+ 	<update id="reple_hate">
+ 		UPDATE total_reple SET reple_hate = reple_hate+1 WHERE reple_idx = #{param1}
  	</update>
  	
  	<!--  댓글 가져오기 -->
  	<select id="replyList" resultType="com.project.main.dto.ReplyDto">
- 	 	SELECT * FROM total_reple WHERE board_idx= #{param1}
+ 	 	SELECT reple_idx,board_idx,nickname,reple_content,reple_date,reple_like,reple_hate FROM total_reple WHERE board_idx= #{param1}
  	</select>
  	
  	
@@ -105,6 +111,14 @@
    							)WHERE RNUM BETWEEN #{param1} AND #{param2}  
  	</select>
  	
- 	
+ 	<!--댓글 등록  -->
+ 	<insert id="replyRegist">
+ 		INSERT INTO total_reple(REPLE_IDX,BOARD_IDX,NICKNAME,REPLE_CONTENT,REPLE_LIKE,REPLE_HATE) values(seq_total_reple.nextval,#{param1},#{param2},#{param3},0,0)
+ 	</insert>
+ 	  	
+ 	<!-- 댓글 삭제 -->
+ 	<delete id="repleDel">
+ 		DELETE FROM TOTAL_REPLE WHERE REPLE_IDX = #{param1}
+ 	</delete>
 
 </mapper>

@@ -328,31 +328,20 @@ public class ProjectService {
 		return mav;		
 	}		
 	
-	//게시글 추천
-	public ModelAndView  ft_like(String ft_like) {
-		inter = sqlSession.getMapper(ProjectInterface.class);
-		ModelAndView mav = new ModelAndView();	
-		inter.ft_like(ft_like);	
-		//불러오기
-		mav.setViewName("ft_like");		
-			
-			
-		return mav;
-	}
-	//게시글 비추천
-	public ModelAndView  ft_hate(String ft_hate) {
-		inter = sqlSession.getMapper(ProjectInterface.class);
-		ModelAndView mav = new ModelAndView();
-		inter.ft_hate(ft_hate);	
-		//불러오기
-		mav.setViewName("ft_hate");	
-	return mav;
-	}
+
 	
-	//댓글 동록
+	//댓글 등록
 	public Map<String, Integer> replyRegist(Map<String, String> params) {
-			
-		return null;
+			inter = sqlSession.getMapper(ProjectInterface.class);
+			Map<String, Integer> obj = new HashMap<String, Integer>();
+			int idx = Integer.parseInt(params.get("idx"));
+			String nick = params.get("nickname");
+			String content= params.get("content");
+			logger.info("글번호:"+idx);
+			logger.info("닉네임:"+nick);
+			logger.info("내용:"+content);
+			obj.put("msg",inter.replyRegist(idx,nick,content));
+		return obj;
 		}			
 	
 	
@@ -363,9 +352,31 @@ public class ProjectService {
 			Map<String, ArrayList<ReplyDto>> obj 
 				= new HashMap<String, ArrayList<ReplyDto>>();
 			obj.put("list", inter.replyList(idx));
-			
+			obj.put("userId",inter.FindId(idx) );
 			return obj;
 	}
 
-	
+	// 댓글 삭제 기능
+	public Map<String, Object> repleDel(String reple_idx) {		
+		inter = sqlSession.getMapper(ProjectInterface.class);	
+		Map<String, Object> map = new HashMap<String, Object>();		
+		int success=0;			
+		success = inter.repleDel(reple_idx);
+		map.put("success", success);				
+		return map;
 	}
+	//댓글 추천 기능
+	public Map<String, Integer> reple_like(String reple_like) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		int success=0;
+		success= inter.reple_like(reple_like);	
+		map.put("success", success);
+		return map;
+	}
+	
+	
+	
+}
+	
+	

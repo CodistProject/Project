@@ -65,34 +65,34 @@ public class RestController {
 		return service.FT_list(params);
 	}	
 
-	//추천
-	@RequestMapping(value="/ft_like")
-	public @ResponseBody ModelAndView ft_like(
-			@RequestParam("like") String ft_like){
-			logger.info("추천수 증가");
-		return service.ft_like(ft_like);
+	//댓글 추천
+	@RequestMapping(value="/reple_like")
+	public @ResponseBody Map<String,Integer> reple_like(
+			@RequestParam("like") String reple_like){
+			logger.info("추천수 증가 시작");
+		return service.reple_like(reple_like);
 	}
-	//비추천
-	@RequestMapping(value="/ft_hate")
-	public @ResponseBody ModelAndView ft_hate(
-			@RequestParam("hate") String ft_hate){
-			logger.info("비추천수 증가");
-		return service.ft_hate(ft_hate);
-	}
+	
 	//댓글 등록
 		@RequestMapping(value="/replyRegist")
 		public @ResponseBody Map<String, Integer> replyRegist(
 			@RequestParam Map<String, String> params){
-			logger.info("댓글 달기 요청");
+			logger.info("댓글 등록 요청");
 			return service.replyRegist(params);
 		}
 	//댓글 리스트 보기
 	@RequestMapping(value="/replyList")
 	public @ResponseBody Map<String, ArrayList<ReplyDto>> replyList(
 			@RequestParam ("idx") String idx){
-		logger.info("댓글 달기 요청");
+		logger.info("댓글리스트 보기");
 		return service.replyList(idx);
 		}	
-		
-
-}
+	
+	//댓글 삭제
+	@RequestMapping(value="/repleDel")
+	public @ResponseBody Map<String, Object> repleDel(
+			@RequestParam  ("reple_idx") String reple_idx){
+		logger.info("댓글 삭제 기능 시행");
+		return service.repleDel(reple_idx);
+		}
+	}
