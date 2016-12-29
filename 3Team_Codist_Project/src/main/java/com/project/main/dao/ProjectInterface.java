@@ -1,5 +1,6 @@
 package com.project.main.dao;
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.project.main.dto.BoardDto;
 import com.project.main.dto.MemberInfo;
@@ -7,7 +8,7 @@ import com.project.main.dto.ReplyDto;
 
 
 public interface ProjectInterface {
-	
+		
 	//로그인 처리
 	public String login(String id, String pw);
 
@@ -69,7 +70,21 @@ public interface ProjectInterface {
 	//게시판 수정
 	public int update(String subject, String content, String idx, String nickname);
 	
+	//댓글 쓰기
+	public int replyRegist(int idx, String nick, String content);
 	
+	//글 삭제
+	public int delete(String idx);
+
+	// 댓글 삭제
+	public int repleDel(String reple_idx);
+	
+	//댓글 추천수 증가
+	public int reple_like(String reple_like);
+	
+	//아이디 찾기
+	public ArrayList<ReplyDto> FindId(String idx);
+
 }
 
 

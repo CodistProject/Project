@@ -7,7 +7,7 @@
 		<title>Q & A  상세보기</title>
 		<script src ="//code.jquery.com/jquery-3.1.0.min.js"></script>
 		<style>
-		#center {
+		.center {
             position: relative;
             left:150px;
             top: 10px;
@@ -57,7 +57,7 @@
 	</head>
 	<body>
 		<jsp:include page="../../resources/include/index.jsp"></jsp:include>
-		<div id="center">
+		<div class="center">
 		<table>
 			<tr>
 				<td>글번호</td>
@@ -88,6 +88,9 @@
 				<input type="button" onclick="location.href='./list'" value="목록"/>
 				<input type="button" onclick="location.href='./Board_update?idx=${content.idx}'" value="수정"/>
 				<input type="button" onclick="location.href='./list'" value="취소"/>
+				<input type="button" onclick="location.href='./QnABoard'" value="목록"/>
+				<input type="button" onclick="location.href='./updateQna?idx=${content.idx}'" value="수정"/>
+				<input type="button" onclick="location.href='./deleteQna?idx=${content.idx}'" value="삭제"/>
 				
 				</td>
 			</tr>
@@ -106,14 +109,7 @@
 		</table>
 		<!--댓글 리스트  -->
 		<table id="repleZone">
-			<tr>
-				<td class="user">
-				</td>
-				<td class="data">
-				</td>
-				
-			</tr>
-		
+			
 		</table>
 		</div>
 	</body>

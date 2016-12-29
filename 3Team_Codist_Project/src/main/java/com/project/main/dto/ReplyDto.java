@@ -6,6 +6,7 @@ public class ReplyDto {
 
    private  int reple_idx;
    private  int board_idx;
+   private 	String id;
    private  String nickname;
    private  String reple_content;
    private  Date reple_date;
@@ -13,7 +14,13 @@ public class ReplyDto {
    private  int reple_hate;
    
    
-   public int getReple_idx() {
+   public String getId() {
+	return id;
+}
+public void setId(String id) {
+	this.id = id;
+}
+public int getReple_idx() {
       return reple_idx;
    }
    public void setReple_idx(int reple_idx) {
