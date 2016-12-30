@@ -51,12 +51,20 @@ public class RestController {
 		return service.join(params);
 	}
 	
-	//패션토크 리스트 보여주기
+	//게시판 리스트 보여주기
 	@RequestMapping(value="/FT_list")
-	public @ResponseBody Map<String, Object> listCall(
+	public @ResponseBody Map<String, Object> Board_list(
 					@RequestParam Map<String, String> params){
 		logger.info("패션 토크리스트 보여주기");
-		return service.FT_list(params);
+		return service.Board_list(params);
+	}	
+	
+	//코디 게시판 리스트 보여주기
+	@RequestMapping(value="/Cd_list")
+	public @ResponseBody Map<String, Object> Cd_list(
+					@RequestParam Map<String, String> params){
+		logger.info("코디 게시판 리스트 보여주기");
+		return service.Cd_list(params);
 	}	
 
 	//댓글 추천
@@ -80,7 +88,7 @@ public class RestController {
 			@RequestParam ("idx") String idx){
 		logger.info("댓글리스트 보기");
 		return service.replyList(idx);
-		}	
+		}
 	
 	//댓글 삭제
 	@RequestMapping(value="/repleDel")

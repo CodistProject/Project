@@ -57,11 +57,14 @@ public interface ProjectInterface {
 	//코디게시판 상세보기
 	public BoardDto CodiBoard_Detail(String board_idx);	
 
-	//FT_리스트 호출
-	public ArrayList<BoardDto> FT_list(int start, int end);
+	//게시판 리스트 호출(코디 게시판 제외)
+	public ArrayList<BoardDto> Board_list(int start, int end, String category_name);
 	
-	//FT_ 리스트 전체 갯수
-	public int FTCount(String category_name);
+	//코디 게시판 리스트 호출
+	public ArrayList<BoardDto> Cd_list(int start, int end, String category_name);
+	
+	//리스트 전체 갯수
+	public int BoardCount(String category_name);
 
 	//게시판 글쓰기
 	public int Board_Write(String nickName, String subject, String content, String filename, String newfilename,
@@ -94,9 +97,10 @@ public interface ProjectInterface {
 	//아이디 찾기
 	public ArrayList<ReplyDto> FindId(String idx);
 
-	//코디게시판 글쓰기
+	//코디 게시판 글쓰기
 	public void CodiBoard_Writes(String filename, String category_name, String newfilename);
 	
+
 	
 }
 

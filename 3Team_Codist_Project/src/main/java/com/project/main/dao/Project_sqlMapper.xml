@@ -90,8 +90,8 @@
  			#{param1}, #{param2}, #{param3})
  	</insert>
  	
- 	<!-- FT 게시물 수 -->
- 	<select id="FTCount" resultType="Integer">
+ 	<!-- 게시판 게시물 수 -->
+ 	<select id="BoardCount" resultType="Integer">
 		 SELECT COUNT(*) FROM TOTAL_BOARD WHERE CATEGORY_NAME = #{category_name}
  	</select>
  	
@@ -112,14 +112,25 @@
  	
  	
  	<!-- FT 리스트 보이기 -->
- 	<select id="FT_list" resultType="com.project.main.dto.BoardDto">
+ 	<select id="Board_list" resultType="com.project.main.dto.BoardDto">
  		SELECT BOARD_IDX, NICKNAME ,SUBJECT ,REG_DATE ,NEWFILENAME,BHIT,REPLES,ft_like FROM (
  					  SELECT BOARD_IDX ,NICKNAME ,SUBJECT 
  							,REG_DATE ,BHIT,REPLES,ft_like,NEWFILENAME
  							,ROW_NUMBER() OVER(ORDER BY BOARD_IDX ASC) AS RNUM FROM 
- 							(SELECT BOARD_IDX, NICKNAME ,SUBJECT ,REG_DATE ,NEWFILENAME,BHIT,REPLES,ft_like FROM TOTAL_BOARD WHERE CATEGORY_NAME = 'FT' )
+ 							(SELECT BOARD_IDX, NICKNAME ,SUBJECT ,REG_DATE ,NEWFILENAME,BHIT,REPLES,ft_like FROM TOTAL_BOARD WHERE CATEGORY_NAME = #{param3} )
    							)WHERE RNUM BETWEEN #{param1} AND #{param2}  
  	</select>
+ 	
+ 	<!-- 코디 리스트 보이기 -->
+ 	<select id="Cd_list" resultType="com.project.main.dto.BoardDto">
+ 		SELECT BOARD_IDX, SUBJECT ,SUB_SUBJECT ,FILENAME ,NEWFILENAME,BHIT,REPLES,ft_like FROM (
+ 					  SELECT BOARD_IDX ,NICKNAME ,SUBJECT 
+ 							,REG_DATE ,BHIT,REPLES,ft_like,NEWFILENAME
+ 							,ROW_NUMBER() OVER(ORDER BY BOARD_IDX ASC) AS RNUM FROM 
+ 							(SELECT BOARD_IDX, NICKNAME ,SUBJECT ,REG_DATE ,NEWFILENAME,BHIT,REPLES,ft_like FROM TOTAL_BOARD WHERE CATEGORY_NAME = #{param3} )
+   							)WHERE RNUM BETWEEN #{param1} AND #{param2}  
+ 	</select>
+ 
  	
  	<!--댓글 등록  -->
  	<insert id="replyRegist">

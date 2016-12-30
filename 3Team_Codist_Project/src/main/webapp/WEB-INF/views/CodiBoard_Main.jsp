@@ -39,7 +39,9 @@
 				border-bottom-color : black;	
 				border-top-color : black;												
 			}			
-					
+			.admin{
+				display: none;
+			}
 		</style>
 	</head>
 	<body>
@@ -58,33 +60,32 @@
 			<thead>		
 				<tr>
 					<td colspan="4" align="right">
-						<button id="admin" style="display: none" onclick="location.href='./CodiBoard_Write?userId=${sessionScope.userId}'">글쓰기</button>						
-						<button onclick="location.href='#'">등록</button>
+						<button class="admin"  onclick="location.href='./CodiBoard_Write?userId=${sessionScope.userId}'">글쓰기</button>						
 					</td>					
 				</tr>		
 				<tr>
 				<div class="img">
 					<td>
-					<input type="checkbox"/> 
-					사진1
+					<input type="checkbox" class="admin"/> 
+					사진1	<!-- <img alt="" src=""/> -->
 					</td>
 				</div>
 				<div class="img">
 					<td>
-					<input type="checkbox"/> 
-					사진2
+					<input type="checkbox" class="admin"/> 
+					사진2	<!-- <img alt="" src=""/> -->
 					</td>
 				</div>
 				<div class="img">
 					<td>
-					<input type="checkbox"/> 
-					사진3
+					<input type="checkbox" class="admin"/> 
+					사진3	<!-- <img alt="" src=""/> -->
 					</td>
 				</div>
 				<div class="img">
 					<td>
-					<input type="checkbox"/> 
-					사진4
+					<input type="checkbox" class="admin"/> 
+					사진4	<!-- <img alt="" src=""/> -->
 					</td>
 				</div>
 			</tr>
@@ -100,35 +101,7 @@
 			</tbody>
 			<tr>
 				<td id="Cd_pageNum" colspan="6" align="center">
-				<%
-					/* if(pg>BLOCK) { */
-				%>
-						[<a href="list.jsp?pg=1">◀◀</a>]
-						[<a href="list.jsp?pg=<%=startPage-1%>">◀</a>]
-				<%
-					/* } */
-				%>		
-				<%
-					for(int i=startPage;i<=endPage;i++){
-						if(i==pg){
-				%>
-							<u><b>[<%=i %>]</b></u>
-				<%
-						}else{
-				%>
-							[<a href="list.jsp?pg=<%=i %>"><%=i %></a>]
-				<%
-						}
-				}
-				%>		
-				<%
-					/* if(endPage<allPage){ */
-				%>
-						[<a href="list.jsp?pg=<%=endPage+1%>">▶</a>]
-						[<a href="list.jsp?pg=<%=allPage%>">▶▶</a>]
-				<%
-					/* } */
-				%>					
+					<div id="Cd_pagenation"></div>			
 				</td>				
 			</tr>						
 		</table>
@@ -142,8 +115,127 @@
 		function hide() {
 			console.log(userId);
 			if(userId=="ADMIN"){
-				$("#admin").css("display","inline");				
+				$(".admin").css("display","block");				
 			}					
+		}
+		
+		var currPage = 1;
+		
+		listCall(currPage);
+
+		function listCall(currPage){
+			var url="./rest/Cd_list";
+			var data = {};
+			data.page = currPage;
+			console.log(currPage);
+			data.pagePerNum = 8;
+			reqServer(url, data);
+		}
+		
+		function reqServer(url, data){
+			console.log(url);
+			$.ajax({
+				url:url,
+				type:"post",
+				data:data,
+				dataType:"json",
+				success:function(d){
+					console.log(d)
+					if(url == "./rest/Cd_list"){
+						printList(d.jsonList.list);
+						//페이지 세팅
+						currPage = d.currPage;
+						printPaging(d.allCnt, d.page);
+						}
+					},error:function(e){
+							console.log(e)
+						}
+			});
+		}
+		
+		function printList(list){
+			console.log(list);
+			var content = "";
+			for(var i=0; i<list.length; i++){
+					content +="<tr>"
+								+"<td>"+list[i].board_idx+"</td>"
+								+"	<td>"
+								+"<a href='./Board_Detail?board_idx="+list[i].board_idx+"'>"
+								+list[i].subject
+								+"</a>";
+								if(list[i].replies >0){
+									content += " <b>["+list[i].replies+"]</b>";
+								}
+								/*
+								if(list[i].newFileName != null){
+								content += "<img width='15px' src='resources/img/default.png'/>";
+								}	
+								*/
+					content +="</td>"
+								+"<td>"+list[i].nickName+"</td>"
+								+"<td>"+list[i].reg_date+"</td>"
+								+"<td>"+list[i].bhit+"</td>"
+								+"<td>"+list[i].ft_like+"</td>"
+								+"</tr>";
+			}
+			$("#list").empty();
+			$("#list").append(content);
+		}
+			//일반 페이징 방식		
+			function printPaging(allCnt, pageNum){
+			console.log("전체 게시물 :"+allCnt );
+			console.log("생성 가능 페이지 :"+pageNum );
+			console.log("현재 페이지 :"+currPage);
+			
+			$("#Ft_pageNum").empty();
+			var start;	//페이지 시작
+			var end;	//페이지 끝
+			var range = (currPage/5);	//다음 페이지 있는지 여부
+			var content = "";
+			
+			if(range >1){//5페이지 넘었을 경우
+				end = currPage%5 == 0 ?
+						//Math.floor 소수점 다버림 
+						(Math.floor(range))*5
+						:(Math.floor(range)+1)*5;
+				start = Math.floor(end-4);
+			}else{//5페이지 미만일 경우
+				start = 1;
+				end = 5;
+			}
+			
+			//페이징 표시			
+			//< 이전
+			if(currPage > 5){
+				content +="<a href='#' onclick='listCall("
+					+(start-1)+")'>이전</a> | "
+			}
+			
+			
+			
+			 for(var i=start; i<=end;i++)
+			{
+				if(i<=pageNum)
+				{
+					if(currPage ==i){
+						content +="<b>"+i+"</b>";
+					}else{
+						content += " <a href='#' onclick='listCall("+i+")'>"
+						+i+"</a> "
+					}					
+				}			
+			} 
+			
+			//마지막 페이지가 전체 페이지 수 보다 적으면 다음 링크 생성
+			if(end<pageNum)
+			{
+				content +=" | <a href='#' onclick='listCall("
+						+(end+1)+")'>다음</a> "
+			}
+			
+			$("#Ft_pageNum").append(content);
+			
+		
 		}
 	</script>
 </html>
