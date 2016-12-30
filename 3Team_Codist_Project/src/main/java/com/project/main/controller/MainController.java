@@ -140,7 +140,7 @@ public class MainController {
 	//코디 게시판 이동
 		@RequestMapping(value="/CodiBoard_Main")
 		public String CodiBoard_Main(){
-			logger.info("탈퇴 페이지 요청");
+			logger.info("코디 페이지 요청");
 			return "CodiBoard_Main";
 		}		
 
@@ -190,17 +190,24 @@ public class MainController {
 	//코디 게시판 글쓰기 이동	
 		@RequestMapping(value="/CodiBoard_Write")
 		public ModelAndView CodiBoard_Write(@RequestParam("userId") String userId){
-			logger.info("물물교환 게시판 글쓰기 이동");		
+			logger.info("코디 게시판 글쓰기 이동");		
 			return service.CodiBoard_Write(userId);
 		}
 		
 		
 	//글쓰기
 	@RequestMapping(value="/Board_Write")
-	public ModelAndView QnABoard_Writes(HttpSession session, MultipartHttpServletRequest multi){				
+	public ModelAndView Board_Write(HttpSession session, MultipartHttpServletRequest multi){				
 		logger.info("글쓰기 요청");
 		return service.Board_Write(multi, session);
 	}		
+	
+	//코디 글쓰기
+		@RequestMapping(value="/CodiBoard_Writes")
+		public ModelAndView CodiBoard_Writes(HttpSession session, MultipartHttpServletRequest multi){				
+		logger.info("글쓰기 요청");
+		return service.CodiBoard_Writes(multi, session);
+	}	
 	
 	//패션 토크 상세보기
 	@RequestMapping(value="/FT_Board_Detail")

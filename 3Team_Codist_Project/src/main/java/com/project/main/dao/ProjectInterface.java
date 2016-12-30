@@ -42,10 +42,7 @@ public interface ProjectInterface {
 	public BoardDto FT_Board_Detail(String board_idx);
 	
 	//코디게시판 상세보기
-	public BoardDto CodiBoard_Detail(String board_idx);
-	
-	//QnA 글쓰기
-	public int QnABoard_Writes(String nickname, String subject, String content, String filename, String newfilename);
+	public BoardDto CodiBoard_Detail(String board_idx);	
 
 	//FT_리스트 호출
 	public ArrayList<BoardDto> FT_list(int start, int end);
@@ -64,6 +61,9 @@ public interface ProjectInterface {
 	public void ft_hate(String ft_hate);
 	//댓글 가져오기
 	public ArrayList<ReplyDto> replyList(String idx);
+	
+	//코디게시판 글쓰기
+	public void CodiBoard_Writes(String filename, String category_name, String newfilename);
 }
 
 

@@ -18,6 +18,7 @@ import com.project.main.dao.ProjectInterface;
 import com.project.main.dto.BoardDto;
 import com.project.main.dto.MemberInfo;
 import com.project.main.dto.ReplyDto;
+import com.project.main.util.CodiUploadFile;
 import com.project.main.util.UploadFile;
 
 @Service
@@ -254,20 +255,64 @@ public class ProjectService {
 		}
 	
 	//코디 글쓰기
-		public ModelAndView CodiBoard_Write(MultipartHttpServletRequest multi)  {		
-			inter = sqlSession.getMapper(ProjectInterface.class);
-			ModelAndView mav = new ModelAndView();		
-				
-			String file1 = multi.getParameter("file1");
-			String file2 = multi.getParameter("file2");
-			String file3 = multi.getParameter("file3");	
-			String file4 = multi.getParameter("file4");
-			String newfilename = "";		
-
-				
+		
+		public ModelAndView CodiBoard_Writes(MultipartHttpServletRequest multi, HttpSession session)  {				
+			inter = sqlSession.getMapper(ProjectInterface.class);			
+			ModelAndView mav = new ModelAndView();			
+			ArrayList filenames = new ArrayList();
+			ArrayList category_names = new ArrayList();			
+			String userId = (String) session.getAttribute("userId");				
+			/*String filenames[] =new String[4];*/
+			/*String category_names[] =new String[4];*/				
 			
 			
-			return mav;		
+			if(!(multi.getParameter("filename1").equals(""))){
+				filenames.add(multi.getParameter("filename1"));
+				category_names.add("코디메인");				
+			}
+			if(!(multi.getParameter("filename2").equals(""))){
+				filenames.add(multi.getParameter("filename2"));
+				category_names.add("외투");
+			}
+			if(!(multi.getParameter("filename3").equals(""))){
+				filenames.add(multi.getParameter("filename3"));
+				category_names.add("상의");
+			}
+			if(!(multi.getParameter("filename4").equals(""))){
+				filenames.add(multi.getParameter("filename4"));
+				category_names.add("하의");
+			}
+			
+						
+			for(int i=0; i< filenames.size();i++)	{			
+			String category_name = "";
+			String newfilename = "";	
+			String filename = "";
+			
+			filename = filenames.get(i).toString();			
+			category_name = category_names.get(i).toString();	
+			
+				//파일 업로드
+				logger.info("파일 업로드");
+				CodiUploadFile upload = new CodiUploadFile();
+				newfilename = upload.fileUp(multi, filename);			
+					
+			newfilename = upload.fileUp(multi, filename);		
+					
+			inter.CodiBoard_Writes(filename, category_name, newfilename);
+			logger.info(filename);
+			logger.info(category_name);
+			logger.info(newfilename);					
+			}
+			
+			String page = "CodiBoard_Main";
+			String msg = "로그인을 해주세요.";
+			
+			
+			mav.addObject("msg",msg);
+			mav.setViewName(page);
+			
+			return mav;					
 		}		
 	
 	//FT리스트 보여주기

@@ -96,7 +96,7 @@
 	<body>
 			<jsp:include page="../../resources/include/index.jsp"></jsp:include>
 		<div class="content">
-			<form action="Board_Write" method="post" enctype="multipart/form-data">		
+			<form action="CodiBoard_Writes" method="post" enctype="multipart/form-data">		
     		<table class="boardwrite">
     			<tr>
     				<td class="align" colspan="2">코디 게시판</td>
@@ -113,25 +113,37 @@
     			<table class="boardwrite" style="display: inline;";>     			
     			<tr> 
     				<td class="align">코디</td>
-    				<td class="align1"><input name="file1" type="file"/></td>
+    				<td class="align1">
+    				<input type="file" name="file1" value="첨부" onchange="fileView(this)"/>
+					<input  id="filenames1"  type="hidden" name="filename1"/>
+    				</td>
     			</tr>
     			</table>
     			<table class="boardwrite" id="outter1" style="display: none;"> 
     			<tr >
     				<td class="align">외투</td>
-    				<td class="align1"><input name="file2" type="file"/> </td>
+    				<td class="align1">
+    				<input type="file" name="file2" value="첨부" onchange="fileView(this)"/>
+					<input  id="filenames2"  type="hidden" name="filename2"/>
+    				</td>
     			</tr>
     			</table>
     			<table class="boardwrite" id="top1" style="display: none;"> 
     			<tr>
     				<td class="align">상의</td>
-    				<td class="align1"><input name="file3" type="file"/> </td>
+    				<td class="align1">
+    				<input type="file" name="file3" value="첨부" onchange="fileView(this)"/>
+					<input  id="filenames3"  type="hidden" name="filename3"/>
+    				</td>
     			</tr>
     			</table>
     			<table class="boardwrite" id="bottom1" style="display: none;"> 
     			<tr>
     				<td class="align">하의</td>
-    				<td class="align1"><input name="file4" type="file"/> </td>
+    				<td class="align1">
+    				<input type="file" name="file4" value="첨부" onchange="fileView(this)"/>
+					<input  id="filenames4"  type="hidden" name="filename4"/>
+    				</td>
     			</tr>
     			</table>
     			<table class="boardwrite"> 			
@@ -199,7 +211,10 @@
 		var fullPath = elem.value;
 		var filename = fullPath.substring(12);
 		console.log(filename);
-		$("#filenames").val(filename);
+		$("#filenames1").val(filename);
+		$("#filenames2").val(filename);
+		$("#filenames3").val(filename);
+		$("#filenames4").val(filename);
 	}
 	</script>
 
