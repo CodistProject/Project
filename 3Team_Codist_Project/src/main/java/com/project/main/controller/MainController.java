@@ -48,7 +48,11 @@ public class MainController {
 			, HttpSession session){
 		logger.info("로그인 처리");
 		params.put("session", session);
+<<<<<<< HEAD
 		return service.login(params);
+=======
+		return service.login(params);		
+>>>>>>> 7c974ebe7ee00507105e0b97aecd8b60f5d0882b
 	}
 	
 	//로그아웃
@@ -130,12 +134,21 @@ public class MainController {
 		return "AlterBoard_Main";
 	}
 	
+<<<<<<< HEAD
 	//게시판 상세보기(코디 게시판 제외)
 	@RequestMapping(value="/Board_Detail")
 	public ModelAndView Board_Detail(@RequestParam("board_idx") String board_idx ){
 		logger.info("상세보기");
 		return service.Board_Detail(board_idx);
 	}
+=======
+	//아이디찾기
+	@RequestMapping(value="/Find_Id")
+	public String findId(){
+		logger.info("아이디찾기 이동");
+	return "Find_Id";
+	}	
+>>>>>>> 7c974ebe7ee00507105e0b97aecd8b60f5d0882b
 	
 	//게시판 수정 페이지 이동 
 	@RequestMapping(value = "/Board_update")
@@ -168,6 +181,7 @@ public class MainController {
 		return service.withdrawa(userId);
 	}
 
+<<<<<<< HEAD
 	//코디 글쓰기 게시판 Form 이동 + 닉네임 찾기	
 	@RequestMapping(value="/CodiBoard_Write")
 	public ModelAndView CodiBoard_Write(@RequestParam("userId") String userId){
@@ -180,6 +194,13 @@ public class MainController {
 	public ModelAndView FTboard_Write(@RequestParam("userId") String userId){
 		logger.info("코디를 부탁해게시판 글쓰기 이동");		
 		return service.FTboard_Write(userId);
+=======
+	//회원가입 페이지 이동
+	@RequestMapping(value="/join")
+	public String join(){
+		logger.info("회원가입 폼으로 이동");
+		return "JoinForm";
+>>>>>>> 7c974ebe7ee00507105e0b97aecd8b60f5d0882b
 	}
 	
 	//QnA 글쓰기 게시판 Form 이동	+ 닉네임 찾기
@@ -189,6 +210,7 @@ public class MainController {
 		return service.QnABoard_Write(userId);
 	}
 	
+<<<<<<< HEAD
 	//코디를 부탁해 글쓰기 게시판 Form 이동	+ 닉네임 찾기
 	@RequestMapping(value="/Coplz_Write")
 	public ModelAndView Coplz_Write(@RequestParam("userId") String userId){
@@ -233,4 +255,34 @@ public class MainController {
 		
 
 
+=======
+	//코디게시판  상세보기
+	@RequestMapping(value="/CodiBoard_Detail")
+	public ModelAndView CodiBoard_Detail(@RequestParam("board_idx") String board_idx ){
+	logger.info("상세보기");
+	return service.CodiBoard_Detail(board_idx);
+	}			
+	
+	// 유저 아이디 찾기(이메일 받아서) - 고급 버젼(찾은 아이디 이메일 쏘는거까지)
+	@RequestMapping(value="/FindId_userEmail")
+	public ModelAndView Find_Id(@RequestParam Map<String, String> params){
+	logger.info("유저 아이디찾기+이메일로 쏴주기");
+	return service.Find_Id(params);
+	}
+	
+	// 유저 비번 찾기(이메일 받아서) - 고급 버젼(찾은 비번 이메일 쏘는거까지)
+	@RequestMapping(value="/FindPw_userEmail")
+	public ModelAndView Find_Pw(@RequestParam Map<String, String> params){
+		logger.info("유저 비번찾기+이메일로 쏴주기2");
+	return service.Find_Pw(params);
+	}
+	
+	// 유저 비번 찾기2(입력 아이디 받아서 메일 찾고  찾은 메일로 메일 보내기 실행) - 고급 버젼(찾은 비번 이메일 쏘는거까지)
+	@RequestMapping(value="/Pw_FindEmail")
+	public ModelAndView Pw_FindEmail(@RequestParam Map<String, String> params){
+		logger.info("유저 비번찾기+이메일로 쏴주기1");
+	return service.Find_Pw(params);
+	}
+	
+>>>>>>> 7c974ebe7ee00507105e0b97aecd8b60f5d0882b
 }

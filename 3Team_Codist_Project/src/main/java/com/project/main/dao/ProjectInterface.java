@@ -1,8 +1,13 @@
 package com.project.main.dao;
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Map;
 
 import com.project.main.dto.BoardDto;
+=======
+import org.springframework.web.servlet.ModelAndView;
+
+>>>>>>> 7c974ebe7ee00507105e0b97aecd8b60f5d0882b
 import com.project.main.dto.MemberInfo;
 import com.project.main.dto.ReplyDto;
 
@@ -60,6 +65,7 @@ public interface ProjectInterface {
 	//게시판 리스트 호출(코디 게시판 제외)
 	public ArrayList<BoardDto> Board_list(int start, int end, String category_name);
 	
+<<<<<<< HEAD
 	//코디 게시판 리스트 호출
 	public ArrayList<BoardDto> Cd_list(int start, int end, String category_name);
 	
@@ -87,6 +93,20 @@ public interface ProjectInterface {
 	
 	//글 삭제
 	public int delete(String idx);
+=======
+	// 유저 비밀번호 담기(로그인시 세션에 담기)
+	public String pw(String id);
+
+	// 유저 아이디 찾기(유저 이메일 받아서 - 이메일 쏘는거 까지)
+	public String Find_Id(String userEmail);
+
+	// 유저 비번 찾기(아이디 받아서 비번 찾기)
+	public String FindPw_userEmail(String userId);  
+
+	// 유저 이메일 찾기(아이디 받아서)
+	public String Find_Email(String user_Id);				
+}
+>>>>>>> 7c974ebe7ee00507105e0b97aecd8b60f5d0882b
 
 	// 댓글 삭제
 	public int repleDel(String reple_idx);

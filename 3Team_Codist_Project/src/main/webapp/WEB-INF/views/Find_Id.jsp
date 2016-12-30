@@ -132,12 +132,13 @@
         <br/> 아이디는 가입시 적어주신 이메일로 보내 드립니다.</p>
     <br/>
     <br/> ■<b>본인 확인용 정보로 찾기</b>
-    <br/>
-    <form id="idFind" action="#">
+    <br/>    
+    <form action="FindId_userEmail">
         <ul>
             <li>이름 :
-                <input id="userName" type="text" size="14" maxlength="14" />
+                <input id="userName" name="user_Name" type="text" size="14" maxlength="14" />
             </li>
+<<<<<<< HEAD
             <li>
             	이메일:
             	<form name="form" method="post">
@@ -172,5 +173,33 @@
 	            form.email2.value = form.email_select.value;
 	        }
 	    }
+=======
+            <li>phone :
+                <select id="phone1" name="userPhone">
+                        <option value="">선택하세요</option>
+                        <option value="010">010</option>
+                        <option value="011">011</option>
+                        <option value="016">016</option>
+                        <option value="017">017</option>
+                        <option value="018">018</option>
+                        <option value="019">019</option>
+               </select>
+               - <input id="phone2" type="text" size="6" maxlength="6"/>
+                - <input id="phone3" type="text" size="6" maxlength="6"/>       
+            </li>
+            <li>이메일 :
+                <input id="email1" name="userEmail1" type="text" size="16" maxlength="16" /> @
+                <input id="email2" name="userEmail2" type="text" size="15" maxlength="16" /> </li>
+            	<p class="p2"> *회원 가입시 작성한 이름과 전화번호, 이메일을 입력하세요.></p>
+            	
+        </ul>
+        <center>        
+          	<input id="sendId" type="submit" value="확인" />   
+        </center>               
+        </form>
+	</div>	
+	</body>	
+	<script>	
+>>>>>>> 7c974ebe7ee00507105e0b97aecd8b60f5d0882b
 	</script>
 </html>
