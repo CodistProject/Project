@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.util.Iterator;
-import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -41,30 +40,30 @@ public class UploadFile {
 		}
 		
 		//3. 파일 가져 오기
-				Iterator<String> files = multi.getFileNames();
-				
-				while(files.hasNext()){
-					//파일 바이너리 뽑기
-					String uploadFile = files.next();
-					logger.info("uploadFile : "+uploadFile);
-					//파일 메모리 저장
-					MultipartFile mFile = multi.getFile(uploadFile);
-					
-				//4. 파일 만들기
-					//새로운 파일 생성
-					newfilename = System.currentTimeMillis()+"."
-							+filename.substring(filename.lastIndexOf(".")+1);
-					logger.info("저장 파일명 : {}",newfilename);
-					
-				//5. 메모리 -> 실제 파일
-					try {
-						mFile.transferTo(new File(path+newfilename));
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}				
-				return newfilename;
+		Iterator<String> files = multi.getFileNames();
+		
+		while(files.hasNext()){
+			//파일 바이너리 뽑기
+			String uploadFile = files.next();
+			logger.info("uploadFile : "+uploadFile);
+			//파일 메모리 저장
+			MultipartFile mFile = multi.getFile(uploadFile);
+			
+		//4. 파일 만들기
+			//새로운 파일 생성
+			newfilename = System.currentTimeMillis()+"."
+					+filename.substring(filename.lastIndexOf(".")+1);
+			logger.info("저장 파일명 : {}",newfilename);
+			
+		//5. 메모리 -> 실제 파일
+			try {
+				mFile.transferTo(new File(path+newfilename));
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
+		}				
+		return newfilename;
+	}
 
 	//파일 삭제
 	public void delete(String delName) {

@@ -80,7 +80,6 @@ public class ProjectService {
 			
 			if(inter.login(id, pw) != null){
 				session.setAttribute("userId", id);
-				session.setAttribute("userPass", pw);			
 			}else{
 				mav.addObject("msg","아이디 또는 비밀번호를 확인 하세요");
 			}			
@@ -88,7 +87,7 @@ public class ProjectService {
 		mav.setViewName(page);
 		return mav;
 	}	
-
+	
 	//회원가입
 	public MemberInfo join(Map<String, String> params) {
 		inter=sqlSession.getMapper(ProjectInterface.class);
@@ -106,7 +105,6 @@ public class ProjectService {
 		inter.memberJoin(info);
 		return info;
 	}
-			
 	
 	// 회원 정보 수정 페이지 이동(보기)
 	public ModelAndView Mem_modify_view(String userId) {
@@ -158,7 +156,6 @@ public class ProjectService {
 		
 		return mav;
 	}
-
 	
 	//게시판 상세보기
 	public ModelAndView Board_Detail(String board_idx) {
@@ -178,7 +175,7 @@ public class ProjectService {
 			page="CodiBoard_Detail";
 		break;
 			
-		case 	"QnA":
+		case "QnA":
 			page="QnABoard_Detail";
 		break;
 		
@@ -193,8 +190,7 @@ public class ProjectService {
 		
 	}
 	
-	
-	//패션 토크 수정페이지
+	//게시판 수정페이지이동
 	public ModelAndView Board_update(String board_idx) {
 		inter= sqlSession.getMapper(ProjectInterface.class);
 		ModelAndView mav =new ModelAndView();
@@ -222,20 +218,68 @@ public class ProjectService {
 		mav.setViewName(page);
 		return mav;
 	}
-
-
-	//닉네임 찾기
-	public  Map<String, String> FindNick(HttpSession session) {
+	//Q&A 닉네임 찾기
+	public ModelAndView QnABoard_Write(String userId) {		
 		inter = sqlSession.getMapper(ProjectInterface.class);
-		 Map<String, String> mav =new HashMap<String, String>();
-		String userId=(String) session.getAttribute("userId");
-		logger.info(userId);
-		String NickName=inter.FindNick(userId);
-		logger.info(NickName);
-		mav.put("nickname",NickName);	
+		ModelAndView mav = new ModelAndView();
+		String nickName = inter.FindNick(userId);
+		logger.info("닉네임:"+nickName);
+		mav.addObject("nickName", nickName);
+		mav.setViewName("QnABoard_Write");
 		return mav;
 	}
 	
+	//코디를 부탁해 닉네임 찾기
+	public ModelAndView Coplz_Write(String userId) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav = new ModelAndView();
+		String nickName = inter.FindNick(userId);
+		logger.info("닉네임:"+nickName);
+		mav.addObject("nickName", nickName);
+		mav.setViewName("Coplz_Write");
+		return mav;		
+	
+	}
+	//물물교환 닉네임 찾기
+	public ModelAndView Alter_Write(String userId) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav = new ModelAndView();
+		String nickName = inter.FindNick(userId);
+		logger.info("닉네임:"+nickName);
+		mav.addObject("nickName", nickName);
+		mav.setViewName("AlterBoard_Write");
+		return mav;	
+	}
+	
+	//패션토크 닉네임 찾기
+	public ModelAndView FTboard_Write(String userId) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav = new ModelAndView();
+		String nickName = inter.FindNick(userId);
+		logger.info("닉네임:"+nickName);
+		mav.addObject("nickName", nickName);
+		mav.setViewName("FT_Board_Write");
+		return mav;		
+	}
+	
+	//코디게시판 닉네임 찾기
+	public ModelAndView CodiBoard_Write(String userId) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav = new ModelAndView();
+		String nickName = inter.FindNick(userId);
+		logger.info("닉네임:"+nickName);
+		mav.addObject("nickName", nickName);
+		mav.setViewName("CodiBoard_Write");
+		return mav;		
+	}
+	//탈퇴하기 페이지 이동(Pw 찾기)
+	public ModelAndView Withdrawal(String userId) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("userPw",inter.FindPw(userId));
+		mav.setViewName("Mypage_Withdrawal");
+		return mav;
+	}
 	//탈퇴하기
 	public ModelAndView withdrawa(String userId) {
 		ModelAndView mav = new ModelAndView();
@@ -244,7 +288,6 @@ public class ProjectService {
 		inter.withdrawa(userId);		
 		mav.setViewName("redirect:/logout");				
 		return mav;
-		
 	}
 
 	// 글쓰기
@@ -354,7 +397,6 @@ public class ProjectService {
 			
 			return mav;					
 		}		
-	
 	//FT리스트 보여주기
 	public Map<String, Object> FT_list(Map<String, String> params) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
@@ -388,62 +430,6 @@ public class ProjectService {
 					
 		return json;
 	}			
-	
-
-	//Q&A 닉네임 찾기
-	public ModelAndView QnABoard_Write(String userId) {		
-		inter = sqlSession.getMapper(ProjectInterface.class);
-		ModelAndView mav = new ModelAndView();
-		String nickName = inter.FindNick(userId);
-		logger.info("닉네임:"+nickName);
-		mav.addObject("nickName", nickName);
-		mav.setViewName("QnABoard_Write");
-		return mav;
-	}
-	
-	//코디를 부탁해 닉네임 찾기
-	public ModelAndView Coplz_Write(String userId) {
-		inter = sqlSession.getMapper(ProjectInterface.class);
-		ModelAndView mav = new ModelAndView();
-		String nickName = inter.FindNick(userId);
-		logger.info("닉네임:"+nickName);
-		mav.addObject("nickName", nickName);
-		mav.setViewName("Coplz_Write");
-		return mav;		
-	
-	}
-	//물물교환 닉네임 찾기
-	public ModelAndView Alter_Write(String userId) {
-		inter = sqlSession.getMapper(ProjectInterface.class);
-		ModelAndView mav = new ModelAndView();
-		String nickName = inter.FindNick(userId);
-		logger.info("닉네임:"+nickName);
-		mav.addObject("nickName", nickName);
-		mav.setViewName("AlterBoard_Write");
-		return mav;	
-	}
-	
-	//패션토크 닉네임 찾기
-	public ModelAndView FTboard_Write(String userId) {
-		inter = sqlSession.getMapper(ProjectInterface.class);
-		ModelAndView mav = new ModelAndView();
-		String nickName = inter.FindNick(userId);
-		logger.info("닉네임:"+nickName);
-		mav.addObject("nickName", nickName);
-		mav.setViewName("FT_Board_Write");
-		return mav;		
-	}
-	
-	//코디게시판 닉네임 찾기
-		public ModelAndView CodiBoard_Write(String userId) {
-			inter = sqlSession.getMapper(ProjectInterface.class);
-			ModelAndView mav = new ModelAndView();
-			String nickName = inter.FindNick(userId);
-			logger.info("닉네임:"+nickName);
-			mav.addObject("nickName", nickName);
-			mav.setViewName("CodiBoard_Write");
-			return mav;		
-		}
 	
 	//게시글 추천
 	public ModelAndView  ft_like(String ft_like) {
@@ -530,7 +516,7 @@ public class ProjectService {
 		map.put("success", success);
 		return map;
 	}
-	
+
 	
 	
 }

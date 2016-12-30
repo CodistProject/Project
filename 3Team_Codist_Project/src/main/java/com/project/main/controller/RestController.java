@@ -42,12 +42,6 @@ public class RestController {
 			logger.info("NickName중복체크");
 		return service.overlayNick(nick);
 	}
-	//닉네입 찾기
-	@RequestMapping(value="/Find_Nick")
-	public @ResponseBody Map<String, String> findNick(HttpSession session){
-		logger.info("닉네임 찾기");
-	return service.FindNick(session);
-	}
 	
 	//회원가입
 	@RequestMapping(value="/join")

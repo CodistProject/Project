@@ -57,7 +57,10 @@
  		UPDATE JOIN_REG SET NICKNAME=#{param2}, PW=#{param3}, NAME=#{param4}, BIRTH=#{param5}, GENDER=#{param6}, EMAIL=#{param7} WHERE ID=#{param1} 
  	</update>
  
-	<!--   -->
+	<!-- 탈퇴(Pw찾기) userId==>userPw  -->
+	<select id="FindPw" resultType="String">
+		SELECT PW FROM JOIN_REG WHERE ID=#{param1}	
+	</select>
  	<!-- 탈퇴 -->
 	<delete id="withdrawa">
 	 	DELETE FROM join_reg WHERE JOIN_IDX=(SELECT JOIN_IDX FROM JOIN_REG WHERE ID = #{param1}) CASCADE

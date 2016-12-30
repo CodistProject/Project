@@ -113,6 +113,13 @@
 			<thead>		
 				<tr>
 					<td id="btn_write" colspan="6" align="right">
+							게시물 갯수 : 
+							<select id="Ft_page">
+							<option value="5">5</option>
+							<option value="10">10</option>
+							<option value="15">15</option>
+							<option value="20">20</option>
+							</select>
 						<button id="FTQna" onclick="location.href='./FTboard_Write?userId=${sessionScope.userId}'">글쓰기</button>
 					</td>					
 				</tr>		
@@ -142,10 +149,10 @@
 	var currPage = 1;
 	
 	listCall(currPage);
-	
-	/* $("#Ft_page").change(function(){
+	//페이지 갯수 정하기
+	$("#Ft_page").change(function(){
 		listCall(currPage);
-	}); */
+	}); 
 	
 
 	function listCall(currPage){
@@ -153,7 +160,7 @@
 		var data = {};
 		data.page = currPage;
 		console.log(currPage);
-		data.pagePerNum = 5;//$("#Ft_pageNum").val();
+		data.pagePerNum = $("#Ft_page").val();
 		reqServer(url, data);
 	}
 	
@@ -238,7 +245,7 @@
 		
 		
 		
-		/* for(var i=start; i<=end;i++)
+		 for(var i=start; i<=end;i++)
 		{
 			if(i<=pageNum)
 			{
@@ -249,7 +256,7 @@
 					+i+"</a> "
 				}					
 			}			
-		} */
+		} 
 		
 		//마지막 페이지가 전체 페이지 수 보다 적으면 다음 링크 생성
 		if(end<pageNum)

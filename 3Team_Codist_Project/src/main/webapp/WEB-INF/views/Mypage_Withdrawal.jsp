@@ -61,7 +61,7 @@
   //비밀번호 확인
 	function Check(){
 		var PW = $("#Pw").val();
-		var PW_C = "${sessionScope.userPass}";
+		var PW_C = "${userPw}";
 			console.log(PW);
 			console.log(PW_C);
 			

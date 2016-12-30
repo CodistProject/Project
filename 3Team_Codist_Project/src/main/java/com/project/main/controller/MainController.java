@@ -51,7 +51,14 @@ public class MainController {
 		return service.login(params);
 	}
 	
-
+	//로그아웃
+	@RequestMapping(value="/logout")
+	public String logout(HttpSession session){
+		logger.info("logout 요청");
+		session.removeAttribute("userId");
+		return "redirect:/";
+	}
+	
 	//회원정보 보기(마이 페이지) 이동
 	@RequestMapping(value="/MemberData_view")
 	public ModelAndView MemberData_view(@RequestParam("userId") String userId) {	
@@ -102,29 +109,6 @@ public class MainController {
 		return "FT_Board_Main";
 	}
 	
-	//게시판 상세보기
-	@RequestMapping(value="/Board_Detail")
-	public ModelAndView Board_Detail(@RequestParam("board_idx") String board_idx ){
-		logger.info("상세보기");
-		return service.Board_Detail(board_idx);
-	}
-	
-	//게시판 수정 이동 
-	@RequestMapping(value = "/Board_update")
-	public ModelAndView Board_update(@RequestParam("board_idx") String board_idx) {	
-		logger.info("회원정보 수정 기능 실행");
-		return service.Board_update(board_idx);
-	}
-	
-	//게시판 수정
-	@RequestMapping(value="/update")
-	public ModelAndView update(
-			@RequestParam Map<String, String> params
-			){
-		logger.info("수정 요청");
-		return service.update(params);
-	}
-		
 	//코디를 부탁해 게시판 이동
 	@RequestMapping(value="/CoplzBoard")
 	public String CoplzBoard(){
@@ -146,11 +130,35 @@ public class MainController {
 		return "AlterBoard_Main";
 	}
 	
+	//게시판 상세보기(코디 게시판 제외)
+	@RequestMapping(value="/Board_Detail")
+	public ModelAndView Board_Detail(@RequestParam("board_idx") String board_idx ){
+		logger.info("상세보기");
+		return service.Board_Detail(board_idx);
+	}
+	
+	//게시판 수정 페이지 이동 
+	@RequestMapping(value = "/Board_update")
+	public ModelAndView Board_update(@RequestParam("board_idx") String board_idx) {	
+		logger.info("회원정보 수정 기능 실행");
+		return service.Board_update(board_idx);
+	}
+	
+	//게시판 수정
+	@RequestMapping(value="/update")
+	public ModelAndView update(
+			@RequestParam Map<String, String> params
+			){
+		logger.info("수정 요청");
+		return service.update(params);
+	}
+	
 	//탈퇴 페이지 이동
 	@RequestMapping(value="/Mypage_Withdrawal")
-	public String withdrawapage(){
+	public ModelAndView withdrawapage(@RequestParam("userId") String userId){
+		logger.info(userId);
 		logger.info("탈퇴 페이지 요청");
-		return "Mypage_Withdrawal";
+		return service.Withdrawal(userId);
 	}
 	
 	//탈퇴
@@ -159,81 +167,49 @@ public class MainController {
 		logger.info("삭제 : {}",userId);
 		return service.withdrawa(userId);
 	}
-		
-	//로그아웃
-	@RequestMapping(value="/logout")
-	public String logout(HttpSession session){
-		logger.info("logout 요청");
-		session.removeAttribute("userId");
-		return "redirect:/";
-	}
-	
-	//코디 게시판 이동
-		@RequestMapping(value="/CodiBoard_Main")
-		public String CodiBoard_Main(){
-			logger.info("코디 페이지 요청");
-			return "CodiBoard_Main";
-		}		
 
-	//Q&A 게시판 이동
-	@RequestMapping(value="/QnABoard_Main")
-	public String QnABoard_Main(){
-		logger.info("탈퇴 페이지 요청");
-		return "QnABoard_Main";
+	//코디 글쓰기 게시판 Form 이동 + 닉네임 찾기	
+	@RequestMapping(value="/CodiBoard_Write")
+	public ModelAndView CodiBoard_Write(@RequestParam("userId") String userId){
+		logger.info("코디 게시판 글쓰기 이동");		
+		return service.CodiBoard_Write(userId);
 	}
 	
-	//코디를 부탁해 게시판 이동
-		@RequestMapping(value="/Coplz_Main")
-		public String Coplz_Main(){
-			logger.info("탈퇴 페이지 요청");
-			return "Coplz_Main";
-		}	
-	
-	
-	//QnA 게시판 글쓰기 이동	
-		@RequestMapping(value="/QnABoard_Write")
-		public ModelAndView QnABoard_Write(@RequestParam("userId") String userId){
-		logger.info("Q&A게시판 글쓰기 이동");		
-		return service.QnABoard_Write(userId);
-	}
-		
-	//코디를 부탁해 게시판 글쓰기 이동	
-		@RequestMapping(value="/Coplz_Write")
-		public ModelAndView Coplz_Write(@RequestParam("userId") String userId){
-		logger.info("코디를 부탁해게시판 글쓰기 이동");		
-		return service.Coplz_Write(userId);
-	}
-		
-	//패션토크 게시판 글쓰기 이동	
-		@RequestMapping(value="/FTboard_Write")
-		public ModelAndView FTboard_Write(@RequestParam("userId") String userId){
+	//패션토크 글쓰기 게시판 Form 이동	+ 닉네임 찾기
+	@RequestMapping(value="/FTboard_Write")
+	public ModelAndView FTboard_Write(@RequestParam("userId") String userId){
 		logger.info("코디를 부탁해게시판 글쓰기 이동");		
 		return service.FTboard_Write(userId);
 	}
+	
+	//QnA 글쓰기 게시판 Form 이동	+ 닉네임 찾기
+	@RequestMapping(value="/QnABoard_Write")
+	public ModelAndView QnABoard_Write(@RequestParam("userId") String userId){
+		logger.info("Q&A게시판 글쓰기 이동");		
+		return service.QnABoard_Write(userId);
+	}
+	
+	//코디를 부탁해 글쓰기 게시판 Form 이동	+ 닉네임 찾기
+	@RequestMapping(value="/Coplz_Write")
+	public ModelAndView Coplz_Write(@RequestParam("userId") String userId){
+		logger.info("코디를 부탁해게시판 글쓰기 이동");		
+		return service.Coplz_Write(userId);
+	}
 			
-	//물물교환 게시판 글쓰기 이동	
+	//물물교환 글쓰기 게시판 Form 이동	+ 닉네임 찾기
 		@RequestMapping(value="/Alter_Write")
 		public ModelAndView Alter(@RequestParam("userId") String userId){
 		logger.info("물물교환 게시판 글쓰기 이동");		
 		return service.Alter_Write(userId);
 	}
-		
-	//코디 게시판 글쓰기 이동	
-		@RequestMapping(value="/CodiBoard_Write")
-		public ModelAndView CodiBoard_Write(@RequestParam("userId") String userId){
-			logger.info("코디 게시판 글쓰기 이동");		
-			return service.CodiBoard_Write(userId);
-		}
-		
-		
-	//글쓰기
+	//게시판 글쓰기(코디 게시판 제외)
 	@RequestMapping(value="/Board_Write")
 	public ModelAndView Board_Write(HttpSession session, MultipartHttpServletRequest multi){				
 		logger.info("글쓰기 요청");
 		return service.Board_Write(multi, session);
 	}		
 	
-	//코디 글쓰기
+	//코디게시판  글쓰기
 	@RequestMapping(value="/CodiBoard_Writes")
 	public ModelAndView CodiBoard_Writes(HttpSession session, MultipartHttpServletRequest multi){				
 	logger.info("글쓰기 요청");

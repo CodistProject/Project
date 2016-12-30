@@ -33,6 +33,9 @@ public interface ProjectInterface {
 	// 회원정보 수정
 	public int Member_Modify(String userId, String nickName, String pw, String name, String birth, String gender,
 			String email);
+	//회원 탈퇴 Pw찾기
+	public String FindPw(String userId);
+	
 	//탈퇴
 	public void withdrawa(String userId);	
 
@@ -93,6 +96,8 @@ public interface ProjectInterface {
 
 	//코디게시판 글쓰기
 	public void CodiBoard_Writes(String filename, String category_name, String newfilename);
+	
+	
 }
 
 
