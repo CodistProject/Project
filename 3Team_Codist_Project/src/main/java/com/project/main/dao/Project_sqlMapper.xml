@@ -59,21 +59,25 @@
  	<!--코디게시판 상세보기  -->
  	<select id="CodiBoard_Detail" resultType="com.project.main.dto.BoardDto">
  		SELECT * FROM TOTAL_BOARD WHERE board_idx = #{param1}
- 	</select>
- 	
- 	<!-- 유저 이메일 찾기 -->
- 	<select id="email" resultType="String">
- 		SELECT EMAIL FROM JOIN_REG WHERE ID = #{param1}
- 	</select> 	
+ 	</select>	
  	
  	<!-- 유저 비밀번호 찾기 -->
  	<select id="pw" resultType="String">
  		SELECT PW FROM JOIN_REG WHERE ID = #{param1}
  	</select>
  	
- 	<!-- 유저 아이디 찾기 -->
+ 	<!-- 유저 아이디 찾기 (이메일 전송 버전)-->
  	<select id="Find_Id" resultType="String">
  		SELECT ID FROM JOIN_REG WHERE EMAIL = #{param1}
- 	</select>	
+ 	</select>
  	
+ 	 <!-- 유저 비번 찾기 (이메일 전송 버전)-->
+ 	<select id="FindPw_userEmail" resultType="String">
+ 		SELECT PW FROM JOIN_REG WHERE ID = #{param1}
+ 	</select>		
+ 	
+ 	<!-- 유저 이메일 찾기(이메일 전송 버전) -->
+ 	<select id="Find_Email" resultType="String">
+ 		SELECT EMAIL FROM JOIN_REG WHERE ID = #{param1}
+ 	</select>
 </mapper>

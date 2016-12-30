@@ -127,17 +127,16 @@
         <div id="center2">
         <h4 id="idf">비밀번호 찾기</h4>
         </div>
-        <hr class="one">
-       
+        <hr class="one">       
             <p id=p1>■비밀번호 힌트로 비밀번호 찾기</p>
             <div id="center3">
-               <form action="#" id="pwFinder">
+               <form action="Pw_FindEmail" id="pwFinder">
                 <ul>
-                    <li>아이디 : <input id="userId" type="text" size="15" maxlength="15"/></li>
-                    <li>이름 : <input id="userId" type="text" size="16" maxlength="16"/></li>
+                    <li>아이디 : <input id="userId" name="user_Id" type="text" size="15" maxlength="15"/></li>
+                    <li>이름 : <input id="userId" name="user_Name" type="text" size="16" maxlength="16"/></li>
                     <li>비밀번호 힌트 : <select id="pwHint">
                         <option value="">선택하세요</option>
-                        <option value="mother">당신의 어머님의 성함은?</option>
+                        <option value="mother">당신의 어머니의 성함은?</option>
                         <option value="father">당신의 아버지의 성함은?</option>
                         <option value="school">출신초등학교는?</option>
                         <option value="love">첫사랑의 이름은?</option>
@@ -145,18 +144,18 @@
                         <option value="family">가장 중요한 기념일은?</option>
                         </select>
                     </li>
-                    <li>비밀번호 힌트 답:<input id="reple1" type="text" size="20"></li>
+                    <li>비밀번호 힌트 답:<input id="reple1"  name="Pw_Ans" type="text" size="20"></li>
                 </ul>
                   <center><input class="submit" id="sendpw1" type=submit value="확인"/></center>
                 </form>
             </div>    
             <div id="center4">
              <p id=p2>■회원정보로 비밀번호 찾기</p>
-                <form action="#" id="pwFinder2" >
+                <form action="FindPw_userEmail" id="pwFinder2" >
             <ul>
-                <li>아이디 : <input id ="userId" type="text" size ="14" maxlength="14"/></li>
+                <li>아이디 : <input id ="userId" name="userId" type="text" size ="14" maxlength="14"/></li>
                 <li>이름 : <input id ="userName" type="text" size ="16" maxlength="16"/></li>
-                <li>이메일 : <input id ="email1" type="text" size="16" maxlength="16" /> @ <input id="email2"type="text" size="15" maxlength="16"/> </li>
+                <li>이메일 : <input id ="email1" name="email1" type="text" size="16" maxlength="16" /> @ <input id="email2" name="email2" type="text" size="15" maxlength="16"/> </li>
                 <li>생년월일:<input id="date" type="date"/> </li>
             </ul>
             <center><input class="submit" id="sendpw2" type="submit" value="확인"/></center>
@@ -164,5 +163,6 @@
             </div>
       </div>
 	</body>
-	<script></script>
+	<script>		
+	</script>
 </html>

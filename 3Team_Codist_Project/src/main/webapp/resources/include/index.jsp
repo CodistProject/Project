@@ -226,10 +226,10 @@
 		</div>
 					
 	</body>
-	<script>	
-		
+	<script>			
+	
 	   // 유저 아이디, 유저 메일, 관리자 메일 담기
-		var userId ="${sessionScope.userId}";					
+		var userId ="${sessionScope.userId}";				
 		
 		// 이벤트 팝업
 		function Event(){
@@ -244,8 +244,7 @@
 			url = "./rest/Email";
 			data={};
 			data.userId = userId;			
-			data.content=$("#askBox").val();		
-			
+			data.content=$("#askBox").val();			
 			// console 로 data 담은 것들 제대로 담겼는지 체크
 			// 유저 정보
 			console.log(data.userId);	

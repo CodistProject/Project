@@ -38,15 +38,18 @@ public interface ProjectInterface {
 	
 	//코디게시판 상세보기
 	public Object CodiBoard_Detail(String board_idx);
-
-	// 유저 이메일 담기(로그인시 세션 담기)
-	public String email(String id);
-
+	
 	// 유저 비밀번호 담기(로그인시 세션에 담기)
 	public String pw(String id);
 
-	// 유저 아이디 찾기(이메일 받아서)
-	public String Find_Id(String userEmail);			
+	// 유저 아이디 찾기(유저 이메일 받아서 - 이메일 쏘는거 까지)
+	public String Find_Id(String userEmail);
+
+	// 유저 비번 찾기(아이디 받아서 비번 찾기)
+	public String FindPw_userEmail(String userId);  
+
+	// 유저 이메일 찾기(아이디 받아서)
+	public String Find_Email(String user_Id);				
 }
 
 

@@ -38,7 +38,6 @@ public class MainController {
 			, HttpSession session){
 		logger.info("로그인 처리");
 		params.put("session", session);
-
 		return service.login(params);		
 	}
 	
@@ -81,7 +80,6 @@ public class MainController {
 	@RequestMapping(value="/Find_Id")
 	public String findId(){
 		logger.info("아이디찾기 이동");
-
 	return "Find_Id";
 	}	
 	
@@ -138,7 +136,22 @@ public class MainController {
 	// 유저 아이디 찾기(이메일 받아서) - 고급 버젼(찾은 아이디 이메일 쏘는거까지)
 	@RequestMapping(value="/FindId_userEmail")
 	public ModelAndView Find_Id(@RequestParam Map<String, String> params){
-	logger.info("유저 이메일 찾기 컨트롤러");
+	logger.info("유저 아이디찾기+이메일로 쏴주기");
 	return service.Find_Id(params);
 	}
+	
+	// 유저 비번 찾기(이메일 받아서) - 고급 버젼(찾은 비번 이메일 쏘는거까지)
+	@RequestMapping(value="/FindPw_userEmail")
+	public ModelAndView Find_Pw(@RequestParam Map<String, String> params){
+		logger.info("유저 비번찾기+이메일로 쏴주기2");
+	return service.Find_Pw(params);
+	}
+	
+	// 유저 비번 찾기2(입력 아이디 받아서 메일 찾고  찾은 메일로 메일 보내기 실행) - 고급 버젼(찾은 비번 이메일 쏘는거까지)
+	@RequestMapping(value="/Pw_FindEmail")
+	public ModelAndView Pw_FindEmail(@RequestParam Map<String, String> params){
+		logger.info("유저 비번찾기+이메일로 쏴주기1");
+	return service.Find_Pw(params);
+	}
+	
 }
