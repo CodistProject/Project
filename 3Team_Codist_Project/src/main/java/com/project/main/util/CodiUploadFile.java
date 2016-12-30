@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-public class UploadFile {
+public class CodiUploadFile {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -40,12 +40,10 @@ public class UploadFile {
 			dir.mkdir();
 		}
 		
-		//3. 파일 가져 오기
-				Iterator<String> files = multi.getFileNames();
+		//3. 파일 가져 오기				
 				
-				while(files.hasNext()){
 					//파일 바이너리 뽑기
-					String uploadFile = files.next();
+					String uploadFile = "";				
 					logger.info("uploadFile : "+uploadFile);
 					//파일 메모리 저장
 					MultipartFile mFile = multi.getFile(uploadFile);
@@ -61,8 +59,7 @@ public class UploadFile {
 						mFile.transferTo(new File(path+newfilename));
 					} catch (Exception e) {
 						e.printStackTrace();
-					}
-				}				
+					}								
 				return newfilename;
 			}
 

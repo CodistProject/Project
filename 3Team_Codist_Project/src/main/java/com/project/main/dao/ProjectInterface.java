@@ -48,6 +48,12 @@ public interface ProjectInterface {
 	//QnA 글쓰기
 	public int QnABoard_Writes(String nickname, String subject, String content, String filename, String newfilename);
 
+	//패션토크 상세보기
+	public BoardDto FT_Board_Detail(String board_idx);
+	
+	//코디게시판 상세보기
+	public BoardDto CodiBoard_Detail(String board_idx);	
+
 	//FT_리스트 호출
 	public ArrayList<BoardDto> FT_list(int start, int end);
 	
@@ -85,8 +91,9 @@ public interface ProjectInterface {
 	//아이디 찾기
 	public ArrayList<ReplyDto> FindId(String idx);
 
+	//코디게시판 글쓰기
+	public void CodiBoard_Writes(String filename, String category_name, String newfilename);
 }
-
 
 
 

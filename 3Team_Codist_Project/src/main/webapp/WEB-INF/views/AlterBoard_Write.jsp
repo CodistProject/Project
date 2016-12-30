@@ -10,15 +10,14 @@
         #center{      
         	font-size:30px;           
             text-align: center;
-            text-align: center;
-            
+            text-align: center;            
         }
         
-        table#QnA{
+        table#boardwrite{
 				width:100%;
-			}
+		}
 			
-		table#QnA td{
+		table#boardwrite td{
 				border :0.5px solid gray;
 				border-collapse : collapse;
 				padding: 5px;
@@ -88,15 +87,14 @@
 			<jsp:include page="../../resources/include/index.jsp"></jsp:include>
 		<div class="content">
 			<form action="Board_Write" method="post" enctype="multipart/form-data">		
-    		<table id="QnA">
+    		<table id="boardwrite">
     			<tr>
-    				<td colspan="2">Q & A</td>
+    				<td colspan="2">패션토크 게시판</td>
+    				<input type="hidden" name="category" value="AT" />
     			</tr>    			
     			<tr>
     				<td>제목</td>
-    				<td><input name="subject" type="text"/>
-    					<input type="hidden" name="category" value="Alter" />
-    				</td>
+    				<td><input name="subject" type="text"/> </td>
     			</tr>
     			<tr>
     				<td>작성자</td>

@@ -79,6 +79,13 @@
  	 		board_idx, nickname, subject, content, filename, newfilename, category_name)VALUES(
  			seq_total_board.NEXTVAL, #{param1}, #{param2}, #{param3},#{param4},#{param5},#{param6})
  	</insert>
+ 	 	
+ 	<!--코디 글쓰기 -->
+ 	<insert id="CodiBoard_Writes">
+ 		INSERT INTO CATEGORY_CLOTH(
+ 	 		filename, category_name, newfilename)VALUES(
+ 			#{param1}, #{param2}, #{param3})
+ 	</insert>
  	
  	<!-- FT 게시물 수 -->
  	<select id="FTCount" resultType="Integer">
