@@ -138,43 +138,7 @@
             <li>이름 :
                 <input id="userName" name="user_Name" type="text" size="14" maxlength="14" />
             </li>
-<<<<<<< HEAD
-            <li>
-            	이메일:
-            	<form name="form" method="post">
-					<input name="email1" type="text" class="box" id="email1" size="15"> @ <input name="email2" type="text" class="box" id="email2" size="20">
-					<select name="email_select" class="box" id="email_select" onChange="checkemailaddy();">
-				    <option value="" selected>선택하세요</option>
-				    <option value="naver.com">naver.com</option>
-					<option value="daum.com">daum.net</option>
-					<option value="gmail.com">gmail.com</option>	
-				    <option value="1">직접입력</option>
-					</select>
-				</form>
-            <p class="p2">*회원 가입시 작성한 이름과  이메일을 입력하세요.</p>
-           </li>
-        </ul>
-        <center>
-            <input id="sendId" type="submit" value="확인" />
-        </center>
-    </form>
-</div>
-	
-	</body>
-	<script>
-		function checkemailaddy(){
-	        if (form.email_select.value == '1') {
-	            form.email2.readonly = false;
-	            form.email2.value = '';
-	            form.email2.focus();
-	        }
-	        else {
-	            form.email2.readonly = true;
-	            form.email2.value = form.email_select.value;
-	        }
-	    }
-=======
-            <li>phone :
+ 			<li>phone :
                 <select id="phone1" name="userPhone">
                         <option value="">선택하세요</option>
                         <option value="010">010</option>
@@ -197,9 +161,19 @@
           	<input id="sendId" type="submit" value="확인" />   
         </center>               
         </form>
-	</div>	
-	</body>	
-	<script>	
->>>>>>> 7c974ebe7ee00507105e0b97aecd8b60f5d0882b
+	</div>		
+	</body>
+	<script>
+		function checkemailaddy(){
+	        if (form.email_select.value == '1') {
+	            form.email2.readonly = false;
+	            form.email2.value = '';
+	            form.email2.focus();
+	        }
+	        else {
+	            form.email2.readonly = true;
+	            form.email2.value = form.email_select.value;
+	        }
+	    }
 	</script>
 </html>

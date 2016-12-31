@@ -48,11 +48,7 @@ public class MainController {
 			, HttpSession session){
 		logger.info("로그인 처리");
 		params.put("session", session);
-<<<<<<< HEAD
-		return service.login(params);
-=======
 		return service.login(params);		
->>>>>>> 7c974ebe7ee00507105e0b97aecd8b60f5d0882b
 	}
 	
 	//로그아웃
@@ -134,22 +130,12 @@ public class MainController {
 		return "AlterBoard_Main";
 	}
 	
-<<<<<<< HEAD
 	//게시판 상세보기(코디 게시판 제외)
 	@RequestMapping(value="/Board_Detail")
 	public ModelAndView Board_Detail(@RequestParam("board_idx") String board_idx ){
 		logger.info("상세보기");
 		return service.Board_Detail(board_idx);
 	}
-=======
-	//아이디찾기
-	@RequestMapping(value="/Find_Id")
-	public String findId(){
-		logger.info("아이디찾기 이동");
-	return "Find_Id";
-	}	
->>>>>>> 7c974ebe7ee00507105e0b97aecd8b60f5d0882b
-	
 	//게시판 수정 페이지 이동 
 	@RequestMapping(value = "/Board_update")
 	public ModelAndView Board_update(@RequestParam("board_idx") String board_idx) {	
@@ -181,7 +167,6 @@ public class MainController {
 		return service.withdrawa(userId);
 	}
 
-<<<<<<< HEAD
 	//코디 글쓰기 게시판 Form 이동 + 닉네임 찾기	
 	@RequestMapping(value="/CodiBoard_Write")
 	public ModelAndView CodiBoard_Write(@RequestParam("userId") String userId){
@@ -194,13 +179,6 @@ public class MainController {
 	public ModelAndView FTboard_Write(@RequestParam("userId") String userId){
 		logger.info("코디를 부탁해게시판 글쓰기 이동");		
 		return service.FTboard_Write(userId);
-=======
-	//회원가입 페이지 이동
-	@RequestMapping(value="/join")
-	public String join(){
-		logger.info("회원가입 폼으로 이동");
-		return "JoinForm";
->>>>>>> 7c974ebe7ee00507105e0b97aecd8b60f5d0882b
 	}
 	
 	//QnA 글쓰기 게시판 Form 이동	+ 닉네임 찾기
@@ -210,7 +188,6 @@ public class MainController {
 		return service.QnABoard_Write(userId);
 	}
 	
-<<<<<<< HEAD
 	//코디를 부탁해 글쓰기 게시판 Form 이동	+ 닉네임 찾기
 	@RequestMapping(value="/Coplz_Write")
 	public ModelAndView Coplz_Write(@RequestParam("userId") String userId){
@@ -235,7 +212,7 @@ public class MainController {
 	@RequestMapping(value="/CodiBoard_Writes")
 	public ModelAndView CodiBoard_Writes(HttpSession session, MultipartHttpServletRequest multi){				
 	logger.info("글쓰기 요청");
-	return service.CodiBoard_Writes(multi, session);
+	return null;//
 	}	
 	
 
@@ -252,16 +229,6 @@ public class MainController {
 		logger.info("이벤트 팝업창 이동");
 		return "PoPup_Event";
 	}
-		
-
-
-=======
-	//코디게시판  상세보기
-	@RequestMapping(value="/CodiBoard_Detail")
-	public ModelAndView CodiBoard_Detail(@RequestParam("board_idx") String board_idx ){
-	logger.info("상세보기");
-	return service.CodiBoard_Detail(board_idx);
-	}			
 	
 	// 유저 아이디 찾기(이메일 받아서) - 고급 버젼(찾은 아이디 이메일 쏘는거까지)
 	@RequestMapping(value="/FindId_userEmail")
@@ -284,5 +251,4 @@ public class MainController {
 	return service.Find_Pw(params);
 	}
 	
->>>>>>> 7c974ebe7ee00507105e0b97aecd8b60f5d0882b
 }

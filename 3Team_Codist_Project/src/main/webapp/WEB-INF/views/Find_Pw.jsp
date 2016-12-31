@@ -131,18 +131,10 @@
         <div id="#content2">
         
         </div>
-<<<<<<< HEAD
-        <hr class="one">
-       <h4 id="idf">비밀번호 찾기</h4>
-            <p id=p1>■비밀번호 힌트로 비밀번호 찾기</p>
-            <div id="#content3">
-               <form action="#" id="pwFinder">
-=======
         <hr class="one">       
             <p id=p1>■비밀번호 힌트로 비밀번호 찾기</p>
             <div id="center3">
                <form action="Pw_FindEmail" id="pwFinder">
->>>>>>> 7c974ebe7ee00507105e0b97aecd8b60f5d0882b
                 <ul>
                     <li>아이디 : <input id="userId" name="user_Id" type="text" size="15" maxlength="15"/></li>
                     <li>이름 : <input id="userId" name="user_Name" type="text" size="16" maxlength="16"/></li>

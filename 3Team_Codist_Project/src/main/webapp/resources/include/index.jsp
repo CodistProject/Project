@@ -210,20 +210,11 @@
 				</table>
 			<br/>
 			<div id="ask">
-<<<<<<< HEAD
-				<textarea id="askBox" cols="25px" rows="7px"></textarea>			
-					<div id="ask1">
-						<input  type="button" value="쪽지">
-						<input type="button" value="이메일">
-					</div>
-				</div>
-=======
 				<textarea id="askBox" cols="25px" rows="7px">답변 받을 이메일 주소 입력 : </textarea>			
 				<div id="ask1">
 				<input  type="button" value="쪽지" />
 				<input type="button" value="이메일" name="email"/>				
 				</div>				
->>>>>>> 7c974ebe7ee00507105e0b97aecd8b60f5d0882b
 			</div>
 		<div id="menu">		
 			<table class="menu">

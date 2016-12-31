@@ -3,17 +3,14 @@ package com.project.main.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-<<<<<<< HEAD
-
-=======
 import java.util.Properties;
+
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
->>>>>>> 7c974ebe7ee00507105e0b97aecd8b60f5d0882b
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -40,11 +37,7 @@ public class ProjectService {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	ProjectInterface inter = null;
-<<<<<<< HEAD
-
-=======
 	
->>>>>>> 7c974ebe7ee00507105e0b97aecd8b60f5d0882b
 	//중복 체크(ID)
 	public Map<String, String> overlayId(String id) {
 		Map<String, String> obj= new HashMap<String, String>();
@@ -74,12 +67,8 @@ public class ProjectService {
 	}	
 	
 	//로그인 처리
-<<<<<<< HEAD
-	public ModelAndView login(Map<String, Object> params) {
-=======
 	public ModelAndView login(Map<String, Object> params) {	
 		inter=sqlSession.getMapper(ProjectInterface.class);
->>>>>>> 7c974ebe7ee00507105e0b97aecd8b60f5d0882b
 		String id = (String) params.get("userId");
 		String pw = (String) params.get("userPass");
 		HttpSession session = (HttpSession) params.get("session");
@@ -99,12 +88,7 @@ public class ProjectService {
 			System.out.println(result);
 			
 			if(inter.login(id, pw) != null){
-<<<<<<< HEAD
 				session.setAttribute("userId", id);
-=======
-				session.setAttribute("userId", id);			
-				session.setAttribute("userPw", pw);
->>>>>>> 7c974ebe7ee00507105e0b97aecd8b60f5d0882b
 			}else{
 				mav.addObject("msg","아이디 또는 비밀번호를 확인 하세요");
 			}			
@@ -129,11 +113,7 @@ public class ProjectService {
 		info.setEmail(params.get("email"));
 		inter.memberJoin(info);
 		return info;
-<<<<<<< HEAD
 	}
-=======
-	}			
->>>>>>> 7c974ebe7ee00507105e0b97aecd8b60f5d0882b
 	
 	// 회원 정보 수정 페이지 이동(보기)
 	public ModelAndView Mem_modify_view(String userId) {
@@ -143,11 +123,7 @@ public class ProjectService {
 		mav.addObject("MemberData", inter.Mem_ModiView(userId));
 		mav.setViewName("Mypage_Member_Update");				 
 		return mav;
-<<<<<<< HEAD
 	}
-=======
-	}	
->>>>>>> 7c974ebe7ee00507105e0b97aecd8b60f5d0882b
 
 	// 회원 정보 보기
 	public ModelAndView MemberData_View(String userId) {
@@ -262,7 +238,6 @@ public class ProjectService {
 		return mav;
 	}
 	
-<<<<<<< HEAD
 	//코디를 부탁해 닉네임 찾기
 	public ModelAndView Coplz_Write(String userId) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
@@ -317,18 +292,12 @@ public class ProjectService {
 	//탈퇴하기
 	public ModelAndView withdrawa(String userId) {
 		ModelAndView mav = new ModelAndView();
-=======
-	//닉네임 찾기
-	public Map<String, String> FindNick(HttpSession session) {
->>>>>>> 7c974ebe7ee00507105e0b97aecd8b60f5d0882b
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		logger.info(userId);
 		inter.withdrawa(userId);		
 		mav.setViewName("redirect:/logout");				
 		return mav;
 	}
-
-<<<<<<< HEAD
 	// 글쓰기
 	public ModelAndView Board_Write(MultipartHttpServletRequest multi, HttpSession session)  {		
 		inter = sqlSession.getMapper(ProjectInterface.class);
@@ -377,15 +346,15 @@ public class ProjectService {
 		return mav;		
 		}
 	
-	//코디 글쓰기
+	/*//코디 글쓰기
 	public ModelAndView CodiBoard_Writes(MultipartHttpServletRequest multi, HttpSession session)  {				
 		inter = sqlSession.getMapper(ProjectInterface.class);			
 		ModelAndView mav = new ModelAndView();			
 		ArrayList filenames = new ArrayList();
 		ArrayList category_names = new ArrayList();			
 		String userId = (String) session.getAttribute("userId");				
-		/*String filenames[] =new String[4];*/
-		/*String category_names[] =new String[4];*/				
+		String filenames[] =new String[4];
+		String category_names[] =new String[4];				
 			
 			
 		if(!(multi.getParameter("filename1").equals(""))){
@@ -435,7 +404,7 @@ public class ProjectService {
 			mav.setViewName(page);
 			
 			return mav;					
-		}		
+		}		*/
 	//게시판 리스트 보여주기(Cd제외)
 	public Map<String, Object> Board_list(Map<String, String> params) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
@@ -590,11 +559,7 @@ public class ProjectService {
 		return map;
 	}
 
-
-
 	
-	
-=======
 	// 이메일 보내기(G mail 전용)
 	public Map<String, String> Email(Map<String, String> params) {
 		
@@ -754,7 +719,6 @@ public class ProjectService {
 		mav.setViewName("ioi");
 		return mav;
 	}
->>>>>>> 7c974ebe7ee00507105e0b97aecd8b60f5d0882b
 }
 	
 	

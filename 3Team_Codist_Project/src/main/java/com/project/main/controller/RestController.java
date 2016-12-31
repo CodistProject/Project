@@ -51,7 +51,6 @@ public class RestController {
 		return service.join(params);
 	}
 	
-<<<<<<< HEAD
 	//게시판 리스트 보여주기
 	@RequestMapping(value="/FT_list")
 	public @ResponseBody Map<String, Object> Board_list(
@@ -98,8 +97,6 @@ public class RestController {
 		logger.info("댓글 삭제 기능 시행");
 		return service.repleDel(reple_idx);
 		}
-	}
-=======
 	// 이메일 문의(Gmail)
 	@RequestMapping(value="/Email")
 	public @ResponseBody Map<String, String> Email(			
@@ -108,4 +105,3 @@ public class RestController {
 		return service.Email(params);
 	}
 }
->>>>>>> 7c974ebe7ee00507105e0b97aecd8b60f5d0882b
