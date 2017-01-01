@@ -150,7 +150,7 @@
                     </li>
                     <li>비밀번호 힌트 답:<input id="reple1"  name="Pw_Ans" type="text" size="20"></li>
                 </ul>
-                  <center><input class="submit" id="sendpw1" type=submit value="확인"/></center>
+                  	<center><input class="submit" id="sendpw1" type=submit value="확인"/></center>
                 </form>
             </div>    
             <div id="#content4">

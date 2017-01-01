@@ -35,7 +35,8 @@
 			}			
 			.Ft_subject{
 				text-align : center;
-			}
+				background-color : yellow;
+			
 			#Ft1{
 				border : 1px solid white;	
 				border-top-color : black;
@@ -48,9 +49,7 @@
 				border-left-color : black;				
 				border-bottom-color : black;
 			}
-			.Ft_subject{
-				background-color : yellow;
-			}
+			
 			/* 버튼 css */
 			#FTQna
 			{
@@ -127,7 +126,7 @@
 					<td class="Ft_subject" id="Ft1">글 번호</td>
 					<td class="Ft_subject" id="Ft2">제목</td>
 		    		<td class="Ft_subject" id="Ft3">작성자</td>				
-					<td class="Ft_subject" id="Ft4">이미지</td>
+					<td class="Ft_subject" id="Ft4">작성일</td><!-- 이미지로 변경 -->
 					<td class="Ft_subject" id="Ft5">조회수</td>
 					<td class="Ft_subject" id="Ft6">추천수</td>
 				</tr>
@@ -137,7 +136,7 @@
 			</tbody>
 			<tr>
 				<td id="Ft_pageNum" colspan="6" align="center">
-							<div id="FT_pagenation"></div>
+							<!-- 페이지 처리가 출력될 내용 영역 -->
 				</td>				
 			</tr>						
 		</table>
@@ -156,9 +155,10 @@
 	
 
 	function listCall(currPage){
-		var url="./rest/FT_list";
+		var url="./rest/Board_list";
 		var data = {};
 		data.page = currPage;
+		data.category_name="FT";
 		console.log(currPage);
 		data.pagePerNum = $("#Ft_page").val();
 		reqServer(url, data);
@@ -173,7 +173,7 @@
 			dataType:"json",
 			success:function(d){
 				console.log(d)
-				if(url == "./rest/FT_list"){
+				if(url == "./rest/Board_list"){
 					printList(d.jsonList.list);
 					//페이지 세팅
 					currPage = d.currPage;
@@ -210,8 +210,8 @@
 							+"<td>"+list[i].ft_like+"</td>"
 							+"</tr>";
 		}
-		$("#list").empty();
-		$("#list").append(content);
+		$("#list").empty();							//더보기시 삭제
+		$("#list").append(content);				//더보기시 삭제
 	}
 		//일반 페이징 방식		
 		function printPaging(allCnt, pageNum){
@@ -236,8 +236,37 @@
 			end = 5;
 		}
 		
-		//페이징 표시			
-		//< 이전
+		//페이징 표시=========================	
+		//더보기로 바꾸기
+		/* 
+		if(currPage > 5){
+			content +="<a href='#' onclick='listCall("
+			+(start-1)+")'>이전</a> | "
+		}
+		 
+		for(var i=start; i<=end;i++){
+			if(i<=pageNum)
+			{
+				if(currPage ==i){
+					content +="<b>"+i+"</b>";
+				}else{
+					content += " <a href='#' onclick='listCall("+i+")'>"
+					+i+"</a> "
+				}					
+			}			
+		} 
+			
+			//마지막 페이지가 전체 페이지 수 보다 적으면 다음 링크 생성 [다음>]
+			if(end<pageNum)
+			{
+				content +=" | <a href='#' onclick='listCall("
+						+(end+1)+")'>다음</a> "
+			}
+			
+			$("#Ft_pageNum").append(content);
+				
+		*/
+		//[< 이전]
 		if(currPage > 5){
 			content +="<a href='#' onclick='listCall("
 				+(start-1)+")'>이전</a> | "
@@ -258,14 +287,14 @@
 			}			
 		} 
 		
-		//마지막 페이지가 전체 페이지 수 보다 적으면 다음 링크 생성
+		//마지막 페이지가 전체 페이지 수 보다 적으면 다음 링크 생성 [다음>]
 		if(end<pageNum)
 		{
 			content +=" | <a href='#' onclick='listCall("
 					+(end+1)+")'>다음</a> "
 		}
 		
-		$("#Ft_pageNum").append(content);
+		$("#Ft_pageNum").append(content);		
 		
 	
 	}

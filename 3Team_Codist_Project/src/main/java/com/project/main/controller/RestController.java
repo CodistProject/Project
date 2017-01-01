@@ -3,8 +3,6 @@ package com.project.main.controller;
 import java.util.ArrayList;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.project.main.dto.MemberInfo;
 import com.project.main.dto.ReplyDto;
@@ -52,7 +49,7 @@ public class RestController {
 	}
 	
 	//게시판 리스트 보여주기
-	@RequestMapping(value="/FT_list")
+	@RequestMapping(value="/Board_list")
 	public @ResponseBody Map<String, Object> Board_list(
 					@RequestParam Map<String, String> params){
 		logger.info("패션 토크리스트 보여주기");

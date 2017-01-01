@@ -44,7 +44,7 @@ public interface ProjectInterface {
 	//조회수 증가
 	public void upHit(String idx);
 	
-	//카테고리 네임 가져오기
+	//카테고리 네임 가져오기(idx >> 카테고리 네임)
 	public String CategoryName(String board_idx);
 		
 	//패션토크 상세보기,FT_수정하기 가져오기

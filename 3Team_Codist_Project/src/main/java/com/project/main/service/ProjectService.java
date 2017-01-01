@@ -415,8 +415,8 @@ public class ProjectService {
 		int pagePerNum =Integer.parseInt(params.get("pagePerNum"));
 		logger.info("현재 페이지 : {}",currPage);
 		logger.info("페이지 당 보여줄 수 : {}",pagePerNum);
-	
-		String category_name ="FT";
+		
+		String category_name =params.get("category_name");
 		int end = currPage*pagePerNum; 				//게시문 끝 번호
 		int start = end-pagePerNum+1;					//게시물 시작 번호
 		int allCnt = inter.BoardCount(category_name);	//전체 개시물 수
