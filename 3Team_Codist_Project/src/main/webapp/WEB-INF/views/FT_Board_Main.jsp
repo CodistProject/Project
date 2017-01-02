@@ -270,9 +270,7 @@
 		if(currPage > 5){
 			content +="<a href='#' onclick='listCall("
 				+(start-1)+")'>이전</a> | "
-		}
-		
-		
+		}		
 		
 		 for(var i=start; i<=end;i++)
 		{
@@ -294,9 +292,7 @@
 					+(end+1)+")'>다음</a> "
 		}
 		
-		$("#Ft_pageNum").append(content);		
-		
-	
+		$("#Ft_pageNum").append(content);	
 	}
 	
 

@@ -244,7 +244,7 @@
 		
 		// 이메일 문의(url, data 담아서 아작스처리)
 		$("input[name='email']").click(function(){
-			console.log("작동 된다!");
+			console.log("이메일 처리");
 			url = "./rest/Email";
 			data={};
 			data.userId = userId;			

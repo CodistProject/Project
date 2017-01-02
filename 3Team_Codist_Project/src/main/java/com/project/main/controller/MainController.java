@@ -237,14 +237,14 @@ public class MainController {
 	return service.Find_Id(params);
 	}
 	
-	// 유저 비번 찾기(이메일 받아서) - 고급 버젼(찾은 비번 이메일 쏘는거까지)
+	// 유저 비번 찾기2(이메일 받아서) - 고급 버젼(찾은 비번 이메일 쏘는거까지)
 	@RequestMapping(value="/FindPw_userEmail")
 	public ModelAndView Find_Pw(@RequestParam Map<String, String> params){
 		logger.info("유저 비번찾기+이메일로 쏴주기2");
 	return service.Find_Pw(params);
 	}
 	
-	// 유저 비번 찾기2(입력 아이디 받아서 메일 찾고  찾은 메일로 메일 보내기 실행) - 고급 버젼(찾은 비번 이메일 쏘는거까지)
+	// 유저 비번 찾기1(입력 아이디 받아서 메일 찾고  찾은 메일로 메일 보내기 실행) - 고급 버젼(찾은 비번 이메일 쏘는거까지)
 	@RequestMapping(value="/Pw_FindEmail")
 	public ModelAndView Pw_FindEmail(@RequestParam Map<String, String> params){
 		logger.info("유저 비번찾기+이메일로 쏴주기1");
