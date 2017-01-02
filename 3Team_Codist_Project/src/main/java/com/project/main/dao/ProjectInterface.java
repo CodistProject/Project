@@ -1,10 +1,7 @@
 package com.project.main.dao;
 import java.util.ArrayList;
-import java.util.Map;
 
 import com.project.main.dto.BoardDto;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.project.main.dto.MemberInfo;
 import com.project.main.dto.ReplyDto;
 

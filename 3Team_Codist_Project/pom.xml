@@ -24,7 +24,7 @@
 	 </repositories>		
 	 
 	<dependencies>
-	
+
 		<!-- java mail -->
 		<dependency>
     	<groupId>javax.mail</groupId>
