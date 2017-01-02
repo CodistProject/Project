@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
     
-    
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>	
 	<head>
@@ -13,9 +13,13 @@
 		<style>
 		</style> 
     	<script type="text/javascript">
+    	
+    	compile ('com.google.api-client:google-api-client:1.20.0');    	
+        compile ('com.google.oauth-client:google-oauth-client-jetty:1.20.0');
+        compile ('com.google.apis:google-api-services-calendar:v3-rev125-1.20.0');
       	// Your Client ID can be retrieved from your project in the Google
       	// Developer Console, https://console.developers.google.com
-      		var CLIENT_ID = 'AIzaSyCU4OMZk8zECIQJ5y7FtruSu_ofhiO2Ogk';
+      		var CLIENT_ID = '217477711897-107ov5gprt1v5jdkn2t95rl6g92d9g39.apps.googleusercontent.com';
 
 		     var SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"];
 
@@ -27,7 +31,7 @@
         	gapi.auth.authorize(
           	{
             	'client_id': CLIENT_ID,
-            	'scope': SCOPES.join("https://www.googleapis.com/auth/calendar.readonly"),
+            	'scope': SCOPES.join(""),
             	'immediate': true
           	}, handleAuthResult);
       	}
@@ -115,6 +119,7 @@
         var textContent = document.createTextNode(message + '\n');
         pre.appendChild(textContent);
       }
+       
    	</script>    
   </head>
   <body>
