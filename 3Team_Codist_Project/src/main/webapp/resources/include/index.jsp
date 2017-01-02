@@ -185,7 +185,6 @@
 			<a class="bottom" href="#">토</a>
 			<a class="bottom" href="#">일</a>			
 		</div>	
-		
 		<div id="extra">
 
 			<div id="loginSession">

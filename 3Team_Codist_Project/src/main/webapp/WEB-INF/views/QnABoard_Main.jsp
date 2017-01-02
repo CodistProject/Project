@@ -1,16 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-	final int ROWSIZE = 4;
-	final int BLOCK = 5;
-	int pg = 1;
-	
-	int allPage = 0;
-	
-	int startPage = ((pg-1)/BLOCK*BLOCK)+1;
-	int endPage = ((pg-1)/BLOCK*BLOCK)+BLOCK;
-%>    
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>	
@@ -164,10 +154,10 @@
 	</body>
 	<script>
 var currPage = 1;
-	
+	2
 	listCall(currPage);
 	//페이지 갯수 정하기
-	$("#Ft_page").change(function(){
+	$("#QnA_page").change(function(){
 		listCall(currPage);
 	}); 
 	
@@ -256,8 +246,8 @@ var currPage = 1;
 		//페이징 표시			
 		//< 이전
 		if(currPage > 5){
-			content +="<a href='#' onclick='listCall("
-				+(start-1)+")'>이전</a> | "
+			content +="<a href='javascript:listCall("
+				+(start-1)+");'>이전</a> | "
 		}
 		
 		

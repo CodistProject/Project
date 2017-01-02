@@ -23,9 +23,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.main.dao.ProjectInterface;
 import com.project.main.dto.BoardDto;
+import com.project.main.dto.ClothDto;
 import com.project.main.dto.MemberInfo;
 import com.project.main.dto.ReplyDto;
-import com.project.main.util.CodiUploadFile;
 import com.project.main.util.UploadFile;
 
 @Service
@@ -166,7 +166,7 @@ public class ProjectService {
 		return mav;
 	}
 	
-	//게시판 상세보기
+	//게시판 상세보기(코디 제외)
 	public ModelAndView Board_Detail(String board_idx) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		ModelAndView mav = new ModelAndView();
@@ -181,7 +181,7 @@ public class ProjectService {
 		break;
 		
 		case "CP":
-			page="CodiBoard_Detail";
+			page="Coplz_Detail";
 		break;
 			
 		case "QnA":
@@ -198,6 +198,15 @@ public class ProjectService {
 		return mav;
 		
 	}
+	//코디 게시판 상세보기
+	public ModelAndView CodiBoard_Detail(String board_idx) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("content",inter.Board_Detail(board_idx));
+		mav.addObject("subcontent",inter.CodiBoard_Detail(board_idx));
+		mav.setViewName("CodiBoard_Detail");
+		return mav;
+	}
 	
 	//게시판 수정페이지이동
 	public ModelAndView Board_update(String board_idx) {
@@ -211,7 +220,7 @@ public class ProjectService {
 		break;
 		
 		case "CP":
-			page="CodiBoard_Update";
+			page="Coplz_Update";
 		break;
 			
 		case 	"QnA":
@@ -405,7 +414,8 @@ public class ProjectService {
 			
 			return mav;					
 		}		*/
-	//게시판 리스트 보여주기(Cd제외)
+	
+	//게시판 리스트 보여주기(CB제외)
 	public Map<String, Object> Board_list(Map<String, String> params) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		//현재페이지
@@ -439,7 +449,7 @@ public class ProjectService {
 		return json;
 	}			
 	
-	//Cd리스트 보여주기 
+	//CB리스트 보여주기 
 	public Map<String, Object> Cd_list(Map<String, String> params) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		//현재페이지
@@ -450,7 +460,7 @@ public class ProjectService {
 		logger.info("현재 페이지 : {}",currPage);
 		logger.info("페이지 당 보여줄 수 : {}",pagePerNum);
 	
-		String category_name ="Cd";
+		String category_name ="CB";
 		int end = currPage*pagePerNum; 				//게시문 끝 번호
 		int start = end-pagePerNum+1;					//게시물 시작 번호
 		int allCnt = inter.BoardCount(category_name);	//전체 개시물 수
@@ -471,8 +481,38 @@ public class ProjectService {
 		json.put("page", page);		
 					
 		return json;
-	}			
+	}	
+	//Cloth보여주기(외투, 상의, 하의)
+	public Map<String, Object> CC_list(Map<String, String> params) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		//현재페이지
+		int currPage =Integer.parseInt(params.get("page"));
+				
+		//페이지당 보여줄 게시문 갯수
+		int pagePerNum =Integer.parseInt(params.get("pagePerNum"));
+		logger.info("현재 페이지 : {}",currPage);
+		logger.info("페이지 당 보여줄 수 : {}",pagePerNum);
 	
+		String category_name =params.get("category_name");
+		int end = currPage*pagePerNum; 				//게시문 끝 번호
+		int start = end-pagePerNum+1;					//게시물 시작 번호
+		int allCnt = inter.ClothCount(category_name);	//전체 개시물 수
+		logger.info("전체 게시물수 : {}",allCnt);
+				
+		int page =allCnt%pagePerNum>0? 
+				Math.round(allCnt/pagePerNum)+1:
+					Math.round(allCnt/pagePerNum); // 생성 할 수 있는 페이지
+		logger.info("생성 할수 있는 게시물 수:{}",page);
+		Map<String, Object> json = new HashMap<String, Object>();
+		Map<String,ArrayList<ClothDto>> obj=
+				new HashMap<String,ArrayList<ClothDto>>();
+		obj.put("list", inter.Cloth_list(start, end,category_name));
+		json.put("jsonList", obj);
+		json.put("currPage", currPage);
+		json.put("allCnt", allCnt);		
+		json.put("page", page);
+		return json;
+	}
 	//게시글 추천
 	public ModelAndView  ft_like(String ft_like) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
@@ -654,7 +694,7 @@ public class ProjectService {
 				map.put("msg", "찾으시는 비밀번호가 이메일로 전송되었습니다.");
 			}				
 			
- //message.setContent("내용","text/html; charset=utf-8");//글내용을 html타입 charset설정
+			//message.setContent("내용","text/html; charset=utf-8");//글내용을 html타입 charset설정
 			
 			System.out.println("이메일 전송중!");
 			Transport.send(message);
@@ -719,6 +759,10 @@ public class ProjectService {
 		mav.setViewName("ioi");
 		return mav;
 	}
+
+	
+
+	
 }
 	
 	

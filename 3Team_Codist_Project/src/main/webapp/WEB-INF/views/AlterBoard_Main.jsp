@@ -6,7 +6,7 @@
    <head>
       <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <title>Insert title here</title>
+      <title>물물교환</title>
        <style>
            .Al_board1{
             border : 1px solid white;         
@@ -228,12 +228,12 @@
 			start = 1;
 			end = 5;
 		}
-		
+		<!-- <a href="javascript:"></a>	 -->		
 		//페이징 표시			
 		//< 이전
 		if(currPage > 5){
-			content +="<a href='#' onclick='listCall("
-				+(start-1)+")'>이전</a> | "
+			content +="<a href='javascript:listCall("
+				+(start-1)+");'>이전</a> | "
 		}
 		
 		

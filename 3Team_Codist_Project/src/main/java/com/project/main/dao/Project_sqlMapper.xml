@@ -61,15 +61,21 @@
 	<select id="FindPw" resultType="String">
 		SELECT PW FROM JOIN_REG WHERE ID=#{param1}	
 	</select>
+	
  	<!-- 탈퇴 -->
 	<delete id="withdrawa">
 	 	DELETE FROM join_reg WHERE JOIN_IDX=(SELECT JOIN_IDX FROM JOIN_REG WHERE ID = #{param1}) CASCADE
 	</delete>
 	  
- 	<!--패션토크 상세보기  -->
+ 	<!--게시판 상세보기(코디 제외)  -->
  	<select id="Board_Detail" resultType="com.project.main.dto.BoardDto">
  		SELECT * FROM TOTAL_BOARD WHERE board_idx = #{param1}
  	</select>
+ 	
+ 	<!--코디게시판 상세보기  -->
+ 	<select id="CodiBoard_Detail" resultType="com.project.main.dto.ClothDto">
+ 		SELECT * FROM CATEGORY_CLOTH WHERE board_idx = #{param1}
+ 	</select>	
  	
  	<!-- 조회수 증가  -->
  	<!-- <update id="upHit">
@@ -95,6 +101,11 @@
  	<select id="BoardCount" resultType="Integer">
 		 SELECT COUNT(*) FROM TOTAL_BOARD WHERE CATEGORY_NAME = #{category_name}
  	</select>
+ 		
+ 	<!-- 게시판 게시물 수 -->
+ 	<select id="ClothCount" resultType="Integer">
+		 SELECT COUNT(*) FROM CATEGORY_CLOTH WHERE CATEGORY_NAME = #{category_name}
+ 	</select>
  	
  	<!--댓글추천수 증가  -->
  	<update id="reple_like">
@@ -110,10 +121,7 @@
  	<select id="replyList" resultType="com.project.main.dto.ReplyDto">
  	 	SELECT reple_idx,board_idx,nickname,reple_content,reple_date,reple_like,reple_hate FROM total_reple WHERE board_idx= #{param1}
  	</select>
- 	<!--코디게시판 상세보기  -->
- 	<select id="CodiBoard_Detail" resultType="com.project.main.dto.BoardDto">
- 		SELECT * FROM TOTAL_BOARD WHERE board_idx = #{param1}
- 	</select>	
+ 	
  	
  	<!-- 유저 비밀번호 찾기 -->
  	<select id="pw" resultType="String">
@@ -130,7 +138,6 @@
  		SELECT PW FROM JOIN_REG WHERE ID = #{param1}
  	</select>		
  	
- 	
  	<!-- FT 리스트 보이기 -->
  	<select id="Board_list" resultType="com.project.main.dto.BoardDto">
  		SELECT BOARD_IDX, NICKNAME ,SUBJECT ,REG_DATE ,NEWFILENAME,BHIT,REPLES,ft_like FROM (
@@ -143,11 +150,21 @@
  	
  	<!-- 코디 리스트 보이기 -->
  	<select id="Cd_list" resultType="com.project.main.dto.BoardDto">
- 		SELECT BOARD_IDX, SUBJECT ,SUB_SUBJECT ,FILENAME ,NEWFILENAME,BHIT,REPLES,ft_like FROM (
- 					  SELECT BOARD_IDX ,NICKNAME ,SUBJECT 
- 							,REG_DATE ,BHIT,REPLES,ft_like,NEWFILENAME
+ 		SELECT BOARD_IDX, SUBJECT ,SUB_SUBJECT ,FILENAME ,NEWFILENAME,REPLES,ft_like FROM (
+ 					  SELECT BOARD_IDX ,SUBJECT ,SUB_SUBJECT 
+ 							,FILENAME ,NEWFILENAME,REPLES,ft_like
  							,ROW_NUMBER() OVER(ORDER BY BOARD_IDX ASC) AS RNUM FROM 
- 							(SELECT BOARD_IDX, NICKNAME ,SUBJECT ,REG_DATE ,NEWFILENAME,BHIT,REPLES,ft_like FROM TOTAL_BOARD WHERE CATEGORY_NAME = #{param3} )
+ 							(SELECT BOARD_IDX, SUBJECT ,SUB_SUBJECT ,FILENAME ,NEWFILENAME,REPLES,ft_like FROM TOTAL_BOARD WHERE CATEGORY_NAME = #{param3} )
+   							)WHERE RNUM BETWEEN #{param1} AND #{param2}  
+ 	</select>
+ 	
+ 	<!-- 상의,하의,외투 리스트 보이기 -->
+ 	<select id="Cloth_list" resultType="com.project.main.dto.ClothDto">
+ 		SELECT CC_IDX,BOARD_IDX, CLOTH_NAME ,REAL_NAME ,NEWFILENAME,FILENAME,CLOTH_URL,CLOTH_DETAIL FROM (
+ 					  SELECT CC_IDX,BOARD_IDX, CLOTH_NAME 
+ 					  		,REAL_NAME ,NEWFILENAME,FILENAME,CLOTH_URL,CLOTH_DETAIL
+ 							,ROW_NUMBER() OVER(ORDER BY CC_IDX ASC) AS RNUM FROM 
+ 							(SELECT CC_IDX,BOARD_IDX, CLOTH_NAME ,REAL_NAME ,NEWFILENAME,FILENAME,CLOTH_URL,CLOTH_DETAIL FROM CATEGORY_CLOTH WHERE CATEGORY_NAME = #{param3} )
    							)WHERE RNUM BETWEEN #{param1} AND #{param2}  
  	</select>
  

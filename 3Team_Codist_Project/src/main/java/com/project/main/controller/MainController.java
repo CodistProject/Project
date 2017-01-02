@@ -136,6 +136,14 @@ public class MainController {
 		logger.info("상세보기");
 		return service.Board_Detail(board_idx);
 	}
+	
+	//코기 게시판 상세보기
+	@RequestMapping(value="/CodiBoard_Detail")
+	public ModelAndView CodiBoard_Detail(@RequestParam("board_idx") String board_idx ){
+		logger.info("상세보기");
+		return service.CodiBoard_Detail(board_idx);
+	}
+	
 	//게시판 수정 페이지 이동 
 	@RequestMapping(value = "/Board_update")
 	public ModelAndView Board_update(@RequestParam("board_idx") String board_idx) {	

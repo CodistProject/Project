@@ -148,7 +148,7 @@
 	
 
 	function listCall(currPage){
-		var url="./rest/CP_list";
+		var url="./rest/Board_list";
 		var data = {};
 		data.page = currPage;
 		console.log(currPage);
@@ -165,7 +165,7 @@
 			dataType:"json",
 			success:function(d){
 				console.log(d)
-				if(url == "./rest/CP_list"){
+				if(url == "./rest/Board_list"){
 					printList(d.jsonList.list);
 					//페이지 세팅
 					currPage = d.currPage;

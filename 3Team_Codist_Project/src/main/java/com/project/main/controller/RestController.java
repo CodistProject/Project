@@ -63,7 +63,14 @@ public class RestController {
 		logger.info("코디 게시판 리스트 보여주기");
 		return service.Cd_list(params);
 	}	
-
+	
+	//Cloth 리스트 보여주기(외투,상의,하의)
+	@RequestMapping(value="/CC_list")
+	public @ResponseBody Map<String, Object> CC_list(
+			@RequestParam Map<String, String> params){
+		logger.info("Cloth 게시판 리스트 보여주기");
+		return service.CC_list(params);
+	}	
 	//댓글 추천
 	@RequestMapping(value="/reple_like")
 	public @ResponseBody Map<String,Integer> reple_like(
