@@ -120,7 +120,7 @@
 				content +="<td>"
 							+"<input type='checkbox' class='admin'/>" 
 							+"<a href='./CodiBoard_Detail?board_idx="+list[i].board_idx+"'>"
-							+"<img width='280px'  alt='메인 코디' src='./resources/upload/"+list[i].filename+"'/>"
+							+"<img width='280px'  alt='메인 코디' src='./resources/upload/"+list[i].newfilename+"'/>"
 							+"</a>"
 							+"</br>"	
 							+list[i].subject

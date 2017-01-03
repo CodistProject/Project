@@ -122,8 +122,8 @@
             <tr>
                <td class="Al_subject" id="Ft1">글 번호</td>
                <td class="Al_subject" id="Ft2">제목</td>
-                <td class="Al_subject" id="Ft3">작성자</td>            
-               <td class="Al_subject" id="Ft4">이미지</td>
+                <td class="Al_subject" id="Ft3">이미지</td>            
+               <td class="Al_subject" id="Ft4">작성자</td>
                <td class="Al_subject" id="Ft5">조회수</td>
             </tr>
          </thead>         
@@ -183,25 +183,29 @@
 		console.log(list);
 		var content = "";
 		for(var i=0; i<list.length; i++){
-				content +="<tr>"
-							+"<td>"+list[i].board_idx+"</td>"
-							+"	<td>"
-							+"<a href='./Board_Detail?board_idx="+list[i].board_idx+"'>"
-							+list[i].subject
-							+"</a>";
-							if(list[i].replies >0){
-								content += " <b>["+list[i].replies+"]</b>";
+					content +="<tr>"
+						+"<td>"+list[i].board_idx+"</td>"
+						+"	<td>"
+						+"<a href='./detail?idx="+list[i].board_idx+"'>"
+						+list[i].subject
+						+"</a>";
+						if(list[i].replies >0){
+							content += " <b>["+list[i].replies+"]</b>";
+						}
+						+"</td>"
+						if(list[i].newfilename != null){
+							content += "<td>" 
+									   +"<img width='15px' src='resources/upload/default.jpg'/>";
 							}
-							/*
-							if(list[i].newFileName != null){
-							content += "<img width='15px' src='resources/img/default.png'/>";
-							}	
-							*/
-				content +="</td>"
-							+"<td>"+list[i].nickName+"</td>"
-							+"<td>"+list[i].reg_date+"</td>"
-							+"<td>"+list[i].bhit+"</td>"
-							+"</tr>";
+						else
+							{
+							content +="<td>"
+									   +"<img width='150' height='50'  alt='메인 코디' src='./resources/upload/"+list[i].newfilename+"'/>";
+							}
+			content +="</td>" 
+						+"<td>"+list[i].nickName+"</td>"
+						+"<td>"+list[i].bhit+"</td>"
+						+"</tr>";
 		}
 		$("#list").empty();
 		$("#list").append(content);

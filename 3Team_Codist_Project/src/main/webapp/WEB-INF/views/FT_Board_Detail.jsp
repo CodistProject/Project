@@ -118,7 +118,7 @@
 		</div>
 	</body>
 	<script>
-	
+
 	var data  = {};
 	var url = "";
 	//게시글 추천 기능 실행

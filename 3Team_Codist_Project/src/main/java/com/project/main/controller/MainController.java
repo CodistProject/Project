@@ -258,5 +258,11 @@ public class MainController {
 		logger.info("유저 비번찾기+이메일로 쏴주기1");
 	return service.Find_Pw(params);
 	}
+	//코디 담은 뒤 캘린더 이동
+	@RequestMapping(value="/GoCalender")
+	public String GoCalender(){
+		logger.info("나만의 옷장 이동");
+		return "Calender";
+	}
 	
 }

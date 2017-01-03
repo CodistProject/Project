@@ -51,6 +51,14 @@
 			.CP_subject{
 				background-color : yellow;
 			}
+			.p1
+			{
+				visibility: hidden;
+			}
+			.p2
+			{
+				display: none;
+			}
 			/* 버튼 css */
 			#CPQna
 			{
@@ -113,16 +121,22 @@
 			<thead>		
 				<tr>
 					<td id="btn_write" colspan="6" align="right">
+							게시물 갯수 : 
+							<select id="CP_page">
+							<option value="5">5</option>
+							<option value="10">10</option>
+							<option value="15">15</option>
+							<option value="20">20</option>
+							</select>
 						<button id="CPQna" onclick="location.href='./Coplz_Write?userId=${sessionScope.userId}'">글쓰기</button>
 					</td>					
 				</tr>		
 				<tr>
 					<td class="CP_subject" id="Ft1">글 번호</td>
 					<td class="CP_subject" id="Ft2">제목</td>
-		    		<td class="CP_subject" id="Ft3">작성자</td>				
-					<td class="CP_subject" id="Ft4">이미지</td>
+		    		<td class="CP_subject" id="Ft3">이미지</td>				
+					<td class="CP_subject" id="Ft4">작성자</td>
 					<td class="CP_subject" id="Ft5">조회수</td>
-					<td class="CP_subject" id="Ft6">추천수</td>
 				</tr>
 			</thead>			
 			<tbody id="list">
@@ -130,7 +144,6 @@
 			</tbody>
 			<tr>
 				<td id="CP_pageNum" colspan="6" align="center">
-							<div id="CP_pagenation"></div>
 				</td>				
 			</tr>						
 		</table>
@@ -142,17 +155,18 @@
 	
 	listCall(currPage);
 	
-	/* $("#Ft_page").change(function(){
+	 $("#CP_page").change(function(){
 		listCall(currPage);
-	}); */
+	});
 	
 
 	function listCall(currPage){
 		var url="./rest/Board_list";
 		var data = {};
 		data.page = currPage;
+		data.category_name="CP";
 		console.log(currPage);
-		data.pagePerNum = 5;//$("#Ft_pageNum").val();
+		data.pagePerNum = $("#CP_page").val();
 		reqServer(url, data);
 	}
 	
@@ -182,29 +196,56 @@
 		var content = "";
 		for(var i=0; i<list.length; i++){
 				content +="<tr>"
-							+"<td>"+list[i].board_idx+"</td>"
+							+"<td id='bidx'>"+list[i].board_idx+"</td>"
 							+"	<td>"
-							+"<a href='./detail?idx="+list[i].board_idx+"'>"
+							+"<a href='javascript:tog("+i+")'>"
 							+list[i].subject
 							+"</a>";
 							if(list[i].replies >0){
 								content += " <b>["+list[i].replies+"]</b>";
 							}
-							/*
-							if(list[i].newFileName != null){
-							content += "<img width='15px' src='resources/img/default.png'/>";
-							}	
-							*/
-				content +="</td>"
+							+"</td>"
+							if(list[i].newfilename != null){
+								content += "<td>" 
+										    +"<img width='15px' src='resources/upload/default.jpg'/>";
+								}
+							else
+								{
+								content +="<td>"
+										    +"<img width='150' height='50'  alt='메인 코디' src='./resources/upload/"+list[i].newfilename+"'/>";
+								}
+				content +="</td>" 
 							+"<td>"+list[i].nickName+"</td>"
-							+"<td>"+list[i].reg_date+"</td>"
-							+"<td>"+list[i].bhit+"</td>"
 							+"<td>"+list[i].bhit+"</td>"
 							+"</tr>";
+				content +="<tr id='T"+i+"'class='p1'>"
+							+"<td colspan='5'>"
+							+"<div id='"+i+"' class='p2'>"
+							+""
+						    +"</div>"
+						    +"</td>"
+							+"</tr>";
+				
 		}
+		
 		$("#list").empty();
 		$("#list").append(content);
 	}
+	
+	function tog(num){
+		$("#"+num).slideToggle("fast",function(){
+            var view = $("#"+num).css("display");
+            if(view == "none")
+                {
+            	$("#T"+num).css("visibility","hidden");
+                }
+            else
+                {
+            	$("#T"+num).css("visibility","visible");
+                }
+        });   
+     };
+     
 		//일반 페이징 방식		
 		function printPaging(allCnt, pageNum){
 		console.log("전체 게시물 :"+allCnt );
@@ -237,7 +278,7 @@
 		
 		
 		
-		/* for(var i=start; i<=end;i++)
+		for(var i=start; i<=end;i++)
 		{
 			if(i<=pageNum)
 			{
@@ -248,7 +289,7 @@
 					+i+"</a> "
 				}					
 			}			
-		} */
+		} 
 		
 		//마지막 페이지가 전체 페이지 수 보다 적으면 다음 링크 생성
 		if(end<pageNum)

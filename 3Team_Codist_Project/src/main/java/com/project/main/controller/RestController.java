@@ -52,7 +52,7 @@ public class RestController {
 	@RequestMapping(value="/Board_list")
 	public @ResponseBody Map<String, Object> Board_list(
 					@RequestParam Map<String, String> params){
-		logger.info("패션 토크리스트 보여주기");
+		logger.info("게시판 리스트 보여주기");
 		return service.Board_list(params);
 	}	
 	
