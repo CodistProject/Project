@@ -25,7 +25,7 @@ public class MainController {
 	@RequestMapping(value="/")
 	public String home(){
 		logger.info("메인 페이지 요청");
-		return "ioi";
+		return "My_Calendar";
 	}
 	
 	//회원가입 약관 이동
