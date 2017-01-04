@@ -165,7 +165,82 @@
 				resize:none;
 			}
 			
-						
+			#mon_pop{				
+				position:absolute;
+				background-color: #6BADFF;
+				z-index:2;
+				width: 300px;
+				height: 300px;				
+				top: 180px;
+				left: 135px;
+				display:none;
+			}
+			
+			#tue_pop{				
+				position:absolute;
+				background-color: #6BADFF;
+				z-index:2;
+				width: 300px;
+				height: 300px;				
+				top: 180px;
+				left: 135px;
+				display:none;
+			}
+			
+			#wed_pop{				
+				position:absolute;
+				background-color: #6BFF7C;;
+				z-index:2;
+				width: 300px;
+				height: 300px;				
+				top: 180px;
+				left: 135px;
+				display:none;
+			}
+			
+			#thur_pop{				
+				position:absolute;
+				background-color: #6BFF7C;;
+				z-index:2;
+				width: 300px;
+				height: 300px;				
+				top: 180px;
+				left: 135px;
+				display:none;
+			}
+			
+			#fri_pop{				
+				position:absolute;
+				background-color: #6BFF7C;;
+				z-index:2;
+				width: 300px;
+				height: 300px;				
+				top: 180px;
+				left: 135px;
+				display:none;
+			}
+			
+			#sat_pop{				
+				position:absolute;
+				background-color: #E5FF6B;
+				z-index:2;
+				width: 300px;
+				height: 300px;				
+				top: 180px;
+				left: 135px;
+				display:none;
+			}
+			
+			#sun_pop{				
+				position:absolute;
+				background-color: #E5FF6B;
+				z-index:2;
+				width: 300px;
+				height: 300px;				
+				top: 180px;
+				left: 135px;
+				display:none;
+			}			
 		
 		</style>
 	</head>
@@ -177,13 +252,13 @@
 		<div id="weather">
 			<a class="top" href="javascript:Event();">이벤트</a>
 			<br/>
-			<a class="top" href="#">월</a>
-			<a class="top" href="#">화</a>			
-			<a class="middle" href="#">수</a>
-			<a class="middle" href="#">목</a>
-			<a class="middle" href="#">금</a>
-			<a class="bottom" href="#">토</a>
-			<a class="bottom" href="#">일</a>			
+			<a id="mon" class="top">월</a>
+			<a id="tue" class="top">화</a>			
+			<a id="wed" class="middle">수</a>
+			<a id="thur" class="middle">목</a>
+			<a id="fri" class="middle">금</a>
+			<a id="sat" class="bottom">토</a>
+			<a id="sun" class="bottom">일</a>			
 		</div>	
 		
 		<div id="extra">
@@ -229,8 +304,127 @@
 				</tr>
 			</table>
 		</div>
+		
+		<!-- 월요일 팝업 -->
+		<div id="mon_pop">				
+			<div>
+			 날씨
+			</div>
+			<div>
+			코디
+			</div>			
+		</div>	
+		
+		<!-- 화요일 팝업 -->
+		<div id="tue_pop">				
+			<div>
+			 날씨
+			</div>
+			<div>
+			코디
+			</div>		
+		</div>
+		
+		<!-- 수요일 팝업 -->
+		<div id="wed_pop">				
+			<div>
+			 날씨
+			</div>
+			<div>
+			코디
+			</div>			
+		</div>
+		
+		<!-- 목요일 팝업 -->
+		<div id="thur_pop">				
+			<div>
+			 날씨
+			</div>
+			<div>
+			코디
+			</div>			
+		</div>
+		
+		<!-- 금요일 팝업 -->
+		<div id="fri_pop">				
+			<div>
+			 날씨
+			</div>
+			<div>
+			코디
+			</div>			
+		</div>
+		
+		<!-- 토요일 팝업 -->
+		<div id="sat_pop">				
+			<div>
+			 날씨
+			</div>
+			<div>
+			코디
+			</div>			
+		</div>
+		
+		<!-- 일요일 팝업 -->
+		<div id="sun_pop">				
+			<div>
+			 날씨
+			</div>
+			<div>
+			코디
+			</div>	
+		</div>	
+		
 	</body>
-	<script>			
+	<script>
+		// 월요일 마우스 마우스오버
+		$("#mon").hover(function () {
+			$("#mon_pop").css("display","block");			
+		},function () {
+			$("#mon_pop").css("display","none");			
+		});		
+		
+		// 화요일 마우스 마우스오버
+		$("#tue").hover(function () {
+			$("#tue_pop").css("display","block");			
+		},function () {
+			$("#tue_pop").css("display","none");			
+		});	
+		
+		// 수요일 마우스 마우스오버
+		$("#wed").hover(function () {
+			$("#wed_pop").css("display","block");			
+		},function () {
+			$("#wed_pop").css("display","none");			
+		});	
+		
+		// 목요일 마우스 마우스오버
+		$("#thur").hover(function () {
+			$("#thur_pop").css("display","block");			
+		},function () {
+			$("#thur_pop").css("display","none");			
+		});	
+		
+		// 금요일 마우스 마우스오버
+		$("#fri").hover(function () {
+			$("#fri_pop").css("display","block");			
+		},function () {
+			$("#fri_pop").css("display","none");			
+		});	
+		
+		// 토요일 마우스 마우스오버
+		$("#sat").hover(function () {
+			$("#sat_pop").css("display","block");			
+		},function () {
+			$("#sat_pop").css("display","none");			
+		});	
+		
+		// 일요일 마우스 마우스오버
+		$("#sun").hover(function () {
+			$("#sun_pop").css("display","block");			
+		},function () {
+			$("#sun_pop").css("display","none");			
+		});	
 	
 	   // 유저 아이디, 유저 메일, 관리자 메일 담기
 		var userId ="${sessionScope.userId}";				
@@ -278,7 +472,11 @@
 					console.log("에러");
 				}
 			});
-		}		
+		}
+		
+		$("#eventclose").click(function(){					
+			self.close();		
+		})
 		
 	</script>	
 </html>

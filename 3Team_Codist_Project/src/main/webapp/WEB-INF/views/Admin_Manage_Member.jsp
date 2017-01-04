@@ -36,8 +36,11 @@
       </style>
    </head>
    <body>
-   <jsp:include page="../../resources/include/AdminPage.jsp"></jsp:include>
-      <div class="messageDiv">
+   <jsp:include page="../../resources/include/index.jsp"></jsp:include>
+   <div>
+   		<jsp:include page="../../resources/include/AdminPage.jsp"></jsp:include>
+    </div>	  
+      <div class="messageDiv">      	
        <span id="i">회원 리스트 </span>
         <table id="o">
            <tr class="l">

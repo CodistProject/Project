@@ -58,7 +58,7 @@
 			
 			<tr>
 				<td>	
-				<a class= "winnerclick" href="#">Time Event</a>	
+				<a class= "winnerclick" href="./TimeEvent">Time Event</a>	
 				</td>
 			</tr>	
 			<tr>
@@ -98,8 +98,7 @@
 				
 			<div class="timeeven">
 				<p>TIME 이벤트</p>
-				<div>
-					게임 API
+				<div>					
 				</div>				
 			</div>			
 			</div>	

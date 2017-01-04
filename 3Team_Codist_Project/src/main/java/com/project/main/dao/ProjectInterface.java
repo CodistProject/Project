@@ -2,6 +2,7 @@ package com.project.main.dao;
 import java.util.ArrayList;
 
 import com.project.main.dto.BoardDto;
+import com.project.main.dto.GameDto;
 import com.project.main.dto.MemberInfo;
 import com.project.main.dto.ReplyDto;
 
@@ -110,8 +111,12 @@ public interface ProjectInterface {
 
 	//코디 게시판 글쓰기
 	public void CodiBoard_Writes(String filename, String category_name, String newfilename);
-	
 
+	// 사다리게임에 관한 데이터 찾아오기
+	public GameDto Find_ladderData(String time_event_name);
+
+	public void Bridge(String timenum, String select1, String select2, String select3, String select4, String select5,
+			String select6);
 	
 }
 

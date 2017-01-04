@@ -60,13 +60,13 @@
 			<thead>		
 				<tr>
 					<td colspan="4" align="right">
-						<button class="admin"  onclick="location.href='./CodiBoard_Write?userId=${sessionScope.userId}'">글쓰기</button>						
+						<button  class="admin"  onclick="location.href='./CodiBoard_Write?userId=${sessionScope.userId}'">글쓰기</button>						
 					</td>					
 				</tr>		
 				<tr>
 				<div class="img">
 					<td>
-					<input type="checkbox" class="admin"/> 
+					<input type="" class="admin"/> 
 					사진1	<!-- <img alt="" src=""/> -->
 					</td>
 				</div>

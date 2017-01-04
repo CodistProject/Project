@@ -1,5 +1,6 @@
 package com.project.main.controller;
 
+import java.util.ArrayList;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
@@ -27,6 +28,13 @@ public class MainController {
 		logger.info("메인 페이지 요청");
 		return "ioi";
 	}
+
+  //관리자 회원관리 페이지
+	 @RequestMapping(value="/AdminMemberPage")
+	 public String AdminMemberPage(){
+	     logger.info("관리자 회원 관리 페이지");
+	  return "Admin_Manage_Member";
+	 }
 	
 	//회원가입 약관 이동
 	@RequestMapping(value="/joinCheck")
@@ -41,7 +49,22 @@ public class MainController {
 		logger.info("회원가입 폼으로 이동");
 		return "JoinForm";
 	}
-	
+
+		//이벤트 관리 페이지 이동
+		@RequestMapping(value="/TimeEvent")
+		public ModelAndView TimeEvent(@RequestParam Map<String, String> params){
+			logger.info("이벤트 관리 페이지 이동");
+			return service.Game(params);
+	}		
+		
+		
+	//이벤트 관리 페이지 이동
+		@RequestMapping(value="/Admin_Manage_Event")
+		public ModelAndView Admin_Manage_Event(@RequestParam Map<String, String> params){
+			logger.info("이벤트 관리 페이지 이동");
+			return service.Admin_Manage_Event(params);
+	}		
+		
 	//로그인 처리
 	@RequestMapping(value="/login")
 	public ModelAndView login(@RequestParam Map<String, Object> params
@@ -250,5 +273,12 @@ public class MainController {
 		logger.info("유저 비번찾기+이메일로 쏴주기1");
 	return service.Find_Pw(params);
 	}
+	
+	// 사다리 게임 설정값 넘기기
+	@RequestMapping(value="/Bridge")
+	public ModelAndView Bridge(@RequestParam Map<String, String> params){		
+		logger.info("사다리 게임 설정값 넘기기");		
+		return service.Bridge(params);
+	}		
 	
 }

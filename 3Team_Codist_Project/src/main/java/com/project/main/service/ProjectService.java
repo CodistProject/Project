@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.main.dao.ProjectInterface;
 import com.project.main.dto.BoardDto;
+import com.project.main.dto.GameDto;
 import com.project.main.dto.MemberInfo;
 import com.project.main.dto.ReplyDto;
 import com.project.main.util.CodiUploadFile;
@@ -719,6 +720,50 @@ public class ProjectService {
 		mav.setViewName("ioi");
 		return mav;
 	}
+	
+	//사다리 게임에 관한 데이터들 찾아오기
+	public ModelAndView Admin_Manage_Event(Map<String, String> params) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		String time_event_name = "사다리";		
+		inter.Find_ladderData(time_event_name);		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("ladder_Data",  inter.Find_ladderData(time_event_name));
+		mav.setViewName("Admin_Manage_Event");
+		return mav;
+	}
+
+	//사다리 설정값 수정하기
+		public ModelAndView Bridge(Map<String, String> params) {
+			inter = sqlSession.getMapper(ProjectInterface.class);
+			String msg = "";
+			ModelAndView mav = new ModelAndView();				
+			String timenum = params.get("timenum");
+			String select1 = params.get("select1");
+			String select2 = params.get("select2");
+			String select3 = params.get("select3");
+			String select4 = params.get("select4");
+			String select5 = params.get("select5");
+			String select6 = params.get("select6");				
+			
+			inter.Bridge(timenum, select1, select2 ,select3, select4, select5, select6);		
+			mav.addObject("msg", msg);
+			mav.setViewName("redirect:/Admin_Manage_Event");
+			return mav;
+		}
+
+		//사다리 게임에 관한 데이터들 찾아오기
+		public ModelAndView Game(Map<String, String> params) {
+			inter = sqlSession.getMapper(ProjectInterface.class);			
+			String time_event_name = "사다리";		
+			inter.Find_ladderData(time_event_name);		
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("ladder_Data",  inter.Find_ladderData(time_event_name));
+			mav.setViewName("Game");
+			return mav;
+		}
+	
+	
+		
 }
 	
 	
