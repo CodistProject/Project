@@ -25,7 +25,7 @@ public class MainController {
 	@RequestMapping(value="/")
 	public String home(){
 		logger.info("메인 페이지 요청");
-		return "My_Calendar";
+		return "ioi";
 	}
 	
 	//회원가입 약관 이동
@@ -249,6 +249,13 @@ public class MainController {
 	public ModelAndView Pw_FindEmail(@RequestParam Map<String, String> params){
 		logger.info("유저 비번찾기+이메일로 쏴주기1");
 	return service.Find_Pw(params);
+	}
+	
+	//나만의 옷장 페이지 이동(index 에서)
+	@RequestMapping(value="/My_Cloth")
+	public String my_Cloth(){
+		logger.info("나만의 옷장 페이지 요청");
+		return "My_Calendar";
 	}
 	
 }

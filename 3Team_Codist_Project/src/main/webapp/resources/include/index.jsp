@@ -223,7 +223,7 @@
 					<td class="menuTd"><a class="board" href="./CodiBoard">코디 게시판</a></td>
 					<td class="menuTd"><a class="board" href="./FTBoard">패션토크 게시판</a></td>
 					<td class="menuTd"><a class="board" href="./CoplzBoard">코디를 부탁해</a></td>
-					<td class="menuTd"><a class="board" href="#">나만의 옷장</a></td>
+					<td class="menuTd"><a class="board" href="./My_Cloth">나만의 옷장</a></td>
 					<td class="menuTd"><a class="board" href="./QnABoard">Q&A</a></td>
 					<td class="menuTd"><a class="board" href="./AlterBoard">물물 교환</a></td>					
 				</tr>
