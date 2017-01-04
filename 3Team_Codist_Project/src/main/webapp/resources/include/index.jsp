@@ -14,6 +14,7 @@
 				font-size: 13pt;
 			}	
 			#head {
+				padding : 10px;
 				margin-left: 10px;
 				margin-right: 10px;
 				height: 80px;			
@@ -241,12 +242,14 @@
 				left: 135px;
 				display:none;
 			}			
-		
+			#logo{
+				width: 200px;
+			}
 		</style>
 	</head>
 	<body>
 		<div id="head">
-			<img alt="로고">
+			<img id="logo" alt="로고" src="../../main/resources/img/logo.png">			
 		</div>
 		
 		<div id="weather">
