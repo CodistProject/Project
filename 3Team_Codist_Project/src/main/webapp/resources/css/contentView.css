@@ -1,0 +1,61 @@
+@CHARSET "UTF-8";
+
+	/* 게시판 css */
+			.content{
+			position: absolute;
+			top:20%;
+		}
+		table.detail{
+			width:100%;
+			margin-top: 10px;
+			}
+		table.detail,.detail td{
+			border: 1px solid #bcbcbc;
+			border-collapse: collapse;
+			paddind:5px;
+			text-align: center;
+			font-size: 16px;
+		}
+		.user{
+			width:100px;
+			margin: 5px;
+			padding: 5px;
+		}
+		.data{
+			width:350px;
+			margin: 5px;
+		}
+		
+		.btn{
+			width:45px;
+			margin: 5px;
+		}
+		#pic{
+			width: 300px;
+			height: 200px;
+		}
+		textarea {
+				width:100%;
+				resize: none;
+		}
+		.left{
+			text-align: left;
+		}
+		.dataleft{
+			text-align: center;
+		}
+		#repleZone{
+			width:100%;
+		}
+		table#repleZone ,#repleZone td{
+			border: 1px solid #bcbcbc;
+			border-collapse: collapse;
+			paddind:5px;
+			text-align: center;
+			font-size: 16px;
+		}
+		
+		input[type='text']{
+			width:100%;
+		}
+		

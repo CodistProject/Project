@@ -1,0 +1,110 @@
+@CHARSET "UTF-8";
+/*마이페이지  */
+		/*회원정보보기  */
+		#Admin
+         {           
+            position: absolute;
+         	top:25%;
+         	clear: left;
+         	float: left;
+         	margin-left: 10px;
+         	width: 120px;
+         	height: 800px;   
+         	left: 120px;
+         	
+         }
+      #Admin a 
+      {
+         padding-top: 5px;
+         display: block;
+         height: 20px;
+         text-align: center;
+         font-weight: bold;
+         text-decoration: none;
+      }   
+      .Mytag{color: black;}
+      
+      .Mytag:link{color: black; }
+      
+     .Mytag:visited{color: black;}
+     
+      .Mytag:active{color: red;}
+	
+	div.content{
+				position: absolute;
+				top:200px;
+			}	
+			#Mypage_div, .Mypage_table, .Mypage_btn{							
+				padding : 5px;
+			}
+			#Mypage_div{				
+				border : 1px solid;
+				border-collapse : collapse;
+				background-color : #EFEFE7;
+				padding-right: 100px;
+				height: 500px;
+				
+			}
+			#Mypage_div, #Mypage_div2{
+				width : 600px;
+				float: right;																	
+			}
+			.Mypage_table{
+				line-height:300%;
+			}	
+			.updatebtn {
+			-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+			-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+			box-shadow:inset 0px 1px 0px 0px #ffffff;
+			background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #f6f6f6));
+			background:-moz-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+			background:-webkit-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+			background:-o-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+			background:-ms-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+			background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0);
+			background-color:#ffffff;
+			border:1px solid #dcdcdc;
+			display:inline-block;
+			cursor:pointer;
+			color:#666666;
+			font-family:Arial;
+			font-size:15px;
+			font-weight:bold;
+			padding:10px 20px;
+			text-decoration:none;
+			text-shadow:0px 1px 0px #ffffff;
+		}
+		.updatebtn:hover {
+			background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f6f6f6), color-stop(1, #ffffff));
+			background:-moz-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+			background:-webkit-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+			background:-o-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+			background:-ms-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+			background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f6f6f6', endColorstr='#ffffff',GradientType=0);
+			background-color:#f6f6f6;
+		}
+		.updatebtn:active {
+			position:relative;
+			top:1px;
+		}
+		/*수정하기 */
+		.Mem_Modi_div, .Mem_Modi_div2{
+				width : 680px;
+				float: right;	
+		}			
+		.Mem_Modi_div{
+				border : 1px solid;
+				border-collapse : collapse;
+				background-color :#EFEFE7;
+				padding-right: 100px;	
+					
+		}
+		.Mem_Modi_div, #Mem_Modi_table1, #Mem_Modi_table2{
+				padding : 5px;
+		}
+		#Mem_Modi_table1{
+			line-height:250%;
+		}
+		

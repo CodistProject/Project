@@ -6,59 +6,14 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Q & A  상세보기</title>
 		<script src ="//code.jquery.com/jquery-3.1.0.min.js"></script>
-		<style>
-		.center {
-            position: relative;
-            left:150px;
-            top: 10px;
-            width: 750px;
-            padding: 15px;
-            margin-bottom: 20px;
-            float: left;
-            border: 1px solid #bcbcbc;
-        }
-		table{
-			width:100%;
-			margin-top: 10px;
-			}
-		table,td{
-			border: 2px solid gray;
-			border-collapse: collapse;
-			paddind:5px;
-			text-align: center;
-			font-size: 16px;
-		}
-		.user{
-			width:50px;
-			margin: 5px;
-		}
-		.data{
-			width:350px;
-			margin: 5px;
-		}
-		.btn{
-			width:45px;
-			margin: 5px;
-		}
-		#pic{
-			width: 300px;
-			height: 200px;
-			
-		}
-		
-		textarea {
-				width:100%;
-				resize: none;
-		}
-		.left{
-			text-align: left;
-		}
+		<link rel="stylesheet" type="text/css" href="resources/css/button.css"/>
+		<link rel="stylesheet" type="text/css" href="resources/css/contentView.css"/>
 		</style>
 	</head>
 	<body>
 		<jsp:include page="../../resources/include/index.jsp"></jsp:include>
-		<div class="center">
-		<table>
+		<div class="content">
+		<table class="detail">
 			<tr>
 				<td>글번호</td>
 				<td id="idx">${content.idx}</td>
@@ -75,28 +30,25 @@
 				<td>내용</td>
 				<td  colspan="5" class="left">${content.content}
 				</td>
-				
 			</tr>
 			<tr>
 				<td>첨부파일</td>
-				<td colspan="5" class="left" id="attach">		
-					
+				<td colspan="5" class="left" id="attach">	
 				</td>
 			</tr>
 			<tr>
 				<td colspan="6">
-				<input type="button" onclick="location.href='./list'" value="목록"/>
-				<input type="button" onclick="location.href='./Board_update?idx=${content.idx}'" value="수정"/>
-				<input type="button" onclick="location.href='./list'" value="취소"/>
-				<input type="button" onclick="location.href='./QnABoard'" value="목록"/>
-				<input type="button" onclick="location.href='./updateQna?idx=${content.idx}'" value="수정"/>
+				<input type="button" class="bt" onclick="location.href='./list'" value="목록"/>
+				<input type="button" class="bt" onclick="location.href='./Board_update?idx=${content.idx}'" value="수정"/>
+				<input type="button" class="bt" onclick="location.href='./list'" value="취소"/>
+				<input type="button" class="bt" onclick="location.href='./QnABoard'" value="목록"/>
+				<input type="button" class="bt" onclick="location.href='./updateQna?idx=${content.idx}'" value="수정"/>
 				<input type="button" onclick="location.href='./deleteQna?idx=${content.idx}'" value="삭제"/>
-				
 				</td>
 			</tr>
 		</table>
 		<!--댓글 등록 폼  -->
-		<table>
+		<table class="detail">
 			<tr>
 				<td class="user">${sessionScope.userId }</td>
 				<td class="data">

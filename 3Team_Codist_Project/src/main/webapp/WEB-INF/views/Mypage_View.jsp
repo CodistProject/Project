@@ -7,22 +7,7 @@
   		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   		<title>마이페이지</title>
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-		<style>			
-			#Mypage_div, .Mypage_table, .Mypage_btn{							
-				padding : 5px;
-			}
-			#Mypage_div{				
-				border : 1px solid;
-				border-collapse : collapse;
-				background-color : yellow;
-				padding-right: 100px;				
-																
-			}
-			#Mypage_div, #Mypage_div2{
-				width : 600px;
-				float: right;																	
-			}					
-		</style>
+		<link rel="stylesheet" type="text/css" href="resources/css/myPage.css"/>
  	</head>
   	<body>  	  		
   		<div class="Mypage_include">
@@ -61,7 +46,7 @@
 	       	 <table class="Mypage_btn" align="right">				            
 				 <tr>
 		       	 	<td>
-			       		<input type="button" onclick="location.href='./Member_modify_view?userId=${sessionScope.userId}'" value="회원 정보 수정"/>
+			       		<input type="button" class="updatebtn" onclick="location.href='./Member_modify_view?userId=${sessionScope.userId}'" value="회원 정보 수정"/>
 			     	</td>
 				 </tr>			
 		   	 </table>

@@ -6,174 +6,13 @@
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>인덱스</title>
-		<style>
-			@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
-		
-			html, body, h1, h2, h3, h4, h5, h6, li, p, table {
-				font-family: 'Jeju Gothic', serif;
-				font-size: 13pt;
-			}	
-			#head {
-				margin-left: 10px;
-				margin-right: 10px;
-				height: 80px;			
-				text-align: center;
-			}
-			
-			#weather {
-				position: fixed;
-				top: 15%;
-				clear: left;
-				float: left;
-				margin-left: 10px;
-				width: 120px;
-				height: 800px;
-				font: bold; 				
-			}
-			
-			#weather a {
-				padding-top: 5px;
-				display: block;
-				height: 20px;
-				text-align: center;				
-				text-decoration: none;				
-			}
-			
-			#weather a.top:hover {
-				background: #6BADFF;
-			}
-			
-			#weather a.middle:hover {
-				background: #6BFF7C;
-			}
-			
-			#weather a.bottom:hover {
-				background: #E5FF6B;
-			}
-			
-			#weather a:visited {
-				color: black;
-			}
-			
-			#extra {
-				position: absolute;			
-				left: 1000px;
-				width: 200px;
-				height: 800px;				
-			}
-			
-			#extra a.top {
-				display: block;
-				background: #6BADFF;
-				height: 20px;
-				text-align: center;
-				font-weight: bold;
-				color: #505050;
-				text-decoration: none;
-			}
-			
-			#extra a.middle {
-				display: block;
-				background: #6BFF7C;
-				height: 20px;
-				text-align: center;
-				font-weight: bold;
-				color: #505050;
-				text-decoration: none;
-			}
-			
-			#extra a.bottom {
-				display: block;
-				background: #E5FF6B;
-				height: 20px;
-				text-align: center;
-				font-weight: bold;
-				color: #505050;
-				text-decoration: none;
-			}
-			
-			#extra p {
-				padding-left: 5px;
-				padding-right: 5px;
-			}	
-			
-			a.board{
-			text-decoration: none;
-			}
-			a.a2{
-			text-decoration: none;
-		    color: black;
-			}
-			
-			#menu {				
-				margin-left: 130px;
-				margin-right: 130px;				
-				width: 850px;
-				height: 100px;												
-			}
-			
-			.menuTd:hover{
-				background: #6BADFF;
-				font-weight: bold;
-			}
-			
-			.menuTd:visited{
-			color: black;
-			}
-			
-			table.menu{
-				width: 100%;				
-				border-collapse: collapse;
-				text-align: center;
-			}
-			
-			tr.menu, td.menu{
-				/* background-color: aqua; */
-			}
-			
-			table.serch{
-				width: 100%;
-				border: 1px solid;
-				border-collapse: collapse;				
-			}
-			table.serch tr{
-				border: 1px solid;
-			}
-			
-			table.serch td{
-				border: 1px solid;
-				padding: 5px;
-			}
-			/* div는 class를 content */
-			.content{				
-				margin-left: 130px;
-				margin-right: 130px;				
-				width: 840px;
-			}
-			
-			#ask{
-				border: 1px solid;
-				height: 150px;
-			}
-			
-			#ask1{
-				text-align: center;
-			}
-			
-			#askBox{
-				border: white;				
-				resize:none;
-			}
-			
-						
-		
-		</style>
+		 <link rel="stylesheet" type="text/css" href="resources/css/main.css"/>
+		 <link rel="stylesheet" type="text/css" href="resources/css/button.css"/>
 	</head>
 	<body>
 		<div id="head">
 			<img alt="로고">
 		</div>
-		
 		<div id="weather">
 			<a class="top" href="javascript:Event();">이벤트</a>
 			<br/>
@@ -187,10 +26,12 @@
 		</div>	
 		
 		<div id="extra">
-
 			<div id="loginSession">
 				<c:if test="${sessionScope.userId ==null}">
 					<jsp:include page="loginBox.jsp"></jsp:include>
+					<a href="#" class="a2" onclick="location.href='./joinCheck'">회원 가입</a>
+					<br/>
+					<br/>
 					<a href="Find_Id" class="a2">아이디</a><a href="Find_Pw" class="a2">/비밀번호 찾기</a> 
 				</c:if>
 				
@@ -203,17 +44,17 @@
 				<table class="serch">
 					<tr>
 						<td>		
-							<input type="text" width="50px">
-							<input type="button" value="검색"> 
+							<input type="text" size="18">
+							<input type="button" class="serchbtn" value="검색"> 
 						</td>						
 					</tr>
 				</table>
 			<br/>
 			<div id="ask">
-				<textarea id="askBox" cols="25px" rows="7px">답변 받을 이메일 주소 입력 : </textarea>			
+				<textarea id="askBox" cols="28px" rows="8px" placeholder="답변 받을 이메일 주소 입력 : "></textarea>			
 				<div id="ask1">
-				<input  type="button" value="쪽지" />
-				<input type="button" value="이메일" name="email"/>				
+				<input  type="button" class="askbtn" value="쪽지" />
+				<input type="button"  class="askbtn" value="이메일" name="email"/>				
 				</div>				
 			</div>
 		</div>

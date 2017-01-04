@@ -6,19 +6,14 @@
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Insert title here</title>
-		<style>		
-			table.login,td.login{
-				border: 1px solid;
-				border-collapse:collapse;
-				padding: 5px;
-				text-align:center;
-			}
-		</style>
+		<link rel="stylesheet" type="text/css" href="resources/css/main.css"/>
+		<link rel="stylesheet" type="text/css" href="resources/css/button.css"/>
 	</head>
 	<body>
+		
 		<form action="login" method="post">
 			<table class="login">
-				<tr >
+				<tr>
 					<td class="login">ID</td>
 					<td class="login">
 						<input type="text" name="userId"/>
@@ -32,8 +27,7 @@
 				</tr>
 				<tr>
 					<td class="login" colspan="2">
-						<input type="submit" value="로그인"/>
-						<input type="button"  value="회원가입" onclick="location.href='./joinCheck'"/>
+						<input type="submit" class="logbtn" value="로그인"/>
 					</td>
 				</tr>
 			</table>

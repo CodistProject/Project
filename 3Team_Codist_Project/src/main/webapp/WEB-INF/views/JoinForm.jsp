@@ -2,14 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>    
     
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>	
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>회원가입 페이지</title>
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-		<style>			
-			table{				
+		<style>		
+			div.content{
+				width: 1000px;
+			}	
+			#SignUp_table{
+				width: 100%;		
 				border : 1px solid;
 				border-collapse : collapse;
 				padding : 5px;			
@@ -24,7 +27,8 @@
 				border : 1px solid white;						
 			}
 			#SignUp_table td{
-				font-size : 8pt; 
+				padding: 10px;
+				font-size : 12pt; 
 				font-family : 굴림체;
 			}
 			#popup{
@@ -44,14 +48,14 @@
 	<div>
 		<jsp:include page="../../resources/include/index.jsp"/>
 	</div>
+	<div class="content">
 		<table id="SignUp_sub" align="center">
 			<tr>
 				<td>
 					<h>회원 가입</h>			
 				</td>
 			</tr>			
-		</table>		
-				
+		</table>	
 		<!-- 가입 정보 확인 -->		
 		<div id="popup">
 			<!-- 가입정보 -->			
@@ -104,7 +108,6 @@
 			</table>
 		</center>
 		</div>
-		
 			<table id="SignUp_table" align="center">
 				<tr>
 					<td>
@@ -284,7 +287,7 @@
 					</td>
 				</tr>
 			</table>						
-	
+	</div>
 	</body>
 	<script>
 		var data;

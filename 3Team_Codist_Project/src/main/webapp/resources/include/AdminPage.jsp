@@ -6,32 +6,7 @@
       <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <title>관리자 페이지 메뉴</title>
-      <style>
-         #Admin
-         {
-           
-           position: absolute;
-         top: 15%;
-         clear: left;
-         float: left;
-         margin-left: 10px;
-         width: 120px;
-         height: 800px;   
-         left: 120px;
-         top: 25%;
-         }
-      #Admin a 
-      {
-         padding-top: 5px;
-         display: block;
-         height: 20px;
-         text-align: center;
-         font-weight: bold;
-         text-decoration: none;
-      }
-   
-         
-      </style>
+      <link rel="stylesheet" type="text/css" href="resources/css/main.css"/>
    </head>
    <body>
    

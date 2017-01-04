@@ -1,0 +1,204 @@
+@CHARSET "UTF-8";
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+			/*메인 페이지 ui 상단 좌, 우  */
+		html, body, h1, h2, h3, h4, h5, h6, li, p, table {
+				font-family: 'Jeju Gothic', serif;
+				font-size: 13pt;
+			}
+			
+			div#head {
+				margin-left: 10px;
+				margin-right: 10px;
+				height: 50px;			
+				text-align: center;
+				            
+			}
+			div#weather {
+				position: fixed;
+				top: 18%;
+				clear: left;
+				float: left;
+				margin-left: 10px;
+				width: 120px;
+				height: 800px;
+				font: bold; 				
+			}
+			#weather a {
+				padding-top: 5px;
+				display: block;
+				height: 20px;
+				text-align: center;				
+				text-decoration: none;				
+			}
+			
+			#weather a.top:hover {
+				background: #6BADFF;
+			}
+			
+			#weather a.middle:hover {
+				background: #6BFF7C;
+			}
+			
+			#weather a.bottom:hover {
+				background: #E5FF6B;
+			}
+			
+			#weather a:visited {
+				color: black;
+			}
+			
+			div#extra {
+				position: absolute;			
+				left: 1000px;
+				top: 150px;
+				width: 250px;
+				height: 200px;
+				
+			}
+			
+			#extra a.top {
+				display: block;
+				background: #6BADFF;
+				height: 20px;
+				text-align: center;
+				font-weight: bold;
+				color: #505050;
+				text-decoration: none;
+			}
+			
+			#extra a.middle {
+				display: block;
+				background: #6BFF7C;
+				height: 20px;
+				text-align: center;
+				font-weight: bold;
+				color: #505050;
+				text-decoration: none;
+			}
+			
+			#extra a.bottom {
+				display: block;
+				background: #E5FF6B;
+				height: 20px;
+				text-align: center;
+				font-weight: bold;
+				color: #505050;
+				text-decoration: none;
+			}
+			
+			#extra p {
+				padding-left: 5px;
+				padding-right: 5px;
+			}	
+			
+			a.board{
+			text-decoration: none;
+			color: black;
+			}
+			
+			a.a2{
+			
+			text-decoration: none;
+		    color: black;
+			}
+			div#menu {	
+				width:100%
+				height:100px;	
+				
+			}
+			/*상단 메뉴  */
+			table.menu{
+				width: 100%;
+				height: 50px;
+				border-collapse: collapse;
+				text-align: center;
+				background: #FAFAFA;
+				box-shadow: 2px 2px 2px 0px lightgray;
+				margin-bottom: 10px;
+			}
+			/*마우스 오버  */
+			a.a2:hover{
+			color: #E41111;
+			text-decoration: underline;
+			}
+			.menuTd:hover{
+				border-top : 2px solid black;
+			}
+			a.top:hover{
+				color: red;
+			}
+			a.middle:hover{
+				color: red;
+			}
+			a.bottom:hover{
+				color: red;
+			}
+			/*검색기능 css  */
+			table.serch{
+				width: 220px;
+				border-collapse: collapse;				
+			}
+			table.serch td{
+				padding: 5px;
+			}
+			/*로그인 세션 */
+			.logses{
+				line-height:200%;
+			}
+			/* div는 class를 content */
+			div.content{				
+				margin-left: 130px;
+				margin-right: 130px;				
+				width: 840px;
+			}
+			#ask{
+				
+				width: 220px;
+				height: 150px;
+				box-shadow: 2px 2px 2px 0px lightgray;
+			}
+			/*1:1 질의 응답 CSS  */
+			#ask1{
+				text-align: center;
+			}
+			#askBox{
+			    outline :none;
+				border: white;				
+				resize:none;
+			}
+			
+			/*관리자 페이지 css  */
+	
+				 #Admin {
+		         position: absolute;
+		         top: 15%;
+		         clear: left;
+		         float: left;
+		         margin-left: 10px;
+		         width: 120px;
+		         height: 800px;   
+		         left: 120px;
+		         top: 25%;
+		         }
+		      #Admin a  {
+		         padding-top: 5px;
+		         display: block;
+		         height: 20px;
+		         text-align: center;
+		         font-weight: bold;
+		         text-decoration: none;
+		      }
+			/* 로그인 박스 */
+			
+			table.login,td.login{
+					padding: 5px;
+					text-align:center;
+					}
+			table.login,td.login{
+					border-collapse:collapse;
+					padding: 5px;
+					text-align:center;
+					}
+			
+		
+		

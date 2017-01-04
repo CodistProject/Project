@@ -10,39 +10,13 @@
 	
 	int startPage = ((pg-1)/BLOCK*BLOCK)+1;
 	int endPage = ((pg-1)/BLOCK*BLOCK)+BLOCK;
-%>    
-    
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+%>
 <html>	
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>코디 게시판</title>
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-		<style>			
-			.Cd_board1{				
-				width : 100%;			
-			}
-			.Cd_board2{												
-				border-bottom-color : black;
-				width : 100%;				
-			}
-			
-			#Cd_pageNum{
-				border : 1px solid white;	
-				border-top-color : black;				
-				border-bottom-color : black;	
-			}		
-			#Cd_sub{
-				font-size : 30pt;				
-				text-align : center;
-				border : 1px solid white;
-				border-bottom-color : black;	
-				border-top-color : black;												
-			}			
-			.admin{
-				display: none;
-			}
-		</style>
+		<link rel="stylesheet" type="text/css" href="resources/css/codiBoard.css"/>
 	</head>
 	<body>
 			
@@ -160,7 +134,7 @@
 					content +="<tr>"
 								+"<td>"+list[i].board_idx+"</td>"
 								+"	<td>"
-								+"<a href='./Board_Detail?board_idx="+list[i].board_idx+"'>"
+								+"<a class='listpage' href='./Board_Detail?board_idx="+list[i].board_idx+"'>"
 								+list[i].subject
 								+"</a>";
 								if(list[i].replies >0){
@@ -207,7 +181,7 @@
 			//페이징 표시			
 			//< 이전
 			if(currPage > 5){
-				content +="<a href='#' onclick='listCall("
+				content +="<a href='#' class='listpage' onclick='listCall("
 					+(start-1)+")'>이전</a> | "
 			}
 			
@@ -220,7 +194,7 @@
 					if(currPage ==i){
 						content +="<b>"+i+"</b>";
 					}else{
-						content += " <a href='#' onclick='listCall("+i+")'>"
+						content += " <a href='#' class='listpage' onclick='listCall("+i+")'>"
 						+i+"</a> "
 					}					
 				}			
@@ -229,7 +203,7 @@
 			//마지막 페이지가 전체 페이지 수 보다 적으면 다음 링크 생성
 			if(end<pageNum)
 			{
-				content +=" | <a href='#' onclick='listCall("
+				content +=" | <a href='#' class='listpage' onclick='listCall("
 						+(end+1)+")'>다음</a> "
 			}
 			

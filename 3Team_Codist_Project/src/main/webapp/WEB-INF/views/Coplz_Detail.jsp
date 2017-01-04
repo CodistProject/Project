@@ -7,6 +7,10 @@
   		<title>코디를 부탁해 메인</title>
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 		<style>
+		.content{
+			position: absolute;
+			top:20%;
+		}
 		div.img1{
 				border: 1px solid;
 				position: absolute;
