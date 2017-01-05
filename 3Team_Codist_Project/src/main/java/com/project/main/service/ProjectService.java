@@ -1,5 +1,7 @@
 package com.project.main.service;
 
+
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -418,8 +420,7 @@ public class ProjectService {
 			
 			return mav;					
 		}		*/
-	
-	//게시판 리스트 보여주기(CB제외)
+	//게시판 리스트 보여주기(Cody Board 제외)
 	public Map<String, Object> Board_list(Map<String, String> params) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		//현재페이지
@@ -616,6 +617,7 @@ public class ProjectService {
 	
 	// 이메일 보내기(G mail 전용)
 	public Map<String, String> Email(Map<String, String> params) {
+		logger.info("이메일 기능 작동");
 		
 		// 1:1 문의용 관련 정보
     	final String userEmail = params.get("userEmail"); // 유저 이메일    	
@@ -627,14 +629,14 @@ public class ProjectService {
     	final String FindId_userEmail = params.get("FindId_userEmail"); // 아이디 찾을때 쓴 유저 이메일 주소(=보내줄 메일 주소)
     	
     	// 비번 찾아서 메일로 보내주기2 용 관련 정보(내용: 유저 비번 / 받을 유저 메일 주소)
-    	final String content_userPw = params.get("content_userPw");  // 유저 비번이 담긴 내용
-    	final String FindPw_userEmail = params.get("FindPw_userEmail"); // 비번 찾을때 쓸 유저 메일주소(=보내줄 메일 주소)
+    	final String content_userPw2 = params.get("content_userPw");  // 유저 비번이 담긴 내용
+    	final String FindPw_userEmail2 = params.get("FindPw_userEmail"); // 비번 찾을때 쓸 유저 메일주소(=보내줄 메일 주소)
     	
     	// 비번 찾아서 메일로 보내주기1 용 관련 정보(내용: 유저 비번 / 받을 유저 메일 주소)
-    	final String content_userPw2 = params.get("user_Pw");  // 유저 비번이 담긴 내용
-    	final String FindPw_userEmail2 = params.get("user_Email"); // 비번 찾을때 쓸 유저 메일주소(=보내줄 메일 주소)
-    	    	
-    	// 유저 및 관리자 정보 가져오기 확인
+    	final String content_userPw1 = params.get("user_Pw");  // 유저 비번이 담긴 내용
+    	final String FindPw_userEmail1 = params.get("user_Email"); // 비번 찾을때 쓸 유저 메일주소(=보내줄 메일 주소)
+    	
+    	// 1:1 문의 관련 정보 체크
     	logger.info("------------1:1 문의용 정보 ---------");
     	logger.info("유저 아이디(보내는 이):"+userId);
     	logger.info("유저 이메일(보내는 이 메일주소):"+userEmail);
@@ -645,15 +647,17 @@ public class ProjectService {
     	logger.info("메일내용(담은 유저 아이디) :"+content_userId);
     	logger.info("받을 유저 메일주소 :"+FindId_userEmail);
     	
-    	// 비번 찾고 메일 담아 보내주기용2 관련정보 체크
-    	logger.info("------------비번 찾아 메일 쏘기 정보2 ---------");
-    	logger.info("메일내용(담은 유저 비번) :"+content_userPw);
-    	logger.info("받을 유저 메일주소 :"+FindPw_userEmail);
-    	
     	// 비번 찾고 메일 담아 보내주기용1 관련정보 체크
     	logger.info("------------비번 찾아 메일 쏘기 정보1 ---------");
+    	logger.info("메일내용(담은 유저 비번) :"+content_userPw1);
+    	logger.info("받을 유저 메일주소 :"+FindPw_userEmail1);
+    	
+    	// 비번 찾고 메일 담아 보내주기용2 관련정보 체크
+    	logger.info("------------비번 찾아 메일 쏘기 정보2 ---------");
     	logger.info("메일내용(담은 유저 비번) :"+content_userPw2);
     	logger.info("받을 유저 메일주소 :"+FindPw_userEmail2);
+    	
+    	
     	
         Properties props = System.getProperties();          
           
@@ -679,34 +683,40 @@ public class ProjectService {
 		try{					
 			Message message = new MimeMessage(session); 
 			message.setFrom(new InternetAddress("0304kiss@gmail.com")); // 작성자 메일주소(유저/보낸사람 이메일주소) - 구글이메일만 가능(하지만 결국 관리자로 할꺼임)
+			
 			// 유저 메일주소(아이디 찾기용)이 빈값이 아닐경우 - 유저 아이디 찾아 보내기용
-			if(userId==null && FindPw_userEmail==null && FindPw_userEmail2==null){
+			if(content == null && content_userPw1 == null && content_userPw2 == null){
+				logger.info("if문 작동 체크");
 				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(FindId_userEmail)); // 찾은 아이디 받을 사람(유저 메일주소)
 				message.setSubject("잃어버린 아이디를 찾았습니다. 확인 바랍니다."); // 제목
 				message.setText("찾으시는 아이디 :"+content_userId); // 찾은 유저아이디 담은 내용
 				map.put("msg", "찾으시는 아이디가 이메일로 전송되었습니다.");
 			}
 			// 유저 아이디(로그인한)가 빈값이 아닐 경우  - 1:1 문의용
-			if(FindId_userEmail==null && FindPw_userEmail==null && FindPw_userEmail2==null){
+			if(content_userId == null && content_userPw1 ==null && content_userPw2 == null){
+				logger.info("if문 작동 체크");
 				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("starcsiran0@naver.com"));  // 관리자 메일주소(받는 사람)
 				message.setSubject(userId+"님께서 1:1 문의를 하셨습니다."); // 제목
 				message.setText(content); // 문의내용
 				map.put("msg", "1:1문의가 이메일로 전송 되었습니다!");
-			}			 
-			// 유저 메일주소(비번 찾기용2)이 빈값이 아닐경우 - 유저 비번 찾아 보내기용
-			if(FindId_userEmail==null && userId==null && FindPw_userEmail==null){
-				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(FindPw_userEmail)); // 찾은 아이디 받을 사람(유저 메일주소)
-				message.setSubject("잃어버린 비밀번호를 찾았습니다. 확인 바랍니다."); // 제목
-				message.setText("찾으시는 비밀번호 :"+content_userPw); // 찾은 유저아이디 담은 내용
-				map.put("msg", "찾으시는 비밀번호가 이메일로 전송되었습니다.");
-			}
+			}		 
+			
 			// 유저 메일주소(비번 찾기용1)이 빈값이 아닐경우 - 유저 비번 찾아 보내기용
-			if(userId==null && FindId_userEmail==null && FindPw_userEmail==null){
+			if(content==null && content_userId ==null && content_userPw2 ==null){
+				logger.info("if문 작동 체크");
+				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(FindPw_userEmail1)); // 찾은 아이디 받을 사람(유저 메일주소)
+				message.setSubject("잃어버린 비밀번호를 찾았습니다. 확인 바랍니다."); // 제목
+				message.setText("찾으시는 비밀번호 :"+content_userPw1); // 찾은 유저아이디 담은 내용
+				map.put("msg", "찾으시는 비밀번호가 이메일로 전송되었습니다.");
+			}						
+			// 유저 메일주소(비번 찾기용2)이 빈값이 아닐경우 - 유저 비번 찾아 보내기용
+			if(content==null && content_userId==null && content_userPw1==null){
+				logger.info("if문 작동 체크");
 				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(FindPw_userEmail2)); // 찾은 아이디 받을 사람(유저 메일주소)
 				message.setSubject("잃어버린 비밀번호를 찾았습니다. 확인 바랍니다."); // 제목
 				message.setText("찾으시는 비밀번호 :"+content_userPw2); // 찾은 유저아이디 담은 내용
 				map.put("msg", "찾으시는 비밀번호가 이메일로 전송되었습니다.");
-			}				
+			}
 			
 			//message.setContent("내용","text/html; charset=utf-8");//글내용을 html타입 charset설정
 			
@@ -743,36 +753,46 @@ public class ProjectService {
 	public ModelAndView Find_Pw(Map<String, String> params) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		logger.info("유저 비번찾기 서비스 실행");
-		// 유저 비번찾기1에 필요한 정보
-		String user_Id = params.get("user_Id"); // 유저 아이디
-		// 받아온 유저아이디 체크
-		logger.info(user_Id);
-		String user_Email = inter.Find_Email(user_Id); // 유저 메일주소
-	
-		// 유저 비번(아이디로), 메일 찾기(아이디로) 하고 params에 담기(메일함수에 담아 보내기 위해)
-		params.put("user_Pw", inter.FindPw_userEmail(user_Id));		
-		params.put("user_Email", user_Email);
-		// 유저 비번찾기1에서 가져온 유저 메일주소
-		logger.info("유저 메일주소(비번 찾기용1/비번 담아서 보내줄 멜주소):"+user_Email);
+		
+		if(params.get("user_Id")!=null){		
+			// 유저 비번찾기1에 필요한 정보
+			String user_Id = params.get("user_Id"); // 유저 아이디
+			// 받아온 유저아이디, 유저아이디로 찾은 유저 이메일 체크
+			logger.info("(방법1)받아온 유저 아이디 체크 : "+user_Id);		
+			String user_Email = inter.Find_Email(user_Id); // 유저 메일주소
+			// 유저 비번찾기1에서 가져온 유저 메일주소
+			logger.info("(방법1)유저아이디로 찾아낸 유저 이메일 :"+user_Email);		
+			// 유저 비번(아이디로), 메일 찾기(아이디로) 하고 params에 담기(메일함수에 담아 보내기 위해)		
+			logger.info("(방법1)유저 아이디로 찾은 유저 비번:"+inter.FindPw_userEmail(user_Id));
+			String user_Pw = inter.FindPw_userEmail(user_Id);
+			params.put("user_Pw", user_Pw);
+			params.put("user_Email", user_Email);
+		}				
 				 
-		// 유저 비번찾기2에 필요한 정보 + 이메일문의에 필요한 정보
-		String userId = params.get("userId");
-		String E = params.get("email1");
-		String E2 = params.get("email2");
-		String userEmail = E+"@"+E2;  // 유저 메일 주소(비번 찾을용+비번 담아 보내줄 멜주소)
-		// 유저 비번찾기2에서 가져온 유저 메일주소 완성본
-		logger.info("유저 메일주소(비번 찾기용2/비번 담아서 보내줄 멜주소):"+userEmail);
+		logger.info("/------------------------------------------------------/");
 		
-		
-		// params에 유저 이메일로 찾은 비번과 보내줄 유저 메일 주소 담기
-		params.put("content_userPw", inter.FindPw_userEmail(userId));
-		params.put("FindPw_userEmail", userEmail);
+		if(params.get("userId")!=null){			
+			// 유저 비번찾기2에 필요한 정보 + 이메일문의에 필요한 정보
+			String userId = params.get("userId");
+			logger.info("(방법2)유저 아이디 :"+ userId); 			
+			String E = params.get("email1");
+			String E2 = params.get("email2");
+			String userEmail = E+"@"+E2;  // 유저 메일 주소(비번 찾을용+비번 담아 보내줄 멜주소)
+			// 유저 비번찾기2에서 가져온 유저 메일주소 완성본
+			logger.info("(방법2)유저 메일주소(비번 찾기용2/비번 담아서 보내줄 멜주소):"+userEmail);					
+			// params에 유저 이메일로 찾은 비번과 보내줄 유저 메일 주소 담기
+			String userPw = inter.FindPw_userEmail(userId);
+			logger.info("(방법2)아이디로 찾은 유저 비번 :"+userPw);
+			params.put("content_userPw", userPw);			
+			params.put("FindPw_userEmail", userEmail);
+		}
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("Find_Pw", Email(params));
 		mav.setViewName("ioi");
 		return mav;
 	}
+	
 	//관리자 회원관리 페이지(미완성)
 	public ModelAndView AdminMemberPage() {
 		ModelAndView mav= new ModelAndView();
@@ -788,11 +808,24 @@ public class ProjectService {
 		System.out.println(inter.FindNick(userId));
 		return obj;
 	}
+	//나만의 옷장이동(유효성검사)
+	public ModelAndView My_Cloth(String userId) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav= new ModelAndView();
+		System.out.println(userId);
+		String page="ioi";
+		String msg="로그인 후 가능합니다.";
+		if(!userId.equals("' '"))
+		{
+			page="My_Calendar";
+			msg="성공";
+		}
+		mav.addObject("msg",msg);
+		mav.setViewName(page);
+		return mav;
+	}
 
 
 	
-
-	
-}
-	
+}	
 	

@@ -122,13 +122,15 @@ public class RestController {
 	}
 
 	
-	// 이메일 문의(Gmail)
+	
+	// 이메일 문의(Gmail/이메일 기능)
 	@RequestMapping(value="/Email")
 	public @ResponseBody Map<String, String> Email(			
 			@RequestParam Map<String, String> params){
-		logger.info("구글 이메일 문의");
+		logger.info("1:1 이메일 문의");
 		return service.Email(params);
 	}
+	
 	//ID중복 체크
 	@RequestMapping(value="/FindNick")
 	public @ResponseBody Map<String,String> FindNick(
@@ -137,4 +139,5 @@ public class RestController {
 			logger.info(userId);
 		return service.Find_Nick(userId);
 	}
+	
 }

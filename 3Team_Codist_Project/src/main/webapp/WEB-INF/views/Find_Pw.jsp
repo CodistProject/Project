@@ -143,7 +143,7 @@
                         <option value="mother">당신의 어머니의 성함은?</option>
                         <option value="father">당신의 아버지의 성함은?</option>
                         <option value="school">출신초등학교는?</option>
-                        <option value="love">첫사랑의 이름은?</option>
+                        <option value="love">나의 첫사랑의 이름은?</option>
                         <option value="first">가장 소중한 보물1호는?</option>
                         <option value="family">가장 중요한 기념일은?</option>
                         </select>

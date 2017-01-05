@@ -222,7 +222,7 @@
 					<td class="menuTd"><a class="board" href="./CodiBoard">코디 게시판</a></td>
 					<td class="menuTd"><a class="board" href="./FTBoard">패션토크 게시판</a></td>
 					<td class="menuTd"><a class="board" href="./CoplzBoard">코디를 부탁해</a></td>
-					<td class="menuTd"><a class="board" href="#">나만의 옷장</a></td>
+					<td class="menuTd"><a class="board" href="./My_Cloth?userId='${sessionScope.userId} '">나만의 옷장</a></td>
 					<td class="menuTd"><a class="board" href="./QnABoard">Q&A</a></td>
 					<td class="menuTd"><a class="board" href="./AlterBoard">물물 교환</a></td>					
 				</tr>
@@ -232,7 +232,7 @@
 	<script>			
 	
 	   // 유저 아이디, 유저 메일, 관리자 메일 담기
-		var userId ="${sessionScope.userId}";				
+		var userId ="${sessionScope.userId}";		
 		
 		// 이벤트 팝업
 		function Event(){
@@ -243,7 +243,7 @@
 		
 		// 이메일 문의(url, data 담아서 아작스처리)
 		$("input[name='email']").click(function(){
-			console.log("작동 된다!");
+			console.log("이메일 처리");
 			url = "./rest/Email";
 			data={};
 			data.userId = userId;			
