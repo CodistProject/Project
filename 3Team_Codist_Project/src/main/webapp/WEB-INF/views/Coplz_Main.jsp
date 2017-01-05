@@ -35,30 +35,18 @@
 			}			
 			.CP_subject{
 				text-align : center;
-			}
-			#CP1{
-				border : 1px solid white;	
-				border-top-color : black;
-				border-right-color : black;				
-				border-bottom-color : black;
-			}
-			#CP6{
-				border : 1px solid white;	
-				border-top-color : black;
-				border-left-color : black;				
-				border-bottom-color : black;
-			}
-			.CP_subject{
 				background-color : yellow;
 			}
-			.p1
+			.CP1,.CP4,.CP5
 			{
-				visibility: hidden;
+				font-size: 8px;
+				width: 20px;
 			}
-			.p2
+			
+			.CP2
 			{
-				display: none;
-			}
+				width: 150px;
+			}		
 			/* 버튼 css */
 			#CPQna
 			{
@@ -120,7 +108,7 @@
 		<table class="CP_board2" align="center">
 			<thead>		
 				<tr>
-					<td id="btn_write" colspan="6" align="right">
+					<td id="btn_write" colspan="5" align="right">
 							게시물 갯수 : 
 							<select id="CP_page">
 							<option value="5">5</option>
@@ -128,22 +116,24 @@
 							<option value="15">15</option>
 							<option value="20">20</option>
 							</select>
-						<button id="CPQna" onclick="location.href='./Coplz_Write?userId=${sessionScope.userId}'">글쓰기</button>
+						<c:if test="${sessionScope.userId !=null}">
+							<button id="CPQna" onclick="location.href='./Coplz_Write?userId=${sessionScope.userId}'">글쓰기</button>
+						</c:if>
 					</td>					
 				</tr>		
-				<tr>
-					<td class="CP_subject" id="Ft1">글 번호</td>
-					<td class="CP_subject" id="Ft2">제목</td>
-		    		<td class="CP_subject" id="Ft3">이미지</td>				
-					<td class="CP_subject" id="Ft4">작성자</td>
-					<td class="CP_subject" id="Ft5">조회수</td>
+				<tr  class="CP_subject">
+					<td class="CP1">글 번호</td>
+					<td class="CP2">이미지</td>
+		    		<td class="CP3">제목</td>				
+					<td class="CP4">작성자</td>
+					<td class="CP5">조회수</td>
 				</tr>
 			</thead>			
 			<tbody id="list">
 				<!-- 리스트가 출력될 내용 영역 tbody -->				
 			</tbody>
 			<tr>
-				<td id="CP_pageNum" colspan="6" align="center">
+				<td id="CP_pageNum" colspan="5" align="center">
 				</td>				
 			</tr>						
 		</table>
@@ -191,60 +181,42 @@
 		});
 	}
 	
+
 	function printList(list){
 		console.log(list);
 		var content = "";
 		for(var i=0; i<list.length; i++){
-				content +="<tr>"
-							+"<td id='bidx'>"+list[i].board_idx+"</td>"
-							+"	<td>"
-							+"<a href='javascript:tog("+i+")'>"
-							+list[i].subject
-							+"</a>";
-							if(list[i].replies >0){
-								content += " <b>["+list[i].replies+"]</b>";
-							}
-							+"</td>"
+					content +="<tr>"
+								+"<td class='CP1'>"
+								+list[i].board_idx
+								+"</td>"
 							if(list[i].newfilename != null){
-								content += "<td>" 
-										    +"<img width='15px' src='resources/upload/default.jpg'/>";
+								content += "<td class='CP2'>" 
+											+"<img width='15px' src='resources/img/default.jpg'/>";
 								}
-							else
+								else
 								{
-								content +="<td>"
-										    +"<img width='150' height='50'  alt='메인 코디' src='./resources/upload/"+list[i].newfilename+"'/>";
+								content +="<td class='CP2'>"
+									 		  +"<img width='150' height='50'  alt='메인 코디' src='./resources/upload/"+list[i].newfilename+"'/>";
 								}
-				content +="</td>" 
-							+"<td>"+list[i].nickName+"</td>"
-							+"<td>"+list[i].bhit+"</td>"
-							+"</tr>";
-				content +="<tr id='T"+i+"'class='p1'>"
-							+"<td colspan='5'>"
-							+"<div id='"+i+"' class='p2'>"
-							+""
-						    +"</div>"
-						    +"</td>"
-							+"</tr>";
-				
+			content+="</td>"
+						+"	<td class='CP3'>"
+						+"<a href='./Board_Detail0?idx="+list[i].board_idx+"'>"
+						+list[i].subject
+						+"</a>";
+						if(list[i].replies >0){
+							content += " <b>["+list[i].replies+"]</b>";
+						}
+						
+						
+			content +="</td>" 
+						+"<td class='CP4'>"+list[i].nickName+"</td>"
+						+"<td class='CP5'>"+list[i].bhit+"</td>"
+						+"</tr>";
 		}
-		
 		$("#list").empty();
 		$("#list").append(content);
-	}
-	
-	function tog(num){
-		$("#"+num).slideToggle("fast",function(){
-            var view = $("#"+num).css("display");
-            if(view == "none")
-                {
-            	$("#T"+num).css("visibility","hidden");
-                }
-            else
-                {
-            	$("#T"+num).css("visibility","visible");
-                }
-        });   
-     };
+	};
      
 		//일반 페이징 방식		
 		function printPaging(allCnt, pageNum){

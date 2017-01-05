@@ -79,7 +79,7 @@
 			var data = {};
 			data.page = currPage;
 			console.log(currPage);
-			data.pagePerNum = 8;
+			data.pagePerNum = 9;
 			reqServer(url, data);
 		}
 		
@@ -95,8 +95,8 @@
 					if(url == "./rest/Cd_list"){
 						printList(d.jsonList.list);
 						//페이지 세팅
-						currPage = d.currPage;
-						printPaging(d.allCnt, d.page);
+						currPage=d.currPage
+						printPaging(currPage, d.page);
 						}
 					},error:function(e){
 							console.log(e)
@@ -133,73 +133,22 @@
 					}
 			}
 			
-			$("#list").empty();
 			$("#list").append(content);
 		}
-			//일반 페이징 방식		
-			function printPaging(allCnt, pageNum){
-			console.log("전체 게시물 :"+allCnt );
-			console.log("생성 가능 페이지 :"+pageNum );
-			console.log("현재 페이지 :"+currPage);
-			
+		//더보기 페이징 처리	
+		function printPaging(currPage,pageNum){
+		console.log("현재 페이지 :"+currPage);
+		//외투
 			$("#Cd_pageNum").empty();
-			var start;	//페이지 시작
-			var end;	//페이지 끝
-			var range = (currPage/5);	//다음 페이지 있는지 여부
 			var content = "";
+		 	if(currPage<pageNum)
+		 		{
+		 		currPage+=1;
+		 		content +=" <a href='#' onclick='listCall("+currPage+")'>+더보기</a> "
+		 		}
 			
-			if(range >1){//5페이지 넘었을 경우
-				end = currPage%5 == 0 ?
-						//Math.floor 소수점 다버림 
-						(Math.floor(range))*5
-						:(Math.floor(range)+1)*5;
-				start = Math.floor(end-4);
-			}else{//5페이지 미만일 경우
-				start = 1;
-				end = 5;
-			}
-			
-			//페이징 표시			
-			//< 이전
-			if(currPage > 5){
-				content +="<a href='#' onclick='listCall("
-					+(start-1)+")'>이전</a> | "
-			}
-			
-			
-			
-			 for(var i=start; i<=end;i++)
-			{
-				if(i<=pageNum)
-				{
-					if(currPage ==i){
-						content +="<b>"+i+"</b>";
-					}else{
-						content += " <a href='#' onclick='listCall("+i+")'>"
-						+i+"</a> "
-					}					
-				}			
-			} 
-			
-			//마지막 페이지가 전체 페이지 수 보다 적으면 다음 링크 생성
-			if(end<pageNum)
-			{
-				content +=" | <a href='#' onclick='listCall("
-						+(end+1)+")'>다음</a> "
-			}
-			
-			$("#Cd_pageNum").append(content);
-			hide();	 
-		
+			$("#Cd_pageNum").append(content);		
 		}
-		   
-			var userId = "${sessionScope.userId}";	   
-			
-			function hide() {
-				console.log(userId);
-				if(userId=="ADMIN"){
-					$(".admin").css("display","block");				
-				}					
-			}
+		
 	</script>
 </html>

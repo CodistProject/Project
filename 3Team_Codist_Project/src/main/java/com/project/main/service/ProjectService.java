@@ -176,10 +176,7 @@ public class ProjectService {
 		String page="main";
 		switch(inter.CategoryName(board_idx))
 		{
-		case "FT":
-			page="FT_Board_Detail";
-		break;
-		
+	
 		case "CP":
 			page="Coplz_Detail";
 		break;
@@ -206,6 +203,13 @@ public class ProjectService {
 		mav.addObject("subcontent",inter.CodiBoard_Detail(board_idx));
 		mav.setViewName("CodiBoard_Detail");
 		return mav;
+	}
+	//패션토크 상세보기
+	public Map<String, BoardDto> FT_Board_Detail(String idx) {
+		Map<String, BoardDto> obj= new HashMap<String, BoardDto>();
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		obj.put("content", inter.Board_Detail(idx));
+		return obj;
 	}
 	
 	//게시판 수정페이지이동
@@ -531,34 +535,7 @@ public class ProjectService {
 		mav.setViewName("ft_hate");	
 	return mav;
 	}
-
 	
-	//댓글 등록
-	public Map<String, Integer> replyRegist(Map<String, String> params) {
-			
-			inter = sqlSession.getMapper(ProjectInterface.class);
-			Map<String, Integer> obj = new HashMap<String, Integer>();
-			int idx = Integer.parseInt(params.get("idx"));
-			String nick = params.get("nickname");
-			String content= params.get("content");
-			logger.info("글번호:"+idx);
-			logger.info("닉네임:"+nick);
-			logger.info("내용:"+content);
-			obj.put("msg",inter.replyRegist(idx,nick,content));
-		return obj;
-		}			
-	
-	
-	//댓글리스트
-	public Map<String, ArrayList<ReplyDto>> replyList(
-			String idx) {
-			inter = sqlSession.getMapper(ProjectInterface.class);
-			Map<String, ArrayList<ReplyDto>> obj 
-				= new HashMap<String, ArrayList<ReplyDto>>();
-			obj.put("list", inter.replyList(idx));
-			obj.put("userId",inter.FindId(idx) );
-			return obj;
-	}
 	//게시판 수정하기
 	public ModelAndView update(Map<String, String> params) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
@@ -580,6 +557,32 @@ public class ProjectService {
 		return mav;
 	}
 	
+	//댓글 등록
+	public Map<String, Integer> replyRegist(Map<String, String> params) {
+			
+			inter = sqlSession.getMapper(ProjectInterface.class);
+			Map<String, Integer> obj = new HashMap<String, Integer>();
+			int idx = Integer.parseInt(params.get("idx"));
+			String nick = params.get("nickname");
+			String content= params.get("content");
+			logger.info("글번호:"+idx);
+			logger.info("닉네임:"+nick);
+			logger.info("내용:"+content);
+			obj.put("msg",inter.replyRegist(idx,nick,content));
+		return obj;
+	}			
+		
+	//댓글리스트
+	public Map<String, ArrayList<ReplyDto>> replyList(
+			String idx) {
+			inter = sqlSession.getMapper(ProjectInterface.class);
+			Map<String, ArrayList<ReplyDto>> obj 
+				= new HashMap<String, ArrayList<ReplyDto>>();
+			obj.put("list", inter.replyList(idx));
+			obj.put("userId",inter.FindId(idx) );
+			return obj;
+	}
+	
 	// 댓글 삭제 기능
 	public Map<String, Object> repleDel(String reple_idx) {		
 		inter = sqlSession.getMapper(ProjectInterface.class);	
@@ -589,12 +592,23 @@ public class ProjectService {
 		map.put("success", success);				
 		return map;
 	}
+	
 	//댓글 추천 기능
-	public Map<String, Integer> reple_like(String reple_like) {
+	public Map<String, Integer> reple_like(int reple_idx) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		int success=0;
-		success= inter.reple_like(reple_like);	
+		success= inter.reple_like(reple_idx);	
+		map.put("success", success);
+		return map;
+	}
+	
+	//댓글 추천 기능
+	public Map<String, Integer> reple_hate(int reple_idx) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		int success=0;
+		success= inter.reple_hate(reple_idx);	
 		map.put("success", success);
 		return map;
 	}
@@ -759,6 +773,22 @@ public class ProjectService {
 		mav.setViewName("ioi");
 		return mav;
 	}
+	//관리자 회원관리 페이지(미완성)
+	public ModelAndView AdminMemberPage() {
+		ModelAndView mav= new ModelAndView();
+		mav.setViewName("Admin_Manage_Member");
+		return mav;
+	}
+	
+	//닉네임찾기
+	public Map<String, String> Find_Nick(String userId) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		Map<String, String> obj =new HashMap<String,String>();
+		obj.put("userNick",inter.FindNick(userId));
+		System.out.println(inter.FindNick(userId));
+		return obj;
+	}
+
 
 	
 

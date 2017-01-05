@@ -130,7 +130,9 @@
 							<option value="15">15</option>
 							<option value="20">20</option>
 							</select>
-						<button id="writeQna" onclick="location.href='./QnABoard_Write?userId=${sessionScope.userId}'">글쓰기</button>
+						<c:if test="${sessionScope.userId !=null}">
+							<button id="writeQna" onclick="location.href='./QnABoard_Write?userId=${sessionScope.userId}'">글쓰기</button>
+						</c:if>
 					</td>					
 				</tr>		
 				<tr>
@@ -153,8 +155,7 @@
 		</div>		
 	</body>
 	<script>
-var currPage = 1;
-	2
+	var currPage = 1;
 	listCall(currPage);
 	//페이지 갯수 정하기
 	$("#QnA_page").change(function(){

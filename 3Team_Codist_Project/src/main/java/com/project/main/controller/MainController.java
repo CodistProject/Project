@@ -223,6 +223,12 @@ public class MainController {
 	return null;//
 	}	
 	
+	//코디 담은 뒤 캘린더 이동
+	@RequestMapping(value="/GoCalender")
+	public String GoCalender(){
+		logger.info("나만의 옷장 이동");
+		return "Calender";
+	}
 
 	//팝업 나만의 옷장
 	@RequestMapping(value="/PopUp_Mycloth")
@@ -230,7 +236,7 @@ public class MainController {
 		logger.info("나만의 옷장 이동");
 		return "PopUp_Mycloth";
 	}
-
+	
 	// 이벤트 팝업창 띄우기
 	@RequestMapping(value="/Event_Popup")
 	public String Event_Popup(){
@@ -258,11 +264,13 @@ public class MainController {
 		logger.info("유저 비번찾기+이메일로 쏴주기1");
 	return service.Find_Pw(params);
 	}
-	//코디 담은 뒤 캘린더 이동
-	@RequestMapping(value="/GoCalender")
-	public String GoCalender(){
-		logger.info("나만의 옷장 이동");
-		return "Calender";
+	
+	//관리자 회원관리 페이지
+	@RequestMapping(value="/AdminMemberPage")
+	public ModelAndView AdminMemberPage(){
+		logger.info("관리자 회원 관리 페이지");
+	return service.AdminMemberPage();
 	}
+	
 	
 }

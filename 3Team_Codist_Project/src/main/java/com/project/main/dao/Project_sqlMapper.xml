@@ -15,19 +15,31 @@
 		SELECT ID FROM JOIN_REG WHERE ID=#{param1}
 	</select>
 	
-	<!-- 중복 체크(Nick) -->
+	<!-- 중복 체크(댓글like) -->
 	<select id="overlayNick" resultType="String">
+		SELECT NICKNAME FROM REPLE_VALIDATION WHERE REPLE_IDX=#{param1}
+	</select>
+	
+	<!-- 중복 체크(댓글hate) -->
+	<select id="overlayLike" resultType="String">
+		SELECT NICKNAME FROM REPLE_VALIDATION WHERE REPLE_IDX=#{param1}
+	</select>
+	
+	<!-- 중복 체크(Nick) -->
+	<select id="overlayHate" resultType="String">
 		SELECT NICKNAME FROM JOIN_REG WHERE NICKNAME=#{param1}
 	</select>
+	
+
+	<!-- 카테고리 찾기  -->
+	<select id="CategoryName" resultType="String">
+		SELECT CATEGORY_NAME FROM TOTAL_BOARD WHERE BOARD_IDX= #{param1}
+	</select>	
 	
 	<!-- 닉네임 찾기(ID >> 닉네임)  -->
 	<select id="FindNick" resultType="String">
 		SELECT NICKNAME FROM JOIN_REG WHERE ID=#{param1}		
 	</select>
-	<!-- 카테고리 찾기  -->
-	<select id="CategoryName" resultType="String">
-		SELECT CATEGORY_NAME FROM TOTAL_BOARD WHERE BOARD_IDX= #{param1}
-	</select>	
 	
 	<!--아이디 찾기( 닉네임 >> ID )  -->
 	<select id="FindId" resultType="com.project.main.dto.ReplyDto">
@@ -107,6 +119,21 @@
 		 SELECT COUNT(*) FROM CATEGORY_CLOTH WHERE CATEGORY_NAME = #{category_name}
  	</select>
  	
+ 	<!--  댓글 가져오기 -->
+ 	<select id="replyList" resultType="com.project.main.dto.ReplyDto">
+ 	 	SELECT reple_idx,board_idx,nickname,reple_content,reple_date,reple_like,reple_hate FROM total_reple WHERE board_idx= #{param1}
+ 	</select>
+ 	
+ 	<!--댓글 등록  -->
+ 	<insert id="replyRegist">
+ 		INSERT INTO total_reple(REPLE_IDX,BOARD_IDX,NICKNAME,REPLE_CONTENT,REPLE_LIKE,REPLE_HATE) values(seq_total_reple.nextval,#{param1},#{param2},#{param3},0,0)
+ 	</insert>
+ 	  	
+ 	<!-- 댓글 삭제 -->
+ 	<delete id="repleDel">
+ 		DELETE FROM TOTAL_REPLE WHERE REPLE_IDX = #{param1}
+ 	</delete>
+ 	
  	<!--댓글추천수 증가  -->
  	<update id="reple_like">
  		UPDATE total_reple SET reple_like = reple_like+1 WHERE reple_idx = #{param1}
@@ -116,12 +143,6 @@
  	<update id="reple_hate">
  		UPDATE total_reple SET reple_hate = reple_hate+1 WHERE reple_idx = #{param1}
  	</update>
- 	
- 	<!--  댓글 가져오기 -->
- 	<select id="replyList" resultType="com.project.main.dto.ReplyDto">
- 	 	SELECT reple_idx,board_idx,nickname,reple_content,reple_date,reple_like,reple_hate FROM total_reple WHERE board_idx= #{param1}
- 	</select>
- 	
  	
  	<!-- 유저 비밀번호 찾기 -->
  	<select id="pw" resultType="String">
@@ -167,17 +188,6 @@
  							(SELECT CC_IDX,BOARD_IDX, CLOTH_NAME ,REAL_NAME ,NEWFILENAME,FILENAME,CLOTH_URL,CLOTH_DETAIL FROM CATEGORY_CLOTH WHERE CATEGORY_NAME = #{param3} )
    							)WHERE RNUM BETWEEN #{param1} AND #{param2}  
  	</select>
- 
- 	
- 	<!--댓글 등록  -->
- 	<insert id="replyRegist">
- 		INSERT INTO total_reple(REPLE_IDX,BOARD_IDX,NICKNAME,REPLE_CONTENT,REPLE_LIKE,REPLE_HATE) values(seq_total_reple.nextval,#{param1},#{param2},#{param3},0,0)
- 	</insert>
- 	  	
- 	<!-- 댓글 삭제 -->
- 	<delete id="repleDel">
- 		DELETE FROM TOTAL_REPLE WHERE REPLE_IDX = #{param1}
- 	</delete>
 
  	<!-- 유저 이메일 찾기(이메일 전송 버전) -->
  	<select id="Find_Email" resultType="String">

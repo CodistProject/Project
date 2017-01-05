@@ -45,15 +45,12 @@ public interface ProjectInterface {
 	//카테고리 네임 가져오기(idx >> 카테고리 네임)
 	public String CategoryName(String board_idx);
 		
-	//패션토크 상세보기,FT_수정하기 가져오기
+	//게시판 상세보기,FT_수정하기 가져오기
 	public BoardDto Board_Detail(String board_idx);
 	
 	//QnA 글쓰기
 	public int QnABoard_Writes(String nickname, String subject, String content, String filename, String newfilename);
 
-	//패션토크 상세보기
-	public BoardDto FT_Board_Detail(String board_idx);
-	
 	//코디게시판 상세보기
 	public ArrayList<ClothDto> CodiBoard_Detail(String board_idx);	
 
@@ -110,14 +107,17 @@ public interface ProjectInterface {
 	public int repleDel(String reple_idx);
 	
 	//댓글 추천수 증가
-	public int reple_like(String reple_like);
+	public int reple_like(int reple_idx);
+	
+	//댓글 추천수 증가
+	public int reple_hate(int reple_idx);
 	
 	//아이디 찾기
 	public ArrayList<ReplyDto> FindId(String idx);
 
 	//코디 게시판 글쓰기
 	public void CodiBoard_Writes(String filename, String category_name, String newfilename);
-	
+
 	
 
 	

@@ -35,18 +35,16 @@
             text-align : center;
             background-color : yellow;
          }
-         #Al1{
-            border : 1px solid white;   
-            border-top-color : black;
-            border-right-color : black;            
-            border-bottom-color : black;
-         }
-         #Al6{
-            border : 1px solid white;   
-            border-top-color : black;
-            border-left-color : black;            
-            border-bottom-color : black;
-         }
+         .Al1,.Al4,.Al5
+			{
+				font-size: 8px;
+				width: 20px;
+			}
+			
+			.Al2
+			{
+				width: 150px;
+			}	
             /* 버튼 css */
          #AlQna
          {
@@ -116,15 +114,17 @@
 							<option value="15">15</option>
 							<option value="20">20</option>
 							</select>
-                  <button id="AlQna" onclick="location.href='./Alter_Write?userId=${sessionScope.userId}'">글쓰기</button>
+					<c:if test="${sessionScope.userId !=null}">
+                	  <button id="AlQna" onclick="location.href='./Alter_Write?userId=${sessionScope.userId}'">글쓰기</button>
+               		</c:if>
                </td>               
             </tr>      
-            <tr>
-               <td class="Al_subject" id="Ft1">글 번호</td>
-               <td class="Al_subject" id="Ft2">제목</td>
-                <td class="Al_subject" id="Ft3">이미지</td>            
-               <td class="Al_subject" id="Ft4">작성자</td>
-               <td class="Al_subject" id="Ft5">조회수</td>
+            <tr class="Al_subject">
+               <td class="Al1">글 번호</td>
+               <td class="Al2">이미지</td>
+                <td class="Al3">제목</td>            
+               <td class="Al4">작성자</td>
+               <td class="Al5">조회수</td>
             </tr>
          </thead>         
          <tbody id="list">
@@ -183,29 +183,30 @@
 		console.log(list);
 		var content = "";
 		for(var i=0; i<list.length; i++){
-					content +="<tr>"
-						+"<td>"+list[i].board_idx+"</td>"
-						+"	<td>"
-						+"<a href='./detail?idx="+list[i].board_idx+"'>"
-						+list[i].subject
-						+"</a>";
-						if(list[i].replies >0){
-							content += " <b>["+list[i].replies+"]</b>";
-						}
-						+"</td>"
+							content +="<tr>"
+										+"<td class='Al1'>"+list[i].board_idx+"</td>"
 						if(list[i].newfilename != null){
-							content += "<td>" 
-									   +"<img width='15px' src='resources/upload/default.jpg'/>";
+							content += "<td class='Al2'>" 
+									    +"<img width='15px' src='resources/img/default.jpg'/>";
 							}
 						else
 							{
-							content +="<td>"
-									   +"<img width='150' height='50'  alt='메인 코디' src='./resources/upload/"+list[i].newfilename+"'/>";
+							content +="<td class='Al2'>"
+									    +"<img width='150' height='50'  alt='물물교환' src='./resources/upload/"+list[i].newfilename+"'/>";
 							}
-			content +="</td>" 
-						+"<td>"+list[i].nickName+"</td>"
-						+"<td>"+list[i].bhit+"</td>"
-						+"</tr>";
+							content +=	"</td>"
+										+"	<td class='Al3'>"
+										+"<a href='./Board_Detail?board_idx="+list[i].board_idx+"'>"
+										+list[i].subject
+										+"</a>";
+										if(list[i].replies >0){
+											content += " <b>["+list[i].replies+"]</b>";
+										}
+										
+							content +="</td>" 
+										+"<td class='Al4'>"+list[i].nickName+"</td>"
+										+"<td class='Al5'>"+list[i].bhit+"</td>"
+										+"</tr>";
 		}
 		$("#list").empty();
 		$("#list").append(content);
@@ -219,7 +220,7 @@
 		$("#Al_pageNum").empty();
 		var start;	//페이지 시작
 		var end;	//페이지 끝
-		var range = (currPage/5);	//다음 페이지 있는지 여부
+		var range = (currPage / 5);	//다음 페이지 있는지 여부
 		var content = "";
 		
 		if(range >1){//5페이지 넘었을 경우
@@ -232,7 +233,7 @@
 			start = 1;
 			end = 5;
 		}
-		<!-- <a href="javascript:"></a>	 -->		
+		
 		//페이징 표시			
 		//< 이전
 		if(currPage > 5){
