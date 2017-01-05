@@ -193,4 +193,16 @@
  	<select id="Find_Email" resultType="String">
  		SELECT EMAIL FROM JOIN_REG WHERE ID = #{param1}
  	</select>
+ 	
+ 	 <!--사다리 게임 설정값 수정-->
+ 	<update id="Bridge">
+ 		UPDATE TIME_EVENT SET TIMENUM = #{param1} , SELECT1 = #{param2}, SELECT2 = #{param3}, SELECT3 = #{param4}, SELECT4 = #{param5} , SELECT5 = #{param6}, SELECT6 = #{param7}
+ 	</update>
+ 	
+ 	<!-- 사다리 게임 정보 가져오기 -->
+ 	<select id="Find_ladderData" resultType="com.project.main.dto.GameDto">
+ 		SELECT * FROM TIME_EVENT WHERE TIME_EVENT_NAME = #{param1}
+ 	</select>
+ 	
+ 	<!--   -->
 </mapper>
