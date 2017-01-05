@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>패션토크 게시판 상세보기</title>
+		<title>물물교환 게시판 상세보기</title>
 		<script src ="//code.jquery.com/jquery-3.1.0.min.js"></script>
 		<style>
 		/* div.content {
@@ -28,7 +28,7 @@
 			text-align: center;
 			font-size: 16px;
 		}
-		.user{
+		.user,.repleNick{
 			width:50px;
 			margin: 5px;
 		}
@@ -53,8 +53,10 @@
 		.left{
 			text-align: left;
 		}
-		.dataleft{
-			text-align: center;
+		.RepleAlter
+		{
+			font-size: 8px;
+			width: 20px;
 		}
 		
 		</style>
@@ -63,6 +65,11 @@
 		<jsp:include page="../../resources/include/index.jsp"/>
 		<div class="content">
 		<table>
+			<tr>
+				<td colspan="6">
+					<h2>ALTER BOARD</h2>
+				</td>
+			</tr>
 			<tr>
 				<td>글번호</td>
 				<td id="idx">${content.board_idx}</td>
@@ -84,26 +91,21 @@
 			<tr>
 				<td>첨부파일</td>
 				<td colspan="5" class="left" id="attach">		
-					
-				</td>
-			<tr>
-				<td colspan="6">
-				<a href="javascript:ft_like()" id="ft_like">추천</a>${content.ft_like}
-				<a href="javascript:ft_hate()" id="ft_hate">비추천</a>${content.ft_hate}
 				</td>
 			</tr>
 			<tr>
 				<td colspan="6">
-				<input type="button" onclick="location.href='./FTBoard'" value="목록"/>
+				<input type="button" onclick="location.href='./QnABoard'" value="목록"/>
 				<input type="button" onclick="location.href='./Board_update?board_idx=${content.board_idx}'" value="수정"/>
 				<input type="button" onclick="location.href='./deleteFT?board_idx=${content.board_idx}'" value="삭제"/>
 				</td>
 			</tr>
+			
 		</table>
 		<!--댓글 등록 폼  -->
 		<table>
 			<tr>
-				<td class="user">${content.nickName}</td>
+				<td class="user"><!-- 닉네임출력 --></td>
 				<td class="data">
 					<textarea id="content" rows="3"></textarea>
 				</td>
@@ -118,23 +120,11 @@
 		</div>
 	</body>
 	<script>
-	
-	var data  = {};
-	var url = "";
-	//게시글 추천 기능 실행
-	function ft_like(){
-		url="./rest/ft_like";
-		data={};
-		data.ft_like=$("#ft_like").val();
-		sendServer(data,url);
-	}
-	function ft_hate(){
-		url="./rest/ft_hate";
-		data={};
-		data.ft_hate=$("#ft_hate").val();
-		sendServer(data,url);
-	}
+
 	// 리플 리스트 실행
+
+	var userId="${sessionScope.userId}";
+	FindNick(userId);
 	replyList();
 	
 	$("#go").click(function(){
@@ -144,16 +134,75 @@
 		data.nickname = $(".user").html();
 		console.log($(".user").html());
 		data.content= $("#content").val();
-		sendServer(data,url);		
+		if(data.nickname=="")
+		{
+		alert("로그인 후 가능합니다.");
+		}
+	else
+		{
+		sendServer(data,url);
+		}		
 	});
-
-		// 리플 리스트 뿌리는 함수
+	
+	//댓글 닉네임 찾기
+	function FindNick(userId)
+	{
+		var url="./rest/FindNick";
+		var data={};
+		data.userId=userId
+		console.log(data.userId);
+		sendServer(data,url);
+	}
+	
+	// 리플 리스트 뿌리는 함수
 	function replyList(){
 		url = "./rest/replyList";
 		data = {};
 		data.idx = $("#idx").html();
 		sendServer(data,url);
 	}
+		
+	// 리플 삭제에 필요한 정보 보내기
+	function repleDel(reple_idx){				
+		console.log(reple_idx);
+		url = "./rest/repleDel";
+		data={};
+		data.reple_idx = reple_idx;
+		console.log(reple_idx);
+		sendServer(data, url);
+	}
+	
+	 //댓글 추천보내기
+	function reple_like(reple_idx){
+		url = "./rest/reple_like"
+		data = {}; 
+		data.reple_idx = reple_idx;
+		data.nickname=$(".user").html();
+		if(data.nickname=="")
+		{
+		alert("로그인 후 가능합니다.");
+		}
+	else
+		{
+		sendServer(data,url);
+		}
+	}
+	 
+	//댓글 비추천 보내기	
+	function reple_hate(reple_idx){
+		url = "./rest/reple_hate"
+		data = {};
+		data.reple_idx = reple_idx;
+		data.nickname=$(".user").html();
+		if(data.nickname=="")
+		{
+		alert("로그인 후 가능합니다.");
+		}
+	else
+		{
+		sendServer(data,url);
+		}
+	}	 
 	
 	function sendServer(obj, url){
 		console.log(obj);
@@ -161,16 +210,21 @@
 		$.ajax({
 			url:url,
 			type:"get",
-			data:data,
+			data:obj,
 			dataType:"json",
 			success:function(d){
 				console.log(d);	
 	            if(url=="./rest/replyRegist"){
 	            	replyList();
 	            }
+	            
 				if(url =="./rest/replyList"){
 					printReple(d.list,d.userId);
 				}
+				
+				if(url == "./rest/FindNick"){
+					$(".user").html(d.userNick);
+					}
 				if(url == "./rest/repleDel"){					
 					alert("삭제에 성공하였습니다.");
 					replyList();
@@ -199,56 +253,30 @@
 	// 리스트 뿌리는 역할 함수
 	function printReple(list,userId){
 		$("#content").val("");
-		var content = "<tr>"
-		+"<td class='user'>닉네임</td>"
-		+"<td class='data left'>내용</td>"
-		+"<td class='data left'>작성일</td>"
-		+"<td class='data left'>추천</td>"
-		+"<td class='data left'>비추천</td>"
-		+"<td class='data left'>삭제</td>"
-	+"</tr>";
+		var content = "";
 		for(var i=0; i<list.length;i++){
-			
 			content +="<tr>"
-				+"<td class='user'>"+list[i].nickname+"</td>"
+				+"<td class='repleNick'>"+list[i].nickname+"</td>"
 				+"<td class='data left'>"+list[i].reple_content+"</td>"
-				+"<td class='data left'>"+list[i].reple_date+"</td>"
-				+"<td class='data left'><a href=javascript:reple_like()>"+list[i].reple_like+"</a></td>"
-				+"<td class='data left'><a href=javascript:reple_hate()>"+list[i].reple_hate+"</a></td>";
+				+"<td class='RepleAlter'>"+list[i].reple_date+"</td>"
+				+"<td class='RepleAlter'>"
+				+"<a href=javascript:reple_like("+list[i].reple_idx+")>"
+				+"<img width='20' height='20'  alt='좋아요' src='./resources/img/like.PNG'/></a>"+list[i].reple_like
+				+"</td>"
+				+"<td class='RepleAlter'>"
+				+"<a href=javascript:reple_hate("+list[i].reple_idx+")>"
+				+"<img width='20' height='20'  alt='싫어요' src='./resources/img/hate.PNG'/></a>"+list[i].reple_hate
+				+"</td>";
 				if("${sessionScope.userId}"==userId[0].id)
 					{
-			content +="<td class='data left'><a href='javascript:repleDel("+list[i].reple_idx+");'>X</a>"+"</td>";
+					content +="<td  class='RepleAlter'><a href='javascript:repleDel("+list[i].reple_idx+");' style='text-decoration:none'>삭제</a>"+"</td>";
 					}
-			content +="</tr>";
+				content +="</tr>";
 		}
 		$("#repleZone").empty();
 		$("#repleZone").append(content);
 	}
 	
-	// 리플 삭제에 필요한 정보 보내기
-	function repleDel(reple_idx){				
-		console.log(reple_idx);
-		url = "./rest/repleDel";
-		data={};
-		data.reple_idx = reple_idx;
-		console.log(reple_idx);
-		sendServer(data, url);
-	}
-	
-	//댓글 추천보내기
-	function reple_like(){
-		url = "./rest/reple_like"
-		data = {}; 
-		data.like = reple_like;
-		console.log(data.like);
-		sendServer(data,url);
-	}
-	//댓글 비추천 보내기	
-	function reple_hate(){
-		url = "./rest/reple_hate"
-		data = {};
-		data.hate = reple_hate;
-		sendServer(data,url);
-	}	
+
 	</script>
 </html>

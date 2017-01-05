@@ -40,8 +40,8 @@
         <div id="Admin">
           <a href="./AdminMember"> 회원 관리</a>
           <a href="./AdminMessage"> 쪽지 관리</a>
-          <a href="#"> 이벤트 관리</a>
-          <a href="#"> 마일리지 관리</a>
+          <a href="./AdminEvent"> 이벤트 관리</a>
+          <a href="./AdminMileage"> 마일리지 관리</a>
           </div>
       <div>      
       <table>

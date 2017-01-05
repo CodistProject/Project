@@ -56,7 +56,11 @@
 		
 	</body>
 	<script>
-	
+	var msg="${msg}";
+	if(msg !="")
+		{
+		alert(msg);
+		}
 		// 메일 보내기(아이디찾기 or 비번찾기 or 이메일 문의) 성공관련 메시지 alert 띄우기
 		var msg = "${msg}";
 		var msg1 ="${Find_Id.msg}";

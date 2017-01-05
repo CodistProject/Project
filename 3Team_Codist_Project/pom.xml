@@ -23,7 +23,8 @@
 		</repository>
 	 </repositories>		
 	 
-	<dependencies>		
+	<dependencies>
+	
 	
 		<!-- java mail -->
 		<dependency>

@@ -136,6 +136,14 @@ public class MainController {
 		logger.info("상세보기");
 		return service.Board_Detail(board_idx);
 	}
+	
+	//코기 게시판 상세보기
+	@RequestMapping(value="/CodiBoard_Detail")
+	public ModelAndView CodiBoard_Detail(@RequestParam("board_idx") String board_idx ){
+		logger.info("상세보기");
+		return service.CodiBoard_Detail(board_idx);
+	}
+	
 	//게시판 수정 페이지 이동 
 	@RequestMapping(value = "/Board_update")
 	public ModelAndView Board_update(@RequestParam("board_idx") String board_idx) {	
@@ -215,14 +223,6 @@ public class MainController {
 	return null;//
 	}	
 	
-
-	//팝업 나만의 옷장
-	@RequestMapping(value="/PopUp_Mycloth")
-	public String PopUp_Mycloth(){
-		logger.info("나만의 옷장 이동");
-		return "PopUp_Mycloth";
-	}
-
 	// 이벤트 팝업창 띄우기
 	@RequestMapping(value="/Event_Popup")
 	public String Event_Popup(){
@@ -250,12 +250,22 @@ public class MainController {
 		logger.info("유저 비번찾기+이메일로 쏴주기1");
 	return service.Find_Pw(params);
 	}
+
+	
+	//관리자 회원관리 페이지
+	@RequestMapping(value="/AdminMemberPage")
+	public ModelAndView AdminMemberPage(){
+		logger.info("관리자 회원 관리 페이지");
+	return service.AdminMemberPage();
+	}
 	
 	//나만의 옷장 페이지 이동(index 에서)
 	@RequestMapping(value="/My_Cloth")
-	public String my_Cloth(){
+	public ModelAndView my_Cloth(@RequestParam("userId") String userId){
 		logger.info("나만의 옷장 페이지 요청");
-		return "My_Calendar";
+		logger.info(userId);
+		
+		return service.My_Cloth(userId);
 	}
 	
 }

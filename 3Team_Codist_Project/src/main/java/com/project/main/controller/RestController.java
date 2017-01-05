@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.main.dto.BoardDto;
 import com.project.main.dto.MemberInfo;
 import com.project.main.dto.ReplyDto;
 import com.project.main.service.ProjectService;
@@ -40,6 +41,14 @@ public class RestController {
 		return service.overlayNick(nick);
 	}
 	
+	//패션토크 게시판 상세보기(더보기)
+	@RequestMapping(value="/FT_Board_Detail")
+	public @ResponseBody Map<String,BoardDto> FT_Board_Detail(
+			@RequestParam("board_idx") String idx){
+			logger.info("패션토크 게시판 상세보기(더보기)");
+		return service.FT_Board_Detail(idx);
+	}
+	
 	//회원가입
 	@RequestMapping(value="/join")
 	public @ResponseBody MemberInfo join(
@@ -52,7 +61,7 @@ public class RestController {
 	@RequestMapping(value="/Board_list")
 	public @ResponseBody Map<String, Object> Board_list(
 					@RequestParam Map<String, String> params){
-		logger.info("리스트 보여주기");
+		logger.info("게시판 리스트 보여주기");
 		return service.Board_list(params);
 	}	
 	
@@ -63,29 +72,30 @@ public class RestController {
 		logger.info("코디 게시판 리스트 보여주기");
 		return service.Cd_list(params);
 	}	
-
-	//댓글 추천
-	@RequestMapping(value="/reple_like")
-	public @ResponseBody Map<String,Integer> reple_like(
-			@RequestParam("like") String reple_like){
-			logger.info("추천수 증가 시작");
-		return service.reple_like(reple_like);
-	}
+	
+	//Cloth 리스트 보여주기(외투,상의,하의)
+	@RequestMapping(value="/CC_list")
+	public @ResponseBody Map<String, Object> CC_list(
+			@RequestParam Map<String, String> params){
+		logger.info("Cloth 게시판 리스트 보여주기");
+		return service.CC_list(params);
+	}	
 	
 	//댓글 등록
-		@RequestMapping(value="/replyRegist")
-		public @ResponseBody Map<String, Integer> replyRegist(
-			@RequestParam Map<String, String> params){
-			logger.info("댓글 등록 요청");
-			return service.replyRegist(params);
-		}
+	@RequestMapping(value="/replyRegist")
+	public @ResponseBody Map<String, Integer> replyRegist(
+		@RequestParam Map<String, String> params){
+		logger.info("댓글 등록 요청");
+		return service.replyRegist(params);
+	}
+	
 	//댓글 리스트 보기
 	@RequestMapping(value="/replyList")
 	public @ResponseBody Map<String, ArrayList<ReplyDto>> replyList(
 			@RequestParam ("idx") String idx){
 		logger.info("댓글리스트 보기");
 		return service.replyList(idx);
-		}
+	}
 	
 	//댓글 삭제
 	@RequestMapping(value="/repleDel")
@@ -93,7 +103,25 @@ public class RestController {
 			@RequestParam  ("reple_idx") String reple_idx){
 		logger.info("댓글 삭제 기능 시행");
 		return service.repleDel(reple_idx);
-		}
+	}
+	
+	//댓글 추천
+	@RequestMapping(value="/reple_like")
+	public @ResponseBody Map<String,Integer> reple_like(
+			@RequestParam  ("reple_idx") int reple_idx){
+			logger.info("추천수 증가");
+		return service.reple_like(reple_idx);
+	}
+	
+	//댓글 비추천
+	@RequestMapping(value="/reple_hate")
+	public @ResponseBody Map<String,Integer> reple_hate(
+			@RequestParam  ("reple_idx") int reple_idx){
+			logger.info("추천수 감소");
+		return service.reple_hate(reple_idx);
+	}
+
+	
 	
 	// 이메일 문의(Gmail/이메일 기능)
 	@RequestMapping(value="/Email")
@@ -103,11 +131,13 @@ public class RestController {
 		return service.Email(params);
 	}
 	
-	// 캘린더 기능(나만의 옷장)
-	@RequestMapping(value="/My_Cloth")
-	public @ResponseBody Map<String, String> My_Cloth(			
-			@RequestParam Map<String, String> params){
-		logger.info("나만의 옷장 페이지 이동 / 캘린더 보여주기");
-		return service.my_Cloth(params);
+	//ID중복 체크
+	@RequestMapping(value="/FindNick")
+	public @ResponseBody Map<String,String> FindNick(
+			@RequestParam("userId") String userId){
+			logger.info("닉네임 찾기");
+			logger.info(userId);
+		return service.Find_Nick(userId);
 	}
+	
 }

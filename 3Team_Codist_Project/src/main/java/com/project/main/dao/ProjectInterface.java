@@ -1,10 +1,8 @@
 package com.project.main.dao;
 import java.util.ArrayList;
-import java.util.Map;
 
 import com.project.main.dto.BoardDto;
-import org.springframework.web.servlet.ModelAndView;
-
+import com.project.main.dto.ClothDto;
 import com.project.main.dto.MemberInfo;
 import com.project.main.dto.ReplyDto;
 
@@ -47,17 +45,14 @@ public interface ProjectInterface {
 	//카테고리 네임 가져오기(idx >> 카테고리 네임)
 	public String CategoryName(String board_idx);
 		
-	//패션토크 상세보기,FT_수정하기 가져오기
+	//게시판 상세보기,FT_수정하기 가져오기
 	public BoardDto Board_Detail(String board_idx);
 	
 	//QnA 글쓰기
 	public int QnABoard_Writes(String nickname, String subject, String content, String filename, String newfilename);
 
-	//패션토크 상세보기
-	public BoardDto FT_Board_Detail(String board_idx);
-	
 	//코디게시판 상세보기
-	public BoardDto CodiBoard_Detail(String board_idx);	
+	public ArrayList<ClothDto> CodiBoard_Detail(String board_idx);	
 
 	//게시판 리스트 호출(코디 게시판 제외)
 	public ArrayList<BoardDto> Board_list(int start, int end, String category_name);
@@ -65,9 +60,15 @@ public interface ProjectInterface {
 	//코디 게시판 리스트 호출
 	public ArrayList<BoardDto> Cd_list(int start, int end, String category_name);
 	
+	//상의,하의, 외투 리스트 가져오기
+	public ArrayList<ClothDto> Cloth_list(int start, int end, String category_name);
+		
 	//리스트 전체 갯수
 	public int BoardCount(String category_name);
-
+	
+	//상의.하의.외투 전체 갯수
+	public int ClothCount(String category_name);
+	
 	//게시판 글쓰기
 	public int Board_Write(String nickName, String subject, String content, String filename, String newfilename,
 			String category_name);
@@ -106,13 +107,17 @@ public interface ProjectInterface {
 	public int repleDel(String reple_idx);
 	
 	//댓글 추천수 증가
-	public int reple_like(String reple_like);
+	public int reple_like(int reple_idx);
+	
+	//댓글 추천수 증가
+	public int reple_hate(int reple_idx);
 	
 	//아이디 찾기
 	public ArrayList<ReplyDto> FindId(String idx);
 
 	//코디 게시판 글쓰기
 	public void CodiBoard_Writes(String filename, String category_name, String newfilename);
+
 	
 
 	

@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.main.dao.ProjectInterface;
 import com.project.main.dto.BoardDto;
+import com.project.main.dto.ClothDto;
 import com.project.main.dto.MemberInfo;
 import com.project.main.dto.ReplyDto;
 import com.project.main.util.UploadFile;
@@ -167,7 +168,7 @@ public class ProjectService {
 		return mav;
 	}
 	
-	//게시판 상세보기
+	//게시판 상세보기(코디 제외)
 	public ModelAndView Board_Detail(String board_idx) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		ModelAndView mav = new ModelAndView();
@@ -177,12 +178,9 @@ public class ProjectService {
 		String page="main";
 		switch(inter.CategoryName(board_idx))
 		{
-		case "FT":
-			page="FT_Board_Detail";
-		break;
-		
+	
 		case "CP":
-			page="CodiBoard_Detail";
+			page="Coplz_Detail";
 		break;
 			
 		case "QnA":
@@ -199,6 +197,22 @@ public class ProjectService {
 		return mav;
 		
 	}
+	//코디 게시판 상세보기
+	public ModelAndView CodiBoard_Detail(String board_idx) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("content",inter.Board_Detail(board_idx));
+		mav.addObject("subcontent",inter.CodiBoard_Detail(board_idx));
+		mav.setViewName("CodiBoard_Detail");
+		return mav;
+	}
+	//패션토크 상세보기
+	public Map<String, BoardDto> FT_Board_Detail(String idx) {
+		Map<String, BoardDto> obj= new HashMap<String, BoardDto>();
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		obj.put("content", inter.Board_Detail(idx));
+		return obj;
+	}
 	
 	//게시판 수정페이지이동
 	public ModelAndView Board_update(String board_idx) {
@@ -212,7 +226,7 @@ public class ProjectService {
 		break;
 		
 		case "CP":
-			page="CodiBoard_Update";
+			page="Coplz_Update";
 		break;
 			
 		case 	"QnA":
@@ -440,7 +454,7 @@ public class ProjectService {
 		return json;
 	}			
 	
-	//Cd리스트 보여주기 
+	//CB리스트 보여주기 
 	public Map<String, Object> Cd_list(Map<String, String> params) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		//현재페이지
@@ -451,7 +465,7 @@ public class ProjectService {
 		logger.info("현재 페이지 : {}",currPage);
 		logger.info("페이지 당 보여줄 수 : {}",pagePerNum);
 	
-		String category_name ="Cd";
+		String category_name ="CB";
 		int end = currPage*pagePerNum; 				//게시문 끝 번호
 		int start = end-pagePerNum+1;					//게시물 시작 번호
 		int allCnt = inter.BoardCount(category_name);	//전체 개시물 수
@@ -472,8 +486,38 @@ public class ProjectService {
 		json.put("page", page);		
 					
 		return json;
-	}			
+	}	
+	//Cloth보여주기(외투, 상의, 하의)
+	public Map<String, Object> CC_list(Map<String, String> params) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		//현재페이지
+		int currPage =Integer.parseInt(params.get("page"));
+				
+		//페이지당 보여줄 게시문 갯수
+		int pagePerNum =Integer.parseInt(params.get("pagePerNum"));
+		logger.info("현재 페이지 : {}",currPage);
+		logger.info("페이지 당 보여줄 수 : {}",pagePerNum);
 	
+		String category_name =params.get("category_name");
+		int end = currPage*pagePerNum; 				//게시문 끝 번호
+		int start = end-pagePerNum+1;					//게시물 시작 번호
+		int allCnt = inter.ClothCount(category_name);	//전체 개시물 수
+		logger.info("전체 게시물수 : {}",allCnt);
+				
+		int page =allCnt%pagePerNum>0? 
+				Math.round(allCnt/pagePerNum)+1:
+					Math.round(allCnt/pagePerNum); // 생성 할 수 있는 페이지
+		logger.info("생성 할수 있는 게시물 수:{}",page);
+		Map<String, Object> json = new HashMap<String, Object>();
+		Map<String,ArrayList<ClothDto>> obj=
+				new HashMap<String,ArrayList<ClothDto>>();
+		obj.put("list", inter.Cloth_list(start, end,category_name));
+		json.put("jsonList", obj);
+		json.put("currPage", currPage);
+		json.put("allCnt", allCnt);		
+		json.put("page", page);
+		return json;
+	}
 	//게시글 추천
 	public ModelAndView  ft_like(String ft_like) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
@@ -492,34 +536,7 @@ public class ProjectService {
 		mav.setViewName("ft_hate");	
 	return mav;
 	}
-
 	
-	//댓글 등록
-	public Map<String, Integer> replyRegist(Map<String, String> params) {
-			
-			inter = sqlSession.getMapper(ProjectInterface.class);
-			Map<String, Integer> obj = new HashMap<String, Integer>();
-			int idx = Integer.parseInt(params.get("idx"));
-			String nick = params.get("nickname");
-			String content= params.get("content");
-			logger.info("글번호:"+idx);
-			logger.info("닉네임:"+nick);
-			logger.info("내용:"+content);
-			obj.put("msg",inter.replyRegist(idx,nick,content));
-		return obj;
-		}			
-	
-	
-	//댓글리스트
-	public Map<String, ArrayList<ReplyDto>> replyList(
-			String idx) {
-			inter = sqlSession.getMapper(ProjectInterface.class);
-			Map<String, ArrayList<ReplyDto>> obj 
-				= new HashMap<String, ArrayList<ReplyDto>>();
-			obj.put("list", inter.replyList(idx));
-			obj.put("userId",inter.FindId(idx) );
-			return obj;
-	}
 	//게시판 수정하기
 	public ModelAndView update(Map<String, String> params) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
@@ -541,6 +558,32 @@ public class ProjectService {
 		return mav;
 	}
 	
+	//댓글 등록
+	public Map<String, Integer> replyRegist(Map<String, String> params) {
+			
+			inter = sqlSession.getMapper(ProjectInterface.class);
+			Map<String, Integer> obj = new HashMap<String, Integer>();
+			int idx = Integer.parseInt(params.get("idx"));
+			String nick = params.get("nickname");
+			String content= params.get("content");
+			logger.info("글번호:"+idx);
+			logger.info("닉네임:"+nick);
+			logger.info("내용:"+content);
+			obj.put("msg",inter.replyRegist(idx,nick,content));
+		return obj;
+	}			
+		
+	//댓글리스트
+	public Map<String, ArrayList<ReplyDto>> replyList(
+			String idx) {
+			inter = sqlSession.getMapper(ProjectInterface.class);
+			Map<String, ArrayList<ReplyDto>> obj 
+				= new HashMap<String, ArrayList<ReplyDto>>();
+			obj.put("list", inter.replyList(idx));
+			obj.put("userId",inter.FindId(idx) );
+			return obj;
+	}
+	
 	// 댓글 삭제 기능
 	public Map<String, Object> repleDel(String reple_idx) {		
 		inter = sqlSession.getMapper(ProjectInterface.class);	
@@ -550,12 +593,23 @@ public class ProjectService {
 		map.put("success", success);				
 		return map;
 	}
+	
 	//댓글 추천 기능
-	public Map<String, Integer> reple_like(String reple_like) {
+	public Map<String, Integer> reple_like(int reple_idx) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		int success=0;
-		success= inter.reple_like(reple_like);	
+		success= inter.reple_like(reple_idx);	
+		map.put("success", success);
+		return map;
+	}
+	
+	//댓글 추천 기능
+	public Map<String, Integer> reple_hate(int reple_idx) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		int success=0;
+		success= inter.reple_hate(reple_idx);	
 		map.put("success", success);
 		return map;
 	}
@@ -664,7 +718,7 @@ public class ProjectService {
 				map.put("msg", "찾으시는 비밀번호가 이메일로 전송되었습니다.");
 			}
 			
- //message.setContent("내용","text/html; charset=utf-8");//글내용을 html타입 charset설정
+			//message.setContent("내용","text/html; charset=utf-8");//글내용을 html타입 charset설정
 			
 			System.out.println("이메일 전송중!");
 			Transport.send(message);
@@ -738,6 +792,38 @@ public class ProjectService {
 		mav.setViewName("ioi");
 		return mav;
 	}
-}
 	
+	//관리자 회원관리 페이지(미완성)
+	public ModelAndView AdminMemberPage() {
+		ModelAndView mav= new ModelAndView();
+		mav.setViewName("Admin_Manage_Member");
+		return mav;
+	}
+	
+	//닉네임찾기
+	public Map<String, String> Find_Nick(String userId) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		Map<String, String> obj =new HashMap<String,String>();
+		obj.put("userNick",inter.FindNick(userId));
+		System.out.println(inter.FindNick(userId));
+		return obj;
+	}
+	
+	// 나만의 옷장이동(메인->나만의 옷장 / 로그인 시 유효성검사)
+	public ModelAndView My_Cloth(String userId) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav= new ModelAndView();
+		System.out.println(userId);
+		String page="ioi";
+		String msg="로그인 후 가능합니다.";
+		if(!userId.equals("' '"))
+		{
+			page="My_Calendar";
+			msg="성공";
+		}
+		mav.addObject("msg",msg);
+		mav.setViewName(page);
+		return mav;
+	}	
+}	
 	

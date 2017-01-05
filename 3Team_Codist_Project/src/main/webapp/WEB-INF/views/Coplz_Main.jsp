@@ -34,22 +34,18 @@
 			}			
 			.CP_subject{
 				text-align : center;
-			}
-			#CP1{
-				border : 1px solid white;	
-				border-top-color : black;
-				border-right-color : black;				
-				border-bottom-color : black;
-			}
-			#CP6{
-				border : 1px solid white;	
-				border-top-color : black;
-				border-left-color : black;				
-				border-bottom-color : black;
-			}
-			.CP_subject{
 				background-color : yellow;
 			}
+			.CP1,.CP4,.CP5
+			{
+				font-size: 8px;
+				width: 20px;
+			}
+			
+			.CP2
+			{
+				width: 150px;
+			}		
 			/* 버튼 css */
 			#CPQna
 			{
@@ -110,8 +106,8 @@
 		</br>
 		<table class="CP_board2" align="center">
 			<thead>		
-				<tr>					
-					<td id="btn_write" colspan="6" align="right">
+				<tr>
+					<td id="btn_write" colspan="5" align="right">
 							게시물 갯수 : 
 							<select id="CP_page">
 							<option value="5">5</option>
@@ -119,16 +115,17 @@
 							<option value="15">15</option>
 							<option value="20">20</option>
 							</select>
-						<button id="CPQna" onclick="location.href='./Coplz_Write?userId=${sessionScope.userId}'">글쓰기</button>
+						<c:if test="${sessionScope.userId !=null}">
+							<button id="CPQna" onclick="location.href='./Coplz_Write?userId=${sessionScope.userId}'">글쓰기</button>
+						</c:if>
 					</td>					
 				</tr>		
-				<tr>
-					<td class="CP_subject" id="Ft1">글 번호</td>
-					<td class="CP_subject" id="Ft2">제목</td>
-		    		<td class="CP_subject" id="Ft3">작성자</td>
-		    		<td class="CP_subject" id="Ft4">등록일</td>				
-					<td class="CP_subject" id="Ft5">이미지</td>
-					<td class="CP_subject" id="Ft6">조회수</td>					
+				<tr  class="CP_subject">
+					<td class="CP1">글 번호</td>
+					<td class="CP2">이미지</td>
+		    		<td class="CP3">제목</td>				
+					<td class="CP4">작성자</td>
+					<td class="CP5">조회수</td>
 				</tr>
 			</thead>			
 			<tbody id="list">
@@ -144,148 +141,133 @@
 	</body>
 	<script>
 	
-	var currPage = 1;
-	
-	listCall(currPage);
-	
-	/* $("#Ft_page").change(function(){
+	   var currPage = 1;
+		
 		listCall(currPage);
-	}); */	
+		//페이지 갯수 정하기
+		$("#CP_page").change(function(){
+			listCall(currPage);
+		}); 
+		
 
-	function listCall(currPage){
-		var url="./rest/Board_list";
-		var data = {};
-		data.page = currPage;
-		data.category_name="CP";
-		console.log("카테고리 네임 :"+data.category_name);
-		console.log(data.page);		
-		data.pagePerNum = $("#CP_page").val();
-		reqServer(url, data);
-	}
-	
-	function reqServer(url, data){
-		console.log(url);
-		$.ajax({
-			url:url,
-			type:"post",
-			data:data,
-			dataType:"json",
-			success:function(d){
-				console.log(d)
-				if(url == "./rest/Board_list"){
-					printList(d.jsonList.list);
-					//페이지 세팅
-					currPage = d.currPage;
-					printPaging(d.allCnt, d.page);
-					}
-				},error:function(e){
-						console.log(e)
-					}
-		});
-	}
-	
-	function printList(list){
-		console.log(list);
-		var content = "";
-		for(var i=0; i<list.length; i++){
-				content +="<tr>"
-							+"<td>"+list[i].board_idx+"</td>"
-							+"	<td>"
-							+"<a href='./Board_Detail?idx="+list[i].board_idx+"'>"
-							+list[i].subject+"</a>";
-							if(list[i].replies >0){
-								content += " <b>["+list[i].replies+"]</b>";
-							}							
-				content +="</td>"
-							+"<td>"+list[i].nickName+"</td>"
-							+"<td>"+list[i].reg_date+"</td>"
-							+"<td>이미지 없어!!</td>"
-							+"<td>"+list[i].bhit+"</td>"
-							+"</tr>";
-		}
-		$("#list").empty();
-		$("#list").append(content);
-	}
-	//일반 페이징 방식		
-	function printPaging(allCnt, pageNum){
-	console.log("전체 게시물 :"+allCnt );
-	console.log("생성 가능 페이지 :"+pageNum );
-	console.log("현재 페이지 :"+currPage);
-	
-	$("#CP_pageNum").empty();
-	var start;	//페이지 시작
-	var end;	//페이지 끝
-	var range = (currPage/5);	//다음 페이지 있는지 여부
-	var content = "";
-	
-	if(range >1){//5페이지 넘었을 경우
-		end = currPage%5 == 0 ?
-				//Math.floor 소수점 다버림 
-				(Math.floor(range))*5
-				:(Math.floor(range)+1)*5;
-		start = Math.floor(end-4);
-	}else{//5페이지 미만일 경우
-		start = 1;
-		end = 5;
-	}
-	
-	//페이징 표시=========================	
-	//더보기로 바꾸기
-	/* 
-	if(currPage > 5){
-		content +="<a href='#' onclick='listCall("
-		+(start-1)+")'>이전</a> | "
-	}
-	 
-	for(var i=start; i<=end;i++){
-		if(i<=pageNum)
-		{
-			if(currPage ==i){
-				content +="<b>"+i+"</b>";
-			}else{
-				content += " <a href='#' onclick='listCall("+i+")'>"
-				+i+"</a> "
-			}					
-		}			
-	} 
-		
-		//마지막 페이지가 전체 페이지 수 보다 적으면 다음 링크 생성 [다음>]
-		if(end<pageNum)
-		{
-			content +=" | <a href='#' onclick='listCall("
-					+(end+1)+")'>다음</a> "
+		function listCall(currPage){
+			var url="./rest/Board_list";
+			var data = {};
+			data.page = currPage;
+			data.category_name="CP";
+			console.log(currPage);
+			data.pagePerNum = $("#CP_page").val();
+			reqServer(url, data);
 		}
 		
-		$("#Ft_pageNum").append(content);
+		function reqServer(url, data){
+			console.log(url);
+			$.ajax({
+				url:url,
+				type:"post",
+				data:data,
+				dataType:"json",
+				success:function(d){
+					console.log(d)
+					if(url == "./rest/Board_list"){
+						printList(d.jsonList.list);
+						//페이지 세팅
+						currPage = d.currPage;
+						printPaging(d.allCnt, d.page);
+						}
+					},error:function(e){
+							console.log(e)
+						}
+			});
+		}
+		
+		function printList(list){
+			console.log(list);
+			var content = "";
+			for(var i=0; i<list.length; i++){
+								content +="<tr>"
+											+"<td class='CP1'>"+list[i].board_idx+"</td>"
+							if(list[i].newfilename != null){
+								content += "<td class='CP2'>" 
+										    +"<img width='15px' src='resources/img/default.jpg'/>";
+								}
+							else
+								{
+								content +="<td class='CP2'>"
+										    +"<img width='150' height='50'  alt='물물교환' src='./resources/upload/"+list[i].newfilename+"'/>";
+								}
+								content +=	"</td>"
+											+"	<td class='CP3'>"
+											+"<a href='./Board_Detail?board_idx="+list[i].board_idx+"'>"
+											+list[i].subject
+											+"</a>";
+											if(list[i].replies >0){
+												content += " <b>["+list[i].replies+"]</b>";
+											}
+											
+								content +="</td>" 
+											+"<td class='CP4'>"+list[i].nickName+"</td>"
+											+"<td class='CP5'>"+list[i].bhit+"</td>"
+											+"</tr>";
+			}
+			$("#list").empty();
+			$("#list").append(content);
+		};
+			//일반 페이징 방식		
+			function printPaging(allCnt, pageNum){
+			console.log("전체 게시물 :"+allCnt );
+			console.log("생성 가능 페이지 :"+pageNum );
+			console.log("현재 페이지 :"+currPage);
 			
-	*/
-	//[< 이전]
-	if(currPage > 5){
-		content +="<a href='#' onclick='listCall("
-			+(start-1)+")'>이전</a> | "
-	}		
-	
-	 for(var i=start; i<=end;i++)
-	{
-		if(i<=pageNum)
-		{
-			if(currPage ==i){
-				content +="<b>"+i+"</b>";
-			}else{
-				content += " <a href='#' onclick='listCall("+i+")'>"
-				+i+"</a> "
-			}					
-		}			
-	} 
-	
-	//마지막 페이지가 전체 페이지 수 보다 적으면 다음 링크 생성 [다음>]
-	if(end<pageNum)
-	{
-		content +=" | <a href='#' onclick='listCall("
-				+(end+1)+")'>다음</a> "
-	}
-	
-	$("#CP_pageNum").append(content);	
-}
+			$("#CP_pageNum").empty();
+			var start;	//페이지 시작
+			var end;	//페이지 끝
+			var range = (currPage / 5);	//다음 페이지 있는지 여부
+			var content = "";
+			
+			if(range >1){//5페이지 넘었을 경우
+				end = currPage%5 == 0 ?
+						//Math.floor 소수점 다버림 
+						(Math.floor(range))*5
+						:(Math.floor(range)+1)*5;
+				start = Math.floor(end-4);
+			}else{//5페이지 미만일 경우
+				start = 1;
+				end = 5;
+			}
+			
+			//페이징 표시			
+			//< 이전
+			if(currPage > 5){
+				content +="<a href='javascript:listCall("
+					+(start-1)+");'>이전</a> | "
+			}
+			
+			
+			
+			 for(var i=start; i<=end;i++)
+			{
+				if(i<=pageNum)
+				{
+					if(currPage ==i){
+						content +="<b>"+i+"</b>";
+					}else{
+						content += " <a href='#' onclick='listCall("+i+")'>"
+						+i+"</a> "
+					}					
+				}			
+			} 
+			
+			//마지막 페이지가 전체 페이지 수 보다 적으면 다음 링크 생성
+			if(end<pageNum)
+			{
+				content +=" | <a href='#' onclick='listCall("
+						+(end+1)+")'>다음</a> "
+			}
+			
+			$("#CP_pageNum").append(content);
+			
+		
+		};
 	</script>
 </html>

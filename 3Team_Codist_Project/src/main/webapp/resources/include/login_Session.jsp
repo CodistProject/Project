@@ -21,8 +21,16 @@
 				<br/>
 				<tr>
 					<td>
+					
+					<c:if test="${sessionScope.userId !='ADMIN'}">
 						<a href="./MemberData_view?userId=${sessionScope.userId}">마이페이지</a>  
-					 	<a href="./logout?userId=${sessionScope.userId}">로그아웃</a>
+					</c:if>
+	
+					<c:if test="${sessionScope.userId =='ADMIN'}">
+						<a href="./AdminMemberPage">관리페이지</a>  
+					</c:if>
+					
+					 <a href="./logout?userId=${sessionScope.userId}">로그아웃</a>
 					 </td>				
 			</table>	
 	</body>
