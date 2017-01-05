@@ -738,29 +738,6 @@ public class ProjectService {
 		mav.setViewName("ioi");
 		return mav;
 	}
-
-	// 나만의 옷장(캘린더 기능)
-	public Map<String, String> my_Cloth(Map<String, String> params) {
-		// 구글 캘린더에서 사용할 Google Account Email 주소
-		String gLoginAddr = "0304kiss@gamil.com";
-		// Google Calendar 패스워드인 Google Account 패스워드
-		String gLoginPass = "sksqkqh1";
-		// Calendar 등록용 : 스케쥴의 제목(한글 사용 가능)
-		String title ="프로젝트";
-		// Calendar 등록용 : 장소 (한글 사용 가능)
-		String place = "ICIA";
-		// Calendar 등록용 : 내용(한글 사용 가능)
-		String memo = "프로젝트 진행중";
-		
-		try{
-			// Google Calendar용 서비스 URL 설정
-			URL postUrl = new URL("http://www.google.com/calendar/feeds/default/private/full");
-		}catch(Exception e){
-			
-		}
-
-		return null;
-	}
 }
 	
 	
