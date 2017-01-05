@@ -51,7 +51,7 @@
 			{/* 외투 상의 하의 담는 div */
 			position:absolute;
 			left: 230px;
-			top: 600px;
+			top: 730px;
 			}	
 		
 		div.img5
@@ -114,6 +114,23 @@
 		{
 			border: 1px solid;
 		}
+		#likehate
+		{
+			position: absolute;
+			width: 90%;
+			height: 90%;
+		}
+		#LikeGO
+		{
+			position: relative;
+			top: 50%;
+			left: 40%;
+		}
+		#LIKE
+		{
+			position: relative;
+			left: 100px;
+		}
 		</style>
  	</head>
   	<body>  	
@@ -143,7 +160,15 @@
 		   		</div>
 	   		</c:if>
    		</c:forEach>
-   		
+   		<div id='likehate'>
+   		<div id="LikeGO">
+   			 		<a href=javascript:UP_like('${content.board_idx}')>
+   			 		<input type="hidden" value="${content.nickName}" id="nicknamefind"/>
+   			 		<img width="200px" height="100px" alt="조아요" src="./resources/img/like.PNG"> 
+   			 		</a>
+   			 		<br/><span id="LIKE" >${content.ft_like}</span>
+   		</div>
+   		</div>
    		<div class="det">
    			<table class="table1" >
    				<tr>
@@ -180,6 +205,9 @@
    				<tr>
    					<td class="td6">
    					<div id="PantsList" class="img5" id="Pants">
+   							<h3>
+							※ 클릭시 구입이 가능합니다
+							</h3>
    					<!-- 하의 리스트 뿌리기 -->
    					</div>
    					<div id="PantsAdd"><!-- 더보기 --></div>   					
@@ -262,6 +290,7 @@
   	}
   	// 나만의 옷장에 담기  
   	function RegistCloth(){
+  			
   			/* 아작스처리 */
   	  		$("#PopUp2Cloth").css("display", "block");  			
   			$("#PopUpCloth").css("display", "none");
@@ -287,6 +316,24 @@
  	 });
   	
 	
+	 //추천 하기
+	function UP_like(board_idx){
+		url = "./rest/reple_like"
+		data = {}; 
+		data.board_idx = board_idx;
+		data.nickname=
+		console.log(board_idx);
+		console.log(data.nickname);
+		if(data.nickname=="")
+			{
+			alert("로그인 후 가능합니다.");
+			}
+		else
+			{
+			//reqServer(url,data);
+			}
+	};
+  	
 	//리스트 뿌리기
 	var OutercurrPage = 1;
 	var TopcurrPage= 1;
