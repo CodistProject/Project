@@ -7,6 +7,7 @@
   		<title>회원정보 수정</title>
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="resources/css/myPage.css"/>
+		<link rel="stylesheet" type="text/css" href="resources/css/button.css"/>
  	</head>
   	<body>
    	<body>   	
@@ -65,8 +66,8 @@
   			<table id="Mem_Modi_table1" align="right">
   				<tr>
   					<td>
-  						<input type="submit"  value="회원 정보 수정"/>
-  						<input type="button" value="취소" onclick="location.href='MemberData_view?userId=${sessionScope.userId}'"/>
+  						<input type="submit" class="bt"  value="회원 정보 수정"/>
+  						<input type="button" class="bt" value="취소" onclick="location.href='MemberData_view?userId=${sessionScope.userId}'"/>
   					</td>
   				</tr>
   			</table>  		

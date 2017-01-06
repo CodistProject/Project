@@ -7,64 +7,7 @@
 		<title>아이디/비밀번호 찾기</title>
 		<script src ="//code.jquery.com/jquery-3.1.0.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="resources/css/button.css"/>
-		<style>
-		
-		div#content {
-            position: absolute;
-            left:290px;
-            bottom: 200px;
-            width: 600px;
-            padding: 15px;
-            margin-bottom: 20px;
-            float: left;
-            border: 1px solid #bcbcbc;
-	        }
-	      li.topLi{
-	          list-style-type: none;
-	          padding: 5px;
-	      }
-	      
-	      hr.one {
-	          border: 1px solid red;
-	          width: 600px;
-	      }
-	      
-	      p.p1 {
-	          font-size: 14px;
-	      }
-	      
-
-	      div.list {
-	          width: 500px;
-	          padding: 10px;
-	          margin-bottom: 20px;
-	          float: left;
-	      }
-	      
-	      li.topLi {
-	          list-style-type: none;
-	          margin: 5px;
-	          padding: 5px;
-	          border: 0;
-	          float: left;
-	      }
-	      
-	      ul.topUi {
-	          list-style: none;
-	          margin: 0px;
-	          padding: 0;
-	      }
-	      
-	      a.a1 {
-	          text-decoration: none;
-	          color: black;
-	          font-size: 13px;
-			}
-		
-		.find{
-		line-height:200%;
-		}
-		</style>
+		<link rel="stylesheet" type="text/css" href="resources/css/findId.css"/>
 	</head>
 	<body>
 		<div>
@@ -89,7 +32,7 @@
                 <input id="userName" name="user_Name" type="text" size="14" maxlength="14" />
             </li>
  			<li>phone :
-                <select id="phone1" name="userPhone">
+                <select id="phone1" name="userPhone" class="sel">
                         <option value="">선택하세요</option>
                         <option value="010">010</option>
                         <option value="011">011</option>

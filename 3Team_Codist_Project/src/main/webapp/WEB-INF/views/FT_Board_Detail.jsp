@@ -15,7 +15,7 @@
 		<table class="detail">
 			<tr>
 				<td>글번호</td>
-				<td id="idx">${content.board_idx}</td>
+				<td id="idx" height="30px">${content.board_idx}</td>
 				<td>작성자</td>
 				<td>${content.nickName}</td>
 				<td>조회수</td>
@@ -23,17 +23,17 @@
 			</tr>
 			<tr>
 				<td>제목</td>
-				<td colspan="5" class="left">${content.subject}</td>
+				<td colspan="5" class="left" height="50px">${content.subject}</td>
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td  colspan="5" class="left">${content.content}
+				<td  colspan="5" class="left" height="200px">${content.content}
 				</td>
 				
 			</tr>
 			<tr>
 				<td>첨부파일</td>
-				<td colspan="5" class="left" id="attach">	
+				<td colspan="5" class="left" id="attach" width="30px">	
 				</td>
 			<tr>
 				<td colspan="6">

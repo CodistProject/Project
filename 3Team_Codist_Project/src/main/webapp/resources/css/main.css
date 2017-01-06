@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 @import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
 			/*메인 페이지 ui 상단 좌, 우  */
-		html, body, h1, h2, h3, h4, h5, h6, li, p, table {
+		html, body,h,h1, h2, h3, h4, h5, h6, li, p, table {
 				font-family: 'Jeju Gothic', serif;
 				font-size: 13pt;
 			}
