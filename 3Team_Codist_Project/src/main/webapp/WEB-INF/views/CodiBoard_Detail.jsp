@@ -251,7 +251,7 @@
 	   			</tr>
 	   			<tr>
 	   				<td align="center">
-	   					<input type="button" value="나만의 옷장으로 이동" onclick="RegistCloth()"/>
+	   					<input type="button" value="나만의 옷장으로 담기" onclick="RegistCloth()"/>
 	   					<input type="button" value="취소"  onclick="cancel()"/>			
    					</td>
    				</tr>   			
@@ -275,8 +275,6 @@
 	   </div>
   	 
    </div>
-
-   
   	</body>
   	<script>
 	
