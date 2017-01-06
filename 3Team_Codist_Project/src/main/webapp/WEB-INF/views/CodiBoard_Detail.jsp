@@ -84,7 +84,7 @@
 			background-color : yellow;
 			width:250px;
 			left :700px;
-			top: 400px;
+			top: 200px;
 			padding : 10px;
 			display: none;	
 			}
@@ -94,7 +94,7 @@
 			background-color : yellow;
 			width:250px;
 			left :700px;
-			top: 400px;
+			top: 200px;
 			padding : 10px;	
 			display: none;
 			}
@@ -123,7 +123,7 @@
 		#LikeGO
 		{
 			position: relative;
-			top: 50%;
+			top: 25%;
 			left: 40%;
 		}
 		#LIKE

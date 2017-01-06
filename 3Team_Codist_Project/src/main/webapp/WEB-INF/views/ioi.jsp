@@ -6,6 +6,7 @@
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>메인 홈페이지</title>
+		<link rel="stylesheet" type="text/css" href="resources/css/ioi.css"/>
 		<style>
 			div.bord{
 				border-top-style: solid;
@@ -33,7 +34,6 @@
 			<jsp:include page="../../resources/include/index.jsp"></jsp:include>
 		</div>
 		<div class="content">
-		
 			BEST 코디
 			<div class="bord">
 				코디 게시판 목록

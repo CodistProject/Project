@@ -1,0 +1,71 @@
+@CHARSET "UTF-8";
+/* 비번 찾기  css */
+
+		 div#content {
+            position: absolute;
+            left:290px;
+            bottom: 150px;
+            width: 600px;
+            padding: 15px;
+            margin-bottom: 20px;
+            float: left;
+            border: 1px solid #bcbcbc;
+	        }
+	      
+	      li.topLi{
+	          list-style-type: none;
+	          padding: 5px;
+	      }
+	      
+	      hr.one {
+	          border: 1px solid red;
+	          width: 600px;
+	      }
+	      
+	      p.p1 {
+	          font-size: 14px;
+	      }
+	      
+
+	      div.list {
+	          width: 500px;
+	          padding: 10px;
+	          margin-bottom: 20px;
+	          float: left;
+	      }
+	      
+	      li.topLi {
+	          list-style-type: none;
+	          margin: 5px;
+	          padding: 5px;
+	          border: 0;
+	          float: left;
+	      }
+	      
+	      ul.topUi {
+	          list-style: none;
+	          margin: 0px;
+	          padding: 0;
+	      }
+	      
+	      a.a1 {
+	          text-decoration: none;
+	          color: black;
+	          font-size: 13px;
+			}
+		 
+		.find{
+		line-height:200%;
+		}
+		/* select 박스 css*/
+			select::-ms-expand { display: none; }
+			select.sel { 
+			width: 150px; /* 원하는 너비설정 */ 
+			padding: .3em .2em; /* 여백으로 높이 설정 */ 
+			font-family: inherit; /* 폰트 상속 */ 
+			background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */
+			 border: 1px solid #999; 
+			 border-radius: 0px; /* iOS 둥근모서리 제거 */ 
+			 -webkit-appearance: none; /* 네이티브 외형 감추기 */ 
+			 -moz-appearance: none; appearance: none; 
+			}	

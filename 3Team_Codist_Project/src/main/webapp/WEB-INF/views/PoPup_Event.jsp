@@ -15,7 +15,6 @@
 				padding: 5px;
 				text-align: center;				
 			}
-			
 			#popup{		
 				padding: 10px;			
 				width: 450px;
@@ -24,23 +23,18 @@
 				border: 1px solid gray;			
 				/* display:none; */
 			}
-			
 			.winner{
 				float: right;
 				padding: 15px;
-		
 				width:50px;			
 			}
-			
 			.event{				
 				width: 400px;
 				height: 500px;
 			}
-			
 			#eventclose{
 				float: right;
 			}
-			
 			.winnerclick{
 				text-decoration: none;
 			}					

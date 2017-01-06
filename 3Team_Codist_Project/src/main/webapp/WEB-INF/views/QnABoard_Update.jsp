@@ -6,42 +6,14 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Q & A 수정하기</title>
 		<script src ="//code.jquery.com/jquery-3.1.0.min.js"></script>
-		<style>
-			#center {
-	            position: relative;
-	            left:150px;
-	            top: 10px;
-	            width: 750px;
-	            padding: 15px;
-	            margin-bottom: 20px;
-	            float: left;
-	            border: 1px solid #bcbcbc;
-	        }
-			table,td{
-			
-			border : 2px solid gray;
-			border-collapse: collapse;
-			margin : 5px;
-			text-align: center;
-		}
-		table{
-			width:100%;
-		}
-		input[type='text']{
-			width:100%;
-		}
-		textarea{
-			width:100%;
-			resize:none;
-		
-		}
-		</style>
+		<link rel="stylesheet" type="text/css" href="resources/css/button.css"/>
+		<link rel="stylesheet" type="text/css" href="resources/css/contentView.css"/>
 	</head>
 	<body>
 	<jsp:include page="../../resources/include/index.jsp"></jsp:include>
-	<div id="center">
+	<div class="content">
 	<form action="Board_update" method="post">
-		<table>
+		<table class="detail">
 			<tr>
 				<td>제목</td>
 				<td>
@@ -69,8 +41,8 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<input type="submit" value="수정"/>
-					<input type="button" onclick="location.href='./qna'"value="취소"/>
+					<input class="bt" type="submit" value="수정"/>
+					<input class="bt" type="button" onclick="location.href='./qna'"value="취소"/>
 				</td>
 			</tr>
 		</table>

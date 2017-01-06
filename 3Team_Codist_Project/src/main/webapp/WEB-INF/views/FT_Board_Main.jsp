@@ -1,121 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
-
-    
+<html>	
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>패션토크 게시판</title>
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-		<style>			
-			.Ft_board1{
-				border : 1px solid white;			
-				border-top-color : black;				
-				border-bottom-color : black;
-				width : 100%;
-			}
-			.Ft_board2{
-				border : 1px solid white;								
-				border-bottom-color : black;
-				width : 100%;
-			}
-			.Ft_board2 td{
-				border : 1px solid;								
-			}
-			#btn_write, #Ft_pageNum{
-				border : 1px solid white;	
-				border-top-color : black;				
-				border-bottom-color : black;	
-			}		
-			#Ft_sub{
-				font-size : 30pt;
-				text-align : center;									
-			}			
-			.Ft_subject{
-				text-align : center;
-				background-color : yellow;
-			}
-			
-			.Ft1,.Ft4,.Ft5,.Ft6,.Ft7
-			{
-				font-size: 8px;
-				width: 20px;
-			}
-			
-			.Ft2
-			{
-				width: 150px;
-			}		
-			.tog1
-			{
-				visibility: hidden;
-			}
-			.tog2
-			{
-				display: none;
-			}
-			#texta
-			{
-				width: 690px;
-				resize: none;
-			}
-			.user
-			{
-				width: 50px;
-				
-			}
-			.Relecontent
-			{
-				width: 700px;
-			}
-			/* 버튼 css */
-			#FTQna
-			{
-			-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
-			-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
-			box-shadow:inset 0px 1px 0px 0px #ffffff;
-			background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #f6f6f6));
-			background:-moz-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
-			background:-webkit-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
-			background:-o-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
-			background:-ms-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
-			background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
-			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0);
-			background-color:#ffffff;
-			-moz-border-radius:6px;
-			-webkit-border-radius:6px;
-			border-radius:6px;
-			border:1px solid #dcdcdc;
-			display:inline-block;
-			cursor:pointer;
-			color:#666666;
-			font-family:Arial;
-			font-size:15px;
-			font-weight:bold;
-			padding:6px 24px;
-			text-decoration:none;
-			text-shadow:0px 1px 0px #ffffff;
-			}
-			
-			#FTQna:hover {
-			background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f6f6f6), color-stop(1, #ffffff));
-			background:-moz-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
-			background:-webkit-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
-			background:-o-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
-			background:-ms-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
-			background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
-			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f6f6f6', endColorstr='#ffffff',GradientType=0);
-			background-color:#f6f6f6;
-			}
-			
-			#FTQna:active {
-			position:relative;
-			top:1px;
-		}			
+		<link rel="stylesheet" type="text/css" href="resources/css/board.css"/>
+		<style>
+		.tog1
+         {
+            visibility: hidden;
+         }
+         .tog2
+         {
+            display: none;
+         }
+         #texta
+         {
+            width: 690px;
+            resize: none;
+         }
+         .user
+         {
+            width: 50px;
+            
+         }
+         .Relecontent
+         {
+            width: 700px;
+         }
 		</style>
 	</head>
 	<body>
-			
      <jsp:include page="../../resources/include/index.jsp"/>
  		<div class="content">
 		<table class="Ft_board1" align="center">
@@ -139,7 +56,7 @@
 							</select>
 						<c:if test="${sessionScope.userId !=null}">
 							<button id="FTQna" onclick="location.href='./FTboard_Write?userId=${sessionScope.userId}'">글쓰기</button>
-						</c:if>
+						</c:if><!-- FTbutton -->
 					</td>					
 				</tr>		
 							

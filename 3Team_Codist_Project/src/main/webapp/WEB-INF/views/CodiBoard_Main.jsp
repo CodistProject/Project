@@ -4,37 +4,12 @@
 
 <html>	
 	<head>
- 	  <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <title>물물교환</title>
-		<style>			
-			.Cd_board1{				
-				width : 100%;			
-			}
-			.Cd_board2{												
-				border-bottom-color : black;
-				width : 100%;				
-			}
-			
-			#Cd_pageNum{
-				border : 1px solid white;	
-				border-top-color : black;				
-				border-bottom-color : black;	
-			}		
-			#Cd_sub{
-				font-size : 30pt;				
-				text-align : center;
-				border : 1px solid white;
-				border-bottom-color : black;	
-				border-top-color : black;												
-			}			
-			.admin{
-				display: none;
-			}
-		</style>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>코디 게시판</title>
+		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="resources/css/codiBoard.css"/>
 	</head>
 	<body>
-			
 		<jsp:include page="../../resources/include/index.jsp"/>
 		<div class="content">		
 		<table class="Cd_board1" align="center">
@@ -45,8 +20,6 @@
 			</tr>				
 		</table>
 		</br>
-		
-	
 		<table class="Cd_board2" align="center">
 			<thead>		
 				<tr>
@@ -149,6 +122,5 @@
 			
 			$("#Cd_pageNum").append(content);		
 		}
-		
 	</script>
 </html>
