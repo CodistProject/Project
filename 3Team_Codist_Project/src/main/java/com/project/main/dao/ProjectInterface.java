@@ -5,6 +5,7 @@ import com.project.main.dto.BoardDto;
 import com.project.main.dto.ClothDto;
 import com.project.main.dto.MemberInfo;
 import com.project.main.dto.ReplyDto;
+import com.project.main.dto.myClothDto;
 
 
 public interface ProjectInterface {
@@ -117,9 +118,15 @@ public interface ProjectInterface {
 
 	//코디 게시판 글쓰기
 	public void CodiBoard_Writes(String filename, String category_name, String newfilename);
-
 	
+	// 코디게시판-> 나만의 옷장 이동 전 팝업시(옷+일정 데이터 담기-DB에)
+	public int Put_Cloth(String join_Idx, String Calendar_Subject, String Calendar_Date, String outer, String top, String pants);
+	
+	// 접속한 유저(세션 아이디 이용) Join_Idx 찾아오기
+	public String Find_JoinIdx(String userId);
 
+	// Join_Idx로 나만의 옷장 데이터 가져오기(옷+일정)
+	public ArrayList<myClothDto> Find_myCloth(String join_Idx);
 	
 }
 

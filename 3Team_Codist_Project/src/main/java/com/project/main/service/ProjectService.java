@@ -28,6 +28,7 @@ import com.project.main.dto.BoardDto;
 import com.project.main.dto.ClothDto;
 import com.project.main.dto.MemberInfo;
 import com.project.main.dto.ReplyDto;
+import com.project.main.dto.myClothDto;
 import com.project.main.util.UploadFile;
 
 @Service
@@ -824,6 +825,49 @@ public class ProjectService {
 		mav.addObject("msg",msg);
 		mav.setViewName(page);
 		return mav;
-	}	
+	}
+
+	// 코디게시판-> 나만의옷장(체크한 옷 데이터 담기 기능) -> 팝업창 띄우기
+	public Map<String, Object> Put_Cloth(Map<String, String> params) {
+		logger.info("옷+일정 담기 기능 실행");
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		// 접속한 아이디를 통해 Join_Idx 도 담아오기
+		String userId = params.get("userId");
+		String Join_Idx = inter.Find_JoinIdx(userId);
+		params.put("join_idx", Join_Idx);
+		
+		// 아작스 데이터로 보낸 일정+옷 데이터 가져오기
+		String Calendar_Subject = params.get("Subject");		
+		String Calendar_Date = params.get("Date");
+		String Outer = params.get("Outer");
+		String Top = params.get("Top");
+		String Pants = params.get("Pants");	
+		// 담아온 데이터 보여지는지 체크
+		logger.info("제목:"+Calendar_Date+"/"+"날짜:"+Calendar_Subject);
+		logger.info("Join_Idx:"+Join_Idx+"/"+"아웃터:"+Outer+"/"+"상의:"+Top+"/"+"하의:"+Pants);
+		
+		Map<String, Object> map = new HashMap<String, Object>();		
+		int success = inter.Put_Cloth(Join_Idx, Calendar_Subject, Calendar_Date, Outer, Top, Pants);		
+	
+		map.put("Put_Cloth", success);		
+		
+		return map;
+	}
+
+	// 나만의 옷장(캘린더) 이동 및 데이터 보여주기(일정+옷)
+	public ModelAndView myCloth(String userId) {
+		logger.info("나만의 옷장(캘린더) 실행");
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav = new ModelAndView();
+		Map<String, ArrayList<myClothDto>> obj = new HashMap<String, ArrayList<myClothDto>>();		
+		// userId 로 join_idx 찾기
+		String Join_Idx = inter.Find_JoinIdx(userId);
+		logger.info("조인 idx:"+Join_Idx);
+		// Join_Idx 로 가져올 데이터 찾기(옷+일정) -> obj 담기-> myCalendar 담기
+		obj.put("myCloth", inter.Find_myCloth(Join_Idx));
+		mav.addObject("myCalendar", obj);
+		mav.setViewName("My_Calendar");
+		return mav;
+	}
 }	
 	

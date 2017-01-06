@@ -262,10 +262,16 @@ public class MainController {
 	//나만의 옷장 페이지 이동(index 에서)
 	@RequestMapping(value="/My_Cloth")
 	public ModelAndView my_Cloth(@RequestParam("userId") String userId){
-		logger.info("나만의 옷장 페이지 요청");
-		logger.info(userId);
-		
+		logger.info("나만의 옷장 페이지 요청1");
+		logger.info(userId);		
 		return service.My_Cloth(userId);
 	}
 	
+	//나만의 옷장 페이지 이동(index 에서)
+	@RequestMapping(value="/My_Calendar")
+	public ModelAndView My_Calendar(@RequestParam ("userId") String userId){
+		logger.info("나만의 옷장 캘린더 이동");
+		logger.info("유저아이디:"+userId);		
+		return service.myCloth(userId);
+	}
 }

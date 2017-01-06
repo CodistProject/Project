@@ -193,4 +193,19 @@
  	<select id="Find_Email" resultType="String">
  		SELECT EMAIL FROM JOIN_REG WHERE ID = #{param1}
  	</select>
+ 	
+ 	<!-- 코디게시판에서 옷 고르고 담기(DB에) -->
+ 	<insert id="Put_Cloth">
+ 		INSERT INTO MY_WARDROBES(CLOSET_IDX, JOIN_IDX, CALENDER_SUBJECT, CALENDER_DATE, MY_OUTER, MY_TOP, MY_PANTS) values(SEQ_MY_WARDROBES.NEXTVAL, #{param1},#{param2},#{param3},#{param4},#{param5},#{param6})
+ 	</insert>
+ 	
+ 	<!-- 유저 아이디로(세션아이디) Join_idx 찾기 -->
+ 	<select id="Find_JoinIdx" resultType="String">
+ 		SELECT JOIN_IDX FROM JOIN_REG WHERE ID = #{param1}
+ 	</select>
+ 	
+ 	<!-- Closet_Idx 찾기(Join_Idx로) -->
+ 	<select id="Find_myCloth" resultType="com.project.main.dto.myClothDto">
+ 		SELECT * FROM MY_WARDROBES WHERE JOIN_IDX = #{param1} ORDER BY CLOSET_IDX DESC
+ 	</select>
 </mapper>
