@@ -319,6 +319,15 @@
 		
 		if(url == "./rest/FT_Board_Detail"){
 			content +="내용: "+list.content
+				   		+"<div id='LikeGO'>"
+				   		+"<a href=javascript:UP_like('"+list.board_idx+"')>"
+				   		+"<img width='30px' height='30px' alt='조아요' src='./resources/img/like.PNG'> "
+				   		+"</a>"
+				   		+"<br/>"
+				   		+"<span id='LIKE'>"
+				   		+list.ft_like
+				   		+"</span>"
+				   		+"</div>"
 						+"</br>"
 						+"<table>"
 						+"<tr>"

@@ -84,7 +84,7 @@
 			background-color : yellow;
 			width:250px;
 			left :700px;
-			top: 200px;
+			top: 400px;
 			padding : 10px;
 			display: none;	
 			}
@@ -94,7 +94,7 @@
 			background-color : yellow;
 			width:250px;
 			left :700px;
-			top: 200px;
+			top: 400px;
 			padding : 10px;	
 			display: none;
 			}
@@ -123,7 +123,7 @@
 		#LikeGO
 		{
 			position: relative;
-			top: 25%;
+			top: 60%;
 			left: 40%;
 		}
 		#LIKE
@@ -161,13 +161,14 @@
 	   		</c:if>
    		</c:forEach>
    		<div id='likehate'>
-   		<div id="LikeGO">
-   			 		<a href=javascript:UP_like('${content.board_idx}')>
-   			 		<input type="hidden" value="${content.nickName}" id="nicknamefind"/>
-   			 		<img width="200px" height="100px" alt="조아요" src="./resources/img/like.PNG"> 
-   			 		</a>
-   			 		<br/><span id="LIKE" >${content.ft_like}</span>
-   		</div>
+	  		<div id="LikeGO">
+			 	<a href=javascript:UP_like('${content.board_idx}')>
+			 		<input type="hidden" value="${content.nickName}" id="nicknamefind"/>
+			 		<img width="200px" height="100px" alt="조아요" src="./resources/img/like.PNG"> 
+			 	</a>
+			 		<br/>
+			 		<span id="LIKE" >${content.ft_like}</span>
+	  		</div>
    		</div>
    		<div class="det">
    			<table class="table1" >
@@ -273,8 +274,8 @@
 	   			</tr>   			
 	   		</table>
 	   </div>
-  	 
    </div>
+
   	</body>
   	<script>
 	
