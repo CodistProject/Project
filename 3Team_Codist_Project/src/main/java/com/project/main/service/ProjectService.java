@@ -25,6 +25,7 @@ import com.project.main.dao.ProjectInterface;
 import com.project.main.dto.BoardDto;
 import com.project.main.dto.GameDto;
 import com.project.main.dto.MemberInfo;
+import com.project.main.dto.MileageDto;
 import com.project.main.dto.ReplyDto;
 import com.project.main.util.CodiUploadFile;
 import com.project.main.util.UploadFile;
@@ -38,6 +39,7 @@ public class ProjectService {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	ProjectInterface inter = null;
+	
 	
 	//중복 체크(ID)
 	public Map<String, String> overlayId(String id) {
@@ -74,7 +76,7 @@ public class ProjectService {
 		String pw = (String) params.get("userPass");
 		HttpSession session = (HttpSession) params.get("session");
 		ModelAndView mav = new ModelAndView();		
-						
+		MileageDto mil= new MileageDto();				
 		logger.info("id: {}",id);
 		logger.info("pw: {}",pw);
 		
@@ -90,6 +92,8 @@ public class ProjectService {
 			
 			if(inter.login(id, pw) != null){
 				session.setAttribute("userId", id);
+				session.setAttribute("mil",mil);
+				mil=index_Mileage(id);				
 			}else{
 				mav.addObject("msg","아이디 또는 비밀번호를 확인 하세요");
 			}			
@@ -731,7 +735,7 @@ public class ProjectService {
 		mav.setViewName("Admin_Manage_Event");
 		return mav;
 	}
-
+	
 	//사다리 설정값 수정하기
 		public ModelAndView Bridge(Map<String, String> params) {
 			inter = sqlSession.getMapper(ProjectInterface.class);
@@ -743,7 +747,8 @@ public class ProjectService {
 			String select3 = params.get("select3");
 			String select4 = params.get("select4");
 			String select5 = params.get("select5");
-			String select6 = params.get("select6");				
+			String select6 = params.get("select6");
+			
 			
 			inter.Bridge(timenum, select1, select2 ,select3, select4, select5, select6);		
 			mav.addObject("msg", msg);
@@ -751,7 +756,7 @@ public class ProjectService {
 			return mav;
 		}
 
-		//사다리 게임에 관한 데이터들 찾아오기
+		//사다리 게임에 관한 데이터를 게임폼으로 보내기
 		public ModelAndView Game(Map<String, String> params) {
 			inter = sqlSession.getMapper(ProjectInterface.class);			
 			String time_event_name = "사다리";		
@@ -761,9 +766,55 @@ public class ProjectService {
 			mav.setViewName("Game");
 			return mav;
 		}
-	
-	
 		
+		//사다리 게임 시간데이터 설정하기
+		public ModelAndView Time(Map<String, String> params) {
+			inter = sqlSession.getMapper(ProjectInterface.class);
+			String msg = "";
+			ModelAndView mav = new ModelAndView();				
+			String time_strat = params.get("time_start");
+			String time_end = params.get("time_end");	
+			
+			logger.info(time_strat);
+			logger.info(time_end);
+			inter.Time(time_strat, time_end);		
+			mav.addObject("msg", msg);
+			mav.setViewName("redirect:/Admin_Manage_Event");
+			return mav;
+		}
+	
+		//사다리 게임에 시간 데이터를 인덱스로 보내기
+			public ModelAndView TimePop(Map<String, String> params) {
+				inter = sqlSession.getMapper(ProjectInterface.class);			
+				String time_event_name = "사다리";		
+				inter.Find_ladderData(time_event_name);		
+				ModelAndView mav = new ModelAndView();
+				mav.addObject("ladder_Data",  inter.Find_ladderData(time_event_name));
+				mav.setViewName("ioi");
+				return mav;
+			}			
+		
+			//유저 마일리지 찾기
+			public ModelAndView MyPage_Mileage(String userId) {
+				inter = sqlSession.getMapper(ProjectInterface.class);
+				MileageDto mdt = new MileageDto();
+				inter.Find_Mileage(userId);
+				logger.info(userId);				
+				ModelAndView mav = new ModelAndView();
+				mav.addObject("Find_Mileage",  inter.Find_Mileage(userId));
+				mav.setViewName("MyPage_Mileage");
+				return mav;
+			}
+		
+			//유저 마일리지 찾기
+			public MileageDto index_Mileage(String userId) {
+				inter = sqlSession.getMapper(ProjectInterface.class);
+				MileageDto mdt = new MileageDto();
+				mdt=inter.Find_Mileage(userId);
+				logger.info(userId);				
+				ModelAndView mav = new ModelAndView();
+				return mdt;
+			}
 }
 	
 	

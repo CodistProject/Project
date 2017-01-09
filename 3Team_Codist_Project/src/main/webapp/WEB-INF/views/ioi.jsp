@@ -25,7 +25,7 @@
 				border: 1px solid;
 				width: 47%;
 				height: 150px;
-			}
+			}		
 		</style>
 	</head>
 	<body>
@@ -50,12 +50,40 @@
 			
 			<div class="bord2">
 				Q&A 게시판 노출
-			</div>		
-		
-		</div>
-		
+			</div>	
 	</body>
 	<script>
+		//시간 이벤트 팝업
+		timeevent_pop();
+		
+		function addZero(i) {
+   			 if (i < 10) {
+       		 i = "0" + i;
+  		  }   		
+  		  return i;  		  
+		}	
+		
+		function timeevent_pop() {
+			var now = new Date();
+			var h = addZero(now.getHours());
+			var m = addZero(now.getMinutes());
+			var nowTime = h+":"+m;	
+			var start = "${ladder_Data.time_start}";
+			var end = "${ladder_Data.time_end}";
+			
+			
+			
+			console.log(nowTime);
+			console.log(start);
+			console.log(end);
+			
+			if(nowTime>=start && nowTime<=end){						
+				var win	= window.open("TimeEvent", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=200,left=300,width=600,height=500");
+			}else{						
+				win.close();
+			}
+		}
+	
 	
 		// 메일 보내기(아이디찾기 or 비번찾기 or 이메일 문의) 성공관련 메시지 alert 띄우기
 		var msg1 ="${Find_Id.msg}";

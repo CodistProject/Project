@@ -94,12 +94,7 @@
 							<td>그래프</td>						
 						</tr>
 					</table>
-				</div>
-				
-			<div class="timeeven">
-				<p>TIME 이벤트</p>
-				<div>					
-				</div>				
+				</div>			
 			</div>			
 			</div>	
 			<input id="eventclose" type="button" value="닫기">		

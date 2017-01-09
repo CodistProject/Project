@@ -63,44 +63,68 @@
 		당첨자 설정 : <input type="text"/>
 		<br/>
 		포인트 설정 : <input type="text"/>
-		<br/>
-		<div class="ok">
-		<input type="button" value="적용"/>	
-		</div>		
+		<br/>		
+		<input type="button" value="적용"/>			
+		<br/>		
 		<h3>시간 이벤트</h3>
-		<p>게임 선택</p>
+		<form action="Time">	
 		<table>		
-			<tr>
-				<td><input type="checkbox" id="bri"></td>
-				<td>사다리 게임</td>				
-				<td><input type="time">~<input type="time"></td>
+			<tr>				
+				<td><p>사다리 게임</p></td>	
 			</tr>
-			<!-- <tr>	
-				<td><input type="checkbox" id="rool"></td>
-				<td>룰렛 게임</td>
-				<td><input type="time">~<input type="time"></td>
-			</tr> -->
-			</table>
+			<tr>							
+				<td>시간 설정 : <input type="time" name="time_start" value="${ladder_Data.time_start}">~<input type="time" name="time_end" value="${ladder_Data.time_end}"></td>
+				<td>							
+				<input type="submit" value="설정"/>				
+				</td>
+			</tr>		
+		</table>
+		</form>
 			<br/>				
-			<form action="Bridge" method="post">
-			인원 수 : <input type="text" name="timenum" value="${ladder_Data.timenum}"><br/>
-			1번 설정값 : <input type="text" name="select1" value="${ladder_Data.select1}"><br/>
-			2번 설정값 : <input type="text" name="select2" value="${ladder_Data.select2}"><br/>
-			3번 설정값 : <input type="text" name="select3" value="${ladder_Data.select3}"><br/>
-			4번 설정값 : <input type="text" name="select4" value="${ladder_Data.select4}"><br/>
-			5번 설정값 : <input type="text" name="select5" value="${ladder_Data.select5}"><br/>
-			6번 설정값 : <input type="text" name="select6" value="${ladder_Data.select6}"><br/>			
-			<input type="submit" value="설정"/>
-			</form>			
-			<br/>	
-			당첨자 설정 : <input type="text"/>			
-			<br/>
-			포인트 설정 : <input type="text"/>
-			<br/>
-			<div class="ok">
-			<input type="button" value="적용"/>		
-			</div>	
-		</div>	
+			<form action="Bridge">
+			<table>
+			<tr>
+				<td>
+				인원 수 : <input type="text" name="timenum" value="${ladder_Data.timenum}">
+				</td>
+			</tr>
+			<tr>
+				<td>
+				1번 설정값 : <input type="text" name="select1" value="${ladder_Data.select1}">
+				</td>
+			</tr>
+			<tr>
+				<td>
+				2번 설정값 : <input type="text" name="select2" value="${ladder_Data.select2}">
+				</td>
+			</tr>
+			<tr>
+				<td>
+				3번 설정값 : <input type="text" name="select3" value="${ladder_Data.select3}">
+				</td>
+			</tr>
+			<tr>
+				<td>
+				4번 설정값 : <input type="text" name="select4" value="${ladder_Data.select4}">
+				</td>
+			</tr>
+			<tr>
+				<td>
+			5번 설정값 : <input type="text" name="select5" value="${ladder_Data.select5}">
+				</td>
+			</tr>
+			<tr>
+				<td>
+			6번 설정값 : <input type="text" name="select6" value="${ladder_Data.select6}">
+				</td>				
+			</tr>
+			<tr>
+				<td align="right">							
+				<input type="submit" value="설정"/>				
+				</td>
+			</tr>
+			</table>
+			</form>		
 		 </div>
 	</body>
 	<script>

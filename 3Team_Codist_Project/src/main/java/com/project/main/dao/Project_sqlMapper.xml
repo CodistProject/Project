@@ -110,6 +110,7 @@
  	<select id="replyList" resultType="com.project.main.dto.ReplyDto">
  	 	SELECT reple_idx,board_idx,nickname,reple_content,reple_date,reple_like,reple_hate FROM total_reple WHERE board_idx= #{param1}
  	</select>
+ 	
  	<!--코디게시판 상세보기  -->
  	<select id="CodiBoard_Detail" resultType="com.project.main.dto.BoardDto">
  		SELECT * FROM TOTAL_BOARD WHERE board_idx = #{param1}
@@ -172,10 +173,21 @@
  		UPDATE TIME_EVENT SET TIMENUM = #{param1} , SELECT1 = #{param2}, SELECT2 = #{param3}, SELECT3 = #{param4}, SELECT4 = #{param5} , SELECT5 = #{param6}, SELECT6 = #{param7}
  	</update>
  	
+ 	<!--사다리 게임 시간값 수정-->
+ 	<update id="Time">
+ 		UPDATE TIME_EVENT SET TIME_START = #{param1} , TIME_END = #{param2}
+ 	</update>
+ 	
  	<!-- 사다리 게임 정보 가져오기 -->
  	<select id="Find_ladderData" resultType="com.project.main.dto.GameDto">
  		SELECT * FROM TIME_EVENT WHERE TIME_EVENT_NAME = #{param1}
  	</select>
+
+ 	<!-- 마일리지 정보 가져오 -->
+ 	<select id="Find_Mileage" resultType="com.project.main.dto.MileageDto">
+ 		SELECT * FROM EVENT_COUPON WHERE USER_ID = #{param1}
+  	</select> 	
+ 	
  	
  	<!--   -->
 </mapper>

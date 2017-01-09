@@ -10,7 +10,22 @@ public class GameDto {
 	private String select4;
 	private String select5;
 	private String select6;
+	private String time_start;
+	private String time_end;
 	
+	
+	public String getTime_start() {
+		return time_start;
+	}
+	public void setTime_start(String time_start) {
+		this.time_start = time_start;
+	}
+	public String getTime_end() {
+		return time_end;
+	}
+	public void setTime_end(String time_end) {
+		this.time_end = time_end;
+	}
 	public String getTime_event_name() {
 		return time_event_name;
 	}

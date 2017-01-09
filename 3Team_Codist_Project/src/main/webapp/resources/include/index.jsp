@@ -35,9 +35,9 @@
 			#weather a {
 				padding-top: 5px;
 				display: block;
-				height: 20px;
+				height: 40px;
 				text-align: center;				
-				text-decoration: none;				
+				text-decoration: none;												
 			}
 			
 			#weather a.top:hover {
@@ -166,84 +166,42 @@
 				resize:none;
 			}
 			
-			#mon_pop{				
+			#daily_pop{				
 				position:absolute;
 				background-color: #6BADFF;
 				z-index:2;
-				width: 300px;
-				height: 300px;				
+				width: 400px;
+				height: 200px;				
 				top: 180px;
 				left: 135px;
 				display:none;
 			}
 			
-			#tue_pop{				
-				position:absolute;
-				background-color: #6BADFF;
-				z-index:2;
-				width: 300px;
-				height: 300px;				
-				top: 180px;
-				left: 135px;
-				display:none;
-			}
-			
-			#wed_pop{				
-				position:absolute;
-				background-color: #6BFF7C;;
-				z-index:2;
-				width: 300px;
-				height: 300px;				
-				top: 180px;
-				left: 135px;
-				display:none;
-			}
-			
-			#thur_pop{				
-				position:absolute;
-				background-color: #6BFF7C;;
-				z-index:2;
-				width: 300px;
-				height: 300px;				
-				top: 180px;
-				left: 135px;
-				display:none;
-			}
-			
-			#fri_pop{				
-				position:absolute;
-				background-color: #6BFF7C;;
-				z-index:2;
-				width: 300px;
-				height: 300px;				
-				top: 180px;
-				left: 135px;
-				display:none;
-			}
-			
-			#sat_pop{				
+			#tomorrow_pop{				
 				position:absolute;
 				background-color: #E5FF6B;
 				z-index:2;
-				width: 300px;
-				height: 300px;				
-				top: 180px;
+				width: 400px;
+				height: 200px;				
+				top: 245px;
 				left: 135px;
 				display:none;
-			}
+			}					
 			
-			#sun_pop{				
-				position:absolute;
-				background-color: #E5FF6B;
-				z-index:2;
-				width: 300px;
-				height: 300px;				
-				top: 180px;
-				left: 135px;
-				display:none;
-			}			
 			#logo{
 				width: 200px;
+			}
+			
+			#codi1{
+				float: right;
+			}
+			
+			#dailywe{
+				float: left;
+			}
+			
+			#tomwwe{
+				float: left;
 			}
 		</style>
 	</head>
@@ -253,15 +211,10 @@
 		</div>
 		
 		<div id="weather">
-			<a class="top" href="javascript:Event();">이벤트</a>
-			<br/>
-			<a id="mon" class="top">월</a>
-			<a id="tue" class="top">화</a>			
-			<a id="wed" class="middle">수</a>
-			<a id="thur" class="middle">목</a>
-			<a id="fri" class="middle">금</a>
-			<a id="sat" class="bottom">토</a>
-			<a id="sun" class="bottom">일</a>			
+			<a class="top" href="javascript:Event();">이벤트</a>			
+			<a id="daily" class="top">Daily<br/>Cody</a>
+			<br/>					
+			<a id="tomorrow" class="bottom">Tomrrow Cody</a>			
 		</div>	
 		
 		<div id="extra">
@@ -303,131 +256,77 @@
 					<td class="menuTd"><a class="board" href="./CoplzBoard">코디를 부탁해</a></td>
 					<td class="menuTd"><a class="board" href="#">나만의 옷장</a></td>
 					<td class="menuTd"><a class="board" href="./QnABoard">Q&A</a></td>
-					<td class="menuTd"><a class="board" href="./AlterBoard">물물 교환</a></td>					
+					<td class="menuTd"><a class="board" href="./AlterBoard">물물 교환</a></td>									
 				</tr>
 			</table>
 		</div>
 		
-		<!-- 월요일 팝업 -->
-		<div id="mon_pop">				
-			<div>
+		<!-- daily 팝업 -->
+		<div id="daily_pop">				
+			<div id=dailywe>
 			 날씨
 			</div>
-			<div>
+			<div id="codi1">
 			코디
 			</div>			
 		</div>	
 		
-		<!-- 화요일 팝업 -->
-		<div id="tue_pop">				
-			<div>
+		<!-- tomorrow 팝업 -->
+		<div id="tomorrow_pop">				
+			<div id=tomwwe>
 			 날씨
 			</div>
-			<div>
+			<div id="codi1">
 			코디
 			</div>		
-		</div>
-		
-		<!-- 수요일 팝업 -->
-		<div id="wed_pop">				
-			<div>
-			 날씨
-			</div>
-			<div>
-			코디
-			</div>			
-		</div>
-		
-		<!-- 목요일 팝업 -->
-		<div id="thur_pop">				
-			<div>
-			 날씨
-			</div>
-			<div>
-			코디
-			</div>			
-		</div>
-		
-		<!-- 금요일 팝업 -->
-		<div id="fri_pop">				
-			<div>
-			 날씨
-			</div>
-			<div>
-			코디
-			</div>			
-		</div>
-		
-		<!-- 토요일 팝업 -->
-		<div id="sat_pop">				
-			<div>
-			 날씨
-			</div>
-			<div>
-			코디
-			</div>			
-		</div>
-		
-		<!-- 일요일 팝업 -->
-		<div id="sun_pop">				
-			<div>
-			 날씨
-			</div>
-			<div>
-			코디
-			</div>	
-		</div>	
-		
+		</div>		
 	</body>
-	<script>
-		// 월요일 마우스 마우스오버
-		$("#mon").hover(function () {
-			$("#mon_pop").css("display","block");			
+	<script>	
+		// 당일 마우스 마우스오버
+		$("#daily").hover(function () {
+			var html = "";			
+			$("#daily_pop").css("display","block");
+			$(".today").empty();
+			 $.getJSON("http://api.openweathermap.org/data/2.5/forecast/daily?&APPID=b50260aefcd6ed0822969e46440ce7df&lat=37.56826&lon=126.977829&mode=json&units=metric&cnt=2",function(json){
+				  /*       document.write(JSON.stringify(json)); */
+				        var json_obj = JSON.parse(JSON.stringify(json));
+				  		var url = "http://openweathermap.org/img/w/";
+				  		var icon = json_obj.list[0].weather[0].icon;
+				  		var max = json_obj.list[0].temp.max+" ℃";
+				  		var min = json_obj.list[0].temp.min+" ℃";
+				  		var url1 = url + icon+".png";				  	
+				  		html += '<div class="today"><img src="'+url1+'" width="70px"><br/>';
+				  		html +='최고 기온: '+max+' <br/>최저 기온: '+ min+''		
+			            html +='</div>'				  		
+				  		$("#dailywe").append(html);				          	
+				    });	  			 
 		},function () {
-			$("#mon_pop").css("display","none");			
-		});		
+			$("#daily_pop").css("display","none");		
+		});				
 		
-		// 화요일 마우스 마우스오버
-		$("#tue").hover(function () {
-			$("#tue_pop").css("display","block");			
+		// 다음날 마우스 마우스오버
+		$("#tomorrow").hover(function () {			
+			var html = "";			
+			$("#tomorrow_pop").css("display","block");
+			$(".tom").empty();
+			 $.getJSON("http://api.openweathermap.org/data/2.5/forecast/daily?&APPID=b50260aefcd6ed0822969e46440ce7df&lat=37.56826&lon=126.977829&mode=json&units=metric&cnt=2",function(json){
+				 var json_obj = JSON.parse(JSON.stringify(json));
+			  		var url = "http://openweathermap.org/img/w/";
+			  		var icon = json_obj.list[1].weather[0].icon;
+			  		var max = json_obj.list[1].temp.max+" ℃";
+			  		var min = json_obj.list[1].temp.min+" ℃";
+			  		var url1 = url + icon+".png";					  		
+			  	
+			  		html += '<div class="tom"><img src="'+url1+'" width="70px"><br/>';	
+			  		html +='최고 기온: '+max+' <br/>최저 기온: '+min+''			  		
+		            html +='</div>'				  		
+			  		$("#tomwwe").append(html);			       	
+				    });			 
+				
 		},function () {
-			$("#tue_pop").css("display","none");			
+			$("#tomorrow_pop").css("display","none");			
 		});	
 		
-		// 수요일 마우스 마우스오버
-		$("#wed").hover(function () {
-			$("#wed_pop").css("display","block");			
-		},function () {
-			$("#wed_pop").css("display","none");			
-		});	
-		
-		// 목요일 마우스 마우스오버
-		$("#thur").hover(function () {
-			$("#thur_pop").css("display","block");			
-		},function () {
-			$("#thur_pop").css("display","none");			
-		});	
-		
-		// 금요일 마우스 마우스오버
-		$("#fri").hover(function () {
-			$("#fri_pop").css("display","block");			
-		},function () {
-			$("#fri_pop").css("display","none");			
-		});	
-		
-		// 토요일 마우스 마우스오버
-		$("#sat").hover(function () {
-			$("#sat_pop").css("display","block");			
-		},function () {
-			$("#sat_pop").css("display","none");			
-		});	
-		
-		// 일요일 마우스 마우스오버
-		$("#sun").hover(function () {
-			$("#sun_pop").css("display","block");			
-		},function () {
-			$("#sun_pop").css("display","none");			
-		});	
 	
 	   // 유저 아이디, 유저 메일, 관리자 메일 담기
 		var userId ="${sessionScope.userId}";				
@@ -435,7 +334,7 @@
 		// 이벤트 팝업
 		function Event(){
 			var Popup_url = "./Event_Popup";
-			var Popup_option = "width=500px, height=600px, resizalbe=no, top=500px, left=500px";
+			var Popup_option = "width=500px, height=600px, resizalbe=no, top=200px, left=400px";
 			window.open(Popup_url,"",Popup_option);
 		}
 		

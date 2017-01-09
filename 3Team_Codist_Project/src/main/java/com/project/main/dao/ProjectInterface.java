@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import com.project.main.dto.BoardDto;
 import com.project.main.dto.GameDto;
 import com.project.main.dto.MemberInfo;
+import com.project.main.dto.MileageDto;
 import com.project.main.dto.ReplyDto;
 
 
@@ -117,6 +118,10 @@ public interface ProjectInterface {
 
 	public void Bridge(String timenum, String select1, String select2, String select3, String select4, String select5,
 			String select6);
+
+	public void Time(String time_strat, String time_end);
+
+	public MileageDto Find_Mileage(String user_Id);
 	
 }
 

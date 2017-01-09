@@ -24,9 +24,9 @@ public class MainController {
 
 	//메인 페이지 이동
 	@RequestMapping(value="/")
-	public String home(){
+	public ModelAndView home(@RequestParam Map<String, String> params){
 		logger.info("메인 페이지 요청");
-		return "ioi";
+		return service.TimePop(params);
 	}
 
   //관리자 회원관리 페이지
@@ -50,7 +50,7 @@ public class MainController {
 		return "JoinForm";
 	}
 
-		//이벤트 관리 페이지 이동
+		//사다리 게임 페이지 이동
 		@RequestMapping(value="/TimeEvent")
 		public ModelAndView TimeEvent(@RequestParam Map<String, String> params){
 			logger.info("이벤트 관리 페이지 이동");
@@ -89,6 +89,14 @@ public class MainController {
 		logger.info("회원정보 보기(마이 페이지) 이동");	
 		return service.MemberData_View(userId);
 	}
+	
+	//마일리지(마이 페이지) 이동
+		@RequestMapping(value="/MyPage_Mileage")
+		public ModelAndView MyPage_Mileage(@RequestParam("userId") String userId) {	
+			logger.info(userId);
+			logger.info("마일리지(마이 페이지) 이동");	
+			return service.MyPage_Mileage(userId);
+		}
 		
 	//회원정보 수정기능 실행 전 보기 (수정보기 페이지이동)
 	@RequestMapping(value = "/Member_modify_view")
@@ -280,5 +288,12 @@ public class MainController {
 		logger.info("사다리 게임 설정값 넘기기");		
 		return service.Bridge(params);
 	}		
+	
+	// 사다리 게임 시간값 넘기기
+	@RequestMapping(value="/Time")
+	public ModelAndView Time(@RequestParam Map<String, String> params){		
+		logger.info("사다리 게임 시간값 넘기기");		
+		return service.Time(params);
+	}
 	
 }
