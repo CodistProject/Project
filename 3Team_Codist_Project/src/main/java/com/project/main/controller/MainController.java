@@ -50,11 +50,11 @@ public class MainController {
 		return "JoinForm";
 	}
 
-		//이벤트 관리 페이지 이동
-		@RequestMapping(value="/TimeEvent")
-		public ModelAndView TimeEvent(@RequestParam Map<String, String> params){
-			logger.info("이벤트 관리 페이지 이동");
-			return service.Game(params);
+	//이벤트 관리 페이지 이동
+	@RequestMapping(value="/TimeEvent")
+	public ModelAndView TimeEvent(@RequestParam Map<String, String> params){
+		logger.info("이벤트 관리 페이지 이동");
+		return service.Game(params);
 	}		
 		
 		
@@ -288,6 +288,15 @@ public class MainController {
 	public ModelAndView Bridge(@RequestParam Map<String, String> params){		
 		logger.info("사다리 게임 설정값 넘기기");		
 		return service.Bridge(params);
+	}
+	// 게시물 삭제
+	@RequestMapping(value="/BoardDelete")
+	public ModelAndView BoardDelete(@RequestParam("board_idx") String board_idx,
+			@RequestParam("category_name") String category_name){		
+		logger.info("게시물 삭제하기");		
+		logger.info(category_name);		
+		return service.BoardDelete(board_idx,category_name);
 	}		
+	
 	
 }

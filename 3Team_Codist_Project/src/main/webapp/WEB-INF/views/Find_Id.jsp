@@ -41,8 +41,8 @@
                         <option value="018">018</option>
                         <option value="019">019</option>
                </select>
-               - <input id="phone2" type="text" size="6" maxlength="6"/>
-                - <input id="phone3" type="text" size="6" maxlength="6"/>       
+               - <input id="phone2" name="userPhone2" type="text" size="6" maxlength="6"/>
+                - <input id="phone3" name="userPhone3" type="text" size="6" maxlength="6"/>       
             </li>
             <li>이메일 :
                 <input id="email1" name="userEmail1" type="text" size="16" maxlength="16" /> @
@@ -56,6 +56,12 @@
 	</div>		
 	</body>
 	<script>
+	   var msg="${msg}";
+		if(msg !="")
+			{
+			alert(msg);
+			}
+		
 		function checkemailaddy(){
 	        if (form.email_select.value == '1') {
 	            form.email2.readonly = false;

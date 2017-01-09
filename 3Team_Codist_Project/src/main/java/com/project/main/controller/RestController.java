@@ -57,6 +57,22 @@ public class RestController {
 		return service.join(params);
 	}
 	
+	//코디 베스트 선정 리스트 보여주기
+	@RequestMapping(value="/CB_BestList")
+	public @ResponseBody Map<String, ArrayList<BoardDto>> CB_BestList(
+					@RequestParam Map<String, String> params){
+		logger.info("코디 게시판 베스트선정 보여주기");
+		return service.CB_BestList(params);
+	}
+	
+	//패션토크  베스트 추천 리스트 보여주기
+	@RequestMapping(value="/FT_BestList")
+	public @ResponseBody Map<String, ArrayList<BoardDto>> FT_BestList(
+					@RequestParam Map<String, String> params){
+		logger.info("코디 게시판 베스트선정 보여주기");
+		return service.FT_BestList(params);
+	}
+	
 	//게시판 리스트 보여주기
 	@RequestMapping(value="/Board_list")
 	public @ResponseBody Map<String, Object> Board_list(
@@ -103,6 +119,16 @@ public class RestController {
 			@RequestParam  ("reple_idx") String reple_idx){
 		logger.info("댓글 삭제 기능 시행");
 		return service.repleDel(reple_idx);
+	}
+	
+	//게시물 추천
+	@RequestMapping(value="/board_Uplike")
+	public @ResponseBody Map<String,String> board_Uplike(
+			@RequestParam  ("board_idx") int board_idx,
+			@RequestParam  ("userId") String userId) {
+			logger.info("추천수 증가");
+			
+		return service.board_Uplike(board_idx,userId);
 	}
 	
 	//댓글 추천

@@ -403,7 +403,7 @@
 			data.PW_ANSWER=$("input[name='PW_answer']").val();
 			data.name = $("input[name='SignUp_name']").val();
 			data.phone= $("select[name='PhoneFirst']").val()+"-"+$("input[name='PhoneMiddle']").val()+"-"+$("input[name='PhoneLast']").val();
-			data.birth=$("select[name='year']").val()+"/"+$("select[name='month']").val()+"/"+$("select[name='day']").val()
+			data.birth=$("select[name='year']").val()+"-"+$("select[name='month']").val()+"-"+$("select[name='day']").val()
 			data.gender = $("input[name='SignUp_gender']").val();
 			if($("select[name='mailName']").val()=="")
 				{

@@ -42,8 +42,7 @@
 	</div>		
 	</body>
 	<script>
-		
-		var currPage = 1;
+		var currPage=1;
 		
 		listCall(currPage);
 
@@ -51,7 +50,6 @@
 			var url="./rest/Cd_list";
 			var data = {};
 			data.page = currPage;
-			console.log(currPage);
 			data.pagePerNum = 9;
 			reqServer(url, data);
 		}

@@ -123,7 +123,7 @@
 		#LikeGO
 		{
 			position: relative;
-			top: 60%;
+			top: 58%;
 			left: 40%;
 		}
 		#LIKE
@@ -163,7 +163,6 @@
    		<div id='likehate'>
 	  		<div id="LikeGO">
 			 	<a href=javascript:UP_like('${content.board_idx}')>
-			 		<input type="hidden" value="${content.nickName}" id="nicknamefind"/>
 			 		<img width="200px" height="100px" alt="조아요" src="./resources/img/like.PNG"> 
 			 	</a>
 			 		<br/>
@@ -317,19 +316,19 @@
 	
 	 //추천 하기
 	function UP_like(board_idx){
-		url = "./rest/reple_like"
+		url = "./rest/board_Uplike"
 		data = {}; 
 		data.board_idx = board_idx;
-		data.nickname=
+		data.userId= "${sessionScope.userId}";
 		console.log(board_idx);
-		console.log(data.nickname);
-		if(data.nickname=="")
+		console.log(data.userId);
+		if(data.userId=="")
 			{
 			alert("로그인 후 가능합니다.");
 			}
 		else
 			{
-			//reqServer(url,data);
+			reqServer(url,data);
 			}
 	};
   	
@@ -399,6 +398,10 @@
 					//페이지 세팅
 					PantscurrPage = d.currPage;
 					printPaging(PantscurrPage,d.page,'Pants');
+					}
+				if(url =="./rest/board_Uplike")
+					{
+					 alert(d.msg);		//확인 누르는 순간 바뀌게 하기
 					}
 				},error:function(e){
 						console.log(e)
@@ -475,6 +478,7 @@
 		
 		$("#OuterAdd").append(content);		
 		}
+	
 	//상의
 	if(category_name =="Top")
 		{
@@ -488,6 +492,7 @@
 		
 		$("#TopAdd").append(content);		
 		}
+	
 	//하의
 	if(category_name =="Pants")
 		{

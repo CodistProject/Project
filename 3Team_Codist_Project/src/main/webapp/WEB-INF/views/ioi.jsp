@@ -11,7 +11,8 @@
 			div.bord{
 				border-top-style: solid;
 				border-top-color: pink;
-				height: 200px;		
+				height: 200px;
+		
 			}
 			
 			div.bord1{
@@ -22,10 +23,16 @@
 			}
 			
 			div.bord2{
+			
 				float: right;	
 				border: 1px solid;
 				width: 47%;
 				height: 150px;
+			}
+			.jump
+			{
+				width: 300px;
+				height: 130px;
 			}
 		</style>
 	</head>
@@ -36,26 +43,186 @@
 		<div class="content">
 			BEST 코디
 			<div class="bord">
-				코디 게시판 목록
+				<table class='BestCody'>
+					<!-- 베스트 코디 리스트  -->
+				</table>
 			</div>
-			회원 추천 코디
+			<div class="jump"><!-- 사이간격 --></div>
 			
+			회원 추천 코디
 			<div class="bord">
-				회원 추천 코디 목록
+				<table class='Recommend'>
+					<!-- 회원 추천 코디 목록 -->
+				</table>
 			</div>
+			<div class="jump"><!-- 사이간격 --></div>
 			
 			<div class="bord1">
-				코디를 부탁해 게시판 노출
+				<table class='CoplzBoardlist'>
+					<!-- 코디를 부탁해 게시판 노출 -->
+				</table>
 			</div>
 			
 			<div class="bord2">
-				Q&A 게시판 노출
+				<table class='QnABoardlist'>
+					<!-- Q&A 게시판 노출 -->
+				</table>
 			</div>		
 		
 		</div>
 		
 	</body>
 	<script>
+	
+	CBlistCall();
+	FTlistCall();
+	QnAlistCall()
+	function CBlistCall(){
+		var url="./rest/CB_BestList";
+		var data = {};
+		data.page = 1;
+		data.pagePerNum = 3;
+		data.category_name='CB';
+		reqServer(url, data);
+	}
+	
+	function FTlistCall(){
+		var url="./rest/FT_BestList";
+		var data = {};
+		data.page = 1;
+		data.pagePerNum = 3;
+		data.category_name='FT';
+		reqServer(url, data);
+	}
+	
+	function QnAlistCall(){
+		var url="./rest/Board_list";
+		var data = {};
+		data.page = 1;
+		data.category_name="QnA";
+		data.pagePerNum = 5;
+		reqServer(url, data);
+	}
+	
+	function reqServer(url, data){
+		console.log(url);
+		$.ajax({
+			url:url,
+			type:"post",
+			data:data,
+			dataType:"json",
+			success:function(d){
+				console.log(d)
+				if(url == "./rest/CB_BestList"){
+				 	ImgPrintList(d.list,url);
+					//더보기 처리
+					//printPaging(currPage, d.page);
+					 } 
+				if(url == "./rest/FT_BestList"){
+					ImgPrintList(d.list,url);
+					//더보기 처리
+					//printPaging(currPage, d.page);
+					 }
+				if(url == "./rest/Board_list"){
+					printList(d.jsonList.list);
+					//더보기 처리
+					//printPaging(d.allCnt, d.page);
+					}
+				},error:function(e){
+						console.log(e)
+					}
+		});
+	}
+	//베스트선정 표현
+	function ImgPrintList(list,url){
+		console.log(list);
+		var content = "";
+		for(var i=0; i<list.length; i++)
+		{
+			if(i==0)
+			{
+			content +="<tr>";	
+			}
+			if(i % 3 ==0)
+			{
+			content	+="</tr><tr>";
+			}
+			content +="<td>"
+						+"<img width='275px' height='280px' alt='메인 코디' src='./resources/upload/"+list[i].newfilename+"'/>"
+						+"</br>"	
+						+list[i].subject
+						+"</br>";
+			if(url == "./rest/CB_BestList")
+				{
+			content += list[i].sub_subject
+						+"</td>";
+				}
+			else
+				{
+			content += list[i].content
+						+"</td>";
+				}		
+			if(i==(list.length-1))
+			{
+			content+="</tr>";
+			}
+		}
+		if(url == "./rest/CB_BestList")
+			{
+			$(".BestCody").append(content);
+			}
+		else
+			{
+			$(".Recommend").append(content);
+			}
+	}
+	
+	function printList(list){
+		console.log(list);
+		var content = "";
+		for(var i=0; i<list.length; i++){
+				content +="<tr>"
+							+"<td>"+list[i].board_idx
+							+"	<td>"
+							+"<a href='./Board_Detail?board_idx="+list[i].board_idx+"'>"
+							+list[i].subject
+							+"</a>";
+							if(list[i].newFileName != null){
+								content += "<h8>[첨부파일]</h8>"				
+								}
+							else
+								{
+								content += "<h8>[첨부파일X]</h8>"				
+								}
+							if(list[i].replies >0){
+								content += " <b>["+list[i].replies+"]</b>";
+							}
+				content +="</td>"
+							+"<td>"+list[i].nickName+"</td>"
+							+"<td>"+list[i].reg_date+"</td>"
+							+"<td>"+list[i].bhit+"</td>"
+							+"</tr>";
+		}
+		$(".QnABoardlist").empty();
+		$(".QnABoardlist").append(content);
+	};
+	
+	//더보기 페이징 처리	
+	function printPaging(currPage,pageNum){
+	console.log("현재 페이지 :"+currPage);
+	//외투
+		$("#Cd_pageNum").empty();
+		var content = "";
+	 	if(currPage<pageNum)
+	 		{
+	 		currPage+=1;
+	 		content +=" <a href='#' onclick='listCall("+currPage+")'>+더보기</a> "
+	 		}
+		
+		$("#Cd_pageNum").append(content);		
+	}
+	
+	
 	var msg="${msg}";
 	if(msg !="")
 		{

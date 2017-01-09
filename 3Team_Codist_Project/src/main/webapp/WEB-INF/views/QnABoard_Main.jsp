@@ -55,6 +55,16 @@
 		</div>		
 	</body>
 	<script>
+	var msg="${msg}";
+	if(msg !="")
+		{
+		alert(msg);
+		}
+	
+	var userId="${sessionScope.userId}";
+	var userNick="";
+	FindNick(userId)
+	
 	var currPage = 1;
 	listCall(currPage);
 	//페이지 갯수 정하기
@@ -62,6 +72,15 @@
 		listCall(currPage);
 	}); 
 	
+	
+	function FindNick(userId)
+	{
+		var url="./rest/FindNick";
+		var data={};
+		data.userId=userId
+		console.log(data.userId);
+		reqServer(url,data);
+	}
 
 	function listCall(currPage){
 		var url="./rest/Board_list";
@@ -88,6 +107,9 @@
 					currPage = d.currPage;
 					printPaging(d.allCnt, d.page);
 					}
+				if(url == "./rest/FindNick"){
+					userNick=d.userNick;
+					}
 				},error:function(e){
 						console.log(e)
 					}
@@ -99,19 +121,25 @@
 		var content = "";
 		for(var i=0; i<list.length; i++){
 				content +="<tr>"
-							+"<td>"+list[i].board_idx+"</td>"
-							+"	<td>"
+							+"<td>"+list[i].board_idx;
+							if(list[i].nickName==userNick)
+								{
+				content +=" <a href='./BoardDelete?board_idx="+list[i].board_idx+"&category_name="+list[i].category_name+"' style='text-decoration:none'>삭제</a> </td>";
+								}
+				content+="	<td>"
 							+"<a href='./Board_Detail?board_idx="+list[i].board_idx+"'>"
 							+list[i].subject
 							+"</a>";
+							if(list[i].newFileName != null){
+								content += "<h8>[첨부파일]</h8>"				
+								}
+							else
+								{
+								content += "<h8>[첨부파일X]</h8>"				
+								}
 							if(list[i].replies >0){
 								content += " <b>["+list[i].replies+"]</b>";
 							}
-							/*
-							if(list[i].newFileName != null){
-							content += "<img width='15px' src='resources/img/default.png'/>";
-							}	
-							*/
 				content +="</td>"
 							+"<td>"+list[i].nickName+"</td>"
 							+"<td>"+list[i].reg_date+"</td>"

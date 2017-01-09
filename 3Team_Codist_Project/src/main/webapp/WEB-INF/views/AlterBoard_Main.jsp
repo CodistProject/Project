@@ -56,6 +56,16 @@
       </div>
    </body>
    <script>
+   var msg="${msg}";
+	if(msg !="")
+		{
+		alert(msg);
+		}
+	
+	var userId="${sessionScope.userId}";
+	var userNick="";
+	FindNick(userId)
+   
    var currPage = 1;
 	
 	listCall(currPage);
@@ -63,6 +73,15 @@
 	$("#Al_page").change(function(){
 		listCall(currPage);
 	}); 
+	
+	function FindNick(userId)
+	{
+		var url="./rest/FindNick";
+		var data={};
+		data.userId=userId
+		console.log(data.userId);
+		reqServer(url,data);
+	}
 	
 
 	function listCall(currPage){
@@ -90,6 +109,9 @@
 					currPage = d.currPage;
 					printPaging(d.allCnt, d.page);
 					}
+				if(url == "./rest/FindNick"){
+					userNick=d.userNick;
+					}
 				},error:function(e){
 						console.log(e)
 					}
@@ -101,7 +123,12 @@
 		var content = "";
 		for(var i=0; i<list.length; i++){
 							content +="<tr>"
-										+"<td class='Al1'>"+list[i].board_idx+"</td>"
+										+"<td class='Al1'>"+list[i].board_idx
+										if(list[i].nickName==userNick)
+										{
+						content +=" <a href='./BoardDelete?board_idx="+list[i].board_idx+"&category_name="+list[i].category_name+"' style='text-decoration:none'>삭제</a>";
+										}
+						content+="	</td>"
 						if(list[i].newfilename != null){
 							content += "<td class='Al2'>" 
 									    +"<img width='15px' src='resources/img/default.jpg'/>";

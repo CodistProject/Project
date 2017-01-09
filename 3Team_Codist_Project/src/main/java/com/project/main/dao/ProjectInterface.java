@@ -17,7 +17,7 @@ public interface ProjectInterface {
 	public String overlayId(String id);	
 	
 	//중복 체크(Nick)
-	public String overlayNick(String id);	
+	public String overlayNick(String nick);	
 	
 	//닉네임 찾기
 	public String FindNick(String userId);
@@ -74,12 +74,9 @@ public interface ProjectInterface {
 	public int Board_Write(String nickName, String subject, String content, String filename, String newfilename,
 			String category_name);
 	
-	//추천수 증가
-	public void ft_like(String ft_like);
-	
-	//비추천수 증가
-	public void ft_hate(String ft_hate);
-	
+	//게시판 추천수 증가
+	public int Board_Uplike(int board_idx);
+
 	//댓글 가져오기
 	public ArrayList<ReplyDto> replyList(String idx);
 
@@ -89,14 +86,14 @@ public interface ProjectInterface {
 	//댓글 쓰기
 	public int replyRegist(int idx, String nick, String content);
 	
-	//글 삭제
-	public int delete(String idx);
-
+	//게시물 삭제
+	public int BoardDelete(String board_idx);
+	
 	// 유저 비밀번호 담기(로그인시 세션에 담기)
 	public String pw(String id);
 
 	// 유저 아이디 찾기(유저 이메일 받아서 - 이메일 쏘는거 까지)
-	public String Find_Id(String userEmail);
+	public String Find_Id(String name, String phone, String userEmail);
 
 	// 유저 비번 찾기(아이디 받아서 비번 찾기)
 	public String FindPw_userEmail(String userId);  
@@ -110,7 +107,7 @@ public interface ProjectInterface {
 	//댓글 추천수 증가
 	public int reple_like(int reple_idx);
 	
-	//댓글 추천수 증가
+	//댓글 추천수 감소
 	public int reple_hate(int reple_idx);
 	
 	//아이디 찾기
@@ -121,10 +118,15 @@ public interface ProjectInterface {
 
 	// 사다리게임에 관한 데이터 찾아오기
 	public GameDto Find_ladderData(String time_event_name);
-
+	
+	//사다리 게임
 	public void Bridge(String timenum, String select1, String select2, String select3, String select4, String select5,
 			String select6);
 	
+	//베스트 게시판 선정
+	public ArrayList<BoardDto> BOARD_BestList(String category_name, int currPage, int pagePerNum);
+	
+
 }
 
 

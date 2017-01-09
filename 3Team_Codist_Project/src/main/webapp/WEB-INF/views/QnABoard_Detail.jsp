@@ -44,7 +44,6 @@
 				<td colspan="6">
 				<input type="button" onclick="location.href='./QnABoard'" value="목록"/>
 				<input type="button" onclick="location.href='./Board_update?board_idx=${content.board_idx}'" value="수정"/>
-				<input type="button" onclick="location.href='./deleteFT?board_idx=${content.board_idx}'" value="삭제"/>
 				</td>
 			</tr>
 			
@@ -73,7 +72,7 @@
 	var userId="${sessionScope.userId}";
 	FindNick(userId);
 	replyList();
-	
+	var userNick="";
 	$("#go").click(function(){
 		url ="./rest/replyRegist";
 		data ={};
@@ -90,6 +89,7 @@
 		sendServer(data,url);
 		}		
 	});
+
 	
 	//댓글 닉네임 찾기
 	function FindNick(userId)

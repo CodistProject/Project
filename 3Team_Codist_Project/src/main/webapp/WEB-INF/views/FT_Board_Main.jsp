@@ -37,7 +37,7 @@
  		<div class="content">
 		<table class="Ft_board1" align="center">
 			<tr>
-			 	<td id="Ft_sub" colspan="6">
+			 	<td id="Ft_sub" colspan="7">
 					<b>패션토크 게시판</b>												
 				</td>
 			</tr>				
@@ -102,6 +102,24 @@
 	}); 
 	
 
+	 //추천 하기
+	function UP_like(board_idx){
+		url = "./rest/board_Uplike"
+		data = {}; 
+		data.board_idx = board_idx;
+		data.userId= "${sessionScope.userId}";
+		console.log(board_idx);
+		console.log(data.userId);
+		if(data.userId=="")
+			{
+			alert("로그인 후 가능합니다.");
+			}
+		else
+			{
+			reqServer(url,data);
+			}
+	};
+	
 	function listCall(currPage){
 		var url="./rest/Board_list";
 		var data = {};
@@ -266,6 +284,12 @@
 				if(url=="./rest/reple_hate"){
 					alert("댓글 비추천");
 				}
+				
+				if(url =="./rest/board_Uplike")
+				{
+				 alert(d.msg);		//확인 누르는 순간 바뀌게 하기
+				}
+				
 				},error:function(e){
 						console.log(e)
 					}

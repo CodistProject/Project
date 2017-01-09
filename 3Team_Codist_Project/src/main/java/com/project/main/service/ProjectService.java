@@ -98,7 +98,53 @@ public class ProjectService {
 		}
 		mav.setViewName(page);
 		return mav;
-	}	
+	}
+	
+	//코디게시판 베스트 선정
+	public Map<String, ArrayList<BoardDto>> CB_BestList(Map<String, String> params) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		//현재페이지
+		int currPage =Integer.parseInt(params.get("page"));
+				
+		//페이지당 보여줄 게시문 갯수
+		int pagePerNum =Integer.parseInt(params.get("pagePerNum"));
+		
+		//카테고리 네임
+		String category_name = params.get("category_name");	
+		
+		logger.info("시작 : {}",currPage);
+		logger.info("끝 : {}",pagePerNum);
+		logger.info("카테고리 : {}",category_name);
+		Map<String, ArrayList<BoardDto>> obj = new HashMap<String, ArrayList<BoardDto>>();
+		
+		obj.put("list", inter.BOARD_BestList(category_name,currPage,pagePerNum));
+					
+		return obj;
+	}
+	
+	//패션토크 베스트 선정
+	public Map<String, ArrayList<BoardDto>> FT_BestList(Map<String, String> params) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		//현재페이지
+		int currPage =Integer.parseInt(params.get("page"));
+				
+		//페이지당 보여줄 게시문 갯수
+		int pagePerNum =Integer.parseInt(params.get("pagePerNum"));
+		
+		//카테고리 네임
+		String category_name = params.get("category_name");	
+		
+		logger.info("시작 : {}",currPage);
+		logger.info("끝 : {}",pagePerNum);
+		logger.info("카테고리 : {}",category_name);
+		
+				
+		Map<String, ArrayList<BoardDto>> obj = new HashMap<String, ArrayList<BoardDto>>();
+		
+		obj.put("list", inter.BOARD_BestList(category_name,currPage,pagePerNum));
+					
+		return obj;
+	}
 	
 	//회원가입
 	public MemberInfo join(Map<String, String> params) {
@@ -421,6 +467,7 @@ public class ProjectService {
 			
 			return mav;					
 		}		*/
+	
 	//게시판 리스트 보여주기(Cody Board 제외)
 	public Map<String, Object> Board_list(Map<String, String> params) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
@@ -446,7 +493,6 @@ public class ProjectService {
 		Map<String, ArrayList<BoardDto>> obj 
 			= new HashMap<String, ArrayList<BoardDto>>();
 		obj.put("list", inter.Board_list(start, end,category_name));
-				
 		json.put("jsonList", obj);
 		json.put("currPage", currPage);
 		json.put("allCnt", allCnt);		
@@ -519,16 +565,24 @@ public class ProjectService {
 		json.put("page", page);
 		return json;
 	}
+	
 	//게시글 추천
-	public ModelAndView  ft_like(String ft_like) {
+	public Map<String, String>  board_Uplike(int board_idx, String userId) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
-		ModelAndView mav = new ModelAndView();	
-		inter.ft_like(ft_like);	
-		//불러오기
-		mav.setViewName("ft_like");		
-		return mav;
+		Map<String, String> obj = new HashMap<String,String>();
+		logger.info("전체 idx:{}",board_idx);
+		logger.info(userId);
+		String msg="댓글 추천에 실패 하셨습니다.";
+		if(inter.Board_Uplike(board_idx) ==1)
+		{
+			 msg="댓글 추천에 성공 하셨습니다.";
+		}
+	    obj.put("msg",msg);
+		
+		return obj;
 	}
-	//게시글 비추천
+	
+	/*	//게시글 비추천
 	public ModelAndView  ft_hate(String ft_hate) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		ModelAndView mav = new ModelAndView();
@@ -536,7 +590,7 @@ public class ProjectService {
 		//불러오기
 		mav.setViewName("ft_hate");	
 	return mav;
-	}
+	}*/
 	
 	//게시판 수정하기
 	public ModelAndView update(Map<String, String> params) {
@@ -605,7 +659,7 @@ public class ProjectService {
 		return map;
 	}
 	
-	//댓글 추천 기능
+	//댓글 비추 기능
 	public Map<String, Integer> reple_hate(int reple_idx) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		Map<String, Integer> map = new HashMap<String, Integer>();
@@ -734,19 +788,35 @@ public class ProjectService {
 	// 유저 아이디 찾기 서비스
 	public ModelAndView Find_Id(Map<String, String> params) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
+		String name= params.get("user_Name");
+		String phone1= params.get("userPhone");
+		String phone2= params.get("userPhone2");
+		String phone3= params.get("userPhone3");
+	
+		String phone = phone1+"-"+phone2+"-"+phone3;
+		
 		String E = params.get("userEmail1");
 		String E2 = params.get("userEmail2");
 		String userEmail = E+"@"+E2;  // 유저 메일 주소(아이디 찾을용+아이디 담아 보내줄 멜주소)
 		// 완성된 유저 이메일 주소
 		logger.info("유저 메일주소(아이디 찾기용/아이디 담아서 보내줄 멜주소:"+userEmail);
-		
-		// params에 찾은 아이디와 이메일 주소 담아주기(Email 클래스에서 갖다쓰게)
-		params.put("content_userId", inter.Find_Id(userEmail));
-		params.put("FindId_userEmail", userEmail);
-		
 		ModelAndView mav = new ModelAndView();				
-		mav.addObject("Find_Id", Email(params));		
-		mav.setViewName("ioi");
+		String userId=inter.Find_Id(name,phone,userEmail);
+		
+		if(userId !=null)
+		{
+			// params에 찾은 아이디와 이메일 주소 담아주기(Email 클래스에서 갖다쓰게)
+			params.put("content_userId", userId);
+			params.put("FindId_userEmail", userEmail);
+			mav.addObject("Find_Id", Email(params));		
+			mav.setViewName("ioi");
+		}
+		else
+		{
+			mav.addObject("msg","회원정보를 확인하여 주십시요.");
+			mav.setViewName("Find_Id");
+		}
+		
 		return mav;
 	}
 
@@ -850,6 +920,7 @@ public class ProjectService {
 		System.out.println(inter.FindNick(userId));
 		return obj;
 	}
+	
 	//나만의 옷장이동(유효성검사)
 	public ModelAndView My_Cloth(String userId) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
@@ -866,6 +937,43 @@ public class ProjectService {
 		mav.setViewName(page);
 		return mav;
 	}
+	
+	//게시물 삭제
+	public ModelAndView BoardDelete(String board_idx,String category_name) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav= new ModelAndView();
+		String msg="삭제에 실패 하셨습니다.";
+		String page="ioi";
+		if(inter.BoardDelete(board_idx)==1)
+		{
+			 msg="삭제에 성공 하셨습니다.";
+			 switch(category_name)
+			 {
+			 case "FT":
+					page="FT_Board_Main";
+				break;
+				
+				case "CP":
+					page="Coplz_Main";
+				break;
+					
+				case 	"QnA":
+					page="QnABoard_Main";
+				break;
+				
+				case "Alter":
+					page="AlterBoard_Main";
+				break;
+			 }
+		}
+
+		mav.addObject("msg",msg);
+		mav.setViewName(page);
+		return mav;
+	}
+
+	
+	
 
 
 	
