@@ -132,9 +132,9 @@
         
         </div>
         <hr class="one">       
-            <p id=p1>■비밀번호 힌트로 비밀번호 찾기</p>
-            <div id="center3">
-               <form action="Pw_FindEmail" id="pwFinder">
+            <p id=p1>■ 비밀번호 힌트로 비밀번호 찾기</p>
+            <form action="Pw_Find" id="pwFinder">
+            <div id="center3">               
                 <ul>
                     <li>아이디 : <input id="userId" name="user_Id" type="text" size="15" maxlength="15"/></li>
                     <li>이름 : <input id="userId" name="user_Name" type="text" size="16" maxlength="16"/></li>
@@ -150,23 +150,29 @@
                     </li>
                     <li>비밀번호 힌트 답:<input id="reple1"  name="Pw_Ans" type="text" size="20"></li>
                 </ul>
-                  	<center><input class="submit" id="sendpw1" type=submit value="확인"/></center>
-                </form>
+                  	<center><input class="submit" id="sendpw1" type=submit value="확인"/></center>                
             </div>    
             <div id="#content4">
-             <p id=p2>■회원정보로 비밀번호 찾기</p>
-                <form action="FindPw_userEmail" id="pwFinder2" >
+             <p id=p2>■ 회원정보로 비밀번호 찾기</p>                
             <ul>
                 <li>아이디 : <input id ="userId" name="userId" type="text" size ="14" maxlength="14"/></li>
-                <li>이름 : <input id ="userName" type="text" size ="16" maxlength="16"/></li>
+                <li>이름 : <input id ="userName" name="userName" type="text" size ="16" maxlength="16"/></li>
                 <li>이메일 : <input id ="email1" name="email1" type="text" size="16" maxlength="16" /> @ <input id="email2" name="email2" type="text" size="15" maxlength="16"/> </li>
-                <li>생년월일:<input id="date" type="date"/> </li>
+                <li>생년월일:<input id="date" name="Birth" type="date"/> </li>
             </ul>
-            <center><input class="submit" id="sendpw2" type="submit" value="확인"/></center>
-            </form>
+            <center><input class="submit" id="sendpw2" type="submit" value="확인"/></center>            
             </div>
+            </form>
       </div>
 	</body>
-	<script>		
+	<script>
+	var success_msg = "${Find_Pw.msg}";
+	var error_msg = "${error_msg}";
+	if(success_msg=="찾으시는 비밀번호가 이메일로 전송되었습니다."){
+		alert(success_msg);
+	}
+	if(error_msg=="입력하신 회원정보가 잘못되었습니다. 다시 확인 바랍니다."){
+		alert(error_msg);
+	}
 	</script>
 </html>

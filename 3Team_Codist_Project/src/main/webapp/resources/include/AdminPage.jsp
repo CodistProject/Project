@@ -38,10 +38,10 @@
    <jsp:include page="index.jsp"></jsp:include>
   
         <div id="Admin">
-          <a href="./AdminMember"> 회원 관리</a>
-          <a href="./AdminMessage"> 쪽지 관리</a>
-          <a href="./AdminEvent"> 이벤트 관리</a>
-          <a href="./AdminMileage"> 마일리지 관리</a>
+          <a href="./Admin_Member"> 회원 관리</a>
+          <a href="./Admin_Message"> 쪽지 관리</a>
+          <a href="./Admin_Event"> 이벤트 관리</a>
+          <a href="./Admin_Mileage"> 마일리지 관리</a>
           </div>
       <div>      
       <table>

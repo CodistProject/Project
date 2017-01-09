@@ -31,14 +31,10 @@
 		
 		</style>
 	</head>
-	<body>
-	
-		<div id='calendar'>
-			${myCalendar.myCloth[0].closet_idx}
-		</div>
-	
+	<body>	
+		<div id='calendar'>	</div>	
 	</body>
-	<script>
+	<script>	
 	
 	$(document).ready(function() {
 		
@@ -68,16 +64,15 @@
 			locale : 'ko',
 			editable: true,
 			eventLimit: true, // allow "more" link when too many events
-			events: [
+			events:[
 				{
-					title: '',
-					url : './',
-					start: '0000-00-00'
+					title: "${myCalendar.myCloth[0].calender_subject}",	
+					url : "http://www.naver.com",
+					start: "${myCalendar.myCloth[0].calender_date}"
 				},
 				{
 					title: 'Long Event',
-					start: '2016-12-07',
-					end: '2016-12-10'
+					start: '0000-00-00'					
 				},
 				{
 					id: 999,

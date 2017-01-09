@@ -237,34 +237,18 @@ public class MainController {
 	return service.Find_Id(params);
 	}
 	
-	// 유저 비번 찾기2(이메일 받아서) - 고급 버젼(찾은 비번 이메일 쏘는거까지)
-	@RequestMapping(value="/FindPw_userEmail")
-	public ModelAndView Find_Pw(@RequestParam Map<String, String> params){
-		logger.info("유저 비번찾기+이메일로 쏴주기2");
-	return service.Find_Pw(params);
-	}
-	
 	// 유저 비번 찾기1(입력 아이디 받아서 메일 찾고  찾은 메일로 메일 보내기 실행) - 고급 버젼(찾은 비번 이메일 쏘는거까지)
-	@RequestMapping(value="/Pw_FindEmail")
+	@RequestMapping(value="/Pw_Find")
 	public ModelAndView Pw_FindEmail(@RequestParam Map<String, String> params){
-		logger.info("유저 비번찾기+이메일로 쏴주기1");
+		logger.info("유저 비번찾기+이메일로 쏴주기");
 	return service.Find_Pw(params);
 	}
-
 	
 	//관리자 회원관리 페이지
 	@RequestMapping(value="/AdminMemberPage")
 	public ModelAndView AdminMemberPage(){
 		logger.info("관리자 회원 관리 페이지");
 	return service.AdminMemberPage();
-	}
-	
-	//나만의 옷장 페이지 이동(index 에서)
-	@RequestMapping(value="/My_Cloth")
-	public ModelAndView my_Cloth(@RequestParam("userId") String userId){
-		logger.info("나만의 옷장 페이지 요청1");
-		logger.info(userId);		
-		return service.My_Cloth(userId);
 	}
 	
 	//나만의 옷장 페이지 이동(index 에서)
