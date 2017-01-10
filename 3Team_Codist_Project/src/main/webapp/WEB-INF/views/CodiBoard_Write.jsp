@@ -7,6 +7,7 @@
 		<title>코디 게시판 글쓰기 </title>
 		<script src ="//code.jquery.com/jquery-3.1.0.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="resources/css/Board.css"/>
+		<link rel="stylesheet" type="text/css" href="resources/css/codiBoard.css"/>
 		
 	</head>
 	<body>
