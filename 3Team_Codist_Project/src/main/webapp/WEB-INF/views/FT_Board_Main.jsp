@@ -291,7 +291,7 @@
 		for(var i=0; i<list.length; i++){
 				content +="<tr>"
 							+"<td id='Idx"+i+"' class='Ft1' height='100px'>"+list[i].board_idx+"</td>"
-							if(list[i].newfilename != null){
+							if(list[i].newfilename == null){
 								content += "<td>" 
 										    +"<img width='15px' src='resources/img/default.jpg'/>";
 								}

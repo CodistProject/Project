@@ -100,7 +100,7 @@
 					}
 				content +="<td>"
 				if(userId=="ADMIN"){
-					content	+="<input type='checkbox' class='admin'/>"
+					content	+="<input type='checkbox' class='admin'"+i+"/>"
 				}
 					content	+="<a href='./CodiBoard_Detail?board_idx="+list[i].board_idx+"'>"
 							+"<img width='280px'  alt='메인 코디' src='./resources/upload/"+list[i].newfilename+"'/>"
