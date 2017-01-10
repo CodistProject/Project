@@ -291,4 +291,19 @@
 	<update id="NewUpdate">
 		UPDATE NOTE SET LETTER_NEW='N'
 	</update>
+	
+ 	<!-- 마일리지+쿠폰 리스트 -->
+ 	<select id="Mileage_List" resultType="com.project.main.dto.MileageDto">
+ 		SELECT JOIN_IDX, USER_ID, COUPON_5, COUPON_10, COUPON_15, COUPON_20, MILEAGE FROM EVENT_COUPON ORDER BY JOIN_IDX ASC 	
+ 	</select>
+ 	
+ 	<!-- 전체 회원 리스트 -->
+ 	<select id="Member_list" resultType="com.project.main.dto.MemberInfo">
+ 		SELECT * FROM JOIN_REG ORDER BY JOIN_IDX ASC 	
+ 	</select>
+ 	
+ 	<!-- 회원전체 마일리지 업데이트(관리자) -->
+ 	<update id=" Update_Mileage">
+ 		UPDATE EVENT_COUPON SET MILEAGE WHERE USER_ID = #{param1} 
+ 	</update>
 </mapper>

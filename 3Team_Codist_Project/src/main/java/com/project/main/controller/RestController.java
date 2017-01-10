@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.main.dto.BoardDto;
 import com.project.main.dto.MemberInfo;
+import com.project.main.dto.MileageDto;
 import com.project.main.dto.ReplyDto;
 import com.project.main.service.ProjectService;
 
@@ -174,8 +175,22 @@ public class RestController {
 			@RequestParam Map<String, String> params){
 		logger.info("코디게시판 -> 나만의 옷장 이동 전 팝업(옷+일정 데이터 담기)");
 		return service.Put_Cloth(params);
+	}
+	
+	// 마일리지+쿠폰(회원) 리스트 
+	@RequestMapping(value="/Mileage_list")
+	public @ResponseBody Map<String, ArrayList<MileageDto>> Mileage_list(){
+		logger.info("마일리지+쿠폰 리스트");
+		return service.Mileage_list();
 	}	
 	
+	// 회원 관리 리스트 
+	@RequestMapping(value="/Member_list")
+	public @ResponseBody Map<String, ArrayList<MemberInfo>> Member_list(){
+		logger.info("회원 관리 리스트");
+		return service.Member_list();
+	}	
+
 	//사다리 게임 마일리지 넣기
 	@RequestMapping(value="/gamemileage")
 	public @ResponseBody Map<String, Integer> gamemileage(			
@@ -208,4 +223,11 @@ public class RestController {
 		return service.NewUpdate();
 	}
 	
+	// 마일리지 업데이트(전체 회원-관리자 모드)
+	@RequestMapping(value="/Upate_Mileage")
+	public @ResponseBody Map<String, String> Upate_Mileage(			
+			@RequestParam Map<String, String> params){
+		logger.info("마일리지 업데이트");
+		return service.Upate_Mileage(params);
+	}
 }

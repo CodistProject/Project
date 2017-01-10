@@ -168,8 +168,16 @@ public interface ProjectInterface {
 	
 	//쪽지 N 알람제거 
 	public int NewUpdate();
-
 	
+	// 마일리지+쿠폰 리스트
+	public ArrayList<MileageDto> Mileage_List();
+
+	// 전체 회원 리스트(관리자 관리모드)
+	public ArrayList<MemberInfo> Member_list();
+
+	// 마일리지 업데이트(전체 회원 - 관리자모드)
+	public boolean Update_Mileage(String userId);
+		
 }
 
 

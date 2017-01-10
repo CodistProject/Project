@@ -10,10 +10,10 @@
    </head>
    <body> 
         <div id="Admin">
-          <a href="./AdminMember"> 회원 관리</a>
+          <a href="./Admin_Member"> 회원 관리</a>
           <a href="./AdminMessage"> 쪽지 관리</a>
           <a href="./Admin_Manage_Event"> 이벤트 관리</a>
-          <a href="./AdminMileage"> 마일리지 관리</a>
+          <a href="./Admin_Mileage"> 마일리지 관리</a>
           </div>
       <div>      
       <table>
