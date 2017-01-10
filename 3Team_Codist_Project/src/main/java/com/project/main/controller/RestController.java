@@ -225,7 +225,7 @@ public class RestController {
 	
 	// 마일리지 업데이트(전체 회원-관리자 모드)
 	@RequestMapping(value="/Upate_Mileage")
-	public @ResponseBody Map<String, String> Upate_Mileage(			
+	public @ResponseBody Map<String, Object> Upate_Mileage(			
 			@RequestParam Map<String, String> params){
 		logger.info("마일리지 업데이트");
 		return service.Upate_Mileage(params);

@@ -308,7 +308,18 @@
  	</select>
  	
  	<!-- 회원전체 마일리지 업데이트(관리자) -->
- 	<update id=" Update_Mileage">
- 		UPDATE EVENT_COUPON SET MILEAGE WHERE USER_ID = #{param1} 
+ 	<update id="Update_Mileage">
+ 		UPDATE EVENT_COUPON SET MILEAGE=${param1} WHERE USER_ID = #{param2} 
  	</update>
+ 	
+ 	<!-- 쿠폰생성 -->
+   <insert id="updateCoupon">
+      INSERT INTO EVENT_COUPON(USER_ID,JOIN_IDX,COUPON_5,COUPON_10 ,COUPON_15  ,COUPON_20,Mileage  ) 
+      VALUES(#{param1},#{param2},0,0,0,0,0)
+   </insert>
+   
+   <!-- 유저 이메일 찾기(이메일 문의용- 문의 내용에 담을 이메일 주소) -->
+   <select id="Find_userEmail" resultType="String">
+   		SELECT EMAIL FROM JOIN_REG WHERE ID = #{param1}
+   </select>
 </mapper>

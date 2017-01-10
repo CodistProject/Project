@@ -79,8 +79,7 @@ public class ProjectService {
 		ModelAndView mav = new ModelAndView();		
 		MileageDto mil= new MileageDto();				
 		logger.info("id: {}",id);
-		logger.info("pw: {}",pw);
-		
+		logger.info("pw: {}",pw);		
 		
 		String page = "ioi";		
 		if(id == null || pw == null){
@@ -727,10 +726,10 @@ public class ProjectService {
 	public Map<String, String> Email(Map<String, String> params) {
 		logger.info("이메일 기능 작동");
 		
-		// 1:1 문의용 관련 정보
-    	final String userEmail = params.get("userEmail"); // 유저 이메일    	
-    	final String content = params.get("content"); // 유저 문의 내용
+		// 1:1 문의용 관련 정보    	    	    	
     	final String userId = params.get("userId"); // 유저 아이디 담기(보낸 이)
+    	final String userEmail = inter.Find_userEmail(userId); // 유저 이메일
+    	final String content = "문의 내용: "+params.get("content")+"/"+"답변 받을 유저메일 주소: "+userEmail; // 유저 문의 내용
     	
     	// 아이디 찾아서 메일로 보내주기 용 관련 정보(내용:유저아이디 / 받을 유저 메일 주소)
     	final String content_userId = params.get("content_userId"); // 유저아이디가 담긴 컨텐트
@@ -748,7 +747,7 @@ public class ProjectService {
     	logger.info("------------1:1 문의용 정보 ---------");
     	logger.info("유저 아이디(보내는 이):"+userId);
     	logger.info("유저 이메일(보내는 이 메일주소):"+userEmail);
-    	logger.info("문의 내용 :"+content);    	
+    	logger.info(content);    	
          
     	// 아이디 찾고 메일 담아 보내주기용 관련정보 체크
     	logger.info("------------아이디 찾아 메일 쏘기 정보 ---------");
@@ -793,24 +792,22 @@ public class ProjectService {
 			message.setFrom(new InternetAddress("0304kiss@gmail.com")); // 작성자 메일주소(유저/보낸사람 이메일주소) - 구글이메일만 가능(하지만 결국 관리자로 할꺼임)
 			
 			// 유저 메일주소(아이디 찾기용)이 빈값이 아닐경우 - 유저 아이디 찾아 보내기용
-			if(content == null && content_userPw1 == null && content_userPw2 == null){
-				logger.info("if문 작동 체크");
+			if(userId == null && content_userPw1 == null && content_userPw2 == null){				
 				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(FindId_userEmail)); // 찾은 아이디 받을 사람(유저 메일주소)
 				message.setSubject("잃어버린 아이디를 찾았습니다. 확인 바랍니다."); // 제목
 				message.setText("찾으시는 아이디 :"+content_userId); // 찾은 유저아이디 담은 내용
 				map.put("msg", "찾으시는 아이디가 이메일로 전송되었습니다.");
 			}
 			// 유저 아이디(로그인한)가 빈값이 아닐 경우  - 1:1 문의용
-			if(content_userId == null && content_userPw1 ==null && content_userPw2 == null){
-				logger.info("if문 작동 체크");
-				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("starcsiran0@naver.com"));  // 관리자 메일주소(받는 사람)
-				message.setSubject(userId+"님께서 1:1 문의를 하셨습니다."); // 제목
-				message.setText(content); // 문의내용
-				map.put("msg", "1:1문의가 이메일로 전송 되었습니다!");
+			if(content_userId == null && content_userPw1 ==null && content_userPw2 == null){									
+					message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("starcsiran0@naver.com"));  // 관리자 메일주소(받는 사람)
+					message.setSubject(userId+"님께서 1:1 문의를 하셨습니다."); // 제목
+					message.setText(content); // 문의내용
+					map.put("msg", "1:1문의가 이메일로 전송 되었습니다!");				
 			}		 
 			
 			// 유저 메일주소(비번 찾기용1)이 빈값이 아닐경우 - 유저 비번 찾아 보내기용
-			if(content==null && content_userId ==null && content_userPw2 ==null){
+			if(userId==null && content_userId ==null && content_userPw2 ==null){
 				logger.info("if문 작동 체크");
 				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(FindPw_userEmail1)); // 찾은 아이디 받을 사람(유저 메일주소)
 				message.setSubject("잃어버린 비밀번호를 찾았습니다. 확인 바랍니다."); // 제목
@@ -818,7 +815,7 @@ public class ProjectService {
 				map.put("msg", "찾으시는 비밀번호가 이메일로 전송되었습니다.");
 			}						
 			// 유저 메일주소(비번 찾기용2)이 빈값이 아닐경우 - 유저 비번 찾아 보내기용
-			if(content==null && content_userId==null && content_userPw1==null){
+			if(userId==null && content_userId==null && content_userPw1==null){
 				logger.info("if문 작동 체크");
 				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(FindPw_userEmail2)); // 찾은 아이디 받을 사람(유저 메일주소)
 				message.setSubject("잃어버린 비밀번호를 찾았습니다. 확인 바랍니다."); // 제목
@@ -1203,14 +1200,17 @@ public class ProjectService {
 			}
 
 			// 마일리지 업데이트(전체 - 관리자모드)
-			public Map<String, String> Upate_Mileage(Map<String, String> params) {
+			public Map<String, Object> Upate_Mileage(Map<String, String> params) {
 				inter = sqlSession.getMapper(ProjectInterface.class);
 				String userId = params.get("userId");
-				Map<String, String> map = new HashMap<String, String>();
+				String Update_Mileage = params.get("mileage");
+				int Count = Integer.parseInt(params.get("count"));				
+				Map<String, Object> map = new HashMap<String, Object>();
 				String msg ="";				 
-				if(inter.Update_Mileage(userId)){
-					msg = "업데이트가 적용되었습니다!.";
+				if(inter.Update_Mileage(Update_Mileage, userId)){
+					msg = "업데이트가 적용되었습니다!.";				
 				}
+				map.put("count", Count);
 				map.put("msg", msg);
 				return map;
 			}

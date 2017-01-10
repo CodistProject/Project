@@ -72,16 +72,13 @@
         </table>
      </div>
 	</body>
-	<script>	
-	// 업뎃 적용 완료 메시지
-	var msg = "${msg}";
-	if(msg=="업데이트가 적용되었습니다!."){
-		alert(msg);
-	}
+	<script>
 	
 	// 마일리지 리스트 함수 실행
 	Mileage_list();
 	
+	var listcount="";
+
 	// 마일리지 리스트 함수 실행(url, data 담고 리스트콜로 보내기)
 	function Mileage_list(){
 		var url="rest/Mileage_list";
@@ -105,7 +102,7 @@
 			}
 		});
 	} 
-	var listcount="";
+	
 	// 리스트 뿌려주는 함수(마일리지+쿠폰)
 	function printList(list){
 		var content="";
@@ -115,10 +112,10 @@
 			content += "<tr>"
 					 +"<td class='p'>"+list[i].join_Idx+"</td>"
 					 +"<td class='p' id='mileageId"+i+"'>"+list[i].user_id+"</td>"					 
-					 +"<td class='p'>"+"<input id='coupon_5"+i+"' type='text' value="+list[i].coupon_5+" size='5'>"+"</td>"
-					 +"<td class='p'>"+"<input id='coupon_10"+i+"' type='text' value="+list[i].coupon_10+" size='5'>"+"</td>"
-					 +"<td class='p'>"+"<input id='coupon_15"+i+"' type='text' value="+list[i].coupon_15+" size='5'>"+"</td>"
-					 +"<td class='p'>"+"<input id='coupon_20"+i+"' type='text' value="+list[i].coupon_20+" size='5'>"+"</td>"
+					 +"<td class='p'>"+"<input id='coupon_5"+i+"' type='text' value="+list[i].coupon_5+" size='5' readonly>"+"</td>"
+					 +"<td class='p'>"+"<input id='coupon_10"+i+"' type='text' value="+list[i].coupon_10+" size='5' readonly>"+"</td>"
+					 +"<td class='p'>"+"<input id='coupon_15"+i+"' type='text' value="+list[i].coupon_15+" size='5' readonly>"+"</td>"
+					 +"<td class='p'>"+"<input id='coupon_20"+i+"' type='text' value="+list[i].coupon_20+" size='5' readonly>"+"</td>"
 					 +"<td class='p'>"+"<input id='mileage"+i+"' type='text' value="+list[i].mileage+" size='5'>"+"</td>"
 					 +"</tr>";			
 		}				  
@@ -126,15 +123,16 @@
 	    $("#list").append(content);				 
 	}
 	
-		
+	
 	// 마일리지 업데이트
 	function Upate_Mileage(){
 		console.log("리스트 개수:"+listcount);		
 		for(var i=0;i<listcount;i++){
+			console.log("run:"+i);
 			var mileage = $("#mileage"+i).val();
 			var userId=$("#mileageId"+i).html();
 			console.log(mileage+"/"+userId);
-			var url = "/rest/Upate_Mileage";
+			var url = "rest/Upate_Mileage";
 			var data={};
 			data.mileage = mileage; 
 			data.userId = userId;
@@ -151,8 +149,17 @@
 			type : "post",
 			data : data,
 			dataType : "json",
-			success : function(d){
-				console.log(d);				
+			success : function(d){						
+				if(url=="rest/Upate_Mileage"){
+					// 리스트 카운트와 map에 담은 카운트가 같을 경우
+					var cou=d.count+1;
+					console.log("카운트"+cou+"/"+listcount);
+					if(listcount==cou){
+						// 업뎃 적용 메시지 띄우기+ 마일리지 관리 페이지 이동
+						alert(d.msg);					
+						location.href='./Admin_Mileage';
+					}	
+				}				
 			}, error : function(e){
 				console.log(e);
 			}

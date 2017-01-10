@@ -243,16 +243,20 @@
 		$("input[name='email']").click(function(){
 			console.log("이메일 처리");
 			url = "./rest/Email";
-			data={};
-			data.userId = userId;			
-			data.content=$("#askBox").val();			
-			// console 로 data 담은 것들 제대로 담겼는지 체크
-			// 유저 정보
-			console.log(data.userId);	
-			console.log(data.content);				
-			
-			// 아작스로 보내서 처리(url, data)
-			ajaxCall(url, data);
+			data={};			
+			// 로그인 유효성검사(이메일 문의)
+			if(userId==""){
+				alert("로그인이 필요한 서비스입니다!");
+			}else{
+				data.userId = userId;			
+				data.content=$("#askBox").val();			
+				// console 로 data 담은 것들 제대로 담겼는지 체크
+				// 유저 정보
+				console.log(data.userId);	
+				console.log(data.content);						
+				// 아작스로 보내서 처리(url, data)
+				ajaxCall(url, data);	
+			}
 		});		
 		
 		// 아작스 처리(이메일 문의)
