@@ -1,126 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
-
-    
+<html>	
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>패션토크 게시판</title>
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-		<style>			
-			.Ft_board1{
-				border : 1px solid white;			
-				border-top-color : black;				
-				border-bottom-color : black;
-				width : 100%;
-			}
-			.Ft_board2{
-				border : 1px solid white;								
-				border-bottom-color : black;
-				width : 100%;
-			}
-			.Ft_board2 td{
-				border : 1px solid;								
-			}
-			#btn_write, #Ft_pageNum{
-				border : 1px solid white;	
-				border-top-color : black;				
-				border-bottom-color : black;	
-			}		
-			#Ft_sub{
-				font-size : 30pt;
-				text-align : center;									
-			}			
-			.Ft_subject{
-				text-align : center;
-				background-color : yellow;
-			}
-			
-			.Ft1,.Ft4,.Ft5,.Ft6,.Ft7
-			{
-				font-size: 8px;
-				width: 20px;
-			}
-			
-			.Ft2
-			{
-				width: 150px;
-			}		
-			.tog1
-			{
-				visibility: hidden;
-			}
-			.tog2
-			{
-				display: none;
-			}
-			#texta
-			{
-				width: 690px;
-				resize: none;
-			}
-			.user
-			{
-				width: 50px;
-				
-			}
-			.Relecontent
-			{
-				width: 700px;
-			}
-			/* 버튼 css */
-			#FTQna
-			{
-			-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
-			-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
-			box-shadow:inset 0px 1px 0px 0px #ffffff;
-			background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #f6f6f6));
-			background:-moz-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
-			background:-webkit-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
-			background:-o-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
-			background:-ms-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
-			background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
-			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0);
-			background-color:#ffffff;
-			-moz-border-radius:6px;
-			-webkit-border-radius:6px;
-			border-radius:6px;
-			border:1px solid #dcdcdc;
-			display:inline-block;
-			cursor:pointer;
-			color:#666666;
-			font-family:Arial;
-			font-size:15px;
-			font-weight:bold;
-			padding:6px 24px;
-			text-decoration:none;
-			text-shadow:0px 1px 0px #ffffff;
-			}
-			
-			#FTQna:hover {
-			background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f6f6f6), color-stop(1, #ffffff));
-			background:-moz-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
-			background:-webkit-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
-			background:-o-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
-			background:-ms-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
-			background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
-			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f6f6f6', endColorstr='#ffffff',GradientType=0);
-			background-color:#f6f6f6;
-			}
-			
-			#FTQna:active {
-			position:relative;
-			top:1px;
-		}			
+		<link rel="stylesheet" type="text/css" href="resources/css/board.css"/>
+		<style>
+		.tog1
+         {
+            visibility: hidden;
+         }
+         .tog2
+         {
+            display: none;
+         }
+         #texta
+         {
+            width: 690px;
+            resize: none;
+         }
+         .user
+         {
+            width: 50px;
+            
+         }
+         .Relecontent
+         {
+            width: 700px;
+         }
 		</style>
 	</head>
 	<body>
-			
      <jsp:include page="../../resources/include/index.jsp"/>
  		<div class="content">
 		<table class="Ft_board1" align="center">
 			<tr>
-			 	<td id="Ft_sub" colspan="6">
+			 	<td id="Ft_sub" colspan="7">
 					<b>패션토크 게시판</b>												
 				</td>
 			</tr>				
@@ -139,7 +56,7 @@
 							</select>
 						<c:if test="${sessionScope.userId !=null}">
 							<button id="FTQna" onclick="location.href='./FTboard_Write?userId=${sessionScope.userId}'">글쓰기</button>
-						</c:if>
+						</c:if><!-- FTbutton -->
 					</td>					
 				</tr>		
 							
@@ -185,6 +102,24 @@
 	}); 
 	
 
+	 //추천 하기
+	function UP_like(board_idx){
+		url = "./rest/board_Uplike"
+		data = {}; 
+		data.board_idx = board_idx;
+		data.userId= "${sessionScope.userId}";
+		console.log(board_idx);
+		console.log(data.userId);
+		if(data.userId=="")
+			{
+			alert("로그인 후 가능합니다.");
+			}
+		else
+			{
+			reqServer(url,data);
+			}
+	};
+	
 	function listCall(currPage){
 		var url="./rest/Board_list";
 		var data = {};
@@ -207,7 +142,7 @@
 		replyList(num);
 		//토글처리
 		
-		$("#"+num).slideToggle("fast",function(){
+		$("#"+num).slideToggle("slow",function(){
             var view = $("#"+num).css("display");
             if(view == "none")
                 {
@@ -349,6 +284,12 @@
 				if(url=="./rest/reple_hate"){
 					alert("댓글 비추천");
 				}
+				
+				if(url =="./rest/board_Uplike")
+				{
+				 alert(d.msg);		//확인 누르는 순간 바뀌게 하기
+				}
+				
 				},error:function(e){
 						console.log(e)
 					}
@@ -402,6 +343,15 @@
 		
 		if(url == "./rest/FT_Board_Detail"){
 			content +="내용: "+list.content
+				   		+"<div id='LikeGO'>"
+				   		+"<a href=javascript:UP_like('"+list.board_idx+"')>"
+				   		+"<img width='30px' height='30px' alt='조아요' src='./resources/img/like.PNG'> "
+				   		+"</a>"
+				   		+"<br/>"
+				   		+"<span id='LIKE'>"
+				   		+list.ft_like
+				   		+"</span>"
+				   		+"</div>"
 						+"</br>"
 						+"<table>"
 						+"<tr>"

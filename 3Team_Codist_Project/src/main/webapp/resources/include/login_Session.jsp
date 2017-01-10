@@ -6,32 +6,28 @@
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>로그인 후 변경</title>
-		<style>		
-			table.login,td.login{
-				padding: 5px;
-				text-align:center;
-			}
-		</style>
+		<link rel="stylesheet" type="text/css" href="resources/css/main.css"/>
 	</head>
 	<body>		
-			<table>
+			<table class="logses">
 				<tr >
-					<td>${sessionScope.userId}님 반갑습니다.</td>				
+					<td>${sessionScope.userId}님 반갑습니다.</td>									
+				</tr>
+				<tr >
+					<td align="right">${sessionScope.mil} 마일리지</td>									
 				</tr>
 				<br/>
 				<tr>
 					<td>
-					
 					<c:if test="${sessionScope.userId !='ADMIN'}">
-						<a href="./MemberData_view?userId=${sessionScope.userId}">마이페이지</a>  
-					</c:if>
-	
-					<c:if test="${sessionScope.userId =='ADMIN'}">
-						<a href="./AdminMemberPage">관리페이지</a>  
-					</c:if>
-					
-					 <a href="./logout?userId=${sessionScope.userId}">로그아웃</a>
+                  		<a href="./MemberData_view?userId=${sessionScope.userId}">마이페이지</a>  
+          		    </c:if>   
+           		 	<c:if test="${sessionScope.userId =='ADMIN'}">
+           	      		<a href="./AdminMemberPage">관리페이지</a> 
+           	      	</c:if>							
+					 	<a href="./logout?userId=${sessionScope.userId}">로그아웃</a>
 					 </td>				
+				</tr>
 			</table>	
 	</body>
 	<script></script>

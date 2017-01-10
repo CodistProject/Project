@@ -4,37 +4,12 @@
 
 <html>	
 	<head>
- 	  <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <title>물물교환</title>
-		<style>			
-			.Cd_board1{				
-				width : 100%;			
-			}
-			.Cd_board2{												
-				border-bottom-color : black;
-				width : 100%;				
-			}
-			
-			#Cd_pageNum{
-				border : 1px solid white;	
-				border-top-color : black;				
-				border-bottom-color : black;	
-			}		
-			#Cd_sub{
-				font-size : 30pt;				
-				text-align : center;
-				border : 1px solid white;
-				border-bottom-color : black;	
-				border-top-color : black;												
-			}			
-			.admin{
-				display: none;
-			}
-		</style>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>코디 게시판</title>
+		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="resources/css/codiBoard.css"/>
 	</head>
 	<body>
-			
 		<jsp:include page="../../resources/include/index.jsp"/>
 		<div class="content">		
 		<table class="Cd_board1" align="center">
@@ -45,13 +20,13 @@
 			</tr>				
 		</table>
 		</br>
-		
-	
 		<table class="Cd_board2" align="center">
 			<thead>		
 				<tr>
 					<td colspan="3" align="right">
-						<button class="admin"  onclick="location.href='./CodiBoard_Write?userId=${sessionScope.userId}'">글쓰기</button>						
+						<c:if test="${sessionScope.userId =='ADMIN'}">
+							<button class="admin"  onclick="location.href='./CodiBoard_Write?userId=${sessionScope.userId}'">글쓰기</button>						
+						</c:if>
 					</td>					
 				</tr>		
 			</thead>			
@@ -69,16 +44,19 @@
 	</div>		
 	</body>
 	<script>
+		var msg = "${msg}";
 		
-		var currPage = 1;
+		if(msg != ""){
+			alert(msg);
+		}
+		var currPage=1;
 		
 		listCall(currPage);
-
+		
 		function listCall(currPage){
 			var url="./rest/Cd_list";
 			var data = {};
 			data.page = currPage;
-			console.log(currPage);
 			data.pagePerNum = 9;
 			reqServer(url, data);
 		}
@@ -107,6 +85,9 @@
 		function printList(list){
 			console.log(list);
 			var content = "";
+			var userId ="${sessionScope.userId}";
+			
+			console.log(userId);
 			for(var i=0; i<list.length; i++)
 			{
 				if(i==0)
@@ -118,8 +99,10 @@
 					content	+="</tr><tr>";
 					}
 				content +="<td>"
-							+"<input type='checkbox' class='admin'/>" 
-							+"<a href='./CodiBoard_Detail?board_idx="+list[i].board_idx+"'>"
+				if(userId=="ADMIN"){
+					content	+="<input type='checkbox' class='admin'/>"
+				}
+					content	+="<a href='./CodiBoard_Detail?board_idx="+list[i].board_idx+"'>"
 							+"<img width='280px'  alt='메인 코디' src='./resources/upload/"+list[i].newfilename+"'/>"
 							+"</a>"
 							+"</br>"	
@@ -149,6 +132,6 @@
 			
 			$("#Cd_pageNum").append(content);		
 		}
-		
+	
 	</script>
 </html>

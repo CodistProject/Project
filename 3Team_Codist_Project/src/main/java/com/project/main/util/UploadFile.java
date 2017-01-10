@@ -42,7 +42,6 @@ public class UploadFile {
 		//3. 파일 가져 오기
 		Iterator<String> files = multi.getFileNames();
 		
-		while(files.hasNext()){
 			//파일 바이너리 뽑기
 			String uploadFile = files.next();
 			logger.info("uploadFile : "+uploadFile);
@@ -61,7 +60,6 @@ public class UploadFile {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}				
 		return newfilename;
 	}
 

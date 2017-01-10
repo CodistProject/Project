@@ -17,7 +17,7 @@
 	
 	<!-- 중복 체크(댓글like) -->
 	<select id="overlayNick" resultType="String">
-		SELECT NICKNAME FROM REPLE_VALIDATION WHERE REPLE_IDX=#{param1}
+		SELECT NICKNAME FROM JOIN_REG WHERE NICKNAME=#{param1}
 	</select>
 	
 	<!-- 중복 체크(댓글hate) -->
@@ -30,6 +30,10 @@
 		SELECT NICKNAME FROM JOIN_REG WHERE NICKNAME=#{param1}
 	</select>
 	
+	<!-- 게시판 삭제 -->
+	<delete id="BoardDelete">
+		DELETE FROM TOTAL_BOARD WHERE BOARD_IDX= #{param1}
+	</delete>
 
 	<!-- 카테고리 찾기  -->
 	<select id="CategoryName" resultType="String">
@@ -76,7 +80,7 @@
 	
  	<!-- 탈퇴 -->
 	<delete id="withdrawa">
-	 	DELETE FROM join_reg WHERE JOIN_IDX=(SELECT JOIN_IDX FROM JOIN_REG WHERE ID = #{param1}) CASCADE
+	 	DELETE FROM join_reg WHERE JOIN_IDX=(SELECT JOIN_IDX FROM JOIN_REG WHERE ID = #{param1})
 	</delete>
 	  
  	<!--게시판 상세보기(코디 제외)  -->
@@ -102,11 +106,25 @@
  			seq_total_board.NEXTVAL, #{param1}, #{param2}, #{param3},#{param4},#{param5},#{param6})
  	</insert>
  	 	
- 	<!--코디 글쓰기 -->
- 	<insert id="CodiBoard_Writes">
+ 	<!--코디 글쓰기(메인) -->
+ 	<insert id="CB_write">
+ 		INSERT INTO TOTAL_BOARD(
+ 	 		category_name, Board_idx,JOIN_IDX ,subject,sub_subject,filename,newfilename,FT_LIKE,FT_HATE,REPLES,BHIT)
+ 	 		VALUES('CB',SEQ_TOTAL_BOARD.NEXTVAL,50,#{param1}, #{param2},#{param3},#{param4},0,0,0,0)
+ 	</insert>
+ 	
+ 	<!--메인 글쓴뒤 idx찾기 -->
+ 	<select id="CB_writeFind" resultType="Integer">
+ 		SELECT BOARD_IDX FROM TOTAL_BOARD 
+ 			WHERE subject=#{param1} AND sub_subject=#{param2} 
+ 				AND filename=#{param3} AND newfilename=#{param4}
+ 	</select>
+ 	
+ 	<!--코디 글쓰기(외투,상의,하의) -->
+ 	<insert id="Cloth_write">
  		INSERT INTO CATEGORY_CLOTH(
- 	 		filename, category_name, newfilename)VALUES(
- 			#{param1}, #{param2}, #{param3})
+ 	 		CC_IDX, BOARD_IDX, CATEGORY_NAME,CLOTH_NAME,REAL_NAME,CLOTH_URL,CLOTH_DETAIL,FILENAME,NEWFILENAME)
+ 	 		VALUES(SEQ_CATEGORY_CLOTH.NEXTVAL,#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8})
  	</insert>
  	
  	<!-- 게시판 게시물 수 -->
@@ -134,6 +152,11 @@
  		DELETE FROM TOTAL_REPLE WHERE REPLE_IDX = #{param1}
  	</delete>
  	
+ 	<!-- 게시판 추천수 증가  -->
+ 	<update id="Board_Uplike">
+ 		UPDATE TOTAL_BOARD SET ft_LIKE= ft_LIKE+1  WHERE BOARD_IDX=#{param1}
+ 	</update>
+ 	
  	<!--댓글추천수 증가  -->
  	<update id="reple_like">
  		UPDATE total_reple SET reple_like = reple_like+1 WHERE reple_idx = #{param1}
@@ -143,7 +166,7 @@
  	<update id="reple_hate">
  		UPDATE total_reple SET reple_hate = reple_hate+1 WHERE reple_idx = #{param1}
  	</update>
- 	
+
  	<!-- 유저 비밀번호 찾기 -->
  	<select id="pw" resultType="String">
  		SELECT PW FROM JOIN_REG WHERE ID = #{param1}
@@ -151,7 +174,7 @@
  	
  	<!-- 유저 아이디 찾기 (이메일 전송 버전)-->
  	<select id="Find_Id" resultType="String">
- 		SELECT ID FROM JOIN_REG WHERE EMAIL = #{param1}
+ 		SELECT ID FROM JOIN_REG WHERE NAME = #{param1} AND PHONE= #{param2} AND EMAIL = #{param3} 
  	</select>
  	
  	 <!-- 유저 비번 찾기1 (이메일 전송 버전)-->
@@ -166,11 +189,11 @@
  	
  	<!--  리스트 보이기 -->
  	<select id="Board_list" resultType="com.project.main.dto.BoardDto">
- 		SELECT BOARD_IDX, NICKNAME ,SUBJECT ,REG_DATE ,NEWFILENAME,BHIT,REPLES,ft_like FROM (
- 					  SELECT BOARD_IDX ,NICKNAME ,SUBJECT 
+ 		SELECT category_name,BOARD_IDX, NICKNAME ,SUBJECT ,REG_DATE ,NEWFILENAME,BHIT,REPLES,ft_like FROM (
+ 					  SELECT category_name,BOARD_IDX ,NICKNAME ,SUBJECT 
  							,REG_DATE ,BHIT,REPLES,ft_like,NEWFILENAME
  							,ROW_NUMBER() OVER(ORDER BY BOARD_IDX ASC) AS RNUM FROM 
- 							(SELECT BOARD_IDX, NICKNAME ,SUBJECT ,REG_DATE ,NEWFILENAME,BHIT,REPLES,ft_like FROM TOTAL_BOARD WHERE CATEGORY_NAME = #{param3} )
+ 							(SELECT category_name,BOARD_IDX, NICKNAME ,SUBJECT ,REG_DATE ,NEWFILENAME,BHIT,REPLES,ft_like FROM TOTAL_BOARD WHERE CATEGORY_NAME = #{param3} )
    							)WHERE RNUM BETWEEN #{param1} AND #{param2}  
  	</select>
  	
@@ -199,6 +222,43 @@
  		SELECT EMAIL FROM JOIN_REG WHERE ID = #{param1}
  	</select>
  	
+ 	 <!--사다리 게임 설정값 수정-->
+ 	<update id="Bridge">
+ 		UPDATE TIME_EVENT SET TIMENUM = #{param1} , SELECT1 = #{param2}, SELECT2 = #{param3}, SELECT3 = #{param4}, SELECT4 = #{param5} , SELECT5 = #{param6}, SELECT6 = #{param7}
+ 	</update>
+ 	
+ 	<!--사다리 게임 시간값 수정-->
+ 	<update id="Time">
+ 		UPDATE TIME_EVENT SET TIME_START = #{param1} , TIME_END = #{param2}
+ 	</update>
+ 	
+ 	<!-- 사다리 게임 정보 가져오기 -->
+ 	<select id="Find_ladderData" resultType="com.project.main.dto.GameDto">
+ 		SELECT * FROM TIME_EVENT WHERE TIME_EVENT_NAME = #{param1}
+ 	</select>
+
+ 	<!-- 마일리지 정보 가져오 -->
+ 	<select id="Find_Mileage" resultType="com.project.main.dto.MileageDto">
+ 		SELECT * FROM EVENT_COUPON WHERE USER_ID = #{param1}
+  	</select> 	
+ 		
+ 	<!--마일리지 넣기-->
+ 	<update id="Mileage_put">
+ 		UPDATE EVENT_COUPON SET MILEAGE = #{param2} WHERE USER_ID = #{param1}
+ 	</update>
+ 	
+ 	<!-- 베스트 코디 보기 -->
+ 	<select id="BOARD_BestList" resultType="com.project.main.dto.BoardDto">
+		SELECT CATEGORY_NAME,BOARD_IDX, NICKNAME ,SUBJECT ,SUB_SUBJECT,CONTENT
+		 					,REG_DATE ,FILENAME,NEWFILENAME,BHIT,REPLES,FT_LIKE FROM (
+		 						SELECT CATEGORY_NAME,BOARD_IDX, NICKNAME 
+		 									,SUBJECT ,SUB_SUBJECT,CONTENT,REG_DATE 
+		 									,FILENAME,NEWFILENAME,BHIT,REPLES,FT_LIKE
+		 									,ROW_NUMBER() OVER(ORDER BY FT_LIKE DESC) 
+		 									AS RNUM FROM TOTAL_BOARD WHERE CATEGORY_NAME=#{param1}) WHERE RNUM BETWEEN #{param2} AND #{param3}
+
+ 	</select>
+ 	
  	<!-- 코디게시판에서 옷 고르고 담기(DB에) -->
  	<insert id="Put_Cloth">
  		INSERT INTO MY_WARDROBES(CLOSET_IDX, JOIN_IDX, CALENDER_SUBJECT, CALENDER_DATE, MY_OUTER, MY_TOP, MY_PANTS) values(SEQ_MY_WARDROBES.NEXTVAL, #{param1},#{param2},#{param3},#{param4},#{param5},#{param6})
@@ -214,5 +274,8 @@
  		SELECT * FROM MY_WARDROBES WHERE JOIN_IDX = #{param1} ORDER BY CLOSET_IDX DESC
  	</select>
  	
- 	<!--   -->
+ 	<!-- 마일리지+쿠폰 리스트 -->
+ 	<select id="Mileage_List" resultType="com.project.main.dto.MileageDto">
+ 		SELECT * FROM EVENT_COUPON
+ 	</select>
 </mapper>

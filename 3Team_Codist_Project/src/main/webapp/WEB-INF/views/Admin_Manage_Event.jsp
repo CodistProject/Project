@@ -14,12 +14,22 @@
 				padding: 10px;
 				float: right;
 			}
+			
+			div.ya
+         	{
+         	position: absolute;
+         	top: 20%;
+         	left:30%;         
+         	}
+			
 		</style>
 	</head>
-	<body>		
-		
-		<jsp:include page="../../resources/include/index.jsp"/>
-		<div class="content">
+	<body>	
+		<jsp:include page="../../resources/include/index.jsp"></jsp:include>
+		<div>				
+   		<jsp:include page="../../resources/include/AdminPage.jsp"></jsp:include>   		
+   		</div>
+		<div class="ya">		
 		<h3>VS 이벤트</h3>
 		<p>사진 선택</p>
 		<table>
@@ -53,33 +63,91 @@
 		당첨자 설정 : <input type="text"/>
 		<br/>
 		포인트 설정 : <input type="text"/>
-		<br/>
-		<div class="ok">
-		<input type="button" value="적용"/>	
-		</div>		
+		<br/>		
+		<input type="button" value="적용"/>			
+		<br/>		
 		<h3>시간 이벤트</h3>
-		<p>게임 선택</p>
-		<table>
+		<form action="Time">	
+		<table>		
+			<tr>				
+				<td><p>사다리 게임</p></td>	
+			</tr>
+			<tr>							
+				<td>시간 설정 : <input type="time" name="time_start" value="${ladder_Data.time_start}">~<input type="time" name="time_end" value="${ladder_Data.time_end}"></td>
+				<td>							
+				<input type="submit" value="설정"/>				
+				</td>
+			</tr>		
+		</table>
+		</form>
+			<br/>				
+			<form action="Bridge">
+			<table>
 			<tr>
-				<td><input type="checkbox"></td>
-				<td>사다리 게임</td>
-				<td><input type="time">~<input type="time"></td>
+				<td>
+				인원 수 : <input type="text" name="timenum" value="${ladder_Data.timenum}">
+				</td>
 			</tr>
-			<tr>	
-				<td><input type="checkbox"></td>
-				<td>룰렛 게임</td>
-				<td><input type="time">~<input type="time"></td>
+			<tr>
+				<td>
+				1번 설정값 : <input type="text" name="select1" value="${ladder_Data.select1}">
+				</td>
 			</tr>
-			</table>			
-			<br/>
-			당첨자 설정 : <input type="text"/>
-			<br/>
-			포인트 설정 : <input type="text"/>
-			<br/>
-			<div class="ok">
-			<input type="button" value="적용"/>		
-			</div>	
-		</div>	
+			<tr>
+				<td>
+				2번 설정값 : <input type="text" name="select2" value="${ladder_Data.select2}">
+				</td>
+			</tr>
+			<tr>
+				<td>
+				3번 설정값 : <input type="text" name="select3" value="${ladder_Data.select3}">
+				</td>
+			</tr>
+			<tr>
+				<td>
+				4번 설정값 : <input type="text" name="select4" value="${ladder_Data.select4}">
+				</td>
+			</tr>
+			<tr>
+				<td>
+			5번 설정값 : <input type="text" name="select5" value="${ladder_Data.select5}">
+				</td>
+			</tr>
+			<tr>
+				<td>
+			6번 설정값 : <input type="text" name="select6" value="${ladder_Data.select6}">
+				</td>				
+			</tr>
+			<tr>
+				<td align="right">							
+				<input type="submit" value="설정"/>				
+				</td>
+			</tr>
+			</table>
+			</form>		
+		 </div>
 	</body>
-	<script></script>
+	<script>
+		var ladder = $("#ladder");			
+	/* 	
+		function val() {
+			var num = $("#num").val();			
+			var i = 1;
+			var html = '';			
+			
+			if(num<=1){
+				alert("숫자가 너무 적습니다.");				
+			}else if(num<=6){
+				for(i;i<=num;i++){
+					 html += '설정값 : <input type="text" name="val'+i+'"  value=""><br/>';					
+				}						
+				ladder.append(html)
+				ladder.append("<input type='hidden' name='val0' value='"+num+"'/>")
+				ladder.append("<input type='submit' value='설정'/>")
+			}else{
+				alert("숫자가 너무 많습니다.");
+			}			
+			
+		}	 */
+	</script>
 </html>

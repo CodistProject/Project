@@ -32,14 +32,17 @@
 	</body>
 	<script>	
 	
+	// 마일리지 리스트 함수 실행
 	Mileage_list();
 	
+	// 마일리지 리스트 함수 실행(url, data 담고 리스트콜로 보내기)
 	function Mileage_list(){
 		var url="rest/Mileage_list";
 		var data={};
 		Mileage_listCall(url, data);	
 	};
-		
+	
+	// 마일리지 리스트 콜 함수 실행(아작스처리)		
 	function Mileage_listCall(url, data){
 		$.ajax({
 			url: url,
@@ -48,6 +51,7 @@
 			dataType: "json",
 			success : function(data){
 				console.log(data);
+				// 리스트 뿌려주기
 				printList(data);
 			}, error : function(error){
 				console.log(error);
@@ -55,17 +59,22 @@
 		});
 	} 
 	
+	// 리스트 뿌려주는 함수(마일리지+쿠폰)
 	function printList(data){
 		var content="";
-		content += "<tr>"+
-				   "<td>"++"</td>"
-				   "<td>"++"</td>"
-				   "<td>"++"</td>"
-				   "<td>"++"</td>"
-				   "<td>"++"</td>"
-				   "<td>"++"</td>"
-				   "<td>"++"</td>"				   
-				  +"</tr>"		
+		for(var i=0; i<list.length; i++){
+			content += "<tr>"+
+					   "<td>"+list[i].join_Idx+"</td>"
+					   "<td>"+list[i].user_id+"</td>"
+					   "<td>"+list[i].coupon_5+"</td>"
+					   "<td>"+list[i].coupon_10+"</td>"
+					   "<td>"+list[i].coupon_15+"</td>"
+					   "<td>"+list[i].coupon_20+"</td>"
+					   "<td>"+list[i].mileage+"</td>"				   
+					  +"</tr>";			
+		}				  
+	    $("#list").empty();
+	    $("#list").append(content);				 
 	}
 	</script>
 </html>

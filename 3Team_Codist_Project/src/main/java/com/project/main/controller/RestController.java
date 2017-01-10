@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.main.dto.BoardDto;
 import com.project.main.dto.MemberInfo;
+import com.project.main.dto.MileageDto;
 import com.project.main.dto.ReplyDto;
 import com.project.main.service.ProjectService;
 
@@ -55,6 +56,22 @@ public class RestController {
 			@RequestParam Map<String, String> params){
 		logger.info("회원 가입");
 		return service.join(params);
+	}
+	
+	//코디 베스트 선정 리스트 보여주기
+	@RequestMapping(value="/CB_BestList")
+	public @ResponseBody Map<String, ArrayList<BoardDto>> CB_BestList(
+					@RequestParam Map<String, String> params){
+		logger.info("코디 게시판 베스트선정 보여주기");
+		return service.CB_BestList(params);
+	}
+	
+	//패션토크  베스트 추천 리스트 보여주기
+	@RequestMapping(value="/FT_BestList")
+	public @ResponseBody Map<String, ArrayList<BoardDto>> FT_BestList(
+					@RequestParam Map<String, String> params){
+		logger.info("코디 게시판 베스트선정 보여주기");
+		return service.FT_BestList(params);
 	}
 	
 	//게시판 리스트 보여주기
@@ -105,6 +122,16 @@ public class RestController {
 		return service.repleDel(reple_idx);
 	}
 	
+	//게시물 추천
+	@RequestMapping(value="/board_Uplike")
+	public @ResponseBody Map<String,String> board_Uplike(
+			@RequestParam  ("board_idx") int board_idx,
+			@RequestParam  ("userId") String userId) {
+			logger.info("추천수 증가");
+			
+		return service.board_Uplike(board_idx,userId);
+	}
+	
 	//댓글 추천
 	@RequestMapping(value="/reple_like")
 	public @ResponseBody Map<String,Integer> reple_like(
@@ -146,14 +173,21 @@ public class RestController {
 			@RequestParam Map<String, String> params){
 		logger.info("코디게시판 -> 나만의 옷장 이동 전 팝업(옷+일정 데이터 담기)");
 		return service.Put_Cloth(params);
-	}	
-	
+	}
 	
 	// 마일리지+쿠폰(회원) 리스트 
 	@RequestMapping(value="/Mileage_list")
-	public @ResponseBody Map<String, Object> Mileage_list(			
+	public @ResponseBody Map<String, ArrayList<MileageDto>> Mileage_list(			
 			@RequestParam Map<String, String> params){
 		logger.info("마일리지+쿠폰 리스트");
 		return service.Mileage_list(params);
 	}	
+
+	//사다리 게임 마일리지 넣기
+	@RequestMapping(value="/gamemileage")
+	public @ResponseBody Map<String, Integer> gamemileage(			
+			@RequestParam Map<String, String> params){
+		logger.info("사다리게임 마일리지 보내기");
+		return service.gamemileage(params);
+	}
 }

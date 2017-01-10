@@ -1,7 +1,9 @@
 package com.project.main.controller;
 
 import java.util.Map;
+
 import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.project.main.service.ProjectService;
 
 
@@ -23,9 +26,9 @@ public class MainController {
 
 	//메인 페이지 이동
 	@RequestMapping(value="/")
-	public String home(){
+	public ModelAndView home(@RequestParam Map<String, String> params){
 		logger.info("메인 페이지 요청");
-		return "ioi";
+		return service.TimePop(params);
 	}
 	
 	//회원가입 약관 이동
@@ -41,7 +44,22 @@ public class MainController {
 		logger.info("회원가입 폼으로 이동");
 		return "JoinForm";
 	}
-	
+
+	//이벤트 관리 페이지 이동
+	@RequestMapping(value="/TimeEvent")
+	public ModelAndView TimeEvent(@RequestParam Map<String, String> params){
+		logger.info("이벤트 관리 페이지 이동");
+		return service.Game(params);
+	}		
+		
+		
+	//이벤트 관리 페이지 이동
+	@RequestMapping(value="/Admin_Manage_Event")
+	public ModelAndView Admin_Manage_Event(@RequestParam Map<String, String> params){
+		logger.info("이벤트 관리 페이지 이동");
+		return service.Admin_Manage_Event(params);
+	}		
+		
 	//로그인 처리
 	@RequestMapping(value="/login")
 	public ModelAndView login(@RequestParam Map<String, Object> params
@@ -56,6 +74,7 @@ public class MainController {
 	public String logout(HttpSession session){
 		logger.info("logout 요청");
 		session.removeAttribute("userId");
+		session.removeAttribute("mil");
 		return "redirect:/";
 	}
 	
@@ -66,6 +85,14 @@ public class MainController {
 		logger.info("회원정보 보기(마이 페이지) 이동");	
 		return service.MemberData_View(userId);
 	}
+	
+	//마일리지(마이 페이지) 이동
+		@RequestMapping(value="/MyPage_Mileage")
+		public ModelAndView MyPage_Mileage(@RequestParam("userId") String userId) {	
+			logger.info(userId);
+			logger.info("마일리지(마이 페이지) 이동");	
+			return service.MyPage_Mileage(userId);
+		}
 		
 	//회원정보 수정기능 실행 전 보기 (수정보기 페이지이동)
 	@RequestMapping(value = "/Member_modify_view")
@@ -211,16 +238,17 @@ public class MainController {
 	}
 	//게시판 글쓰기(코디 게시판 제외)
 	@RequestMapping(value="/Board_Write")
-	public ModelAndView Board_Write(HttpSession session, MultipartHttpServletRequest multi){				
+	public ModelAndView Board_Write(MultipartHttpServletRequest multi){				
 		logger.info("글쓰기 요청");
-		return service.Board_Write(multi, session);
+		return service.Board_Write(multi);
 	}		
 	
 	//코디게시판  글쓰기
 	@RequestMapping(value="/CodiBoard_Writes")
-	public ModelAndView CodiBoard_Writes(HttpSession session, MultipartHttpServletRequest multi){				
+	public ModelAndView CodiBoard_Writes(MultipartHttpServletRequest multi){				
 	logger.info("글쓰기 요청");
-	return null;//
+	
+	return service.CodiBoard_Writes(multi);
 	}	
 	
 	// 이벤트 팝업창 띄우기
@@ -258,4 +286,27 @@ public class MainController {
 		logger.info("유저아이디:"+userId);		
 		return service.myCloth(userId);
 	}
+	
+	// 사다리 게임 설정값 넘기기
+	@RequestMapping(value="/Bridge")
+	public ModelAndView Bridge(@RequestParam Map<String, String> params){		
+		logger.info("사다리 게임 설정값 넘기기");		
+		return service.Bridge(params);
+	}
+	// 게시물 삭제
+	@RequestMapping(value="/BoardDelete")
+	public ModelAndView BoardDelete(@RequestParam("board_idx") String board_idx,
+			@RequestParam("category_name") String category_name){		
+		logger.info("게시물 삭제하기");		
+		logger.info(category_name);		
+		return service.BoardDelete(board_idx,category_name);
+	}		
+	
+	// 사다리 게임 시간값 넘기기
+	@RequestMapping(value="/Time")
+	public ModelAndView Time(@RequestParam Map<String, String> params){		
+		logger.info("사다리 게임 시간값 넘기기");		
+		return service.Time(params);
+	}
+	
 }

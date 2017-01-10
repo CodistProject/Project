@@ -7,92 +7,9 @@
       <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <title>물물교환</title>
-       <style>
-           .Al_board1{
-            border : 1px solid white;         
-            border-top-color : black;            
-            border-bottom-color : black;
-            width : 100%;
-         }
-         .Al_board2{
-            border : 1px solid white;                        
-            border-bottom-color : black;
-            width : 100%;
-         }
-         .Al_board2 td{
-            border : 1px solid;                        
-         }
-         #btn_write, #Al_pageNum{
-            border : 1px solid white;   
-            border-top-color : black;            
-            border-bottom-color : black;   
-         }      
-         #Al_sub{
-            font-size : 30pt;
-            text-align : center;                           
-         }         
-         .Al_subject{
-            text-align : center;
-            background-color : yellow;
-         }
-         .Al1,.Al4,.Al5
-			{
-				font-size: 8px;
-				width: 20px;
-			}
-			
-			.Al2
-			{
-				width: 150px;
-			}	
-            /* 버튼 css */
-         #AlQna
-         {
-         -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
-         -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
-         box-shadow:inset 0px 1px 0px 0px #ffffff;
-         background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #f6f6f6));
-         background:-moz-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
-         background:-webkit-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
-         background:-o-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
-         background:-ms-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
-         background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
-         filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0);
-         background-color:#ffffff;
-         -moz-border-radius:6px;
-         -webkit-border-radius:6px;
-         border-radius:6px;
-         border:1px solid #dcdcdc;
-         display:inline-block;
-         cursor:pointer;
-         color:#666666;
-         font-family:Arial;
-         font-size:15px;
-         font-weight:bold;
-         padding:6px 24px;
-         text-decoration:none;
-         text-shadow:0px 1px 0px #ffffff;
-         }
-         
-         #AlQna:hover {
-         background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f6f6f6), color-stop(1, #ffffff));
-         background:-moz-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
-         background:-webkit-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
-         background:-o-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
-         background:-ms-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
-         background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
-         filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f6f6f6', endColorstr='#ffffff',GradientType=0);
-         background-color:#f6f6f6;
-         }
-         
-         #AlQna:active {
-         position:relative;
-         top:1px;
-      }            
-      </style>
+       <link rel="stylesheet" type="text/css" href="resources/css/AlterBoard.css"/>
    </head>
    <body>
-         
      <jsp:include page="../../resources/include/index.jsp"/>
        <div class="content">
       <table class="Al_board1" align="center">
@@ -139,6 +56,16 @@
       </div>
    </body>
    <script>
+   var msg="${msg}";
+	if(msg !="")
+		{
+		alert(msg);
+		}
+	
+	var userId="${sessionScope.userId}";
+	var userNick="";
+	FindNick(userId)
+   
    var currPage = 1;
 	
 	listCall(currPage);
@@ -146,6 +73,15 @@
 	$("#Al_page").change(function(){
 		listCall(currPage);
 	}); 
+	
+	function FindNick(userId)
+	{
+		var url="./rest/FindNick";
+		var data={};
+		data.userId=userId
+		console.log(data.userId);
+		reqServer(url,data);
+	}
 	
 
 	function listCall(currPage){
@@ -173,6 +109,9 @@
 					currPage = d.currPage;
 					printPaging(d.allCnt, d.page);
 					}
+				if(url == "./rest/FindNick"){
+					userNick=d.userNick;
+					}
 				},error:function(e){
 						console.log(e)
 					}
@@ -184,7 +123,12 @@
 		var content = "";
 		for(var i=0; i<list.length; i++){
 							content +="<tr>"
-										+"<td class='Al1'>"+list[i].board_idx+"</td>"
+										+"<td class='Al1'>"+list[i].board_idx
+										if(list[i].nickName==userNick)
+										{
+						content +=" <a href='./BoardDelete?board_idx="+list[i].board_idx+"&category_name="+list[i].category_name+"' style='text-decoration:none'>삭제</a>";
+										}
+						content+="	</td>"
 						if(list[i].newfilename != null){
 							content += "<td class='Al2'>" 
 									    +"<img width='15px' src='resources/img/default.jpg'/>";
@@ -250,7 +194,7 @@
 				if(currPage ==i){
 					content +="<b>"+i+"</b>";
 				}else{
-					content += " <a href='#' onclick='listCall("+i+")'>"
+					content += " <a href='#' class='listpage' onclick='listCall("+i+")'>"
 					+i+"</a> "
 				}					
 			}			
@@ -259,7 +203,7 @@
 		//마지막 페이지가 전체 페이지 수 보다 적으면 다음 링크 생성
 		if(end<pageNum)
 		{
-			content +=" | <a href='#' onclick='listCall("
+			content +=" | <a href='#' class='listpage' onclick='listCall("
 					+(end+1)+")'>다음</a> "
 		}
 		

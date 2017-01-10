@@ -7,10 +7,11 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <title>Insert title here</title>
       <style>
-      #agree,#agree2
+      #agree1,#agree2
       {
       	border:1px solid;
       	border-collapse: collapse;
+      	
       }
       	#agree3{
       	width: 700px;
@@ -215,19 +216,35 @@ Codist는 회원관리, 서비스 개발・제공 및 향상, 안전한 인터�
 		<table id="agree_chk" align="center">
 			<tr>
 				<td>	
-					<input type="checkbox" name="agree1" value="" />위 약관의 동의하겠습니다.								
+					<input type="checkbox" id="agree1" value="check" />위 약관의 동의하겠습니다.								
 				</td>
 				<td>
-					<input type="checkbox" name="agree2" value="" />개인정보 수집에 동의하겠습니다.
+					<input type="checkbox" id="agree2" value="check2" />개인정보 수집에 동의하겠습니다.
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2">
-				 	<button id="next" onclick="location.href='./joinForm'">다음</button>
+				 	<button id="next" id="agree3" onclick="check()">다음</button>
 				</td>
 			</tr>
 		</table>
 		</div>
    </body>
-   <script></script>
+   <script>
+   function check()
+   {
+   	 var check=$("#agree1:checked").val();
+   	 var check2=$("#agree2:checked").val();
+   	 console.log(check);
+   	 console.log(check2);
+   	 if(check=="check" && check2=="check2")
+   		 {
+   			 location.href='./joinForm';
+   		 }
+   	 else
+   		 {
+			alert("약관의 확인을 체크해 주세요!")   		 
+   		 }
+   	}
+   	 </script>
 </html>

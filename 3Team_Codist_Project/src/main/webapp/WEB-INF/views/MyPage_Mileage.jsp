@@ -50,10 +50,10 @@
 				   		<table id="info">
 				   		 
 				           <tr>
-		 	           			<td>보유 마일리지 :</td>
+		 	           			<td>보유 마일리지 : ${Find_Mileage.mileage}</td>
 		 	           		</tr>
 		 	           		<tr>
-		 	           			<td>사용가능 마일리지 :</td>
+		 	           			<td>사용가능 마일리지 : <span id="use"></span></td>
 		 	           		</tr>
 				     <tr>
             			<td class="rig">
@@ -63,9 +63,24 @@
 				            </table>
     				</div>
 				</td>   			
-   			</tr>
-    	
-    		</table>
-    		
+   			</tr>    	
+    		</table>    		
   	</body>
-</html>
+  	<script>
+  		usemileage();
+  		
+  		function usemileage() {
+  			var mg = ${Find_Mileage.mileage};
+  			var html ="";
+  			var use = $("#use");
+  			console.log(mg);
+  			if(mg<1000){
+				html += "(1000 마일리지부터 사용가능합니다)";
+				use.append(html);
+			}else{
+				html += mg;
+				use.append(html);
+			}
+		}
+  	</script>
+</html>  

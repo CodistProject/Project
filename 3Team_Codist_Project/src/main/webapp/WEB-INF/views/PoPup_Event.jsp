@@ -15,7 +15,6 @@
 				padding: 5px;
 				text-align: center;				
 			}
-			
 			#popup{		
 				padding: 10px;			
 				width: 450px;
@@ -24,23 +23,18 @@
 				border: 1px solid gray;			
 				/* display:none; */
 			}
-			
 			.winner{
 				float: right;
 				padding: 15px;
-		
 				width:50px;			
 			}
-			
 			.event{				
 				width: 400px;
 				height: 500px;
 			}
-			
 			#eventclose{
 				float: right;
 			}
-			
 			.winnerclick{
 				text-decoration: none;
 			}					
@@ -58,7 +52,7 @@
 			
 			<tr>
 				<td>	
-				<a class= "winnerclick" href="#">Time Event</a>	
+				<a class= "winnerclick"  href="javascript:TimeEvent();">Time Event</a>	
 				</td>
 			</tr>	
 			<tr>
@@ -94,20 +88,25 @@
 							<td>그래프</td>						
 						</tr>
 					</table>
-				</div>
-				
-			<div class="timeeven">
-				<p>TIME 이벤트</p>
-				<div>
-					게임 API
-				</div>				
+				</div>			
 			</div>			
 			</div>	
 			<input id="eventclose" type="button" value="닫기">		
 		</div>		
 	</body>
 	<script>
-	
+	function TimeEvent()
+	{
+		if("${sessionScope.userId}"!="")
+			{
+			location.href="./TimeEvent";
+			}
+		else
+			{
+			alert("로그인 후 사용 가능합니다.");
+			}
+	 			
+	}
 	// 이벤트 팝업창 닫기
 	$("#eventclose").click(function(){					
 		self.close();		

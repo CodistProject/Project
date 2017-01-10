@@ -2,30 +2,33 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>    
     
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>	
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>회원가입 페이지</title>
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-		<style>			
-			table{				
+		<link rel="stylesheet" type="text/css" href="resources/css/button.css"/>
+		<style>
+		/*회원가입  */		
+		div.content{
+				width: 800px;
+			}	
+			#SignUp_table{
+				width: 100%;		
 				border : 1px solid;
 				border-collapse : collapse;
 				padding : 5px;			
 			}						
 			#SignUp_sub h{
 				font-size : 15pt;
-				font-family : 굴림체;
 			}
 			#agree_chk{
 				font-size : 13pt;
-				font-family : 굴림체;	
 				border : 1px solid white;						
 			}
 			#SignUp_table td{
-				font-size : 8pt; 
-				font-family : 굴림체;
+				padding: 10px;
+				font-size : 12pt; 
 			}
 			#popup{
 				position:absolute;
@@ -37,21 +40,34 @@
 				top: 15%;
 				left: 25%;
 				display:none;
-			}			
+			}
+			/* select 박스 css*/
+			select::-ms-expand { display: none; }
+			select.sel { 
+			width: 150px; /* 원하는 너비설정 */ 
+			padding: .3em .2em; /* 여백으로 높이 설정 */ 
+			font-family: inherit; /* 폰트 상속 */ 
+			background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */
+			 border: 1px solid #999; 
+			 border-radius: 0px; /* iOS 둥근모서리 제거 */ 
+			 -webkit-appearance: none; /* 네이티브 외형 감추기 */ 
+			 -moz-appearance: none; appearance: none; 
+			}	
+		
 		</style>
 	</head>
 	<body>
 	<div>
 		<jsp:include page="../../resources/include/index.jsp"/>
 	</div>
+	<div class="content">
 		<table id="SignUp_sub" align="center">
 			<tr>
 				<td>
 					<h>회원 가입</h>			
 				</td>
 			</tr>			
-		</table>		
-				
+		</table>	
 		<!-- 가입 정보 확인 -->		
 		<div id="popup">
 			<!-- 가입정보 -->			
@@ -97,25 +113,24 @@
 				
 				<tr>
 					<td colspan="2">
-						<input type="button" value="확인"
+						<input type="button" class="bt" value="확인"
 							onclick="location.href='./'"/>
 					</td>
 				</tr>
 			</table>
 		</center>
 		</div>
-		
 			<table id="SignUp_table" align="center">
 				<tr>
 					<td>
 						<!-- placeholder:바탕에 쓰기?  -->
-						아이디 : <input name="SignUp_id" type="text" placeholder="정우철"/>
+						아이디 : <input name="SignUp_id" type="text" placeholder="아이디를 입력하세요"/>
 						<input id="Id_Chk" type="button" value="중복체크"/>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						닉네임 : <input name="SignUp_NickName" type="text"/>
+						닉네임 : <input name="SignUp_NickName" type="text" placeholder="닉네임을 입력하세요"/>
 						<input id="Nick_Chk" type="button" value="중복체크"/>		
 					</td>
 				</tr>
@@ -132,8 +147,8 @@
 				</tr>
 				<tr>
 					<td>
-						비밀번호 질문 : <input name="PW_Q" type="text" value=""/>
-						<select name="PW_Qs">
+						비밀번호 질문 : <input name="PW_Q" type="text" value="" placeholder="질문을 선택하세요"/>
+						<select name="PW_Qs" class="sel">
 							<option value="">임의로 작성</option>
 							<option value="아버지의 성함은?">아버지의 성함은?</option>
 							<option value="어머니의 성함은?">어머니의 성함은?</option>
@@ -152,13 +167,13 @@
 				</tr>					
 				<tr>
 					<td>
-						이름 : <input name="SignUp_name" type="text"/>			
+						이름 : <input name="SignUp_name" type="text" placeholder="이름을 입력하세요"/>			
 					</td>
 				</tr>
 				<tr>
 					<td>
 						전화번호 : 
-						<select name="PhoneFirst" >
+						<select name="PhoneFirst"  class="sel">
 							<option value="">----</option>
 							<option value="010">010</option>
 							<option value="011">011</option>
@@ -189,7 +204,7 @@
 				<tr>
 					<td>
 						생년월일 :				
-						<select name="year">
+						<select name="year" class="sel">
 							<option value="">----</option>
 							<option value="1997">1997</option>
 							<option value="1996">1996</option>
@@ -210,7 +225,7 @@
 							<option value="1981">1981</option>
 							<option value="1980">1980</option>
 						</select>년
-						<select name="month">
+						<select name="month" class="sel">
 							<option value="">--</option>
 							<option value="12">12</option>
 							<option value="11">11</option>
@@ -225,7 +240,7 @@
 							<option value="2">2</option>								
 							<option value="1">1</option>
 						</select>월
-						<select name="day">
+						<select name="day" class="sel">
 							<option value="">--</option>
 							<option value="31">31</option>
 							<option value="30">30</option>
@@ -270,7 +285,7 @@
 				<tr>
 					<td>
 						메일주소 : <input name="SignUp_email" type="text"/>	
-						<select name="mailName">
+						<select name="mailName" class="sel">
 							<option value="">임의로 작성</option>
 							<option value="@naver.com">@naver.com</option>
 							<option value="@daum.com">@daum.net</option>
@@ -280,11 +295,11 @@
 				</tr>
 				<tr>
 					<td align="right">
-						<input id="regist_btn" type="button" value="회원가입"/>				
+					<center><input class="bt" id="regist_btn" type="button" value="회원가입"/></center>				
 					</td>
 				</tr>
 			</table>						
-	
+	</div>
 	</body>
 	<script>
 		var data;
@@ -388,7 +403,7 @@
 			data.PW_ANSWER=$("input[name='PW_answer']").val();
 			data.name = $("input[name='SignUp_name']").val();
 			data.phone= $("select[name='PhoneFirst']").val()+"-"+$("input[name='PhoneMiddle']").val()+"-"+$("input[name='PhoneLast']").val();
-			data.birth=$("select[name='year']").val()+"/"+$("select[name='month']").val()+"/"+$("select[name='day']").val()
+			data.birth=$("select[name='year']").val()+"-"+$("select[name='month']").val()+"-"+$("select[name='day']").val()
 			data.gender = $("input[name='SignUp_gender']").val();
 			if($("select[name='mailName']").val()=="")
 				{

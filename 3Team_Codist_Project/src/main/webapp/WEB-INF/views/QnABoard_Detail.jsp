@@ -6,65 +6,13 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Q & A  상세보기</title>
 		<script src ="//code.jquery.com/jquery-3.1.0.min.js"></script>
-		<style>
-		/* div.content {
-            position: relative;
-            left:150px;
-            top: 10px;
-            width: 750px;
-            padding: 15px;
-            margin-bottom: 20px;
-            float: left;
-            border: 1px solid #bcbcbc;
-        } */
-		table{
-			width:100%;
-			margin-top: 10px;
-			}
-		table,td{
-			border: 2px solid gray;
-			border-collapse: collapse;
-			paddind:5px;
-			text-align: center;
-			font-size: 16px;
-		}
-		.user,.repleNick{
-			width:50px;
-			margin: 5px;
-		}
-		.data{
-			width:350px;
-			margin: 5px;
-		}
-		.btn{
-			width:45px;
-			margin: 5px;
-		}
-		#pic{
-			width: 300px;
-			height: 200px;
-			
-		}
-		
-		textarea {
-				width:100%;
-				resize: none;
-		}
-		.left{
-			text-align: left;
-		}
-		.RepleQnA
-		{
-			font-size: 8px;
-			width: 20px;
-		}
-		
-		</style>
+		<link rel="stylesheet" type="text/css" href="resources/css/button.css"/>
+		<link rel="stylesheet" type="text/css" href="resources/css/contentView.css"/>
 	</head>
 	<body>
-		<jsp:include page="../../resources/include/index.jsp"/>
+		<jsp:include page="../../resources/include/index.jsp"></jsp:include>
 		<div class="content">
-		<table>
+		<table class="detail">
 			<tr>
 				<td colspan="6">
 					<h2>Q&A BOARD</h2>
@@ -80,30 +28,28 @@
 			</tr>
 			<tr>
 				<td>제목</td>
-				<td colspan="5" class="left">${content.subject}</td>
+				<td colspan="5" class="left" height="50px">${content.subject}</td>
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td  colspan="5" class="left">${content.content}
+				<td  colspan="5" class="left" height="200px">${content.content}
 				</td>
-				
 			</tr>
 			<tr>
 				<td>첨부파일</td>
-				<td colspan="5" class="left" id="attach">		
+				<td colspan="5" class="left" id="attach" width="30px">	
 				</td>
 			</tr>
 			<tr>
 				<td colspan="6">
 				<input type="button" onclick="location.href='./QnABoard'" value="목록"/>
 				<input type="button" onclick="location.href='./Board_update?board_idx=${content.board_idx}'" value="수정"/>
-				<input type="button" onclick="location.href='./deleteFT?board_idx=${content.board_idx}'" value="삭제"/>
 				</td>
 			</tr>
 			
 		</table>
 		<!--댓글 등록 폼  -->
-		<table>
+		<table class="detail">
 			<tr>
 				<td class="user"><!-- 닉네임출력 --></td>
 				<td class="data">
@@ -126,7 +72,7 @@
 	var userId="${sessionScope.userId}";
 	FindNick(userId);
 	replyList();
-	
+	var userNick="";
 	$("#go").click(function(){
 		url ="./rest/replyRegist";
 		data ={};
@@ -143,6 +89,7 @@
 		sendServer(data,url);
 		}		
 	});
+
 	
 	//댓글 닉네임 찾기
 	function FindNick(userId)

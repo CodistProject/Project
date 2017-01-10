@@ -3,7 +3,9 @@ import java.util.ArrayList;
 
 import com.project.main.dto.BoardDto;
 import com.project.main.dto.ClothDto;
+import com.project.main.dto.GameDto;
 import com.project.main.dto.MemberInfo;
+import com.project.main.dto.MileageDto;
 import com.project.main.dto.ReplyDto;
 import com.project.main.dto.myClothDto;
 
@@ -17,7 +19,7 @@ public interface ProjectInterface {
 	public String overlayId(String id);	
 	
 	//중복 체크(Nick)
-	public String overlayNick(String id);	
+	public String overlayNick(String nick);	
 	
 	//닉네임 찾기
 	public String FindNick(String userId);
@@ -74,12 +76,9 @@ public interface ProjectInterface {
 	public int Board_Write(String nickName, String subject, String content, String filename, String newfilename,
 			String category_name);
 	
-	//추천수 증가
-	public void ft_like(String ft_like);
-	
-	//비추천수 증가
-	public void ft_hate(String ft_hate);
-	
+	//게시판 추천수 증가
+	public int Board_Uplike(int board_idx);
+
 	//댓글 가져오기
 	public ArrayList<ReplyDto> replyList(String idx);
 
@@ -89,14 +88,14 @@ public interface ProjectInterface {
 	//댓글 쓰기
 	public int replyRegist(int idx, String nick, String content);
 	
-	//글 삭제
-	public int delete(String idx);
-
+	//게시물 삭제
+	public int BoardDelete(String board_idx);
+	
 	// 유저 비밀번호 담기(로그인시 세션에 담기)
 	public String pw(String id);
 
 	// 유저 아이디 찾기(유저 이메일 받아서 - 이메일 쏘는거 까지)
-	public String Find_Id(String userEmail);
+	public String Find_Id(String name, String phone, String userEmail);
 
 	// 유저 비번 찾기1(아이디, 이름, 질문답)
 	public String FindPw_userData(String userId1, String userName1, String Pw_Ans);
@@ -113,14 +112,24 @@ public interface ProjectInterface {
 	//댓글 추천수 증가
 	public int reple_like(int reple_idx);
 	
-	//댓글 추천수 증가
+	//댓글 추천수 감소
 	public int reple_hate(int reple_idx);
 	
 	//아이디 찾기
 	public ArrayList<ReplyDto> FindId(String idx);
 
-	//코디 게시판 글쓰기
-	public void CodiBoard_Writes(String filename, String category_name, String newfilename);
+	//코디 게시판 글쓰기<메인코디>
+	public void CB_write(String subject, String sub_subject, String cBfilename, String cBnewfilename);
+	
+	//글쓰기 위한 idx찾기
+	public int CB_writeFind(String subject, String sub_subject, String cBfilename, String cBnewfilename);
+	
+	//코디 게시판 글쓰기<외투,상의,하의>
+	public void Cloth_write(int board_idx,String category_name, String cloth_name, String real_name,
+			String cloth_cloth_url, String cloth_detail, String filename, String newfilename);
+
+	//베스트 게시판 선정
+	public ArrayList<BoardDto> BOARD_BestList(String category_name, int currPage, int pagePerNum);
 	
 	// 코디게시판-> 나만의 옷장 이동 전 팝업시(옷+일정 데이터 담기-DB에)
 	public int Put_Cloth(String join_Idx, String Calendar_Subject, String Calendar_Date, String outer, String top, String pants);
@@ -131,9 +140,24 @@ public interface ProjectInterface {
 	// Join_Idx로 나만의 옷장 데이터 가져오기(옷+일정)
 	public ArrayList<myClothDto> Find_myCloth(String join_Idx);
 
-	// 마일리지+쿠폰 리스트
-	public ArrayList<?> Mileage_List();
+	// 사다리게임에 관한 데이터 찾아오기
+	public GameDto Find_ladderData(String time_event_name);
+		
+	//사다리 게임 설정
+	public void Bridge(String timenum, String select1, String select2, String select3, String select4, String select5,
+			String select6);
 	
+	//사다리게임 시간 설정
+	public void Time(String time_strat, String time_end);
+
+	//마일리지 찾기
+	public MileageDto Find_Mileage(String user_Id);
+
+	//사다리게임 마일리지 넣기
+	public int Mileage_put(String userId, int reuslt_Mlieage);
+	
+	// 마일리지+쿠폰 리스트
+	public ArrayList<MileageDto> Mileage_List();	
 }
 
 

@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class BoardDto {
 
+	
 	//게시판 내용
     private String category_name;
     private int board_idx;
@@ -118,6 +119,8 @@ public class BoardDto {
 	public void setFt_hate(int ft_hate) {
 		this.ft_hate = ft_hate;
 	}
+	
+
       
       
 

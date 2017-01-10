@@ -6,97 +6,14 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>코디 게시판 글쓰기 </title>
 		<script src ="//code.jquery.com/jquery-3.1.0.min.js"></script>
-		<style>				
-        #center{      
-        	font-size:30px;           
-            text-align: center;
-            text-align: center;            
-        }
-        
-        table.boardwrite{
-				width:100%;
-		}
-			
-		table.boardwrite td{
-				border :0.5px solid gray;
-				border-collapse : collapse;
-				padding: 5px;					
-		}
-				
-		td.alignleft{
-			text-align: right;
-		}
+		<link rel="stylesheet" type="text/css" href="resources/css/codiBoard.css"/>
 		
-		.input{
-			text-align: left;
-		}
-		
-		input.text{
-			width:100%;
-		}
-		
-		textarea#content{
-			width:100%;
-			resize:none;				
-		}
-		
-		#paging{
-			text-align: center;
-		}	
-		
-		.align{
-			text-align: center;	
-			width:100%
-		}
-		.align1{
-			text-align: center;		
-		}
-			
-		/* 버튼 css */
-		.button
-		{
-			-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
-			-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
-			box-shadow:inset 0px 1px 0px 0px #ffffff;
-			background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #f6f6f6));
-			background:-moz-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
-			background:-webkit-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
-			background:-o-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
-			background:-ms-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
-			background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
-			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0);
-			background-color:#ffffff;
-			-moz-border-radius:6px;
-			-webkit-border-radius:6px;
-			border-radius:6px;
-			border:1px solid #dcdcdc;
-			display:inline-block;
-			cursor:pointer;
-			color:#666666;
-			font-family:Arial;
-			font-size:15px;
-			font-weight:bold;
-			padding:6px 24px;
-			text-decoration:none;
-			text-shadow:0px 1px 0px #ffffff;
-		}
-		.button:hover {
-			background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f6f6f6), color-stop(1, #ffffff));
-			background:-moz-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
-			background:-webkit-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
-			background:-o-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
-			background:-ms-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
-			background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
-			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f6f6f6', endColorstr='#ffffff',GradientType=0);
-			background-color:#f6f6f6;
-		}
-	
-		</style>
 	</head>
 	<body>
 			<jsp:include page="../../resources/include/index.jsp"></jsp:include>
 		<div class="content">
 			<form action="CodiBoard_Writes" method="post" enctype="multipart/form-data">		
+			<!-- 체크박스 -->
     		<table class="boardwrite">
     			<tr>
     				<td class="align" colspan="2">코디 게시판</td>
@@ -106,46 +23,133 @@
     				<td class="alignleft" colspan="2">    					
     					<input id="outter" type="checkbox" onclick="check()"/>외투 추가
     					<input id="top" type="checkbox" onclick="check()"/>상의 추가
-    					<input id="bottom" type="checkbox" onclick="check()"/>하의 추가    				 					
+    					<input id="Pants" type="checkbox" onclick="check()"/>하의 추가    				 					
     				</td>    				
     			</tr>
     			</table> 
-    			<table class="boardwrite" style="display: inline;";>     			
+    			
+    			<table class="boardwrite" style="display: inline">     			
     			<tr> 
     				<td class="align">코디</td>
-    				<td class="align1">
-    				<input type="file" name="file1" value="첨부" onchange="fileView(this)"/>
+    				<td class="align1" rowspan="3">
+    				<input type="file" name="file1" value="첨부" onchange="fileView(this,1)"/>
 					<input  id="filenames1"  type="hidden" name="filename1"/>
     				</td>
     			</tr>
+    			<tr>
+    				<td id="CB2"  style="display: none">
+    				코디 이름:<input name='CBname' type="text" />
+    				</td>
+  				</tr>
+  				<tr>
+    				<td id="CB3"  style="display: none">
+    				추가 설명:<input name='CBplus' type="text"/>
+    				</td>
+    			</tr>
     			</table>
-    			<table class="boardwrite" id="outter1" style="display: none;"> 
+    			
+    			<table class="boardwrite" id="outter1" style="display: none"> 
     			<tr >
     				<td class="align">외투</td>
-    				<td class="align1">
-    				<input type="file" name="file2" value="첨부" onchange="fileView(this)"/>
+    				<td class="align1" rowspan="4">
+    				<input type="file" name="file2" value="첨부" onchange="fileView(this,2)"/>
 					<input  id="filenames2"  type="hidden" name="filename2"/>
     				</td>
     			</tr>
+    			<tr>
+    				<td id="outter2" style="display: none">
+    					분류:<select name="OutterCloth" >
+							<option value="">선택해주세요</option>
+							<option value="블레이져/코트">블레이져/코트</option>
+							<option value="점퍼/패딩"> 점퍼/패딩</option>
+							<option value="자켓/야상">자켓/야상</option>
+							<option value="블루종/항공점퍼">블루종/항공점퍼</option>
+							<option value="패딩조끼">패딩조끼</option>
+							<option value="후드집업">후드집업</option>
+							<option value="가디건/베스트">가디건/베스트</option>
+						</select>
+    					외투 이름:<input name='Outtername' type="text"/>
+    				</td>
+    			</tr>
+    			<tr>
+    				<td id="outter3" style="display: none">
+    				추가 설명:<input name='Outterplus' type="text"/>
+    				</td>
+    			</tr>
+    			<tr>
+    				<td id="outter4" style="display: none">
+    				판매 주소(IP):<input name='OutterUrl' type="text" placeholder="ex)www.naver.com"/>
+    				</td>
+    			</tr>
     			</table>
-    			<table class="boardwrite" id="top1" style="display: none;"> 
+    			
+    			<table class="boardwrite" id="top1" style="display: none"> 
     			<tr>
     				<td class="align">상의</td>
-    				<td class="align1">
-    				<input type="file" name="file3" value="첨부" onchange="fileView(this)"/>
+    				<td class="align1" rowspan="4">
+    				<input type="file" name="file3" value="첨부" onchange="fileView(this,3)"/>
 					<input  id="filenames3"  type="hidden" name="filename3"/>
     				</td>
     			</tr>
-    			</table>
-    			<table class="boardwrite" id="bottom1" style="display: none;"> 
+    			<tr >
+    				<td id="Top2" style="display: none">
+    				분류:<select name="TopCloth" >
+							<option value="">선택해주세요</option>
+							<option value="KNIT">KNIT</option>
+							<option value="TEE"> TEE</option>
+							<option value="SHIRTS">SHIRTS</option>
+						</select>
+    				상의 이름:<input name='Topname' type="text"/>
+    				</td>
+    			</tr>
     			<tr>
-    				<td class="align">하의</td>
-    				<td class="align1">
-    				<input type="file" name="file4" value="첨부" onchange="fileView(this)"/>
-					<input  id="filenames4"  type="hidden" name="filename4"/>
+    				<td id="Top3" style="display: none">
+    				추가 설명:<input name='Topplus' type="text"/>
+    				</td>
+    			</tr>
+    			<tr>
+    				<td id="Top4" style="display: none">
+    				판매 주소(IP):<input name='TopUrl' type="text" placeholder="ex)www.naver.com"/>
     				</td>
     			</tr>
     			</table>
+    			
+    			<table class="boardwrite" id="Pants1" style="display: none;"> 
+    			<tr>
+    				<td class="align">하의</td>
+    				<td class="align1" rowspan="4">
+    				<input type="file" name="file4" value="첨부" onchange="fileView(this,4)"/>
+					<input  id="filenames4"  type="hidden" name="filename4"/>
+    				</td>
+    			</tr>
+    			<tr>
+    				<td  id="Pants2" style="display: none">
+    				분류:<select name="PantsCloth" >
+							<option value="">선택해주세요</option>
+							<option value="청바지">청바지</option>
+							<option value="슬랙스"> 슬랙스</option>
+							<option value="면바지">면바지</option>
+							<option value="밴딩">밴딩</option>
+							<option value="트레이닝">트레이닝</option>
+							<option value="반바지">반바지</option>
+							<option value="비치웨어">비치웨어</option>
+						</select>
+    				하의 이름:<input name='Pantsname' type="text"/>
+    				</td>
+    			</tr>
+    			<tr>
+    				<td  id="Pants3" style="display: none">
+    				추가 설명:<input name='Pantsplus' type="text"/>
+    				</td>
+    			</tr>
+    			<tr>
+    				<td id="Pants4" style="display: none">
+    				판매 주소(IP):<input name='PantsUrl' type="text" placeholder="ex)www.naver.com"/>
+    				</td>
+    			</tr>
+    			
+    			</table>
+    			
     			<table class="boardwrite"> 			
 				<tr>
 				<td align="right" colspan="2">					
@@ -159,6 +163,40 @@
 	</body>
 	<script>
 	
+	//첨부파일 이름 가져오기
+	function fileView(elem,i){
+		console.log(elem.value);
+		var fullPath = elem.value;
+		var filename = fullPath.substring(12);
+		console.log(filename);
+		$("#filenames"+i).val(filename);
+	
+		if(i==1)
+			{
+			$("#CB2").css("display","block");
+			$("#CB3").css("display","block");
+			}
+		if(i==2)
+		{
+			$("#outter2").css("display","block");
+			$("#outter3").css("display","block");
+			$("#outter4").css("display","block");
+		}
+		if(i==3)
+		{
+			$("#Top2").css("display","block");
+			$("#Top3").css("display","block");
+			$("#Top4").css("display","block");
+		}
+		if(i==4)
+		{
+			$("#Pants2").css("display","block");
+			$("#Pants3").css("display","block");
+			$("#Pants4").css("display","block");
+		}
+	}
+	
+	//체크
 	function check() {
 		var outter = false;
 		var top = false;
@@ -166,12 +204,14 @@
 		
 		if($('#outter').is(":checked")){
 			outter = true;
-		}if($('#top').is(":checked")){
+		}
+		if($('#top').is(":checked")){
 			top = true;
-		}if(($('#bottom').is(":checked"))){
+		}
+		if($('#Pants').is(":checked")){
 			bottom = true;
 		}
-		
+
 		if(outter==true){
 			$("#outter1").css("display","inline");
 		}else{
@@ -183,39 +223,16 @@
 			$("#top1").css("display","none");
 		}		
 		if(bottom==true){
-			$("#bottom1").css("display","inline");
+			$("#Pants1").css("display","inline");
 		}else{			
-			$("#bottom1").css("display","none");
+			$("#Pants1").css("display","none");
 		}		
-		console.log(outter);
 	}	
 	
-				
-		/* if($('#outter').is(":checked")){
-			$("#outter1").css("display","inline");
-		}if($('#top').is(":checked")){
-			$("#top1").css("display","inline");
-		}if(($('#bottom').is(":checked"))){
-			$("#bottom1").css("display","inline");
-		} */
-		
 
-	var msg = "${msg}";
 	
-	if(msg != ""){
-		alert(msg);
-	}
 	
-	function fileView(elem){
-		console.log(elem.value);
-		var fullPath = elem.value;
-		var filename = fullPath.substring(12);
-		console.log(filename);
-		$("#filenames1").val(filename);
-		$("#filenames2").val(filename);
-		$("#filenames3").val(filename);
-		$("#filenames4").val(filename);
-	}
+
 	</script>
 
 </html>
