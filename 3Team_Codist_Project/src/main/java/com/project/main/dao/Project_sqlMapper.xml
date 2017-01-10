@@ -213,4 +213,6 @@
  	<select id="Find_myCloth" resultType="com.project.main.dto.myClothDto">
  		SELECT * FROM MY_WARDROBES WHERE JOIN_IDX = #{param1} ORDER BY CLOSET_IDX DESC
  	</select>
+ 	
+ 	<!--   -->
 </mapper>

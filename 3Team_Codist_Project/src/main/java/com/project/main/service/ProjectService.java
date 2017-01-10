@@ -883,5 +883,13 @@ public class ProjectService {
 		}
 		return mav;
 	}
+	
+	// 마일리지+쿠폰 리스트 보기
+	public Map<String, Object> Mileage_list(Map<String, String> params) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		Map<String, ArrayList<>> map = new HashMap<String, ArrayList<>>();
+		map.put("", inter.Mileage_List());
+		return map;
+	}
 }	
 	

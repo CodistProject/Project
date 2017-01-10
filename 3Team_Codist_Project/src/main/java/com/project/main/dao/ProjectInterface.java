@@ -131,7 +131,8 @@ public interface ProjectInterface {
 	// Join_Idx로 나만의 옷장 데이터 가져오기(옷+일정)
 	public ArrayList<myClothDto> Find_myCloth(String join_Idx);
 
-	
+	// 마일리지+쿠폰 리스트
+	public ArrayList<?> Mileage_List();
 	
 }
 

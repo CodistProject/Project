@@ -147,4 +147,13 @@ public class RestController {
 		logger.info("코디게시판 -> 나만의 옷장 이동 전 팝업(옷+일정 데이터 담기)");
 		return service.Put_Cloth(params);
 	}	
+	
+	
+	// 마일리지+쿠폰(회원) 리스트 
+	@RequestMapping(value="/Mileage_list")
+	public @ResponseBody Map<String, Object> Mileage_list(			
+			@RequestParam Map<String, String> params){
+		logger.info("마일리지+쿠폰 리스트");
+		return service.Mileage_list(params);
+	}	
 }
