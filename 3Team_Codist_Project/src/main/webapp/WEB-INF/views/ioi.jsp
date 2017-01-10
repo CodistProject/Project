@@ -114,6 +114,8 @@
 		reqServer(url, data);
 	}
 	
+	
+	
 	function reqServer(url, data){
 		console.log(url);
 		$.ajax({
@@ -320,9 +322,12 @@
 		if(nowTime>=start && nowTime<=end){						
 			 win	= window.open("TimeEvent", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=200,left=300,width=600,height=500");
 		}else{					
-			win.close();
+			if(win){
+	            win.close();
+			}
 		}
 	}
+	
 	
 	</script>
 </html>

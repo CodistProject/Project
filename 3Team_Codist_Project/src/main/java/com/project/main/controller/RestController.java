@@ -183,6 +183,23 @@ public class RestController {
 		logger.info("사다리게임 마일리지 보내기");
 		return service.gamemileage(params,session);
 	}
-
+	
+	//쪽지 알람
+	@RequestMapping(value="/countNote")
+	public @ResponseBody Map<String, Integer> countNote(){
+		logger.info("쪽지 알람");
+		return service.countNote();
+	}
+	
+	//쪽지 등록
+	@RequestMapping(value="/RegistNote")
+	public @ResponseBody Map<String, Integer> RegistNote(
+			@RequestParam("content") String content,
+			@RequestParam  ("userId") String userId){
+		logger.info("쪽지 등록 요청");
+		logger.info(content);
+		logger.info(userId);
+		return service.RegistNote(userId,content);
+	}
 	
 }

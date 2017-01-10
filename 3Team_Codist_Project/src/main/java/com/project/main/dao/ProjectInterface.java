@@ -156,6 +156,12 @@ public interface ProjectInterface {
 	//사다리게임 마일리지 넣기
 	public int Mileage_put(String userId, int reuslt_Mlieage);
 	
+	//쪽지 알람기능
+	public int countNote();
+	
+	//쪽지 등록
+	public int RegistNote( String userId,int join_idx, String content);
+	
 }
 
 

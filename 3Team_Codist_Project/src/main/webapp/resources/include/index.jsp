@@ -103,9 +103,9 @@
 				</table>
 			<br/>
 			<div id="ask">
-				<textarea id="askBox" cols="28px" rows="8px" placeholder="답변 받을 이메일 주소 입력 : "></textarea>			
+				<textarea id="askBox" cols="28px" rows="8px" placeholder="관리자에게 문의 하세요!~ : "></textarea>			
 				<div id="ask1">
-				<input  type="button" class="askbtn" value="쪽지" />
+				<input  type="button" class="askbtn" onclick="RegistNote()" value="쪽지" />
 				<input type="button"  class="askbtn" value="이메일" name="email"/>				
 				</div>				
 			</div>
@@ -144,6 +144,41 @@
 		</div>		
 	</body>
 	<script>	
+	sendNote();
+	//쪽지 등록
+	function RegistNote()
+	{
+		var url="./rest/RegistNote";
+		var data={};
+		data.content=$("#askBox").val();
+		data.userId="${sessionScope.userId}";
+		console.log(data.content);
+		if(data.userId=="")
+			{
+			alert("로그인 후 이용 가능합니다!")
+			}
+		else
+			{
+		ajaxCall(url, data);	
+			}
+	}
+	
+	//알람
+	function sendNote(){
+		var url="./rest/countNote";
+		var data={};
+		ajaxCall(url, data);	
+		//10초마다
+		setInterval(function(){
+			var url="./rest/countNote";
+			var data={};
+			ajaxCall(url, data);	
+			
+		}, 10000);
+	}
+			
+	
+	
 		// 당일 마우스 마우스오버
 		$("#daily").hover(function () {
 			var html = "";			
@@ -227,11 +262,27 @@
 				success:function(data){
 					console.log(data);
 					console.log("성공");
-					if(url=="./rest/Email"){									
+					if(reqUrl=="./rest/Email"){									
 						alert("문의하신 내용이 이메일 전송이 완료되었습니다.");
-					}else{
-						alert("이메일 전송이 실패하였습니다!");			
-					}					
+					}
+					if(reqUrl="./rest/countNote"){
+						var nowNoteCnt=data.count;
+						console.log("현재 쪽지"+nowNoteCnt);
+						if(nowNoteCnt!=0 &&"${sessionScope.userId}=='ADMIN'"){
+							$("#noteImg").css("display","block");
+							$("#noteImg").html("!!!"+nowNoteCnt+"개의 쪽지가 존재합니다!");
+						}else{
+							$("#noteImg").css("display","none");
+						}
+					}
+					if(reqUrl="./rest/RegistNote")
+						{
+						console.log(data.msg);
+						if(data.msg==1)
+							{
+							alert("관리자에게 쪽지가 전송 되었습니다.!");
+							}
+						}
 				}, error : function(e){
 					console.log("에러");
 				}

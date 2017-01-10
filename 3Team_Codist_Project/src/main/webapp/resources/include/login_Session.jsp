@@ -11,7 +11,7 @@
 	<body>		
 			<table class="logses">
 				<tr >
-					<td>${sessionScope.userId}님 반갑습니다.</td>									
+					<td>${sessionScope.userId}님 반갑습니다.<span id="noteImg"><!-- 갯수  --></span> </td>									
 				</tr>
 				<tr >
 					<td align="right">${sessionScope.mil} 마일리지</td>									
@@ -23,7 +23,7 @@
                   		<a href="./MemberData_view?userId=${sessionScope.userId}">마이페이지</a>  
           		    </c:if>   
            		 	<c:if test="${sessionScope.userId =='ADMIN'}">
-           	      		<a href="./AdminMemberPage">관리페이지</a> 
+           	      		<a href="./AdminMemberPage">관리페이지</a>
            	      	</c:if>							
 					 	<a href="./logout?userId=${sessionScope.userId}">로그아웃</a>
 					 </td>				

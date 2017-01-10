@@ -273,4 +273,15 @@
  	<select id="Find_myCloth" resultType="com.project.main.dto.myClothDto">
  		SELECT * FROM MY_WARDROBES WHERE JOIN_IDX = #{param1} ORDER BY CLOSET_IDX DESC
  	</select>
+ 	
+ 	<!-- 쪽지 전채 개수 -->
+	<select id="countNote" resultType="Integer">
+		SELECT COUNT(*) FROM NOTE WHERE LETTER_NEW='Y'
+	</select>
+	<!-- 쪽지 등록 -->
+	<insert id="RegistNote">
+		INSERT INTO NOTE(NOTE_IDX,USER_ID,JOIN_IDX,ADMIN,ADMIN_IDX,LETTER_CONTENT,LETTER_NEW) 
+				VALUES(SEQ_NOTE.NEXTVAL,#{param1},#{param2},'ADMIN',50,#{param3},'Y')
+	</insert>
+	
 </mapper>

@@ -1132,6 +1132,25 @@ public class ProjectService {
 				return map;
 			}
 			
+			//쪽지 알람
+			public Map<String, Integer> countNote() {
+				Map<String, Integer> map = new HashMap<String, Integer>();
+				inter=sqlSession.getMapper(ProjectInterface.class);
+				int count=0;
+				count=inter.countNote();
+				logger.info("count:{}",count);
+				map.put("count", count);
+				return map;
+			}
+			
+			//쪽지 등록	
+			public Map<String, Integer> RegistNote(String userId, String content) {
+				Map<String, Integer> map = new HashMap<String, Integer>();
+				int join_idx=Integer.parseInt(inter.Find_JoinIdx(userId));
+				logger.info("idx:{}",join_idx);
+				map.put("msg",inter.RegistNote(userId,join_idx,content));
+				return map;
+			}
 			
 }
 	
