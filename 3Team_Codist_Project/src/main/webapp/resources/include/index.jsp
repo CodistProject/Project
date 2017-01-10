@@ -69,7 +69,7 @@
 	</head>
 	<body>
 		<div id="head">
-			<a href="./"><img id="logo" alt="로고" src="../../main/resources/img/logo.png"></a>			
+			<a href="./"><img class="logo"id="logo" alt="로고" src="../../main/resources/img/logo.png"></a>			
 		</div>
 		<div id="weather">
 			<a class="top" href="javascript:Event();">이벤트</a>			

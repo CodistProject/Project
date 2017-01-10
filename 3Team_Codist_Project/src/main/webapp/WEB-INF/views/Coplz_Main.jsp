@@ -6,10 +6,9 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>코디를 부탁해</title>
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="resources/css/reqBoard.css"/>
+		<link rel="stylesheet" type="text/css" href="resources/css/CoplzBoard.css"/>
 	</head>
 	<body>
-			
      <jsp:include page="../../resources/include/index.jsp"/>
  		<div class="content">
 		<table class="CP_board1" align="center">
@@ -36,12 +35,12 @@
 						</c:if>
 					</td>					
 				</tr>		
-				<tr  class="CP_subject">
-					<td class="CP1">글 번호</td>
-					<td class="CP2">이미지</td>
-		    		<td class="CP3">제목</td>				
-					<td class="CP4">작성자</td>
-					<td class="CP5">조회수</td>
+				<tr class="CP_subject">
+					<td class="CP1" width="60px" height="50px">글 번호</td>
+					<td class="CP2" width="150px">이미지</td>
+		    		<td class="CP3" >제목</td>				
+					<td class="CP4" width="100px">작성자</td>
+					<td class="CP5" width="70px">조회수</td>
 				</tr>
 			</thead>			
 			<tbody id="list">
@@ -113,8 +112,8 @@
 										    +"<img width='150' height='50'  alt='물물교환' src='./resources/upload/"+list[i].newfilename+"'/>";
 								}
 								content +=	"</td>"
-											+"	<td class='CP3'>"
-											+"<a href='./Board_Detail?board_idx="+list[i].board_idx+"'>"
+											+"	<td class='CP3' style='text-align: left'>"
+											+"<a class='a2' href='./Board_Detail?board_idx="+list[i].board_idx+"'>"
 											+list[i].subject
 											+"</a>";
 											if(list[i].replies >0){

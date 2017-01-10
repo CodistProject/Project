@@ -6,7 +6,13 @@
   		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   		<title>탈퇴</title>
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="resources/css/button.css"/>
 		<style>
+			.content{
+			position: absolute;
+			top:20%;
+			right: 20%;
+			}
 			textarea#wdw{
 				resize: none;
 				width: 580px;	
@@ -46,7 +52,7 @@
 		<tr>			
 			<td>
 			비밀번호 확인: <input id="Pw" type="text"/>
-			<input id="PW_checker" type="button" onclick="Check()" value="탈퇴"/>
+			<input id="PW_checker" class="bt" type="button" onclick="Check()" value="탈퇴"/>
 			</td>
 		</tr>				
 		</table>

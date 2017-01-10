@@ -42,8 +42,8 @@
 				</td>
 			<tr>
 				<td colspan="6">
-				<a href="javascript:ft_like()" id="ft_like">추천</a>${content.ft_like}
-				<a href="javascript:ft_hate()" id="ft_hate">비추천</a>${content.ft_hate}
+				<a href="javascript:ft_like()" id="ft_like" class="a2">추천</a>${content.ft_like}
+				<a href="javascript:ft_hate()" id="ft_hate" class="a2">비추천</a>${content.ft_hate}
 				</td>
 			</tr>
 			<tr>

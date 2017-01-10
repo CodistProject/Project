@@ -19,7 +19,7 @@
 			</tr>				
 		</table>
 		</br>
-		<table class="QnA_board2" align="center">
+		<table class="QnA_board2" >
 			<thead>		
 				<tr>
 					<td id="btn_write" colspan="5" align="right">
@@ -36,7 +36,7 @@
 					</td>					
 				</tr>		
 				<tr>
-					<td class="QnA_subject" id="Ft1">번호</td>
+					<td class="QnA_subject" id="Ft1" height="50px">번호</td>
 					<td class="QnA_subject" id="Ft2">제목</td>
 		    		<td class="QnA_subject" id="Ft3">작성자</td>				
 					<td class="QnA_subject" id="Ft4">작성일</td>
@@ -120,14 +120,15 @@
 		console.log(list);
 		var content = "";
 		for(var i=0; i<list.length; i++){
-				content +="<tr>"
-							+"<td>"+list[i].board_idx;
+				content +="<tr height='50px'>"
+							+"<td>"+list[i].board_idx
 							if(list[i].nickName==userNick)
-								{
+							{
 				content +=" <a href='./BoardDelete?board_idx="+list[i].board_idx+"&category_name="+list[i].category_name+"' style='text-decoration:none'>삭제</a> </td>";
-								}
-				content+="	<td>"
-							+"<a href='./Board_Detail?board_idx="+list[i].board_idx+"'>"
+							}
+				content+="</td>"
+							+"	<td>"
+							+"<a class='listpage' href='./Board_Detail?board_idx="+list[i].board_idx+"'>"
 							+list[i].subject
 							+"</a>";
 							if(list[i].newFileName != null){
@@ -175,7 +176,7 @@
 		//페이징 표시			
 		//< 이전
 		if(currPage > 5){
-			content +="<a href='javascript:listCall("
+			content +="<a class='a2' href='javascript:listCall("
 				+(start-1)+");'>이전</a> | "
 		}
 		
@@ -188,7 +189,7 @@
 				if(currPage ==i){
 					content +="<b>"+i+"</b>";
 				}else{
-					content += " <a href='#' onclick='listCall("+i+")'>"
+					content += " <a class='a2' href='#' onclick='listCall("+i+")'>"
 					+i+"</a> "
 				}					
 			}			
@@ -197,7 +198,7 @@
 		//마지막 페이지가 전체 페이지 수 보다 적으면 다음 링크 생성
 		if(end<pageNum)
 		{
-			content +=" | <a href='#' onclick='listCall("
+			content +=" | <a class='a2' href='#' onclick='listCall("
 					+(end+1)+")'>다음</a> "
 		}
 		

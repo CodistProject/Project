@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+	div.content{
+			position: absolute;
+			top:20%;
+			}
+	
+	table#boardwrite{
+		width: 100%;
+		text-align: center;
+		border: 0.5px solid #bcbcbc;
+	}
+
+	table#boardwrite tr td{
+		border :0.5px solid #bcbcbc;								
+	}
+	input.text{
+		width: 100%;
+		height: 100%;
+	}
+	textarea#content {
+		width: 100%;
+}

@@ -4,47 +4,33 @@
 				position: absolute;
 				top:20%;
 			}
-			.CP_board1{
-				border : 1px solid white;			
-				border-top-color : black;				
-				border-bottom-color : black;
+			table.CP_board1{
 				width : 100%;
-			}
-			.CP_board2{
-				border : 1px solid white;								
-				border-bottom-color : black;
-				width : 100%;
+            	text-align: center;
 			}
 			.CP_board2 td{
-				border : 1px solid;								
+			  border-bottom:1px solid #bcbcbc;
 			}
-			#btn_write, #CP_pageNum{
+			table.CP_board2 {
+				width : 100%;								
+			}
+			td#btn_write, td#CP_pageNum{
 				border : 1px solid white;	
-				border-top-color : black;				
 				border-bottom-color : black;	
 			}		
 			#CP_sub{
 				font-size : 30pt;
 				text-align : center;									
 			}			
-			.CP_subject{
+			
+			tr.CP_subject{
 				text-align : center;
+            	background-color : #434441;
+            	color: white;
 			}
-			#CP1{
-				border : 1px solid white;	
-				border-top-color : black;
-				border-right-color : black;				
-				border-bottom-color : black;
-			}
-			#CP6{
-				border : 1px solid white;	
-				border-top-color : black;
-				border-left-color : black;				
-				border-bottom-color : black;
-			}
-			.CP_subject{
-				background-color : #4C2FF0;
-				color: white;
+			.a2{
+				text-decoration: none;
+				color: black;
 			}
 			/* 버튼 css */
 			#CPQna

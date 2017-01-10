@@ -4,23 +4,19 @@
 			position: absolute;
 			top:20%;
 			}
-		  .QnA_board1{
-			border : 1px solid white;         
-            border-top-color : black;            
-            border-bottom-color : black;
-            width : 100%;
-			}
-			.QnA_board2{
-			border : 1px solid white;                        
-            border-bottom-color : black;
-            width : 100%;
+		  table.QnA_board1{
+			width : 100%;
+            text-align: center;
 			}
 			.QnA_board2 td{
-				border : 1px solid; 								
+			  border-bottom:1px solid #bcbcbc;
+			 
 			}
-			#btn_write, #QnA_pageNum{
+			.QnA_board2{
+			   width : 100%;
+			}
+			td#btn_write,td#QnA_pageNum{
 				border : 1px solid white;	
-				border-top-color : black;				
 				border-bottom-color : black;	
 			}		
 			#QnA_sub{
@@ -31,21 +27,9 @@
 				width: 100%;
 			}		
 			.QnA_subject{
-				text-align : center;
-				background-color : #4C2FF0;
-				color: white;
-			}
-			#Ft1{
-				border : 1px solid white;	
-				border-top-color : black;
-				border-right-color : black;				
-				border-bottom-color : black;
-			}
-			#Ft6{
-				border : 1px solid white;	
-				border-top-color : black;
-				border-left-color : black;				
-				border-bottom-color : black;
+			 	text-align : center;
+            	background-color : #434441;
+            	color: white;
 			}
 			a.listpage{
 				text-decoration: none;
@@ -54,7 +38,10 @@
 			a.listpage:hover{
 			  color: #E15959;
 			}
-			
+			.a2{
+			 text-decoration: none;
+			 color: black;
+			}
 		 /* 버튼 css */
          #writeQna
          {

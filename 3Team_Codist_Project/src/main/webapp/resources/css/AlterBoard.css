@@ -5,45 +5,35 @@
 			position: absolute;
 			top:20%;
 		}
- 			.Al_board1{
-            border : 1px solid white;         
-            border-top-color : black;            
-            border-bottom-color : black;
-            width : 100%;
+		.Al1,.Al5{
+			text-align: center;
+		}
+ 		 table.Al_board1{
+           		border-top-color : black;				
+				border-bottom-color : black;
+				width : 100%;
          }
-         .Al_board2{
-            border : 1px solid white;                        
-            border-bottom-color : black;
-            width : 100%;
-         }
+         
          .Al_board2 td{
-            border : 1px solid;                        
+            border-bottom:1px solid #bcbcbc;
          }
-         #btn_write, #Al_pageNum{
-            border : 1px solid white;   
-            border-top-color : black;            
+         table.Al_board2{
+         	width:100%;
+         }
+         td#btn_write, td#Al_pageNum{
             border-bottom-color : black;   
          }      
-         #Al_sub{
+         td#Al_sub{
             font-size : 30pt;
             text-align : center;                           
          }         
          .Al_subject{
-            text-align : center;
-            background-color : #4C2FF0;
-            color: white;
+			 	text-align : center;
+            	background-color : #434441;
+            	color: white;
          }
-         #Al1{
-            border : 1px solid white;   
-            border-top-color : black;
-            border-right-color : black;            
-            border-bottom-color : black;
-         }
-         #Al6{
-            border : 1px solid white;   
-            border-top-color : black;
-            border-left-color : black;            
-            border-bottom-color : black;
+         td.Al4{
+          text-align: center;
          }
          a.listpage{
 				text-decoration: none;
@@ -52,6 +42,10 @@
 			.listpage:hover{
 			  color: #E15959;
 			}
+		.a2{
+			 text-decoration: none;
+			 color: black;
+			}	
             /* 버튼 css */
          #AlQna
          {

@@ -10,19 +10,19 @@
 		<link rel="stylesheet" type="text/css" href="resources/css/button.css"/>
 	</head>
 	<body>
-		
 		<form action="login" method="post">
-			<table class="login">
+			<table class="loginBox">
 				<tr>
-					<td class="login">ID</td>
+					<td> LOGIN </td>
+				</tr>
+				<tr>
 					<td class="login">
-						<input type="text" name="userId"/>
+						<input type="text" name="userId" class="input" style="height:30px;"placeholder="아이디를 입력하세요" />
 					</td>
 				</tr>
 				<tr>
-					<td class="login">PW</td>
 					<td class="login">
-						<input type="password" name="userPass"/>
+						<input type="password" name="userPass" class="input" style="height:30px;" placeholder="비밀번호를 입력하세요"/>
 					</td>
 				</tr>
 				<tr>
@@ -32,6 +32,7 @@
 				</tr>
 			</table>
 		</form>
+		
 	</body>
 	<script>
 		

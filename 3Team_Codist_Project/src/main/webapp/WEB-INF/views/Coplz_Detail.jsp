@@ -4,12 +4,14 @@
 <html>
  	<head>
   		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  		<title>코디를 부탁해 메인</title>
+  		<title>코디를 부탁해 상세보기</title>
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="resources/css/button.css"/>
 		<style>
 		.content{
 			position: absolute;
-			top:20%;
+			top:10px; 
+			right: 20%;
 		}
 		div.img1{
 				border: 1px solid;
@@ -85,7 +87,7 @@
    		</div>
    	
    	<div class="reply">
-   	<table width="100%" cellpadding="0" cellspacing="0" border="0">
+   	<table class="replywrite" width="100%" cellpadding="0" cellspacing="0" border="0">
      <tr style="background:url('img/table_mid.gif') repeat-x; text-align:center;">
       <td width="5"><img src="img/table_left.gif" width="5" height="30" /></td>
       <td>댓글</td>
@@ -119,9 +121,9 @@
      <tr height="1" bgcolor="#82B5DF"><td colspan="4"></td></tr>
      <tr align="center">
       <td>&nbsp;</td>
-      <td colspan="2"><input type=button value="등록">
-       <input type=button value="취소">
-       <input type="button" value="목록">
+      <td colspan="2"><input class="bt" type=button value="등록">
+       <input class="bt" type=button value="취소">
+       <input class="bt"type="button" value="목록">
       <td>&nbsp;</td>
       </tr>
   	
@@ -130,7 +132,5 @@
    </div>
    </div>
   	</body>
-  	<script>
   	
-  	</script>
 </html>
