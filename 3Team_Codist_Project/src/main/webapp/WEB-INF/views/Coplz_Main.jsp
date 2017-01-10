@@ -37,7 +37,7 @@
 				</tr>		
 				<tr class="CP_subject">
 					<td class="CP1" width="60px" height="50px">글 번호</td>
-					<td class="CP2" width="150px">이미지</td>
+					<td class="CP2" width="100px">이미지</td>
 		    		<td class="CP3" >제목</td>				
 					<td class="CP4" width="100px">작성자</td>
 					<td class="CP5" width="70px">조회수</td>
@@ -101,7 +101,7 @@
 			var content = "";
 			for(var i=0; i<list.length; i++){
 								content +="<tr>"
-											+"<td class='CP1' height='50px'>"+list[i].board_idx+"</td>"
+											+"<td class='CP1' height='100px' style='text-align:center'>"+list[i].board_idx+"</td>"
 							if(list[i].newfilename != null){
 								content += "<td class='CP2'>" 
 										    +"<img width='15px' src='resources/img/default.jpg'/>";
@@ -109,7 +109,7 @@
 							else
 								{
 								content +="<td class='CP2'>"
-										    +"<img width='150' height='50'  alt='물물교환' src='./resources/upload/"+list[i].newfilename+"'/>";
+										    +"<img width='100' height='100'  alt='물물교환' src='./resources/upload/"+list[i].newfilename+"'/>";
 								}
 								content +=	"</td>"
 											+"	<td class='CP3' style='text-align: left'>"
