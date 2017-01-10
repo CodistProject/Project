@@ -26,7 +26,6 @@ import com.project.main.dto.BoardDto;
 import com.project.main.dto.ClothDto;
 import com.project.main.dto.MemberInfo;
 import com.project.main.dto.MileageDto;
-import com.project.main.dto.NoteDto;
 import com.project.main.dto.ReplyDto;
 import com.project.main.dto.myClothDto;
 import com.project.main.util.UploadFile;
