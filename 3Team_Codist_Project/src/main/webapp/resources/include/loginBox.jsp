@@ -33,8 +33,6 @@
 			</table>
 		</form>
 	</body>
-	<script>
-		
-			
+	<script>			
 	</script>
 </html>

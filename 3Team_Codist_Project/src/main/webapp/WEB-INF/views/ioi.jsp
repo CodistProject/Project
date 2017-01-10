@@ -271,6 +271,7 @@
 		{
 		alert(msg);
 		}
+	
 	// 메일 보내기(아이디찾기 or 비번찾기 or 이메일 문의) 성공관련 메시지 alert 띄우기
 	var msg = "${msg}";
 	var msg1 ="${Find_Id.msg}";
@@ -278,6 +279,8 @@
 	var msg_chk = "1:1문의가 이메일로 전송 되었습니다!";
 	var msg_chk1 = "찾으시는 아이디가 이메일로 전송되었습니다."; 
 	var msg_chk2 = "찾으시는 비밀번호가 이메일로 전송되었습니다.";			
+	var msg_chk3 = "로그인이 필요한 서비스 입니다!";
+	
 	
 	if(msg==msg_chk){
 		console.log("1:1 문의 전송 성공 여부 :"+msg);
@@ -290,7 +293,11 @@
 	if(msg2==msg_chk2){
 		console.log("비번 찾기 메시지 성공 여부:"+msg2);
 		alert(msg2);	
-	}		
+	}	
+	if(msg==msg_chk3){
+		console.log("1:1 문의 전송 성공 여부 :"+msg);
+		alert(msg);
+	}	
 	
 	
 	//시간 이벤트 팝업

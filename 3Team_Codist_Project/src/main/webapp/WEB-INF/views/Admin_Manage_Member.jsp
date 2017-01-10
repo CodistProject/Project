@@ -17,14 +17,14 @@
          {
             border:1px solid;
             border-collapse: collapse;           
-            font-size: 10px;
+            font-size: 13px;
             text-align: center;
-            width : 400px;            
+            width : 550px;            
          }
          .p{
          	border:1px solid;
             border-collapse: collapse;
-            font-size: 10px;
+            font-size: 13px;
             text-align: center;
             padding: 10px;
            }
