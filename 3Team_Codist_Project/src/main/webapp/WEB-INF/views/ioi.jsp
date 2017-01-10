@@ -76,7 +76,8 @@
 	
 	CBlistCall();
 	FTlistCall();
-	QnAlistCall()
+	QnAlistCall();
+	CPlistCall();
 	function CBlistCall(){
 		var url="./rest/CB_BestList";
 		var data = {};
@@ -92,6 +93,15 @@
 		data.page = 1;
 		data.pagePerNum = 3;
 		data.category_name='FT';
+		reqServer(url, data);
+	}
+	
+	function CPlistCall(){
+		var url="./rest/Board_list";
+		var data = {};
+		data.page = 1;
+		data.pagePerNum = 3;
+		data.category_name='CP';
 		reqServer(url, data);
 	}
 	
@@ -124,7 +134,7 @@
 					//printPaging(currPage, d.page);
 					 }
 				if(url == "./rest/Board_list"){
-					printList(d.jsonList.list);
+					printList(d.jsonList.list,data.category_name);
 					//더보기 처리
 					//printPaging(d.allCnt, d.page);
 					}
@@ -177,34 +187,67 @@
 			}
 	}
 	
-	function printList(list){
+	function printList(list,category_name){
 		console.log(list);
 		var content = "";
-		for(var i=0; i<list.length; i++){
-				content +="<tr>"
-							+"<td>"+list[i].board_idx
-							+"	<td>"
-							+"<a href='./Board_Detail?board_idx="+list[i].board_idx+"'>"
-							+list[i].subject
-							+"</a>";
-							if(list[i].newFileName != null){
-								content += "<h8>[첨부파일]</h8>"				
+		if(category_name=="QnA"){
+			for(var i=0; i<list.length; i++){
+					content +="<tr>"
+								+"<td>"+list[i].board_idx
+								+"	<td>"
+								+"<a href='./Board_Detail?board_idx="+list[i].board_idx+"'>"
+								+list[i].subject
+								+"</a>";
+								if(list[i].newFileName != null){
+									content += "<h8>[첨부파일]</h8>"				
+									}
+								else
+									{
+									content += "<h8>[첨부파일X]</h8>"				
+									}
+								if(list[i].replies >0){
+									content += " <b>["+list[i].replies+"]</b>";
 								}
-							else
-								{
-								content += "<h8>[첨부파일X]</h8>"				
+					content +="</td>"
+								+"<td>"+list[i].nickName+"</td>"
+								+"<td>"+list[i].reg_date+"</td>"
+								+"<td>"+list[i].bhit+"</td>"
+								+"</tr>";
+			}
+			$(".QnABoardlist").empty();
+			$(".QnABoardlist").append(content);
+			}
+	 if(category_name=="CP")
+			{
+			 for(var i=0; i<list.length; i++){
+					content +="<tr>"
+								+"<td class='CP1'>"+list[i].board_idx+"</td>"
+				if(list[i].newfilename != null){
+					content += "<td class='CP2'>" 
+							    +"<img width='15px' src='resources/img/default.jpg'/>";
+					}
+				else
+					{
+					content +="<td class='CP2'>"
+							    +"<img width='150' height='50'  alt='물물교환' src='./resources/upload/"+list[i].newfilename+"'/>";
+					}
+					content +=	"</td>"
+								+"	<td class='CP3'>"
+								+"<a href='./Board_Detail?board_idx="+list[i].board_idx+"'>"
+								+list[i].subject
+								+"</a>";
+								if(list[i].replies >0){
+									content += " <b>["+list[i].replies+"]</b>";
 								}
-							if(list[i].replies >0){
-								content += " <b>["+list[i].replies+"]</b>";
-							}
-				content +="</td>"
-							+"<td>"+list[i].nickName+"</td>"
-							+"<td>"+list[i].reg_date+"</td>"
-							+"<td>"+list[i].bhit+"</td>"
-							+"</tr>";
-		}
-		$(".QnABoardlist").empty();
-		$(".QnABoardlist").append(content);
+								
+					content +="</td>" 
+								+"<td class='CP4'>"+list[i].nickName+"</td>"
+								+"<td class='CP5'>"+list[i].bhit+"</td>"
+								+"</tr>";
+				}
+				$(".CoplzBoardlist").empty();
+				$(".CoplzBoardlist").append(content);
+			}
 	};
 	
 	//더보기 페이징 처리	
