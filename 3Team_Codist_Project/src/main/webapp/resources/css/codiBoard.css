@@ -21,9 +21,7 @@
 				border-bottom-color : black;	
 				border-top-color : black;												
 			}			
-			.admin{
-				display: none;
-			}
+			
 			a.listpage{
 				text-decoration: none;
 				color: black;

@@ -26,7 +26,7 @@ public class MainController {
 	@RequestMapping(value="/")
 	public String home(){
 		logger.info("메인 페이지 요청");
-		return "CodiBoard_Write";
+		return "ioi";
 	}
 
   //관리자 회원관리 페이지
@@ -234,14 +234,14 @@ public class MainController {
 	}
 	//게시판 글쓰기(코디 게시판 제외)
 	@RequestMapping(value="/Board_Write")
-	public ModelAndView Board_Write(HttpSession session, MultipartHttpServletRequest multi){				
+	public ModelAndView Board_Write(MultipartHttpServletRequest multi){				
 		logger.info("글쓰기 요청");
-		return service.Board_Write(multi, session);
+		return service.Board_Write(multi);
 	}		
 	
 	//코디게시판  글쓰기
 	@RequestMapping(value="/CodiBoard_Writes")
-	public ModelAndView CodiBoard_Writes( MultipartHttpServletRequest multi){				
+	public ModelAndView CodiBoard_Writes(MultipartHttpServletRequest multi){				
 	logger.info("글쓰기 요청");
 	
 	return service.CodiBoard_Writes(multi);

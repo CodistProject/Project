@@ -24,7 +24,9 @@
 			<thead>		
 				<tr>
 					<td colspan="3" align="right">
-						<button class="admin"  onclick="location.href='./CodiBoard_Write?userId=${sessionScope.userId}'">글쓰기</button>						
+						<c:if test="${sessionScope.userId =='ADMIN'}">
+							<button class="admin"  onclick="location.href='./CodiBoard_Write?userId=${sessionScope.userId}'">글쓰기</button>						
+						</c:if>
 					</td>					
 				</tr>		
 			</thead>			
@@ -42,10 +44,15 @@
 	</div>		
 	</body>
 	<script>
+		var msg = "${msg}";
+		
+		if(msg != ""){
+			alert(msg);
+		}
 		var currPage=1;
 		
 		listCall(currPage);
-
+		
 		function listCall(currPage){
 			var url="./rest/Cd_list";
 			var data = {};
@@ -78,6 +85,9 @@
 		function printList(list){
 			console.log(list);
 			var content = "";
+			var userId ="${sessionScope.userId}";
+			
+			console.log(userId);
 			for(var i=0; i<list.length; i++)
 			{
 				if(i==0)
@@ -89,8 +99,10 @@
 					content	+="</tr><tr>";
 					}
 				content +="<td>"
-							+"<input type='checkbox' class='admin'/>" 
-							+"<a href='./CodiBoard_Detail?board_idx="+list[i].board_idx+"'>"
+				if(userId=="ADMIN"){
+					content	+="<input type='checkbox' class='admin'/>"
+				}
+					content	+="<a href='./CodiBoard_Detail?board_idx="+list[i].board_idx+"'>"
 							+"<img width='280px'  alt='메인 코디' src='./resources/upload/"+list[i].newfilename+"'/>"
 							+"</a>"
 							+"</br>"	
@@ -120,5 +132,6 @@
 			
 			$("#Cd_pageNum").append(content);		
 		}
+	
 	</script>
 </html>

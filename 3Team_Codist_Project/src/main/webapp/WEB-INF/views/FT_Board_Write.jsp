@@ -20,7 +20,7 @@
     			</tr>    			
     			<tr>
     				<td>제목</td>
-    				<td><input name="subject" type="text"/ class="text"> </td>
+    				<td><input name="subject" type="text" class="text"/> </td>
     			</tr>
     			<tr>
     				<td>작성자</td>

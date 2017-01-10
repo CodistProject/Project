@@ -142,7 +142,7 @@
 		replyList(num);
 		//토글처리
 		
-		$("#"+num).slideToggle("fast",function(){
+		$("#"+num).slideToggle("slow",function(){
             var view = $("#"+num).css("display");
             if(view == "none")
                 {

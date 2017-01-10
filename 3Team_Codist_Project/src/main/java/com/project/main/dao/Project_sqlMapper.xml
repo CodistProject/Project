@@ -106,11 +106,25 @@
  			seq_total_board.NEXTVAL, #{param1}, #{param2}, #{param3},#{param4},#{param5},#{param6})
  	</insert>
  	 	
- 	<!--코디 글쓰기 -->
- 	<insert id="CodiBoard_Writes">
+ 	<!--코디 글쓰기(메인) -->
+ 	<insert id="CB_write">
+ 		INSERT INTO TOTAL_BOARD(
+ 	 		category_name, Board_idx,JOIN_IDX ,subject,sub_subject,filename,newfilename,FT_LIKE,FT_HATE,REPLES,BHIT)
+ 	 		VALUES('CB',SEQ_TOTAL_BOARD.NEXTVAL,50,#{param1}, #{param2},#{param3},#{param4},0,0,0,0)
+ 	</insert>
+ 	
+ 	<!--메인 글쓴뒤 idx찾기 -->
+ 	<select id="CB_writeFind" resultType="Integer">
+ 		SELECT BOARD_IDX FROM TOTAL_BOARD 
+ 			WHERE subject=#{param1} AND sub_subject=#{param2} 
+ 				AND filename=#{param3} AND newfilename=#{param4}
+ 	</select>
+ 	
+ 	<!--코디 글쓰기(외투,상의,하의) -->
+ 	<insert id="Cloth_write">
  		INSERT INTO CATEGORY_CLOTH(
- 	 		filename, category_name, newfilename)VALUES(
- 			#{param1}, #{param2}, #{param3})
+ 	 		CC_IDX, BOARD_IDX, CATEGORY_NAME,CLOTH_NAME,REAL_NAME,CLOTH_URL,CLOTH_DETAIL,FILENAME,NEWFILENAME)
+ 	 		VALUES(SEQ_CATEGORY_CLOTH.NEXTVAL,#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8})
  	</insert>
  	
  	<!-- 게시판 게시물 수 -->

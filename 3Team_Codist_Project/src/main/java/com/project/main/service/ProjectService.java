@@ -361,7 +361,7 @@ public class ProjectService {
 		return mav;
 	}
 	// 글쓰기
-	public ModelAndView Board_Write(MultipartHttpServletRequest multi, HttpSession session)  {		
+	public ModelAndView Board_Write(MultipartHttpServletRequest multi)  {		
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		ModelAndView mav = new ModelAndView();		
 			
@@ -371,7 +371,6 @@ public class ProjectService {
 		String filename = multi.getParameter("filename");
 		String newfilename = "";		
 		String category_name = multi.getParameter("category");		
-		String userId = (String) session.getAttribute("userId");	
 		
 		if(filename.equals("")){
 			logger.info("파일이 없어요");
@@ -384,12 +383,6 @@ public class ProjectService {
 		logger.info(nickName+" / "+ subject+" / "+ content+" / "+filename+" / "+ newfilename+" / "+category_name);
 		inter.Board_Write(nickName, subject, content,filename, newfilename,category_name);		
 		String page = "";
-		String msg = "로그인을 해주세요.";		
-		
-		if(userId != null){	
-			logger.info("userId:{}",userId);
-			
-			msg = "등록에 성공 하였습니다.";
 			if(category_name.equals("QnA")){
 				page = "QnABoard_Main";
 			}else if(category_name.equals("AT")){
@@ -401,20 +394,17 @@ public class ProjectService {
 			}else if(category_name.equals("CB")){
 				page = "CodiBoard_Main";
 			}
-		}
-		
-		mav.addObject("msg",msg);
-		mav.setViewName(page);
-		return mav;		
-		}
+		return null;
+}
+
 	
 	//코디 글쓰기
 	public ModelAndView CodiBoard_Writes(MultipartHttpServletRequest multi)  {				
 		inter = sqlSession.getMapper(ProjectInterface.class);			
-		ModelAndView mav = new ModelAndView();			
+		ModelAndView mav = new ModelAndView();
 		String CBfilename=multi.getParameter("filename1");
 		String subject=multi.getParameter("CBname");
-		String sub_subject=multi.getParameter("CBname");
+		String sub_subject=multi.getParameter("CBplus");
 		String CBnewfilename = "";		
 		logger.info(CBfilename +"/"+subject+"/"+sub_subject);
 		
@@ -433,7 +423,7 @@ public class ProjectService {
 		String Topcloth_cloth_url=multi.getParameter("TopUrl");
 		String Topnewfilename ="";
 		logger.info(Topfilename+"/"+Topcloth_name+"/"+Topreal_name+"/"+Topcloth_detail+"/"+Topcloth_cloth_url);
-	
+		
 		String Pantsfilename=multi.getParameter("filename4");
 		String Pantscloth_name=multi.getParameter("PantsCloth");
 		String Pantsreal_name =multi.getParameter("Pantsname");
@@ -441,6 +431,7 @@ public class ProjectService {
 		String Pantscloth_cloth_url=multi.getParameter("PantsUrl");
 		String Pantsnewfilename ="";
 		logger.info(Pantsfilename+"/"+Pantscloth_name+"/"+Pantsreal_name+"/"+Pantscloth_detail+"/"+Pantscloth_cloth_url);
+		String msg="코디 글쓰기에 실패 하셨습니다.";
 		//코디 newfilename 추출
 		if(CBfilename.equals("")){
 			logger.info("파일이 없어요");
@@ -449,8 +440,15 @@ public class ProjectService {
 			logger.info("파일 업로드");
 			UploadFile upload = new UploadFile();
 			CBnewfilename = upload.fileUp(multi, CBfilename);
+			//메인 코디 등록
+			inter.CB_write(subject, sub_subject,CBfilename,CBnewfilename);
+			msg="코디 글쓰기에 성공 하셨습니다.";
 		}
 		logger.info(CBnewfilename);
+		
+		//board_idx찾기(외투,상의,하의에 넣기)
+		int Board_idx=inter.CB_writeFind(subject, sub_subject, CBfilename, CBnewfilename);
+		logger.info("idx : {}",Board_idx);
 		
 		//외투 newfilename 추출
 		if(Outterfilename.equals("")){
@@ -460,6 +458,9 @@ public class ProjectService {
 			logger.info("파일 업로드");
 			UploadFile upload = new UploadFile();
 			Outternewfilename = upload.fileUp(multi, Outterfilename);
+			//아우터 등록
+			inter.Cloth_write(Board_idx,"Outer",Outtercloth_name, Outterreal_name,Outtercloth_cloth_url,Outtercloth_detail,Outterfilename,Outternewfilename);
+			//msg="코디 글쓰기에 성공 하셨습니다.";
 		}
 		logger.info(Outternewfilename);
 		
@@ -471,6 +472,9 @@ public class ProjectService {
 			logger.info("파일 업로드");
 			UploadFile upload = new UploadFile();
 			Topnewfilename = upload.fileUp(multi, Topfilename);
+			//상의 등록
+			inter.Cloth_write(Board_idx,"Top",Topcloth_name, Topreal_name,Topcloth_cloth_url,Topcloth_detail,Topfilename,Topnewfilename);
+			//msg="코디 글쓰기에 성공 하셨습니다.";
 		}
 		logger.info(Topnewfilename);
 		
@@ -482,17 +486,16 @@ public class ProjectService {
 			logger.info("파일 업로드");
 			UploadFile upload = new UploadFile();
 			Pantsnewfilename = upload.fileUp(multi, Pantsfilename);
+			//하의 등록
+			inter.Cloth_write(Board_idx,"Pants",Pantscloth_name, Pantsreal_name,Pantscloth_cloth_url,Pantscloth_detail,Pantsfilename,Pantsnewfilename);
+			//msg="코디 글쓰기에 성공 하셨습니다.";
 		}
 		logger.info(Pantsnewfilename);
-	/*	//메인 코디 등록
-		inter.CodiBoard_Writes(subject, sub_subject,CBfilename,CBnewfilename);
-		//아우터 등록
-		inter.CodiBoard_Writes(Outtercloth_name, Outterreal_name,Outtercloth_detail,Outterfilename,Outternewfilename);
-		//상의 등록
-		inter.CodiBoard_Writes(Topcloth_name, Topreal_name,Topcloth_detail,Topfilename,Topnewfilename);
-		//하의 등록
-		inter.CodiBoard_Writes(Pantscloth_name, Pantsreal_name,Pantscloth_detail,Pantsfilename,Pantsnewfilename);*/
-		return null;
+		
+		mav.addObject("msg",msg);
+		mav.setViewName("CodiBoard_Main");
+		
+		return mav;
 	}		
 	
 	//게시판 리스트 보여주기(Cody Board 제외)

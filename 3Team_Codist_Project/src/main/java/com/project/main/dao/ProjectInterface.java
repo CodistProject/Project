@@ -113,8 +113,15 @@ public interface ProjectInterface {
 	//아이디 찾기
 	public ArrayList<ReplyDto> FindId(String idx);
 
-	//코디 게시판 글쓰기
-	public void CodiBoard_Writes(String subject, String sub_subject, String cBfilename, String cBnewfilename);
+	//코디 게시판 글쓰기<메인코디>
+	public void CB_write(String subject, String sub_subject, String cBfilename, String cBnewfilename);
+	
+	//글쓰기 위한 idx찾기
+	public int CB_writeFind(String subject, String sub_subject, String cBfilename, String cBnewfilename);
+	
+	//코디 게시판 글쓰기<외투,상의,하의>
+	public void Cloth_write(int board_idx,String category_name, String cloth_name, String real_name,
+			String cloth_cloth_url, String cloth_detail, String filename, String newfilename);
 
 	// 사다리게임에 관한 데이터 찾아오기
 	public GameDto Find_ladderData(String time_event_name);
@@ -125,6 +132,10 @@ public interface ProjectInterface {
 	
 	//베스트 게시판 선정
 	public ArrayList<BoardDto> BOARD_BestList(String category_name, int currPage, int pagePerNum);
+
+	
+	
+	
 	
 
 }
