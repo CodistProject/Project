@@ -4,9 +4,9 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Q & A 게시판 글쓰기 </title>
+		<title>패션토크 글쓰기 </title>
 		<script src ="//code.jquery.com/jquery-3.1.0.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="resources/css/board.css"/>
+		<link rel="stylesheet" type="text/css" href="resources/css/Board.css"/>
 		<link rel="stylesheet" type="text/css" href="resources/css/button.css"/>
 	</head>
 	<body>
@@ -18,11 +18,11 @@
     				<td colspan="2">패션토크 게시판</td>
     				<input type="hidden" name="category" value="FT" />
     			</tr>    			
-    			<tr>
+    			<tr height="30px">
     				<td>제목</td>
-    				<td><input name="subject" type="text"/ class="text"> </td>
+    				<td><input name="subject" type="text" class="text"/> </td>
     			</tr>
-    			<tr>
+    			<tr height="30px">
     				<td>작성자</td>
     				<td><input class="text" name="nickName" type="text" value="${nickName}" readonly/></td>
     			</tr>
@@ -37,7 +37,6 @@
 					<input  id="filenames"  type="hidden" name="filename"/>
 				</td>
 			</tr>
-			
 			<tr>
 				<td colspan="2">					
 					<input class="bt" type="submit" class="button" value="등록"/>

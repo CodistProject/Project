@@ -9,9 +9,11 @@
 		 <link rel="stylesheet" type="text/css" href="resources/css/main.css"/>
 		 <link rel="stylesheet" type="text/css" href="resources/css/button.css"/>
 		 <style>
-		   #mon_pop{            
+		  /* 요일메뉴 */
+			 #mon_pop{            
             position:absolute;
-            background-color: #6BADFF;
+            background-color: #FFFEE7;
+            box-shadow: 2px 2px 2px 0px lightgray;
             z-index:2;
             width: 300px;
             height: 300px;            
@@ -22,7 +24,8 @@
          
          #tue_pop{            
             position:absolute;
-            background-color: #6BADFF;
+            background-color: #FFFEE7;
+            box-shadow: 2px 2px 2px 0px lightgray;
             z-index:2;
             width: 300px;
             height: 300px;            
@@ -33,7 +36,8 @@
          
          #wed_pop{            
             position:absolute;
-            background-color: #6BFF7C;;
+            background-color: #FFFEE7;
+            box-shadow: 2px 2px 2px 0px lightgray;
             z-index:2;
             width: 300px;
             height: 300px;            
@@ -44,7 +48,8 @@
          
          #thur_pop{            
             position:absolute;
-            background-color: #6BFF7C;;
+            background-color: #FFFEE7;
+            box-shadow: 2px 2px 2px 0px lightgray;
             z-index:2;
             width: 300px;
             height: 300px;            
@@ -55,7 +60,8 @@
          
          #fri_pop{            
             position:absolute;
-            background-color: #6BFF7C;;
+            background-color: #FFFEE7;
+            box-shadow: 2px 2px 2px 0px lightgray;
             z-index:2;
             width: 300px;
             height: 300px;            
@@ -66,7 +72,8 @@
          
          #sat_pop{            
             position:absolute;
-            background-color: #E5FF6B;
+           	background-color: #FFFEE7;
+            box-shadow: 2px 2px 2px 0px lightgray;
             z-index:2;
             width: 300px;
             height: 300px;            
@@ -77,7 +84,8 @@
          
          #sun_pop{            
             position:absolute;
-            background-color: #E5FF6B;
+            background-color: #FFFEE7;
+            box-shadow: 2px 2px 2px 0px lightgray;
             z-index:2;
             width: 300px;
             height: 300px;            
@@ -89,7 +97,7 @@
 	</head>
 	<body>
 		<div id="head">
-			<a href="./"><img id="logo" alt="로고" src="../../main/resources/img/logo.png"></a>			
+			<a href="./"><img class="logo"id="logo" alt="로고" src="../../main/resources/img/logo.png"></a>			
 		</div>
 		<div id="weather">
 			<a class="top" href="javascript:Event();">이벤트</a>

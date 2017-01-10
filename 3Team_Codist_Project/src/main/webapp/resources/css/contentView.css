@@ -58,4 +58,13 @@
 		input[type='text']{
 			width:100%;
 		}
-		
+		a.del{
+			color: black;
+		}
+		a.a2{
+			text-decoration: none;
+			color: black;
+		}
+		.a2:hover{
+			color:red;
+		}
