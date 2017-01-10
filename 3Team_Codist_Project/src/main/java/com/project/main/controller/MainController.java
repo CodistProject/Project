@@ -259,9 +259,9 @@ public class MainController {
 	}
 	//게시판 글쓰기(코디 게시판 제외)
 	@RequestMapping(value="/Board_Write")
-	public ModelAndView Board_Write(MultipartHttpServletRequest multi){				
+	public ModelAndView Board_Write(MultipartHttpServletRequest multi,HttpSession session){				
 		logger.info("글쓰기 요청");
-		return service.Board_Write(multi);
+		return service.Board_Write(multi,session);
 	}		
 	
 	//코디게시판  글쓰기

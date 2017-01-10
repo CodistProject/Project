@@ -362,6 +362,7 @@
 	//리플 리스트
 	function printReple(list,userId){
 		$("#texta").val("");
+		console.log(userId);
 		console.log(userId[0].id);
 		var content = "";
 		for(var i=0; i<list.length;i++){

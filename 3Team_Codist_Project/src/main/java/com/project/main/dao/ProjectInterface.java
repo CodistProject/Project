@@ -27,7 +27,10 @@ public interface ProjectInterface {
 
 	//회원가입
 	public void memberJoin(MemberInfo info);
-		
+	
+	// 이벤트 쿠폰 생성
+	public void updateCoupon(String id, int idx);
+	
 	// 회원정보 수정 보기
 	public MemberInfo Mem_ModiView(String userId);
 
@@ -75,7 +78,7 @@ public interface ProjectInterface {
 	
 	//게시판 글쓰기
 	public int Board_Write(String nickName, String subject, String content, String filename, String newfilename,
-			String category_name);
+			String category_name,int join_idx);
 	
 	//게시판 추천수 증가
 	public int Board_Uplike(int board_idx);

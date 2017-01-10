@@ -164,6 +164,7 @@ public class ProjectService {
 		info.setGender(params.get("gender"));
 		info.setEmail(params.get("email"));
 		inter.memberJoin(info);
+		inter.updateCoupon(info.getId(),Integer.parseInt(inter.Find_JoinIdx(info.getId())));
 		return info;
 	}
 	
@@ -377,10 +378,10 @@ public class ProjectService {
 	}
 	
 	// 글쓰기
-	public ModelAndView Board_Write(MultipartHttpServletRequest multi)  {		
+	public ModelAndView Board_Write(MultipartHttpServletRequest multi,HttpSession session)  {		
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		ModelAndView mav = new ModelAndView();		
-			
+		String userId= (String) session.getAttribute("userId");
 		String subject = multi.getParameter("subject");
 		String content = multi.getParameter("content");
 		String nickName = multi.getParameter("nickName");	
@@ -388,6 +389,7 @@ public class ProjectService {
 		String newfilename = "";		
 		String category_name = multi.getParameter("category");		
 		
+		int join_idx=Integer.parseInt(inter.Find_JoinIdx(userId));
 		if(filename.equals("")){
 			logger.info("파일이 없어요");
 		}else {
@@ -397,13 +399,13 @@ public class ProjectService {
 			newfilename = upload.fileUp(multi, filename);
 		}		
 		logger.info(nickName+" / "+ subject+" / "+ content+" / "+filename+" / "+ newfilename+" / "+category_name);
-		inter.Board_Write(nickName, subject, content,filename, newfilename,category_name);		
+		inter.Board_Write(nickName, subject, content,filename, newfilename,category_name,join_idx);		
 		String page = "";
 		String msg="";
 			if(category_name.equals("QnA")){
 				page = "QnABoard_Main";
 				msg="QnA글쓰기에 성공 하셨습니다.";
-			}else if(category_name.equals("AT")){
+			}else if(category_name.equals("Alter")){
 				page = "AlterBoard_Main";
 				msg="Alter글쓰기에 성공 하셨습니다.";
 			}else if(category_name.equals("FT")){
@@ -686,7 +688,7 @@ public class ProjectService {
 			Map<String, ArrayList<ReplyDto>> obj 
 				= new HashMap<String, ArrayList<ReplyDto>>();
 			obj.put("list", inter.replyList(idx));
-			obj.put("userId",inter.FindId(idx) );
+			obj.put("userId",inter.FindId(idx));
 			return obj;
 	}
 	

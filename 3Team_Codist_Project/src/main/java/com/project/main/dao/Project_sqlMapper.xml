@@ -56,6 +56,11 @@
 		INSERT INTO JOIN_REG(JOIN_IDX,ID,NICKNAME,PW,PW_QNA,PW_ANSWER,NAME,PHONE,BIRTH,GENDER,EMAIL) 
 		VALUES(SEQ_JOIN_REG.NEXTVAL,#{id},#{nickName},#{pw},#{PW_QnA},#{PW_ANSWER},#{name},#{phone},#{birth},#{gender},#{email})
 	</insert>
+	<!-- 쿠폰생성 -->
+   <insert id="updateCoupon">
+      INSERT INTO EVENT_COUPON(USER_ID,JOIN_IDX,COUPON_5,COUPON_10 ,COUPON_15  ,COUPON_20,Mileage  ) 
+      VALUES(#{param1},#{param2},0,0,0,0,0)
+   </insert>
 	
 	<!-- 마이페이지/회원정보 보기 -->
  	<select id="MemberData_View" resultType="com.project.main.dto.MemberInfo">
@@ -102,8 +107,8 @@
 	<!-- 글쓰기 -->
  	<insert id="Board_Write">
  		INSERT INTO TOTAL_BOARD(
- 	 		board_idx, nickname, subject, content, filename, newfilename, category_name)VALUES(
- 			seq_total_board.NEXTVAL, #{param1}, #{param2}, #{param3},#{param4},#{param5},#{param6})
+ 	 		board_idx,  nickname, subject, content, filename, newfilename, category_name,join_idx)VALUES(
+ 			seq_total_board.NEXTVAL, #{param1}, #{param2}, #{param3},#{param4},#{param5},#{param6},#{param7})
  	</insert>
  	 	
  	<!--코디 글쓰기(메인) -->

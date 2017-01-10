@@ -16,7 +16,7 @@
     		<table id="boardwrite">
     			<tr>
     				<td colspan="2">물물 교환</td>
-    				<input type="hidden" name="category" value="AT" />
+    				<input type="hidden" name="category" value="Alter" />
     			</tr>    			
     			<tr>
     				<td>제목</td>
