@@ -201,5 +201,11 @@ public class RestController {
 		logger.info(userId);
 		return service.RegistNote(userId,content);
 	}
+	//쪽지 알람확인(NEW >>'N')
+	@RequestMapping(value="/NewUpdate")
+	public @ResponseBody Map<String, Integer> NewUpdate(){
+		logger.info("쪽지 알람제거");
+		return service.NewUpdate();
+	}
 	
 }

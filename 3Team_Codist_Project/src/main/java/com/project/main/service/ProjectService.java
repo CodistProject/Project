@@ -26,6 +26,7 @@ import com.project.main.dto.BoardDto;
 import com.project.main.dto.ClothDto;
 import com.project.main.dto.MemberInfo;
 import com.project.main.dto.MileageDto;
+import com.project.main.dto.NoteDto;
 import com.project.main.dto.ReplyDto;
 import com.project.main.dto.myClothDto;
 import com.project.main.util.UploadFile;
@@ -984,6 +985,13 @@ public class ProjectService {
 		mav.setViewName("Admin_Manage_Member");
 		return mav;
 	}
+	//관리자 쪽지 관리 페이지
+	public ModelAndView AdminMessage() {
+		ModelAndView mav= new ModelAndView();
+		mav.addObject("list",inter.AdminMessageList());
+		mav.setViewName("Admin_Manage_Message");
+		return mav;
+	}
 	
 	//닉네임찾기
 	public Map<String, String> Find_Nick(String userId) {
@@ -1146,11 +1154,21 @@ public class ProjectService {
 			//쪽지 등록	
 			public Map<String, Integer> RegistNote(String userId, String content) {
 				Map<String, Integer> map = new HashMap<String, Integer>();
+				inter=sqlSession.getMapper(ProjectInterface.class);
 				int join_idx=Integer.parseInt(inter.Find_JoinIdx(userId));
 				logger.info("idx:{}",join_idx);
 				map.put("msg",inter.RegistNote(userId,join_idx,content));
 				return map;
 			}
+			
+			//쪽지 알람 제거
+			public Map<String, Integer> NewUpdate() {
+				Map<String, Integer> map = new HashMap<String, Integer>();
+				inter=sqlSession.getMapper(ProjectInterface.class);
+				map.put("msg",inter.NewUpdate());
+				return map;
+			}
+			
 			
 }
 	

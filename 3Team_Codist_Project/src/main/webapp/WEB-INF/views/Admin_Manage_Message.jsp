@@ -36,25 +36,56 @@
       </style>
    </head>
    <body>
+      <jsp:include page="../../resources/include/index.jsp"></jsp:include>
    <jsp:include page="../../resources/include/AdminPage.jsp"></jsp:include>
       <div class="messageDiv">
        <span id="i">쪽지 확인</span>
         <table id="o">
            <tr class="l">
+            <td class="p">번호</td>
             <td class="p">ID</td>
-            <td class="p">이름</td>
-            <td class="p">제목</td>
             <td class="p">내용</td>
+            <td class="p">작성일</td>
             <td class="p">삭제</td>           
            </tr>
-           <tr>
-            <td class="p">ID1</td>
-            <td class="p">이름1</td>
-            <td class="p">제목1</td>
-            <td class="p">내용1</td>
-            <td class="p"><a href="#" class="y">x</a></td>           
-           </tr>
+           <c:forEach items="${list}" var="dto">
+	           <tr>
+	            <td class="p">${dto.join_idx }</td>
+	            <td class="p">${dto.user_id }</td>
+	            <td class="p">${dto.letter_content }</td>
+	            <td class="p">${dto.letter_date }</td>
+	            <td class="p"><a href="#" class="y">x</a></td>           
+	           </tr>
+           </c:forEach>
         </table>
      </div>
    </body>
-   <script></script>
+   <script>
+   
+   function NewUpdate(){
+		var url="./rest/NewUpdate";
+		var data = {};
+		reqServer(url, data);
+	}
+	
+	function reqServer(url, data){
+		console.log(url);
+		$.ajax({
+			url:url,
+			type:"post",
+			data:data,
+			dataType:"json",
+			success:function(d){
+				console.log(d)
+				if(url="./rest/NewUpdate"){
+					if(d.msg==1)
+						{
+						alert("쪽지를 확인 하였습니다.")
+						}
+					}
+				},error:function(e){
+						console.log(e)
+					}
+		});
+	}
+   </script>

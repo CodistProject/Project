@@ -283,5 +283,12 @@
 		INSERT INTO NOTE(NOTE_IDX,USER_ID,JOIN_IDX,ADMIN,ADMIN_IDX,LETTER_CONTENT,LETTER_NEW) 
 				VALUES(SEQ_NOTE.NEXTVAL,#{param1},#{param2},'ADMIN',50,#{param3},'Y')
 	</insert>
-	
+	<!-- 쪽지 리스트  -->
+	<select id="AdminMessageList" resultType="com.project.main.dto.NoteDto">
+		SELECT * FROM NOTE ORDER BY NOTE_IDX ASC
+	</select>
+	<!-- 알람 삭제 -->
+	<update id="NewUpdate">
+		UPDATE NOTE SET LETTER_NEW='N'
+	</update>
 </mapper>

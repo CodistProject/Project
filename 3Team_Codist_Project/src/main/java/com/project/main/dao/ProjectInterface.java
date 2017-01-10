@@ -6,6 +6,7 @@ import com.project.main.dto.ClothDto;
 import com.project.main.dto.GameDto;
 import com.project.main.dto.MemberInfo;
 import com.project.main.dto.MileageDto;
+import com.project.main.dto.NoteDto;
 import com.project.main.dto.ReplyDto;
 import com.project.main.dto.myClothDto;
 
@@ -161,6 +162,13 @@ public interface ProjectInterface {
 	
 	//쪽지 등록
 	public int RegistNote( String userId,int join_idx, String content);
+	
+	//쪽지 리스트
+	public ArrayList<NoteDto> AdminMessageList();
+	
+	//쪽지 N 알람제거 
+	public int NewUpdate();
+
 	
 }
 
