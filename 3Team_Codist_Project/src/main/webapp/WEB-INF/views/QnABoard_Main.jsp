@@ -124,7 +124,7 @@
 							+"<td>"+list[i].board_idx
 							if(list[i].nickName==userNick)
 							{
-				content +=" <a href='./BoardDelete?board_idx="+list[i].board_idx+"&category_name="+list[i].category_name+"' style='text-decoration:none'>삭제</a> </td>";
+				content +=" <a href='./BoardDelete?board_idx="+list[i].board_idx+"&category_name="+list[i].category_name+"' style='text-decoration:none'>삭제</a></td>";
 							}
 				content+="</td>"
 							+"	<td>"

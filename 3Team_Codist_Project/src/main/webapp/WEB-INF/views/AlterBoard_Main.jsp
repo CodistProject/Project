@@ -123,7 +123,7 @@
 		var content = "";
 		for(var i=0; i<list.length; i++){
 							content +="<tr>"
-										+"<td class='Al1' height='50px'>"+list[i].board_idx
+										+"<td class='Al1' height='100px'>"+list[i].board_idx
 										if(list[i].nickName==userNick)
 										{
 						content +=" <a href='./BoardDelete?board_idx="+list[i].board_idx+"&category_name="+list[i].category_name+"' style='text-decoration:none'>삭제</a>";
@@ -136,7 +136,7 @@
 						else
 							{
 							content +="<td class='Al2'>"
-									    +"<img width='150' height='50'  alt='물물교환' src='./resources/upload/"+list[i].newfilename+"'/>";
+									    +"<img width='150' height='100px'  alt='물물교환' src='./resources/upload/"+list[i].newfilename+"'/>";
 							}
 							content +=	"</td>"
 										+"	<td class='Al3'>"
