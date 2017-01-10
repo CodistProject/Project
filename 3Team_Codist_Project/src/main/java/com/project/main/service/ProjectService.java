@@ -1,7 +1,5 @@
 package com.project.main.service;
 
-
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,9 +24,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.project.main.dao.ProjectInterface;
 import com.project.main.dto.BoardDto;
 import com.project.main.dto.ClothDto;
-import com.project.main.dto.GameDto;
 import com.project.main.dto.MemberInfo;
 import com.project.main.dto.ReplyDto;
+import com.project.main.dto.myClothDto;
 import com.project.main.util.UploadFile;
 
 @Service
@@ -343,6 +341,7 @@ public class ProjectService {
 		mav.setViewName("CodiBoard_Write");
 		return mav;		
 	}
+	
 	//탈퇴하기 페이지 이동(Pw 찾기)
 	public ModelAndView Withdrawal(String userId) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
@@ -351,6 +350,7 @@ public class ProjectService {
 		mav.setViewName("Mypage_Withdrawal");
 		return mav;
 	}
+	
 	//탈퇴하기
 	public ModelAndView withdrawa(String userId) {
 		ModelAndView mav = new ModelAndView();
@@ -360,6 +360,7 @@ public class ProjectService {
 		mav.setViewName("redirect:/logout");				
 		return mav;
 	}
+	
 	// 글쓰기
 	public ModelAndView Board_Write(MultipartHttpServletRequest multi)  {		
 		inter = sqlSession.getMapper(ProjectInterface.class);
@@ -853,44 +854,65 @@ public class ProjectService {
 	// 유저 비번 찾기 서비스
 	public ModelAndView Find_Pw(Map<String, String> params) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
-		logger.info("유저 비번찾기 서비스 실행");
-		
-		if(params.get("user_Id")!=null){		
-			// 유저 비번찾기1에 필요한 정보
-			String user_Id = params.get("user_Id"); // 유저 아이디
-			// 받아온 유저아이디, 유저아이디로 찾은 유저 이메일 체크
-			logger.info("(방법1)받아온 유저 아이디 체크 : "+user_Id);		
-			String user_Email = inter.Find_Email(user_Id); // 유저 메일주소
-			// 유저 비번찾기1에서 가져온 유저 메일주소
+		logger.info("유저 비번찾기 서비스 실행");				
+		ModelAndView mav = new ModelAndView();
+		// 방법 1 - 유저비번찾기
+		if(params.get("user_Id")!="" && params.get("user_Name")!="" && params.get("Pw_Ans")!=""){
+			logger.info("유저 비번찾기 방법1");
+			// 유효성 검사에 필요한 3가지(아이디, 이름, 비번질문답)
+			String userId1 = params.get("user_Id");
+			String userName1 = params.get("user_Name");
+			String Pw_Ans = params.get("Pw_Ans");
+			logger.info("아이디:"+userId1+"/"+"이름:"+userName1+"/"+"질문답:"+Pw_Ans);			
+			// 유저아이디로 찾은 유저 이메일				
+			String user_Email = inter.Find_Email(userId1); // 유저 메일주소
 			logger.info("(방법1)유저아이디로 찾아낸 유저 이메일 :"+user_Email);		
-			// 유저 비번(아이디로), 메일 찾기(아이디로) 하고 params에 담기(메일함수에 담아 보내기 위해)		
-			logger.info("(방법1)유저 아이디로 찾은 유저 비번:"+inter.FindPw_userEmail(user_Id));
-			String user_Pw = inter.FindPw_userEmail(user_Id);
-			params.put("user_Pw", user_Pw);
-			params.put("user_Email", user_Email);
-		}				
-				 
-		logger.info("/------------------------------------------------------/");
-		
-		if(params.get("userId")!=null){			
-			// 유저 비번찾기2에 필요한 정보 + 이메일문의에 필요한 정보
-			String userId = params.get("userId");
-			logger.info("(방법2)유저 아이디 :"+ userId); 			
+			// 유저 비번(아이디, 이름, 질문답), 메일 찾기(아이디로) 하고 params에 담기(메일함수에 담아 보내기 위해)
+			String user_Pw = inter.FindPw_userData(userId1, userName1, Pw_Ans);
+			logger.info("(방법1)아이디, 이름, 질문답으로 찾은 유저 비번:"+user_Pw);
+			if(user_Pw==null){
+				logger.info("if 정상작동");
+				mav.addObject("error_msg", "입력하신 회원정보가 잘못되었습니다. 다시 확인 바랍니다.");
+				mav.setViewName("Find_Pw");
+			}else{
+				params.put("user_Pw", user_Pw);			
+				params.put("user_Email", user_Email);
+				mav.addObject("Find_Pw", Email(params));			
+				mav.setViewName("ioi");
+			}
+			
+		}	
+		// 방법 2 - 유저비번찾기
+		else if(params.get("userId")!="" && params.get("userName")!="" && params.get("Birth")!=""){		
+			logger.info("유저 비번찾기 방법2");
+			// 유효성 검사에 필요한 3가지(아이디, 이름, 생년월일)
+			String userId2 = params.get("userId");
+			String userName2 = params.get("userName");
+			String userBirth = params.get("Birth");
+			logger.info("아이디:"+userId2+"/"+"이름:"+userName2+"/"+"생년월일:"+userBirth);
+			// 유저 이메일 주소 받아오기 			
 			String E = params.get("email1");
 			String E2 = params.get("email2");
 			String userEmail = E+"@"+E2;  // 유저 메일 주소(비번 찾을용+비번 담아 보내줄 멜주소)
 			// 유저 비번찾기2에서 가져온 유저 메일주소 완성본
-			logger.info("(방법2)유저 메일주소(비번 찾기용2/비번 담아서 보내줄 멜주소):"+userEmail);					
+			logger.info("(방법2)유저 메일주소(비번 담아서 보내줄 멜주소):"+userEmail);					
 			// params에 유저 이메일로 찾은 비번과 보내줄 유저 메일 주소 담기
-			String userPw = inter.FindPw_userEmail(userId);
+			String userPw = inter.FindPw_userData2(userId2, userName2, userBirth);
 			logger.info("(방법2)아이디로 찾은 유저 비번 :"+userPw);
-			params.put("content_userPw", userPw);			
-			params.put("FindPw_userEmail", userEmail);
-		}
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("Find_Pw", Email(params));
-		mav.setViewName("ioi");
+			if(userPw==null){
+				logger.info("if 정상작동");
+				mav.addObject("error_msg", "입력하신 회원정보가 잘못되었습니다. 다시 확인 바랍니다.");
+				mav.setViewName("Find_Pw");
+			}else{
+				params.put("content_userPw", userPw);			
+				params.put("FindPw_userEmail", userEmail);
+				mav.addObject("Find_Pw", Email(params));
+				mav.setViewName("ioi");
+		    }			
+		}else{
+			mav.addObject("error_msg", "입력하신 회원정보가 잘못되었습니다. 다시 확인 바랍니다.");
+			mav.setViewName("Find_Pw");
+		}		
 		return mav;
 	}
 	
@@ -951,20 +973,58 @@ public class ProjectService {
 		return obj;
 	}
 	
-	//나만의 옷장이동(유효성검사)
-	public ModelAndView My_Cloth(String userId) {
+	// 코디게시판-> 나만의옷장(체크한 옷 데이터 담기 기능) -> 팝업창 띄우기
+	public Map<String, Object> Put_Cloth(Map<String, String> params) {
+		logger.info("옷+일정 담기 기능 실행");
 		inter = sqlSession.getMapper(ProjectInterface.class);
-		ModelAndView mav= new ModelAndView();
-		System.out.println(userId);
-		String page="ioi";
-		String msg="로그인 후 가능합니다.";
-		if(!userId.equals("' '"))
-		{
-			page="My_Calendar";
-			msg="성공";
+		// 접속한 아이디를 통해 Join_Idx 도 담아오기
+		String userId = params.get("userId");
+		String Join_Idx = inter.Find_JoinIdx(userId);
+		params.put("join_idx", Join_Idx);
+		
+		// 아작스 데이터로 보낸 일정+옷 데이터 가져오기
+		String Calendar_Subject = params.get("Subject");		
+		String Calendar_Date = params.get("Date");
+		String Outer = params.get("Outer");
+		String Top = params.get("Top");
+		String Pants = params.get("Pants");	
+		// 담아온 데이터 보여지는지 체크
+		logger.info("제목:"+Calendar_Date+"/"+"날짜:"+Calendar_Subject);
+		logger.info("Join_Idx:"+Join_Idx+"/"+"아웃터:"+Outer+"/"+"상의:"+Top+"/"+"하의:"+Pants);
+		
+		Map<String, Object> map = new HashMap<String, Object>();		
+		int success = inter.Put_Cloth(Join_Idx, Calendar_Subject, Calendar_Date, Outer, Top, Pants);		
+	
+		map.put("Put_Cloth", success);		
+		
+		return map;
+	}
+
+	// 나만의 옷장(캘린더) 이동 및 데이터 보여주기(일정+옷)
+	public ModelAndView myCloth(String userId) {		
+		logger.info("나만의 옷장(캘린더) 실행");
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav = new ModelAndView();
+		Map<String, ArrayList<myClothDto>> obj = new HashMap<String, ArrayList<myClothDto>>();
+		// 로그인시 가능하게 유효성 검사		
+		if(userId==""){
+			String page="ioi";
+			String msg="";
+			logger.info("if가 되는거니?");
+			msg = "로그인이 필요한 서비스입니다!.";
+			mav.addObject("msg", msg);
+			mav.setViewName(page);
 		}
-		mav.addObject("msg",msg);
-		mav.setViewName(page);
+		// 로그인 후 정상처리
+		if(userId!=""){
+			// userId 로 join_idx 찾기
+			String Join_Idx = inter.Find_JoinIdx(userId);
+			logger.info("조인 idx:"+Join_Idx);
+			// Join_Idx 로 가져올 데이터 찾기(옷+일정) -> obj 담기-> myCalendar 담기
+			obj.put("myCloth", inter.Find_myCloth(Join_Idx));
+			mav.addObject("myCalendar", obj);		
+			mav.setViewName("My_Calendar");			
+		}
 		return mav;
 	}
 	
@@ -1003,8 +1063,6 @@ public class ProjectService {
 	}
 
 	
-	
-
 
 	
 }	

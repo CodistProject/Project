@@ -176,7 +176,7 @@
    				</tr>
    				<tr>
    					<td class="td2" >
-             		 <div id="OuterList" class="img5" id="Outer">
+             		 <div id="OuterList" class="img5">
              		 		<h3>
 							※ 클릭시 구입이 가능합니다
 							</h3>
@@ -190,7 +190,7 @@
    				</tr>
    				<tr>
    					<td class="td4" >
-   					<div id="TopList" class="img5" id="Top">
+   					<div id="TopList" class="img5">
    							<h3>
 							※ 클릭시 구입이 가능합니다
 							</h3>
@@ -204,7 +204,7 @@
    				</tr>
    				<tr>
    					<td class="td6">
-   					<div id="PantsList" class="img5" id="Pants">
+   					<div id="PantsList" class="img5">
    							<h3>
 							※ 클릭시 구입이 가능합니다
 							</h3>
@@ -220,18 +220,12 @@
    						<input type="button" class="buttonA"  value="수정" />
    					 	<input type="button" class="buttonA"  onclick="popUp()" value="담기"/>
    					</td>   					
-   				</tr>
-   				<tr>
-   					<td>
-   					<div id='line'><!--선--></div>
-   					이용약관/기타
-   					</td>
-	   			</tr>
+   				</tr>   				
    				</table>
    		</div>
     <div class="PopUpMaster">
     	<!-- 나만의 옷장 글쓰기  -->
-     	<div id="PopUpCloth">
+     	<div id="PopUpCloth">     	
      	  		<table id="PopUp_table" >
 	   			<tr>
 	   				<td colspan="2">
@@ -240,59 +234,111 @@
 	   			</tr>
 	   			<tr>
 	   				<td>
-	   					날짜 :  <input type="text"  id="Date" value=""/>
+	   					날짜 :  <input type="text"  id="Date" name="Calendar_Date" placeholder="Ex)2016-01-06"/>
 	   			
 	   				</td>
 	   			</tr>
 	   			<tr>
 	   				<td>
-	   					제목 :  <input type="text"  id="Subject" placeholder="Ex)데이트, 월요일 코디"/>
+	   					제목 :  <input type="text"  id="Subject" name="Calendar_Subject" placeholder="Ex)데이트, 월요일 코디"/>
 	   				</td>
 	   			</tr>
 	   			<tr>
 	   				<td align="center">
-	   					<input type="button" value="나만의 옷장으로 담기" onclick="RegistCloth()"/>
+	   					<input type="button" value="나만의 옷장에 담기" onclick="RegistCloth()"/>
 	   					<input type="button" value="취소"  onclick="cancel()"/>			
    					</td>
    				</tr>   			
    			</table>
-  	 </div>
-  	    <!-- 이동 되었습니다 팝업 -->
-	   <div id="PopUp2Cloth">
-	   		<table id="PopUp2_table" >
-	   			<tr>
-	   				<td>
-	   					<b>나만의 옷장으로 이동되었습니다!</b>
-	   				</td>
-	   			</tr>   			
-	   			<tr>
-	   				<td align="center">
-	   					<input type="button" value="계속 보기!" onclick="cancel2()"/>
-	   					<input type="button"  value="옷장 으로!" onclick="location.href='./GoCalender'"/>			
-	   				</td>
-	   			</tr>   			
-	   		</table>
-	   </div>
-   </div>
-
+   			</div>
+   		
+   			<!-- 나만의 옷장이동(캘린더로 보내기) -->   		
+	        <div id="PopUp2Cloth">
+	            <table id="PopUp2_table" >
+	               <tr>
+	                  <td>
+	                     <b>나만의 옷장에 선택하신 의류+일정이 저장 되었습니다.!</b>
+	                     </br>
+	                     <b>나만의 옷장으로 이동하시겠습니까?</b>
+	                  </td>
+	               </tr>            
+	               <tr>
+	                  <td align="center">
+	                     <input type="button" value="계속 보기!" onclick="cancel2()"/>
+	                     <input type="button"  value="나만의 옷장으로 이동" onclick="location.href='./My_Calendar?userId=${sessionScope.userId}'"/>         
+	                  </td>
+	               </tr>            
+	            </table>
+	        </div>  			   			   			  	 	  	    
+   	</div>   
   	</body>
-  	<script>
-	
+  	<script>	
+  	
   	// 코디 담기 버튼실행- 나만의 옷장으로 보내기 팝업 띄우기(날짜/이름작성 팝업창)
-  	function popUp(){
+  	function popUp(){  		
+  		// 나만의 옷장 팝업창 띄우기(캘린더 이동 전)
   		var view = $("#PopUp2Cloth").css("display");
   		if(view=="block"){
   			$("#PopUp2Cloth").css("display", "none");
   		}
-		$("#PopUpCloth").css("display", "block");
-  	}
+		$("#PopUpCloth").css("display", "block");  		
+  	}	
+  	  	
   	// 나만의 옷장에 담기  
-  	function RegistCloth(){
-  			
-  			/* 아작스처리 */
-  	  		$("#PopUp2Cloth").css("display", "block");  			
-  			$("#PopUpCloth").css("display", "none");
-  	}
+  	function RegistCloth(){ 			
+  		
+  	// 동시에 체크한 옷(아웃터, 탑, 팬츠) 데이터+ 제목, 날짜 데이터 담기  		
+		url = "./rest/Put_Cloth";
+		data={};
+		data.Subject = $("input[name='Calendar_Subject']").val();
+		data.Date = $("input[name='Calendar_Date']").val();
+		data.Outer = $("input[name='checked_Outer']:checked").val();
+		data.Top = $("input[name='checked_Top']:checked").val();
+		data.Pants = $("input[name='checked_Pants']:checked").val();
+		data.userId = "${sessionScope.userId}";
+		
+		if(data.Outer==null){
+			data.Outer = "없음";	
+		}
+		if(data.Top==null){
+			data.Top = "없음";
+		}
+		if(data.Pants==null){
+			data.Pants = "없음";
+		}
+		
+		console.log("url:"+url);
+		console.log("제목:"+data.Subject);
+		console.log("날짜:"+data.Date);
+		console.log("외투:"+data.Outer);
+		console.log("상의:"+data.Top); 
+		console.log("하의:"+data.Pants);
+		console.log("유저아이디:"+"${sessionScope.userId}");
+		
+		// 나만의 옷장 팝업 띄우기전 담아둔 데이터들 DB에 담기
+	    ajaxCloth(url, data);
+		
+		$("#PopUp2Cloth").css("display", "block");  			
+		$("#PopUpCloth").css("display", "none");
+	}
+  	
+  	 // 나만의 옷장 데이터 담기 (아작스)
+  	function ajaxCloth(reqUrl, reqData){
+  		console.log("url 체크 : "+reqUrl);  		  		
+  		$.ajax({
+  			url : reqUrl,
+  			type : "post",
+  			data : reqData,
+  			dataType : "json",  		
+  			success : function(d){
+  				alert("성공!");
+  			}, error : function(e){
+  				console.log(e);
+  			}
+  		});
+  	};
+  	
+  	
   	// 나만의 옷장 글쓰기 취소
   	function cancel(){
   		$("#PopUpCloth").css("display", "none");
@@ -341,7 +387,7 @@
 	ToplistCall(TopcurrPage);
 	PantslistCall(PantscurrPage);
 	
-	//외투 뿌리기
+	// 외투 뿌리기
 	function OuterlistCall(OutercurrPage){
 		var url="./rest/CC_list";
 		var data = {};
@@ -351,7 +397,7 @@
 		data.pagePerNum = 10;
 		reqServer(url, data);
 	}
-	//상의 뿌리기
+	// 상의 뿌리기
 	function ToplistCall(TopcurrPage){
 		var url="./rest/CC_list";
 		var data = {};
@@ -361,6 +407,7 @@
 		data.pagePerNum = 10;
 		reqServer(url, data);
 	}
+	
 	//하의 뿌리기
 	function PantslistCall(PantscurrPage){
 		var url="./rest/CC_list";
@@ -425,9 +472,20 @@
 				content +="</tr>"
 							+"<tr>";
 				}
-			content +="<td>"
-						+"<input type='checkbox' value='Cloth'/>" 
-						+"<a href='http://"+list[i].cloth_url+"'>"
+			content +="<td>";
+			if(category_name=="Outer")
+				{
+				content +="<input type='checkbox' value='"+list[i].newfilename+"' name='checked_Outer'/>";
+				}
+			if(category_name=="Top")
+				{
+				content +="<input type='checkbox' value='"+list[i].newfilename+"' name='checked_Top'/>";
+				}
+			if(category_name=="Pants")
+				{
+				content +="<input type='checkbox' value='"+list[i].newfilename+"' name='checked_Pants'/>";
+				}
+				content +="<a href='http://"+list[i].cloth_url+"'>"
 						+"<img width='100' height='100'  alt='메인 코디' src='./resources/upload/"+list[i].newfilename+"'/>"
 						+"</a>"
 						+"</br>"	
@@ -506,8 +564,7 @@
 		
 		$("#PantsAdd").append(content);		
 		}
-
-}
+	}
 	
   	</script>
 </html>

@@ -1,8 +1,9 @@
 package com.project.main.controller;
 
-import java.util.ArrayList;
 import java.util.Map;
+
 import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.project.main.service.ProjectService;
 
 
@@ -28,13 +30,6 @@ public class MainController {
 		logger.info("메인 페이지 요청");
 		return "ioi";
 	}
-
-  //관리자 회원관리 페이지
-	 @RequestMapping(value="/AdminMemberPage")
-	 public String AdminMemberPage(){
-	     logger.info("관리자 회원 관리 페이지");
-	  return "Admin_Manage_Member";
-	 }
 	
 	//회원가입 약관 이동
 	@RequestMapping(value="/joinCheck")
@@ -59,10 +54,10 @@ public class MainController {
 		
 		
 	//이벤트 관리 페이지 이동
-		@RequestMapping(value="/Admin_Manage_Event")
-		public ModelAndView Admin_Manage_Event(@RequestParam Map<String, String> params){
-			logger.info("이벤트 관리 페이지 이동");
-			return service.Admin_Manage_Event(params);
+	@RequestMapping(value="/Admin_Manage_Event")
+	public ModelAndView Admin_Manage_Event(@RequestParam Map<String, String> params){
+		logger.info("이벤트 관리 페이지 이동");
+		return service.Admin_Manage_Event(params);
 	}		
 		
 	//로그인 처리
@@ -261,27 +256,26 @@ public class MainController {
 	return service.Find_Id(params);
 	}
 	
-	// 유저 비번 찾기2(이메일 받아서) - 고급 버젼(찾은 비번 이메일 쏘는거까지)
-	@RequestMapping(value="/FindPw_userEmail")
-	public ModelAndView Find_Pw(@RequestParam Map<String, String> params){
-		logger.info("유저 비번찾기+이메일로 쏴주기2");
+	// 유저 비번 찾기1(입력 아이디 받아서 메일 찾고  찾은 메일로 메일 보내기 실행) - 고급 버젼(찾은 비번 이메일 쏘는거까지)
+	@RequestMapping(value="/Pw_Find")
+	public ModelAndView Pw_FindEmail(@RequestParam Map<String, String> params){
+		logger.info("유저 비번찾기+이메일로 쏴주기");
 	return service.Find_Pw(params);
 	}
 	
-	// 유저 비번 찾기1(입력 아이디 받아서 메일 찾고  찾은 메일로 메일 보내기 실행) - 고급 버젼(찾은 비번 이메일 쏘는거까지)
-	@RequestMapping(value="/Pw_FindEmail")
-	public ModelAndView Pw_FindEmail(@RequestParam Map<String, String> params){
-		logger.info("유저 비번찾기+이메일로 쏴주기1");
-	return service.Find_Pw(params);
+	//관리자 회원관리 페이지
+	@RequestMapping(value="/AdminMemberPage")
+	public ModelAndView AdminMemberPage(){
+		logger.info("관리자 회원 관리 페이지");
+	return service.AdminMemberPage();
 	}
 	
 	//나만의 옷장 페이지 이동(index 에서)
-	@RequestMapping(value="/My_Cloth")
-	public ModelAndView my_Cloth(@RequestParam("userId") String userId){
-		logger.info("나만의 옷장 페이지 요청");
-		logger.info(userId);
-		
-		return service.My_Cloth(userId);
+	@RequestMapping(value="/My_Calendar")
+	public ModelAndView My_Calendar(@RequestParam ("userId") String userId){
+		logger.info("나만의 옷장 캘린더 이동");
+		logger.info("유저아이디:"+userId);		
+		return service.myCloth(userId);
 	}
 	
 	// 사다리 게임 설정값 넘기기

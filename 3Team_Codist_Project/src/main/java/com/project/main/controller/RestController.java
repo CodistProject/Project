@@ -166,4 +166,11 @@ public class RestController {
 		return service.Find_Nick(userId);
 	}
 	
+	// 코디 게시판 -> 나만의 옷장 팝업창 띄우기 -> (중간작업:캘린더에 보낼 모든 데이터 담기)
+	@RequestMapping(value="/Put_Cloth")
+	public @ResponseBody Map<String, Object> Put_Cloth(			
+			@RequestParam Map<String, String> params){
+		logger.info("코디게시판 -> 나만의 옷장 이동 전 팝업(옷+일정 데이터 담기)");
+		return service.Put_Cloth(params);
+	}	
 }

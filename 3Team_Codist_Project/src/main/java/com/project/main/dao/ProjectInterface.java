@@ -6,6 +6,7 @@ import com.project.main.dto.ClothDto;
 import com.project.main.dto.GameDto;
 import com.project.main.dto.MemberInfo;
 import com.project.main.dto.ReplyDto;
+import com.project.main.dto.myClothDto;
 
 
 public interface ProjectInterface {
@@ -95,11 +96,14 @@ public interface ProjectInterface {
 	// 유저 아이디 찾기(유저 이메일 받아서 - 이메일 쏘는거 까지)
 	public String Find_Id(String name, String phone, String userEmail);
 
-	// 유저 비번 찾기(아이디 받아서 비번 찾기)
-	public String FindPw_userEmail(String userId);  
+	// 유저 비번 찾기1(아이디, 이름, 질문답)
+	public String FindPw_userData(String userId1, String userName1, String Pw_Ans);
+	
+	// 유저 비번 찾기2(아이디, 이름, 생년월일)
+	public String FindPw_userData2(String userId2, String userName2, String userBirth);
 
 	// 유저 이메일 찾기(아이디 받아서)
-	public String Find_Email(String user_Id);				
+	public String Find_Email(String userId1);				
 
 	// 댓글 삭제
 	public int repleDel(String reple_idx);
@@ -132,7 +136,17 @@ public interface ProjectInterface {
 	
 	//베스트 게시판 선정
 	public ArrayList<BoardDto> BOARD_BestList(String category_name, int currPage, int pagePerNum);
+	
+	// 코디게시판-> 나만의 옷장 이동 전 팝업시(옷+일정 데이터 담기-DB에)
+	public int Put_Cloth(String join_Idx, String Calendar_Subject, String Calendar_Date, String outer, String top, String pants);
+	
+	// 접속한 유저(세션 아이디 이용) Join_Idx 찾아오기
+	public String Find_JoinIdx(String userId);
 
+	// Join_Idx로 나만의 옷장 데이터 가져오기(옷+일정)
+	public ArrayList<myClothDto> Find_myCloth(String join_Idx);
+
+	
 	
 	
 	
