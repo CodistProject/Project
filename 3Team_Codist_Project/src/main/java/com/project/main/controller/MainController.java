@@ -79,6 +79,7 @@ public class MainController {
 	public String logout(HttpSession session){
 		logger.info("logout 요청");
 		session.removeAttribute("userId");
+		session.removeAttribute("mil");
 		return "redirect:/";
 	}
 	

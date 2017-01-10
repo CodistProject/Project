@@ -187,7 +187,11 @@
  	<select id="Find_Mileage" resultType="com.project.main.dto.MileageDto">
  		SELECT * FROM EVENT_COUPON WHERE USER_ID = #{param1}
   	</select> 	
- 	
+ 		
+ 	<!--마일리지 넣기-->
+ 	<update id="Mileage_put">
+ 		UPDATE EVENT_COUPON SET MILEAGE = #{param2} WHERE USER_ID = #{param1}
+ 	</update>
  	
  	<!--   -->
 </mapper>

@@ -438,6 +438,7 @@ html, body{
             reSetCheckFootPrint();
             var target = $('input[data-node="'+node+'"]');
             var val = target.val();
+        
             
             target.css('display','block');
             $('.ladder-start').css('display','none');            
@@ -447,7 +448,42 @@ html, body{
             	 alert("꽝 입니다");
              }else{
             	 alert(val+" 포인트가 증정되었습니다.");
-             }             
+             }   
+             
+             gamemileage(val);
+             
+         	function gamemileage(val){
+        		var url="./rest/gamemileage";
+        		var data = {};
+        		data.val = val;
+        		data.userId="${sessionScope.userId}";
+        		data.userMileage = ${sessionScope.mil};
+        		if(data.val=="꽝"){
+        			data.val = 0;
+        			console.log("당첨 마일리지:"+data.val);
+        		}
+        		
+        		console.log("당첨 마일리지:"+data.val);
+        		console.log("유저아이디:"+data.userId);
+        		console.log("유저 마일리지:"+data.userMileage);
+        		gamemil(url, data);
+        	}
+        	
+        	function gamemil(url, data){
+        		console.log(url);
+        		$.ajax({
+        			url:url,
+        			type:"post",
+        			data:data,
+        			dataType:"json",
+        			success:function(data){
+        				console.log(data)        				
+        				},error:function(e){
+        						console.log(e)
+        					}
+        		});
+        	}
+             
             return false;                
         }		
 		
@@ -565,8 +601,7 @@ html, body{
         ladder.append(html);
     }
     function resultSetting(){
-         var resultList = LADDER[heightNode-1];
-         console.log(resultList )
+         var resultList = LADDER[heightNode-1];    
 
         var html = '';
          var val0 = "${ladder_Data.select1}";
@@ -603,8 +638,7 @@ html, body{
        		 case 5:
         		var val = val5;
         		break;
-       		 }
-            console.log(val);
+       		 }           
             var x = resultList[i].split('-')[0]*1;
             var y = resultList[i].split('-')[1]*1 + 1;
             var node = x + "-" + y;

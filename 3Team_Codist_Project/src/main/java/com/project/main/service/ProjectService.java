@@ -92,8 +92,8 @@ public class ProjectService {
 			
 			if(inter.login(id, pw) != null){
 				session.setAttribute("userId", id);
-				session.setAttribute("mil",mil);
-				mil=index_Mileage(id);				
+				mil=index_Mileage(id);
+				session.setAttribute("mil",mil.getMileage());
 			}else{
 				mav.addObject("msg","아이디 또는 비밀번호를 확인 하세요");
 			}			
@@ -812,8 +812,21 @@ public class ProjectService {
 				MileageDto mdt = new MileageDto();
 				mdt=inter.Find_Mileage(userId);
 				logger.info(userId);				
-				ModelAndView mav = new ModelAndView();
 				return mdt;
+			}
+
+			public Map<String, Integer> gamemileage(Map<String, String> params) {
+				inter = sqlSession.getMapper(ProjectInterface.class);				
+ 				int val = Integer.parseInt(params.get("val"));
+				String userId = params.get("userId");
+				int userMileage = Integer.parseInt(params.get("userMileage"));
+				int reuslt_Mlieage = userMileage+val; 
+				logger.info("{}",val);
+				logger.info(userId);
+				logger.info("{}",reuslt_Mlieage);
+				Map<String, Integer> map = new HashMap<String, Integer>();
+				map.put("Mileage_put", inter.Mileage_put(userId, reuslt_Mlieage));							
+				return map;
 			}
 }
 	

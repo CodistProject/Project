@@ -116,12 +116,18 @@ public interface ProjectInterface {
 	// 사다리게임에 관한 데이터 찾아오기
 	public GameDto Find_ladderData(String time_event_name);
 
+	//사다리 게임 설정
 	public void Bridge(String timenum, String select1, String select2, String select3, String select4, String select5,
 			String select6);
-
+	
+	//사다리게임 시간 설정
 	public void Time(String time_strat, String time_end);
 
+	//마일리지 찾기
 	public MileageDto Find_Mileage(String user_Id);
+
+	//사다리게임 마일리지 넣기
+	public int Mileage_put(String userId, int reuslt_Mlieage);
 	
 }
 
