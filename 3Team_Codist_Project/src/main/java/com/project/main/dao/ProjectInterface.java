@@ -181,8 +181,6 @@ public interface ProjectInterface {
 	// 마일리지 업데이트(전체 회원 - 관리자모드)
 	public boolean Update_Mileage(String Update_Mileage, String userId);
 	
-	// 이벤트 쿠폰 생성
-	public void updateCoupon(String id, int idx);
 
 	// 이메일 문의 내용에 담을 유저 이메일 찾기(이메일 문의용)
 	public String Find_userEmail(String userId);
