@@ -271,27 +271,58 @@
 		{
 		alert(msg);
 		}
-		// 메일 보내기(아이디찾기 or 비번찾기 or 이메일 문의) 성공관련 메시지 alert 띄우기
-		var msg = "${msg}";
-		var msg1 ="${Find_Id.msg}";
-		var msg2 ="${Find_Pw.msg}";
-		var msg_chk = "1:1문의가 이메일로 전송 되었습니다!";
-		var msg_chk1 = "찾으시는 아이디가 이메일로 전송되었습니다."; 
-		var msg_chk2 = "찾으시는 비밀번호가 이메일로 전송되었습니다.";			
+	// 메일 보내기(아이디찾기 or 비번찾기 or 이메일 문의) 성공관련 메시지 alert 띄우기
+	var msg = "${msg}";
+	var msg1 ="${Find_Id.msg}";
+	var msg2 ="${Find_Pw.msg}";
+	var msg_chk = "1:1문의가 이메일로 전송 되었습니다!";
+	var msg_chk1 = "찾으시는 아이디가 이메일로 전송되었습니다."; 
+	var msg_chk2 = "찾으시는 비밀번호가 이메일로 전송되었습니다.";			
+	
+	if(msg==msg_chk){
+		console.log("1:1 문의 전송 성공 여부 :"+msg);
+		alert(msg);
+	}
+	if(msg1==msg_chk1){
+		console.log("아이디 찾기 메시지 성공 여부:"+msg1);
+		alert(msg1);	
+	}		
+	if(msg2==msg_chk2){
+		console.log("비번 찾기 메시지 성공 여부:"+msg2);
+		alert(msg2);	
+	}		
+	
+	
+	//시간 이벤트 팝업
+	timeevent_pop();
+	
+	function addZero(i) {
+  			 if (i < 10) {
+      		 i = "0" + i;
+ 		  }   		
+ 		  return i;  		  
+	}	
+	
+	function timeevent_pop() {
+		var now = new Date();
+		var h = addZero(now.getHours());
+		var m = addZero(now.getMinutes());
+		var nowTime = h+":"+m;	
+		var start = "${ladder_Data.time_start}";
+		var end = "${ladder_Data.time_end}";
 		
-		if(msg==msg_chk){
-			console.log("1:1 문의 전송 성공 여부 :"+msg);
-			alert(msg);
+		
+		
+		console.log(nowTime);
+		console.log(start);
+		console.log(end);
+		var win;
+		if(nowTime>=start && nowTime<=end){						
+			 win	= window.open("TimeEvent", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=200,left=300,width=600,height=500");
+		}else{					
+			win.close();
 		}
-		if(msg1==msg_chk1){
-			console.log("아이디 찾기 메시지 성공 여부:"+msg1);
-			alert(msg1);	
-		}		
-		if(msg2==msg_chk2){
-			console.log("비번 찾기 메시지 성공 여부:"+msg2);
-			alert(msg2);	
-		}		
-		
-		
+	}
+	
 	</script>
 </html>

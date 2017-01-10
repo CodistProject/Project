@@ -166,7 +166,7 @@
  	<update id="reple_hate">
  		UPDATE total_reple SET reple_hate = reple_hate+1 WHERE reple_idx = #{param1}
  	</update>
- 	
+
  	<!-- 유저 비밀번호 찾기 -->
  	<select id="pw" resultType="String">
  		SELECT PW FROM JOIN_REG WHERE ID = #{param1}
@@ -227,10 +227,25 @@
  		UPDATE TIME_EVENT SET TIMENUM = #{param1} , SELECT1 = #{param2}, SELECT2 = #{param3}, SELECT3 = #{param4}, SELECT4 = #{param5} , SELECT5 = #{param6}, SELECT6 = #{param7}
  	</update>
  	
+ 	<!--사다리 게임 시간값 수정-->
+ 	<update id="Time">
+ 		UPDATE TIME_EVENT SET TIME_START = #{param1} , TIME_END = #{param2}
+ 	</update>
+ 	
  	<!-- 사다리 게임 정보 가져오기 -->
  	<select id="Find_ladderData" resultType="com.project.main.dto.GameDto">
  		SELECT * FROM TIME_EVENT WHERE TIME_EVENT_NAME = #{param1}
  	</select>
+
+ 	<!-- 마일리지 정보 가져오 -->
+ 	<select id="Find_Mileage" resultType="com.project.main.dto.MileageDto">
+ 		SELECT * FROM EVENT_COUPON WHERE USER_ID = #{param1}
+  	</select> 	
+ 		
+ 	<!--마일리지 넣기-->
+ 	<update id="Mileage_put">
+ 		UPDATE EVENT_COUPON SET MILEAGE = #{param2} WHERE USER_ID = #{param1}
+ 	</update>
  	
  	<!-- 베스트 코디 보기 -->
  	<select id="BOARD_BestList" resultType="com.project.main.dto.BoardDto">

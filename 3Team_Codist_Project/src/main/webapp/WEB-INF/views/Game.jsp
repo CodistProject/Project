@@ -280,8 +280,7 @@ html, body{
 
 .start-form{
     width:300px;
-    height: 400px;
-    background-image: url("bg.png") ;
+    height: 400px;    
     background-repeat: no-repeat;
     background-position: 50% 30%;
     margin: 0 auto;
@@ -312,6 +311,7 @@ html, body{
     top: 0;
     left: 0;
 }
+
 		</style>
 	</head>
 	<body>
@@ -321,9 +321,7 @@ html, body{
     <meta charset=utf-8>
     <meta name=description content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <link rel="import" href="http://www.polymer-project.org/components/paper-ripple/paper-ripple.html">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" type="text/css" href=" meterial.css">
+    <link rel="import" href="http://www.polymer-project.org/components/paper-ripple/paper-ripple.html">    
     <script src="./jquery-2.1.3.min.js"></script>
 	<style>
 	input.hide{
@@ -333,7 +331,7 @@ html, body{
 </head>
 <body>
     <div class="landing" id="landing">
-       <div class="start-form">
+       <div class="start-form">       		
             <div class="landing-form">
                 <div class="group">      
                   <input id="mem" type="hidden" name="member" value="${ladder_Data.timenum}" required>
@@ -439,11 +437,56 @@ html, body{
         if(y ==heightNode ){
             reSetCheckFootPrint();
             var target = $('input[data-node="'+node+'"]');
-            target.css('display','block')
-            $('#' + node + "-user").text(userName)
-             working = false;
-            return false;
-        }
+            var val = target.val();
+        
+            
+            target.css('display','block');
+            $('.ladder-start').css('display','none');            
+            $('#' + node + "-user").text(userName);                  
+             working = false;          
+             if(val=="꽝"){
+            	 alert("꽝 입니다");
+             }else{
+            	 alert(val+" 포인트가 증정되었습니다.");
+             }   
+             
+             gamemileage(val);
+             
+         	function gamemileage(val){
+        		var url="./rest/gamemileage";
+        		var data = {};
+        		data.val = val;
+        		data.userId="${sessionScope.userId}";
+        	  	data.userMileage = ${sessionScope.mil};
+		        		if(data.val=="꽝"){
+		        			data.val = 0;
+		        			console.log("당첨 마일리지:"+data.val);
+		        		}
+		        		
+		        		console.log("당첨 마일리지:"+data.val);
+		        		console.log("유저아이디:"+data.userId);
+		        		console.log("유저 마일리지:"+data.userMileage);
+		        		gamemil(url, data);
+        		}
+        	
+        	function gamemil(url, data){
+        		console.log(url);
+        		$.ajax({
+        			url:url,
+        			type:"post",
+        			data:data,
+        			dataType:"json",
+        			success:function(data){
+        				console.log(data)        				
+        				},error:function(e){
+        						console.log(e)
+        					}
+        		});
+        	}
+             
+            return false;                
+        }		
+		
         if(nodeInfo["change"] ){
             var leftNode = (x-1) + "-" +y;
             var rightNode = (x+1) + "-" +y;
@@ -558,8 +601,7 @@ html, body{
         ladder.append(html);
     }
     function resultSetting(){
-         var resultList = LADDER[heightNode-1];
-         console.log(resultList )
+         var resultList = LADDER[heightNode-1];    
 
         var html = '';
          var val0 = "${ladder_Data.select1}";
@@ -596,8 +638,7 @@ html, body{
        		 case 5:
         		var val = val5;
         		break;
-       		 }
-            console.log(val);
+       		 }           
             var x = resultList[i].split('-')[0]*1;
             var y = resultList[i].split('-')[1]*1 + 1;
             var node = x + "-" + y;
@@ -605,7 +646,7 @@ html, body{
             html += '<div class="answer-wrap" style="left:'+left+'"><input type="text" class="hide" value="'+val+'" data-node="'+node+'">';
             html +='<p id="'+node+'-user"></p>'
             html +='</div>'
-        }
+        }       
         ladder.append(html);
     }
 
@@ -744,9 +785,11 @@ html, body{
         }
     }
 
-
-
-});
+    $("#eventclose").click(function(){					
+		self.close();		
+	})
+	
+	});
 </script>
 </body>
 </html>

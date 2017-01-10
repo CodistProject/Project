@@ -52,7 +52,7 @@
 			
 			<tr>
 				<td>	
-				<a class= "winnerclick" href="./TimeEvent">Time Event</a>	
+				<a class= "winnerclick"  href="javascript:TimeEvent();">Time Event</a>	
 				</td>
 			</tr>	
 			<tr>
@@ -88,19 +88,25 @@
 							<td>그래프</td>						
 						</tr>
 					</table>
-				</div>
-				
-			<div class="timeeven">
-				<p>TIME 이벤트</p>
-				<div>					
-				</div>				
+				</div>			
 			</div>			
 			</div>	
 			<input id="eventclose" type="button" value="닫기">		
 		</div>		
 	</body>
 	<script>
-	
+	function TimeEvent()
+	{
+		if("${sessionScope.userId}"!="")
+			{
+			location.href="./TimeEvent";
+			}
+		else
+			{
+			alert("로그인 후 사용 가능합니다.");
+			}
+	 			
+	}
 	// 이벤트 팝업창 닫기
 	$("#eventclose").click(function(){					
 		self.close();		

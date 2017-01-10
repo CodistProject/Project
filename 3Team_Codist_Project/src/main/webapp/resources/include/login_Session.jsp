@@ -11,7 +11,10 @@
 	<body>		
 			<table class="logses">
 				<tr >
-					<td>${sessionScope.userId}님 반갑습니다.</td>		
+					<td>${sessionScope.userId}님 반갑습니다.</td>									
+				</tr>
+				<tr >
+					<td align="right">${sessionScope.mil} 마일리지</td>									
 				</tr>
 				<br/>
 				<tr>

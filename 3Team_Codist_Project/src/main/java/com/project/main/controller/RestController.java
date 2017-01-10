@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.project.main.dto.BoardDto;
 import com.project.main.dto.MemberInfo;
@@ -173,4 +174,12 @@ public class RestController {
 		logger.info("코디게시판 -> 나만의 옷장 이동 전 팝업(옷+일정 데이터 담기)");
 		return service.Put_Cloth(params);
 	}	
+	//사다리 게임 마일리지 넣기
+	@RequestMapping(value="/gamemileage")
+	public @ResponseBody Map<String, Integer> gamemileage(			
+			@RequestParam Map<String, String> params){
+		logger.info("사다리게임 마일리지 보내기");
+		return service.gamemileage(params);
+	}
+	
 }
