@@ -11,7 +11,9 @@
 		<style>
 		#daily_pop{				
 				position:absolute;
-				background-color: #6BADFF;
+				background-color: #F5F5F5;
+				border: 1px solid #bcbcbc;
+				box-shadow: 2px 2px 2px 0px lightgray;
 				z-index:2;
 				width: 400px;
 				height: 200px;				
@@ -22,7 +24,9 @@
 			
 			#tomorrow_pop{				
 				position:absolute;
-				background-color: #E5FF6B;
+				background-color: #F5F5F5;
+				border: 1px solid #bcbcbc;
+				box-shadow: 2px 2px 2px 0px lightgray;
 				z-index:2;
 				width: 400px;
 				height: 200px;				

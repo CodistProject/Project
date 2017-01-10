@@ -101,7 +101,7 @@
 			var content = "";
 			for(var i=0; i<list.length; i++){
 								content +="<tr>"
-											+"<td class='CP1'>"+list[i].board_idx+"</td>"
+											+"<td class='CP1' height='50px'>"+list[i].board_idx+"</td>"
 							if(list[i].newfilename != null){
 								content += "<td class='CP2'>" 
 										    +"<img width='15px' src='resources/img/default.jpg'/>";
@@ -121,8 +121,8 @@
 											}
 											
 								content +="</td>" 
-											+"<td class='CP4'>"+list[i].nickName+"</td>"
-											+"<td class='CP5'>"+list[i].bhit+"</td>"
+											+"<td class='CP4'  style='text-align: center'>"+list[i].nickName+"</td>"
+											+"<td class='CP5' style='text-align: center'>"+list[i].bhit+"</td>"
 											+"</tr>";
 			}
 			$("#list").empty();

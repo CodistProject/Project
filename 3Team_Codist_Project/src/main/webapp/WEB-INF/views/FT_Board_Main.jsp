@@ -290,7 +290,7 @@
 		if(url == "./rest/Board_list"){
 		for(var i=0; i<list.length; i++){
 				content +="<tr>"
-							+"<td id='Idx"+i+"' class='Ft1'>"+list[i].board_idx+"</td>"
+							+"<td id='Idx"+i+"' class='Ft1' height='100px'>"+list[i].board_idx+"</td>"
 							if(list[i].newfilename != null){
 								content += "<td>" 
 										    +"<img width='15px' src='resources/img/default.jpg'/>";
@@ -298,7 +298,7 @@
 							else
 								{
 								content +="<td class='Ft2'>"
-										    +"<img width='150' height='50'  alt='메인 코디' src='./resources/upload/"+list[i].newfilename+"'/>";
+										    +"<img width='150' height='100px'  alt='메인 코디' src='./resources/upload/"+list[i].newfilename+"'/>";
 								}
 				content +=	"</td>"
 							+"	<td>"
@@ -330,15 +330,17 @@
 		if(url == "./rest/FT_Board_Detail"){
 			content +="내용: "+list.content
 				   		+"<div id='LikeGO'>"
-				   		+"<a href=javascript:UP_like('"+list.board_idx+"')>"
-				   		+"<img width='30px' height='30px' alt='조아요' src='./resources/img/like.PNG'> "
+				   		+"<br/>"
+				   		+"<center>"
+				   		+"<a href=javascript:UP_like('"+list.board_idx+"') style='text-decoration:none'>"
+				   		+"<img width='20px' height='20px' alt='조아요' src='./resources/img/like.PNG'> "
 				   		+"</a>"
 				   		+"<br/>"
-				   		+"<span id='LIKE'>"
+				   		+"<span id='LIKE'>추천 "
 				   		+list.ft_like
 				   		+"</span>"
+				   		+"</center>"
 				   		+"</div>"
-						+"</br>"
 						+"<table class=Ft_board3>"
 						+"<tr>"
 						+"<td class='user' width='60px' style='background-color:#FBFEC8'>"
