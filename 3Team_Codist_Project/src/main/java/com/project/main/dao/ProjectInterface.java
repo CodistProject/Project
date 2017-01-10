@@ -114,7 +114,7 @@ public interface ProjectInterface {
 	public ArrayList<ReplyDto> FindId(String idx);
 
 	//코디 게시판 글쓰기
-	public void CodiBoard_Writes(String filename, String category_name, String newfilename);
+	public void CodiBoard_Writes(String subject, String sub_subject, String cBfilename, String cBnewfilename);
 
 	// 사다리게임에 관한 데이터 찾아오기
 	public GameDto Find_ladderData(String time_event_name);

@@ -26,7 +26,7 @@ public class MainController {
 	@RequestMapping(value="/")
 	public String home(){
 		logger.info("메인 페이지 요청");
-		return "ioi";
+		return "CodiBoard_Write";
 	}
 
   //관리자 회원관리 페이지
@@ -241,9 +241,10 @@ public class MainController {
 	
 	//코디게시판  글쓰기
 	@RequestMapping(value="/CodiBoard_Writes")
-	public ModelAndView CodiBoard_Writes(HttpSession session, MultipartHttpServletRequest multi){				
+	public ModelAndView CodiBoard_Writes( MultipartHttpServletRequest multi){				
 	logger.info("글쓰기 요청");
-	return null;//
+	
+	return service.CodiBoard_Writes(multi);
 	}	
 	
 	// 이벤트 팝업창 띄우기

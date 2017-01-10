@@ -408,65 +408,92 @@ public class ProjectService {
 		return mav;		
 		}
 	
-	/*//코디 글쓰기
-	public ModelAndView CodiBoard_Writes(MultipartHttpServletRequest multi, HttpSession session)  {				
+	//코디 글쓰기
+	public ModelAndView CodiBoard_Writes(MultipartHttpServletRequest multi)  {				
 		inter = sqlSession.getMapper(ProjectInterface.class);			
 		ModelAndView mav = new ModelAndView();			
-		ArrayList filenames = new ArrayList();
-		ArrayList category_names = new ArrayList();			
-		String userId = (String) session.getAttribute("userId");				
-		String filenames[] =new String[4];
-		String category_names[] =new String[4];				
-			
-			
-		if(!(multi.getParameter("filename1").equals(""))){
-			filenames.add(multi.getParameter("filename1"));
-			category_names.add("코디메인");				
+		String CBfilename=multi.getParameter("filename1");
+		String subject=multi.getParameter("CBname");
+		String sub_subject=multi.getParameter("CBname");
+		String CBnewfilename = "";		
+		logger.info(CBfilename +"/"+subject+"/"+sub_subject);
+		
+		String Outterfilename=multi.getParameter("filename2");
+		String Outtercloth_name=multi.getParameter("OutterCloth");
+		String Outterreal_name =multi.getParameter("Outtername");
+		String Outtercloth_detail=multi.getParameter("Outterplus");
+		String Outtercloth_cloth_url=multi.getParameter("OutterUrl");
+		String Outternewfilename = "";		
+		logger.info(Outterfilename+"/"+Outtercloth_name+"/"+Outterreal_name+"/"+Outtercloth_detail+"/"+Outtercloth_cloth_url);
+		
+		String Topfilename=multi.getParameter("filename3");
+		String Topcloth_name=multi.getParameter("TopCloth");
+		String Topreal_name =multi.getParameter("Topname");
+		String Topcloth_detail=multi.getParameter("Topplus");
+		String Topcloth_cloth_url=multi.getParameter("TopUrl");
+		String Topnewfilename ="";
+		logger.info(Topfilename+"/"+Topcloth_name+"/"+Topreal_name+"/"+Topcloth_detail+"/"+Topcloth_cloth_url);
+	
+		String Pantsfilename=multi.getParameter("filename4");
+		String Pantscloth_name=multi.getParameter("PantsCloth");
+		String Pantsreal_name =multi.getParameter("Pantsname");
+		String Pantscloth_detail=multi.getParameter("Pantsplus");
+		String Pantscloth_cloth_url=multi.getParameter("PantsUrl");
+		String Pantsnewfilename ="";
+		logger.info(Pantsfilename+"/"+Pantscloth_name+"/"+Pantsreal_name+"/"+Pantscloth_detail+"/"+Pantscloth_cloth_url);
+		//코디 newfilename 추출
+		if(CBfilename.equals("")){
+			logger.info("파일이 없어요");
+		}else {
+			//파일 업로드 
+			logger.info("파일 업로드");
+			UploadFile upload = new UploadFile();
+			CBnewfilename = upload.fileUp(multi, CBfilename);
 		}
-		if(!(multi.getParameter("filename2").equals(""))){
-			filenames.add(multi.getParameter("filename2"));
-			category_names.add("외투");
+		logger.info(CBnewfilename);
+		
+		//외투 newfilename 추출
+		if(Outterfilename.equals("")){
+			logger.info("파일이 없어요");
+		}else {
+			//파일 업로드
+			logger.info("파일 업로드");
+			UploadFile upload = new UploadFile();
+			Outternewfilename = upload.fileUp(multi, Outterfilename);
 		}
-		if(!(multi.getParameter("filename3").equals(""))){
-			filenames.add(multi.getParameter("filename3"));
-			category_names.add("상의");
+		logger.info(Outternewfilename);
+		
+		//상의 newfilename 추출
+		if(Topfilename.equals("")){
+			logger.info("파일이 없어요");
+		}else {
+			//파일 업로드
+			logger.info("파일 업로드");
+			UploadFile upload = new UploadFile();
+			Topnewfilename = upload.fileUp(multi, Topfilename);
 		}
-		if(!(multi.getParameter("filename4").equals(""))){
-			filenames.add(multi.getParameter("filename4"));
-			category_names.add("하의");
+		logger.info(Topnewfilename);
+		
+		//하의 newfilename 추출
+		if(Pantsfilename.equals("")){
+			logger.info("파일이 없어요");
+		}else {
+			//파일 업로드
+			logger.info("파일 업로드");
+			UploadFile upload = new UploadFile();
+			Pantsnewfilename = upload.fileUp(multi, Pantsfilename);
 		}
-			
-						
-			for(int i=0; i< filenames.size();i++)	{			
-			String category_name = "";
-			String newfilename = "";	
-			String filename = "";
-			
-			filename = filenames.get(i).toString();			
-			category_name = category_names.get(i).toString();	
-			
-				//파일 업로드
-				logger.info("파일 업로드");
-				CodiUploadFile upload = new CodiUploadFile();
-				newfilename = upload.fileUp(multi, filename);			
-					
-			newfilename = upload.fileUp(multi, filename);		
-					
-			inter.CodiBoard_Writes(filename, category_name, newfilename);
-			logger.info(filename);
-			logger.info(category_name);
-			logger.info(newfilename);					
-			}
-			
-			String page = "CodiBoard_Main";
-			String msg = "로그인을 해주세요.";
-			
-			
-			mav.addObject("msg",msg);
-			mav.setViewName(page);
-			
-			return mav;					
-		}		*/
+		logger.info(Pantsnewfilename);
+	/*	//메인 코디 등록
+		inter.CodiBoard_Writes(subject, sub_subject,CBfilename,CBnewfilename);
+		//아우터 등록
+		inter.CodiBoard_Writes(Outtercloth_name, Outterreal_name,Outtercloth_detail,Outterfilename,Outternewfilename);
+		//상의 등록
+		inter.CodiBoard_Writes(Topcloth_name, Topreal_name,Topcloth_detail,Topfilename,Topnewfilename);
+		//하의 등록
+		inter.CodiBoard_Writes(Pantscloth_name, Pantsreal_name,Pantscloth_detail,Pantsfilename,Pantsnewfilename);*/
+		return null;
+	}		
 	
 	//게시판 리스트 보여주기(Cody Board 제외)
 	public Map<String, Object> Board_list(Map<String, String> params) {
