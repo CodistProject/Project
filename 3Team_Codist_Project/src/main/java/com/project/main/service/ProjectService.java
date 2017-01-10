@@ -1049,41 +1049,41 @@ public class ProjectService {
 		return mav;
 	}
 	
-	//게시물 삭제
-	public ModelAndView BoardDelete(String board_idx,String category_name) {
-		inter = sqlSession.getMapper(ProjectInterface.class);
-		ModelAndView mav= new ModelAndView();
-		String msg="삭제에 실패 하셨습니다.";
-		String page="ioi";
-		if(inter.BoardDelete(board_idx)==1)
-		{
-			 msg="삭제에 성공 하셨습니다.";
-			 switch(category_name)
-			 {
-			 case "FT":
-					page="FT_Board_Main";
-				break;
-				
-				case "CP":
-					page="Coplz_Main";
-				break;
+		//게시물 삭제
+		public ModelAndView BoardDelete(String board_idx,String category_name) {
+			inter = sqlSession.getMapper(ProjectInterface.class);
+			ModelAndView mav= new ModelAndView();
+			String msg="삭제에 실패 하셨습니다.";
+			String page="ioi";
+			if(inter.BoardDelete(board_idx)==1)
+			{
+				 msg="삭제에 성공 하셨습니다.";
+				 switch(category_name)
+				 {
+				 case "FT":
+						page="FT_Board_Main";
+					break;
 					
-				case 	"QnA":
-					page="QnABoard_Main";
-				break;
-				
-				case "Alter":
-					page="AlterBoard_Main";
-				break;
-			 }
+					case "CP":
+						page="Coplz_Main";
+					break;
+						
+					case 	"QnA":
+						page="QnABoard_Main";
+					break;
+					
+					case "Alter":
+						page="AlterBoard_Main";
+					break;
+				 }
+			}
+		
+			mav.addObject("msg",msg);
+			mav.setViewName(page);
+			return mav;
 		}
 
-		mav.addObject("msg",msg);
-		mav.setViewName(page);
-		return mav;
-	}
-
-		//사다리 게임에 시간 데이터를 인덱스로 보내기
+			//사다리 게임에 시간 데이터를 인덱스로 보내기
 			public ModelAndView TimePop(Map<String, String> params) {
 				inter = sqlSession.getMapper(ProjectInterface.class);			
 				String time_event_name = "사다리";		
@@ -1114,8 +1114,9 @@ public class ProjectService {
 				logger.info(userId);				
 				return mdt;
 			}
-
-			public Map<String, Integer> gamemileage(Map<String, String> params) {
+			
+			//게임 마일리지
+			public Map<String, Integer> gamemileage(Map<String, String> params, HttpSession session) {
 				inter = sqlSession.getMapper(ProjectInterface.class);				
  				int val = Integer.parseInt(params.get("val"));
 				String userId = params.get("userId");
@@ -1124,10 +1125,14 @@ public class ProjectService {
 				logger.info("{}",val);
 				logger.info(userId);
 				logger.info("{}",reuslt_Mlieage);
+				
+				session.setAttribute("mil",reuslt_Mlieage);
 				Map<String, Integer> map = new HashMap<String, Integer>();
-				map.put("Mileage_put", inter.Mileage_put(userId, reuslt_Mlieage));							
+				map.put("Mileage_put", inter.Mileage_put(userId, reuslt_Mlieage));
 				return map;
 			}
+			
+			
 }
 	
 	

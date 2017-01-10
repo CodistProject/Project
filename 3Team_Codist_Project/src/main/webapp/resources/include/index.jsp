@@ -9,164 +9,7 @@
 		 <link rel="stylesheet" type="text/css" href="resources/css/main.css"/>
 		 <link rel="stylesheet" type="text/css" href="resources/css/button.css"/>
 		<style>
-			@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
-			html, body, h1, h2, h3, h4, h5, h6, li, p, table {
-				font-family: 'Jeju Gothic', serif;
-				font-size: 13pt;
-			}	
-			#head {
-				padding : 10px;
-				margin-left: 10px;
-				margin-right: 10px;
-				height: 80px;			
-				text-align: center;
-			}
-			
-			#weather {
-				position: fixed;
-				top: 15%;
-				clear: left;
-				float: left;
-				margin-left: 10px;
-				width: 120px;
-				height: 800px;
-				font: bold; 				
-			}
-			
-			#weather a {
-				padding-top: 5px;
-				display: block;
-				height: 40px;
-				text-align: center;				
-				text-decoration: none;												
-			}
-			
-			#weather a.top:hover {
-				background: #6BADFF;
-			}
-			
-			#weather a.middle:hover {
-				background: #6BFF7C;
-			}
-			
-			#weather a.bottom:hover {
-				background: #E5FF6B;
-			}
-			
-			#weather a:visited {
-				color: black;
-			}
-			
-			#extra {
-				position: absolute;			
-				left: 1000px;
-				width: 200px;
-				height: 800px;				
-			}
-			
-			#extra a.top {
-				display: block;
-				background: #6BADFF;
-				height: 20px;
-				text-align: center;
-				font-weight: bold;
-				color: #505050;
-				text-decoration: none;
-			}
-			
-			#extra a.middle {
-				display: block;
-				background: #6BFF7C;
-				height: 20px;
-				text-align: center;
-				font-weight: bold;
-				color: #505050;
-				text-decoration: none;
-			}
-			
-			#extra a.bottom {
-				display: block;
-				background: #E5FF6B;
-				height: 20px;
-				text-align: center;
-				font-weight: bold;
-				color: #505050;
-				text-decoration: none;
-			}
-			
-			#extra p {
-				padding-left: 5px;
-				padding-right: 5px;
-			}	
-			
-			a.board{
-			text-decoration: none;
-			}
-			a.a2{
-			text-decoration: none;
-		    color: black;
-			}
-			
-			#menu {				
-				margin-left: 130px;
-				margin-right: 130px;				
-				width: 850px;
-				height: 100px;												
-			}
-			.menuTd:hover{
-				background: #6BADFF;
-				font-weight: bold;
-			}
-			
-			.menuTd:visited{
-			color: black;
-			}
-			
-			table.menu{
-				width: 100%;				
-				border-collapse: collapse;
-				text-align: center;
-			}
-			
-			tr.menu, td.menu{
-				/* background-color: aqua; */
-			}
-			
-			table.serch{
-				width: 100%;
-				border: 1px solid;
-				border-collapse: collapse;				
-			}
-			table.serch tr{
-				border: 1px solid;
-			}
-			
-			table.serch td{
-				border: 1px solid;
-				padding: 5px;
-			}
-			/* div는 class를 content */
-			.content{				
-				margin-left: 130px;
-				margin-right: 130px;				
-				width: 840px;
-			}
-			
-			#ask{
-				border: 1px solid;
-				height: 150px;
-			}
-			
-			#ask1{
-				text-align: center;
-			}
-			
-			#askBox{
-				border: white;				
-				resize:none;
-			}
-			
-			#daily_pop{				
+		#daily_pop{				
 				position:absolute;
 				background-color: #6BADFF;
 				z-index:2;
@@ -202,6 +45,25 @@
 			
 			#tomwwe{
 				float: left;
+			}
+			.content{				
+				margin-left: 130px;
+				margin-right: 130px;				
+				width: 840px;
+			}
+			
+			#ask{
+				border: 1px solid;
+				height: 150px;
+			}
+			
+			#ask1{
+				text-align: center;
+			}
+			
+			#askBox{
+				border: white;				
+				resize:none;
 			}
 		</style>
 	</head>

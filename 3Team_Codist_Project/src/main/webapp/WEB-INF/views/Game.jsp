@@ -451,6 +451,7 @@ html, body{
              }   
              
              gamemileage(val);
+            //마일리지 업데이트
              
          	function gamemileage(val){
         		var url="./rest/gamemileage";
@@ -477,7 +478,7 @@ html, body{
         			data:data,
         			dataType:"json",
         			success:function(data){
-        				console.log(data)        				
+	        				console.log(data)
         				},error:function(e){
         						console.log(e)
         					}
