@@ -19,7 +19,7 @@
 				margin-left: 10px;
 				width: 120px;
 				height: 800px;
-				font: bold; 				
+				font: bold; 	
 			}
 			#weather a {
 				padding-top: 5px;
@@ -28,7 +28,7 @@
 				text-align: center;				
 				text-decoration: none;				
 			}
-			
+			/* 
 			#weather a.top:hover {
 				background: #6BADFF;
 			}
@@ -40,7 +40,7 @@
 			#weather a.bottom:hover {
 				background: #E5FF6B;
 			}
-			
+			 */
 			#weather a:visited {
 				color: black;
 			}

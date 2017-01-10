@@ -6,21 +6,13 @@
   		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   		<title>마일리지</title>
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="resources/css/button.css"/>
 		<style>
-		/* 	table {
-				text-align: center;
-				
-				} */
 		#info{
 				width: 490px;
-                
-               
                 border-style: solid;
-                
                 padding: 25px;
                 text-align: left;
-                
-
 		}
 		#total{
 			position: absolute;
@@ -57,7 +49,7 @@
 		 	           		</tr>
 				     <tr>
             			<td class="rig">
-            				<input type="button" onclick="" value="마일리지 사용"/>
+            				<input type="button" class="bt" onclick="" value="마일리지 사용"/>
             			</td>
             		</tr>
 				            </table>
