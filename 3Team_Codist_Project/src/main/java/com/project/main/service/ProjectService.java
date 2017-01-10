@@ -361,7 +361,17 @@ public class ProjectService {
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		logger.info(userId);
 		inter.withdrawa(userId);		
-		mav.setViewName("redirect:/logout");				
+		mav.setViewName("redirect:/logout");		
+		return mav;
+	}
+	
+	// 강제 탈퇴하기
+	public ModelAndView withdrawa2(String userId) {
+		ModelAndView mav = new ModelAndView();
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		logger.info("강제 탈퇴시킬 유저 아이디:"+userId);
+		inter.withdrawa(userId);		
+		mav.setViewName("Admin_Manage_Member");		
 		return mav;
 	}
 	
@@ -1051,9 +1061,10 @@ public class ProjectService {
 	
 
 	// 마일리지+쿠폰 리스트 보기
-	public Map<String, ArrayList<MileageDto>> Mileage_list(Map<String, String> params) {
+	public Map<String, ArrayList<MileageDto>> Mileage_list() {
 		inter = sqlSession.getMapper(ProjectInterface.class);
-		Map<String, ArrayList<MileageDto>> map = new HashMap<String, ArrayList<MileageDto>>();
+		Map<String, ArrayList<MileageDto>> map = 
+				new HashMap<String, ArrayList<MileageDto>>();
 		map.put("list", inter.Mileage_List());
 		return map;
 	}	
@@ -1135,6 +1146,27 @@ public class ProjectService {
 				logger.info("{}",reuslt_Mlieage);
 				Map<String, Integer> map = new HashMap<String, Integer>();
 				map.put("Mileage_put", inter.Mileage_put(userId, reuslt_Mlieage));							
+				return map;
+			}
+
+			// 회원관리 리스트(관리자모드)
+			public Map<String, ArrayList<MemberInfo>> Member_list() {
+				inter = sqlSession.getMapper(ProjectInterface.class);
+				Map<String, ArrayList<MemberInfo>> map = new HashMap<String, ArrayList<MemberInfo>>();
+				map.put("list", inter.Member_list());
+				return map;
+			}
+
+			// 마일리지 업데이트(전체 - 관리자모드)
+			public Map<String, String> Upate_Mileage(Map<String, String> params) {
+				inter = sqlSession.getMapper(ProjectInterface.class);
+				String userId = params.get("userId");
+				Map<String, String> map = new HashMap<String, String>();
+				String msg ="";				 
+				if(inter.Update_Mileage(userId)){
+					msg = "업데이트가 적용되었습니다!.";
+				}
+				map.put("msg", msg);
 				return map;
 			}
 }

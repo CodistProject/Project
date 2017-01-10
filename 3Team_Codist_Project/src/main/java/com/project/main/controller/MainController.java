@@ -201,6 +201,12 @@ public class MainController {
 		logger.info("삭제 : {}",userId);
 		return service.withdrawa(userId);
 	}
+	
+	@RequestMapping(value = "/withdrawa2")
+	public ModelAndView withdrawa2(@RequestParam("userId") String userId){
+		logger.info("강제 탈퇴기능");
+		return service.withdrawa2(userId);
+	}
 
 	//코디 글쓰기 게시판 Form 이동 + 닉네임 찾기	
 	@RequestMapping(value="/CodiBoard_Write")
@@ -307,6 +313,19 @@ public class MainController {
 	public ModelAndView Time(@RequestParam Map<String, String> params){		
 		logger.info("사다리 게임 시간값 넘기기");		
 		return service.Time(params);
+	}	
+	
+	// 마일리지+쿠폰 관리 페이지 이동
+	@RequestMapping(value="/Admin_Mileage")
+	public String Admin_Mileage(){		
+		logger.info("마일리지+쿠폰 관리 페이지 이동");		
+		return "Admin_Manage_Mileage";
 	}
 	
+	// 회원 관리 리스트 페이지 이동
+	@RequestMapping(value="/Admin_Member")
+	public String Admin_Member(){		
+		logger.info("관리자 회원관리 리스트 페이지 이동");		
+		return "Admin_Manage_Member";
+	}
 }
