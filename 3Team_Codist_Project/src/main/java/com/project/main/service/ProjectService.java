@@ -399,18 +399,23 @@ public class ProjectService {
 		logger.info(nickName+" / "+ subject+" / "+ content+" / "+filename+" / "+ newfilename+" / "+category_name);
 		inter.Board_Write(nickName, subject, content,filename, newfilename,category_name);		
 		String page = "";
+		String msg="";
 			if(category_name.equals("QnA")){
 				page = "QnABoard_Main";
+				msg="QnA글쓰기에 성공 하셨습니다.";
 			}else if(category_name.equals("AT")){
 				page = "AlterBoard_Main";
+				msg="Alter글쓰기에 성공 하셨습니다.";
 			}else if(category_name.equals("FT")){
 				page = "FT_Board_Main";
+				msg="FT글쓰기에 성공 하셨습니다.";
 			}else if(category_name.equals("CP")){
 				page = "Coplz_Main";
-			}else if(category_name.equals("CB")){
-				page = "CodiBoard_Main";
+				msg="CP글쓰기에 성공 하셨습니다.";
 			}
-		return null;
+			mav.addObject("msg",msg);
+			mav.setViewName(page);
+		return mav;
 }
 
 	
