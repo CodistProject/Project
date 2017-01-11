@@ -261,5 +261,13 @@ public class RestController {
 		return service.Findweather();
 	}
 	
+	//이벤트 당첨자 추천
+	@RequestMapping(value="/EventupLike")
+	public @ResponseBody Map<String, String> EventupLike(
+			@RequestParam Map<String, String> params){
+		logger.info("날씨 페이지");
+		return service.EventupLike(params);
+	}
+	
 	
 }

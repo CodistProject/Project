@@ -1372,6 +1372,21 @@ public class ProjectService {
 				
 				return map;
 			}
+			//일일이벤트 당첨자 후보
+			public Map<String, String> EventupLike(Map<String, String> params) {
+				inter = sqlSession.getMapper(ProjectInterface.class);
+				Map<String, String> map= new HashMap<String, String>();
+				String userId=params.get("userId");
+				String selection_name=params.get("selection_name");
+				logger.info(selection_name);
+				inter.EventUplike(selection_name);
+				if(inter.EventupLike(userId,selection_name)==1)
+				{
+					map.put("msg","추천합시다.");
+				}
+				
+				return map;
+			}
 		
 			
 }

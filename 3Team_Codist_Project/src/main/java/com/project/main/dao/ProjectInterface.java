@@ -205,6 +205,12 @@ public interface ProjectInterface {
 	//일일 이벤트 찾기
 	public ArrayList<SelectionDto> EventCall();
 	
+	//일일 이벤트 좋아요 올리기
+	public void EventUplike(String selection_name);
+	
+	//당첨자 후보 업데이트 
+	public int EventupLike(String userId, String selection_name);
+	
 	
 	
 }

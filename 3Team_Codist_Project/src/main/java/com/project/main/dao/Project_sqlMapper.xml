@@ -226,14 +226,27 @@
  	<select id="Find_Email" resultType="String">
  		SELECT EMAIL FROM JOIN_REG WHERE ID = #{param1}
  	</select>
+ 	
  	<!-- 일일 이벤트 -->
  	<insert id="DailyEvent">
  		INSERT INTO SELECTION(IDX,SELECTION_TYPE,SELECTION_NAME,SELECTION_LIKE) VALUES(SEQ_SELECTION.NEXTVAL,'VS이벤트',#{param1},0)
  	</insert>
+ 	
  	<!-- 일일 이벤트 찾기 -->
  	<select id="EventCall" resultType="com.project.main.dto.SelectionDto">
  		SELECT IDX,SELECTION_TYPE,SELECTION_NAME,SELECTION_LIKE FROM SELECTION
  	</select>
+ 	
+	<!-- 일일 이벤트 좋아요 올리기-->
+	<update id="EventUplike">
+		UPDATE SELECTION SET SELECTION_LIKE = SELECTION_LIKE+1 WHERE SELECTION_NAME = #{param1}
+	</update>
+	
+	<!--당첨자 후보 업데이트   -->
+	<insert id="EventupLike">
+		INSERT INTO CANDIDATE VALUES(SEQ_CANDIDATE.NEXTVAL,#{param2},#{param1})
+	</insert>
+ 	
  	 <!--사다리 게임 설정값 수정-->
  	<update id="Bridge">
  		UPDATE TIME_EVENT SET TIMENUM = #{param1} , SELECT1 = #{param2}, SELECT2 = #{param3}, SELECT3 = #{param4}, SELECT4 = #{param5} , SELECT5 = #{param6}, SELECT6 = #{param7}
