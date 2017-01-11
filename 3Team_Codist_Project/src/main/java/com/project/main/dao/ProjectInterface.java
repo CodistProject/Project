@@ -8,6 +8,8 @@ import com.project.main.dto.MemberInfo;
 import com.project.main.dto.MileageDto;
 import com.project.main.dto.NoteDto;
 import com.project.main.dto.ReplyDto;
+import com.project.main.dto.SelectionDto;
+import com.project.main.dto.WeatherDto;
 import com.project.main.dto.myClothDto;
 
 
@@ -181,12 +183,26 @@ public interface ProjectInterface {
 	// 마일리지 업데이트(전체 회원 - 관리자모드)
 	public boolean Update_Mileage(String Update_Mileage, String userId);
 	
-	// 이벤트 쿠폰 생성
-	public void updateCoupon(String id, int idx);
-
 	// 이메일 문의 내용에 담을 유저 이메일 찾기(이메일 문의용)
 	public String Find_userEmail(String userId);
-		
+	
+	//날씨 넣기(오늘)
+	public void Weather(String weather);
+	
+	//날씨 넣기(내일)
+	public void Weather2(String weather);
+	
+	//날씨 찾기
+	public WeatherDto Findweather();
+	
+	//일일 이벤트 넣기
+	public int DailyEvent(String file1);
+	
+	//일일 이벤트 찾기
+	public ArrayList<SelectionDto> EventCall();
+	
+	
+	
 }
 
 

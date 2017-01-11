@@ -17,6 +17,8 @@ import com.project.main.dto.BoardDto;
 import com.project.main.dto.MemberInfo;
 import com.project.main.dto.MileageDto;
 import com.project.main.dto.ReplyDto;
+import com.project.main.dto.SelectionDto;
+import com.project.main.dto.WeatherDto;
 import com.project.main.service.ProjectService;
 
 @Controller("RestController")
@@ -190,8 +192,23 @@ public class RestController {
 		logger.info("회원 관리 리스트");
 		return service.Member_list();
 	}	
-
-	//사다리 게임 마일리지 넣기
+	
+	// 일일이벤트
+	@RequestMapping(value="/DailyEvent")
+	public @ResponseBody Map<String, String> DailyEvent(
+			@RequestParam Map<String, String> params){
+		logger.info("일일이벤트");
+		return service.DailyEvent(params);
+	}
+		
+	// 일일 이벤트 찾기
+	@RequestMapping(value="/EventCall")
+	public @ResponseBody Map<String, ArrayList<SelectionDto>> EventCall()
+	{
+		logger.info("일일이벤트찾기");
+		return service.EventCall();
+	}
+	//사다리 게임 마일리지 넣기(시간이벤트)
 	@RequestMapping(value="/gamemileage")
 	public @ResponseBody Map<String, Integer> gamemileage(			
 			@RequestParam Map<String, String> params,HttpSession session){
@@ -230,4 +247,19 @@ public class RestController {
 		logger.info("마일리지 업데이트");
 		return service.Upate_Mileage(params);
 	}
+	// 날씨 페이지
+	@RequestMapping(value="/Weather")
+	public @ResponseBody Map<String, String> Weather(			
+			@RequestParam Map<String, String> params){
+		logger.info("날씨 페이지");
+		return service.Weather(params);
+	}
+	// 날씨 페이지가져오기
+	@RequestMapping(value="/Findweather")
+	public @ResponseBody Map<String, WeatherDto> Weather(){
+		logger.info("날씨 페이지");
+		return service.Findweather();
+	}
+	
+	
 }

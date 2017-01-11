@@ -142,13 +142,14 @@
 			<div id=tomwwe>
 			 날씨
 			</div>
-			<div id="codi1">
+			<div id="codi2">
 			코디
 			</div>		
 		</div>		
 	</body>
 	<script>	
 	sendNote();
+	weather();
 	//쪽지 등록
 	function RegistNote()
 	{
@@ -165,6 +166,13 @@
 			{
 		ajaxCall(url, data);	
 			}
+	}
+	//날씨가져오기
+	function weather()
+	{
+		var url="./rest/Findweather";
+		var data={};
+		ajaxCall(url, data);	
 	}
 	
 	//알람
@@ -273,23 +281,33 @@
 					if(reqUrl=="./rest/Email"){									
 						alert("문의하신 내용이 이메일 전송이 완료되었습니다.");
 					}
-					if(reqUrl="./rest/countNote"){
+					if(reqUrl=="./rest/countNote"){
 						var nowNoteCnt=data.count;
 						console.log("현재 쪽지"+nowNoteCnt);
-						if(nowNoteCnt!=0 &&"${sessionScope.userId}=='ADMIN'"){
+						if(nowNoteCnt!=0 &&"${sessionScope.userId}"=='ADMIN'){
 							$("#noteImg").css("display","block");
 							$("#noteImg").html("!!!"+nowNoteCnt+"개의 쪽지가 존재합니다!");
 						}else{
 							$("#noteImg").css("display","none");
 						}
 					}
-					if(reqUrl="./rest/RegistNote")
+					if(reqUrl=="./rest/RegistNote")
 						{
 						console.log(data.msg);
 						if(data.msg==1)
 							{
 							alert("관리자에게 쪽지가 전송 되었습니다.!");
 							}
+						}
+					if(reqUrl=="./rest/Findweather")
+						{
+						console.log(data.weather.dailycody);
+						var content = "<img width='250' height='200px'  alt='날씨 코디' src='./resources/upload/"+data.weather.dailycody+"'/>";
+						$("#codi1").empty();
+						$("#codi1").append(content);
+						var content2 = "<img width='250' height='200px'  alt='날씨 코디' src='./resources/upload/"+data.weather.tomrrowCody+"'/>";
+						$("#codi2").empty();
+						$("#codi2").append(content2);
 						}
 				}, error : function(e){
 					console.log("에러");

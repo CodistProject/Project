@@ -17,7 +17,7 @@
 			}
 			#popup{		
 				padding: 10px;			
-				width: 450px;
+				width: 500px;
 				height: 550px;
 				background-color:white;
 				border: 1px solid gray;			
@@ -37,38 +37,34 @@
 			}
 			.winnerclick{
 				text-decoration: none;
+			}
+			#Event
+			{
+			
 			}					
 		</style>
 	</head>
 	<body>		
-		<div id="popup">
-			<div class="winner">
-			<table>
-			<tr>
-				<td>				
-				<a class= "winnerclick" href="#">Daily Event</a>				
-				</td>
-			</tr>
-			
-			<tr>
-				<td>	
-				<a class= "winnerclick"  href="javascript:TimeEvent();">Time Event</a>	
-				</td>
-			</tr>	
-			<tr>
-				<td>
-				<a class= "winnerclick" href="#">당첨확인</a>	
-				</td>
-			</tr>
-			</table>
-			</div>	
-			<div class="event">						
-				<p>VS 이벤트</p>
+			<div class="event">
+				<table>
+					<tr>
+						<td>				
+						<a class= "winnerclick" href="#">Daily Event</a>				
+						</td>
+						<td>	
+						<a class= "winnerclick"  href="javascript:TimeEvent();">Time Event</a>	
+						</td>
+						<td>
+						<a class= "winnerclick" href="#">당첨확인</a>	
+						</td>
+					</tr>
+				</table>									
+				<p id="Event">VS 이벤트</p>
 				<table class="popup">
 					<tr>						
-						<td>사진1</td>
+						<td><div id="candidate1">사진1</div></td>
 						<td>vs</td>
-						<td>사진2</td>
+						<td><div id="candidate2">사진2</div></td>
 					</tr>
 					<tr>						
 						<td><input type="button" value="선택"></td>
@@ -95,6 +91,7 @@
 		</div>		
 	</body>
 	<script>
+	EventCall();
 	function TimeEvent()
 	{
 		if("${sessionScope.userId}"!="")
@@ -111,6 +108,34 @@
 	$("#eventclose").click(function(){					
 		self.close();		
 	})
+	
+	function EventCall(){
+			var url="./rest/EventCall";
+			var data = {};
+			reqServer(url, data);
+		}
+		
+		function reqServer(url, data){
+			console.log(url);
+			$.ajax({
+				url:url,
+				type:"post",
+				data:data,
+				dataType:"json",
+				success:function(d){
+					console.log(d.Event[0].selection_name);
+					console.log(d.Event[1].selection_name);
+						 var content = "<img width='230' height='200px'  alt='일일 이벤트' src='./resources/upload/"+d.Event[0].selection_name+"'/>";
+						$("#candidate1").empty();
+						$("#candidate1").append(content);
+						var content2 = "<img width='230' height='200px'  alt='일일 이벤트' src='./resources/upload/"+d.Event[1].selection_name+"'/>";
+						$("#candidate2").empty();
+						$("#candidate2").append(content2); 
+					},error:function(e){
+							console.log(e)
+						}
+			});
+		}
 	
 	</script>
 </html>

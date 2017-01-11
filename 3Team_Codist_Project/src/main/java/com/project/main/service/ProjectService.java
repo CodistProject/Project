@@ -26,8 +26,9 @@ import com.project.main.dto.BoardDto;
 import com.project.main.dto.ClothDto;
 import com.project.main.dto.MemberInfo;
 import com.project.main.dto.MileageDto;
-import com.project.main.dto.NoteDto;
 import com.project.main.dto.ReplyDto;
+import com.project.main.dto.SelectionDto;
+import com.project.main.dto.WeatherDto;
 import com.project.main.dto.myClothDto;
 import com.project.main.util.UploadFile;
 
@@ -935,7 +936,29 @@ public class ProjectService {
 		return mav;
 	}
 	
-	//사다리 게임에 관한 데이터들 찾아오기
+	//일일이벤트
+	public Map<String, String> DailyEvent(Map<String, String> params) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		Map<String, String> map = new HashMap<String, String>();
+		String file1=params.get("choice1");
+		String file2=params.get("choice2");
+		int result1=inter.DailyEvent(file1);
+		int result2=inter.DailyEvent(file2);
+		if( result1== 1&& result2 == 1)
+		{
+			map.put("msg","이벤트 등록에 성공하셨습니다.");
+		}
+		
+		return map;
+	}
+	//일일 이벤트 찾기 
+	public Map<String, ArrayList<SelectionDto>> EventCall() {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		Map<String, ArrayList<SelectionDto>> map = new HashMap<String, ArrayList<SelectionDto>>();
+		map.put("Event",inter.EventCall());
+		return map;
+	}
+	//사다리
 	public ModelAndView Admin_Manage_Event(Map<String, String> params) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		String time_event_name = "사다리";		
@@ -1214,6 +1237,108 @@ public class ProjectService {
 				map.put("msg", msg);
 				return map;
 			}
+			//날씨 페이지
+			public Map<String, String> Weather(Map<String, String> params) {
+				inter = sqlSession.getMapper(ProjectInterface.class);
+				Map<String, String> map = new HashMap<String, String>();
+						String Weather1=params.get("Weather1");
+						String Weather2=params.get("Weather2");
+						String Weather3=params.get("Weather3");
+						String Weather4=params.get("Weather4");
+						String Weather5=params.get("Weather5");
+						String Weather6=params.get("Weather6");
+						for(int i=0;i<2;i++)
+						{
+							
+							int random=(int) ((Math.random()*6)+1);
+							switch(random)
+							{
+							case 1:
+								map.put("msg", "날씨 등록에 성공하셨습니다");
+								if(i==0)
+								{
+									inter.Weather(Weather1);
+								}
+								else
+								{
+									inter.Weather2(Weather1);									
+								}
+							break;
+	
+							case 2:
+								map.put("msg", "날씨 등록에 성공하셨습니다");
+								if(i==0)
+								{
+									inter.Weather(Weather2);
+								}
+								else
+								{
+									inter.Weather2(Weather2);									
+								};
+							break;
+							
+							case 3:
+								map.put("msg", "날씨 등록에 성공하셨습니다");
+								if(i==0)
+								{
+									inter.Weather(Weather3);
+								}
+								else
+								{
+									inter.Weather2(Weather3);									
+								}
+							break;
+							
+							case 4:
+								map.put("msg", "날씨 등록에 성공하셨습니다");
+								if(i==0)
+								{
+									inter.Weather(Weather4);
+								}
+								else
+								{
+									inter.Weather2(Weather4);									
+								}
+							break;
+							
+							case 5:
+								map.put("msg", "날씨 등록에 성공하셨습니다");
+								if(i==0)
+								{
+									inter.Weather(Weather5);
+								}
+								else
+								{
+									inter.Weather2(Weather5);									
+								}
+							break;
+							
+							case 6:
+								map.put("msg", "날씨 등록에 성공하셨습니다");
+								if(i==0)
+								{
+									inter.Weather(Weather6);
+								}
+								else
+								{
+									inter.Weather2(Weather6);									
+								}
+							break;
+							}
+						}
+			return map;
+			}
+			
+			//날씨 찾기
+			public Map<String, WeatherDto> Findweather() {
+				inter = sqlSession.getMapper(ProjectInterface.class);
+				Map<String, WeatherDto> map= new HashMap<String, WeatherDto>();
+				map.put("weather", inter.Findweather());
+				
+				return map;
+			}
+		
+			
 }
 	
 

@@ -48,7 +48,7 @@
 			</tr>
 			<tr>
 				<td colspan="6">
-				<input type="button" class="bt" onclick="location.href='./FTBoard'" value="목록"/>
+				<input type="button" class="bt" onclick="location.href='./AlterBoard'" value="목록"/>
 				<input type="button" class="bt" onclick="location.href='./Board_update?board_idx=${content.board_idx}'" value="수정"/>
 				<input type="button" class="bt" onclick="location.href='./deleteFT?board_idx=${content.board_idx}'" value="삭제"/>
 				</td>

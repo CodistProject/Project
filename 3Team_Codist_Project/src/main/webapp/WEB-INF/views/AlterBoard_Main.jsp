@@ -129,7 +129,7 @@
 						content +=" <a href='./BoardDelete?board_idx="+list[i].board_idx+"&category_name="+list[i].category_name+"' style='text-decoration:none'>삭제</a>";
 										}
 						content+="	</td>"
-						if(list[i].newfilename != null){
+						if(list[i].newfilename == null){
 							content += "<td class='Al2'>" 
 									    +"<img width='15px' src='resources/img/default.jpg'/>";
 							}
