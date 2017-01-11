@@ -13,10 +13,6 @@
 		.del{
 			display: none;
 		}
-		table td{
-			border: 1px solid;
-			border-collapse: collapse;
-		}
 	</style>
 	<body>
 		<jsp:include page="../../resources/include/index.jsp"/>
