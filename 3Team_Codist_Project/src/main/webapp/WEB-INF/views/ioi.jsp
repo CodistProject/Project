@@ -54,6 +54,11 @@
 		
 	</body>
 	<script>
+	// 나만의 옷장에 데이터 없을시 경보 메세지
+	var my_msg = "${my_msg}";
+	if(my_msg=="나만의 옷장에 담긴 데이터가 없습니다. 코디게시판에서 담아오는 서비스가 필요합니다!"){
+		alert(my_msg);
+	}
 	
 	CBlistCall();
 	FTlistCall();
@@ -94,6 +99,8 @@
 		data.pagePerNum = 5;
 		reqServer(url, data);
 	}
+	
+	
 	
 	function reqServer(url, data){
 		console.log(url);
@@ -252,6 +259,7 @@
 		{
 		alert(msg);
 		}
+	
 	// 메일 보내기(아이디찾기 or 비번찾기 or 이메일 문의) 성공관련 메시지 alert 띄우기
 	var msg = "${msg}";
 	var msg1 ="${Find_Id.msg}";
@@ -259,6 +267,8 @@
 	var msg_chk = "1:1문의가 이메일로 전송 되었습니다!";
 	var msg_chk1 = "찾으시는 아이디가 이메일로 전송되었습니다."; 
 	var msg_chk2 = "찾으시는 비밀번호가 이메일로 전송되었습니다.";			
+	var msg_chk3 = "로그인이 필요한 서비스 입니다!";
+	
 	
 	if(msg==msg_chk){
 		console.log("1:1 문의 전송 성공 여부 :"+msg);
@@ -271,7 +281,11 @@
 	if(msg2==msg_chk2){
 		console.log("비번 찾기 메시지 성공 여부:"+msg2);
 		alert(msg2);	
-	}		
+	}	
+	if(msg==msg_chk3){
+		console.log("1:1 문의 전송 성공 여부 :"+msg);
+		alert(msg);
+	}	
 	
 	
 	//시간 이벤트 팝업
@@ -290,23 +304,21 @@
 		var m = addZero(now.getMinutes());
 		var nowTime = h+":"+m;	
 		var start = "${ladder_Data.time_start}";
-		var end = "${ladder_Data.time_end}";
-		
-		
+		var end = "${ladder_Data.time_end}";	
 		
 		console.log(nowTime);
 		console.log(start);
 		console.log(end);
 		var win;
-		
-		if(nowTime>=start && nowTime<=end){				
-			 win	= window.open("../../main/TimeEvent", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=200,left=300,width=600,height=500");
-		}else{
+		if(nowTime>=start && nowTime<=end){						
+			 win	= window.open("TimeEvent", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=200,left=300,width=600,height=500");
+		}else{					
 			if(win){
-				win.close();
-			}			
+	            win.close();
+			}
 		}
 	}
+	
 	
 	</script>
 </html>

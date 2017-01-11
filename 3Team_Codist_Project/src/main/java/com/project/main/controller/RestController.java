@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.main.dto.BoardDto;
 import com.project.main.dto.MemberInfo;
+import com.project.main.dto.MileageDto;
 import com.project.main.dto.ReplyDto;
+import com.project.main.dto.SelectionDto;
+import com.project.main.dto.WeatherDto;
 import com.project.main.service.ProjectService;
 
 @Controller("RestController")
@@ -174,15 +177,89 @@ public class RestController {
 			@RequestParam Map<String, String> params){
 		logger.info("코디게시판 -> 나만의 옷장 이동 전 팝업(옷+일정 데이터 담기)");
 		return service.Put_Cloth(params);
+	}
+	
+	// 마일리지+쿠폰(회원) 리스트 
+	@RequestMapping(value="/Mileage_list")
+	public @ResponseBody Map<String, ArrayList<MileageDto>> Mileage_list(){
+		logger.info("마일리지+쿠폰 리스트");
+		return service.Mileage_list();
 	}	
 	
-	//사다리 게임 마일리지 넣기
+	// 회원 관리 리스트 
+	@RequestMapping(value="/Member_list")
+	public @ResponseBody Map<String, ArrayList<MemberInfo>> Member_list(){
+		logger.info("회원 관리 리스트");
+		return service.Member_list();
+	}	
+	
+	// 일일이벤트
+	@RequestMapping(value="/DailyEvent")
+	public @ResponseBody Map<String, String> DailyEvent(
+			@RequestParam Map<String, String> params){
+		logger.info("일일이벤트");
+		return service.DailyEvent(params);
+	}
+		
+	// 일일 이벤트 찾기
+	@RequestMapping(value="/EventCall")
+	public @ResponseBody Map<String, ArrayList<SelectionDto>> EventCall()
+	{
+		logger.info("일일이벤트찾기");
+		return service.EventCall();
+	}
+	//사다리 게임 마일리지 넣기(시간이벤트)
 	@RequestMapping(value="/gamemileage")
 	public @ResponseBody Map<String, Integer> gamemileage(			
 			@RequestParam Map<String, String> params,HttpSession session){
 		logger.info("사다리게임 마일리지 보내기");
 		return service.gamemileage(params,session);
 	}
-
+	
+	//쪽지 알람
+	@RequestMapping(value="/countNote")
+	public @ResponseBody Map<String, Integer> countNote(){
+		logger.info("쪽지 알람");
+		return service.countNote();
+	}
+	
+	//쪽지 등록
+	@RequestMapping(value="/RegistNote")
+	public @ResponseBody Map<String, Integer> RegistNote(
+			@RequestParam("content") String content,
+			@RequestParam  ("userId") String userId){
+		logger.info("쪽지 등록 요청");
+		logger.info(content);
+		logger.info(userId);
+		return service.RegistNote(userId,content);
+	}
+	//쪽지 알람확인(NEW >>'N')
+	@RequestMapping(value="/NewUpdate")
+	public @ResponseBody Map<String, Integer> NewUpdate(){
+		logger.info("쪽지 알람제거");
+		return service.NewUpdate();
+	}
+	
+	// 마일리지 업데이트(전체 회원-관리자 모드)
+	@RequestMapping(value="/Upate_Mileage")
+	public @ResponseBody Map<String, Object> Upate_Mileage(			
+			@RequestParam Map<String, String> params){
+		logger.info("마일리지 업데이트");
+		return service.Upate_Mileage(params);
+	}
+	// 날씨 페이지
+	@RequestMapping(value="/Weather")
+	public @ResponseBody Map<String, String> Weather(			
+			@RequestParam Map<String, String> params){
+		logger.info("날씨 페이지");
+		return service.Weather(params);
+	}
+	// 날씨 페이지가져오기
+	@RequestMapping(value="/Findweather")
+	public @ResponseBody Map<String, WeatherDto> Weather(){
+		logger.info("날씨 페이지");
+		return service.Findweather();
+	}
+	
 	
 }

@@ -59,7 +59,22 @@ public class MainController {
 	public ModelAndView Admin_Manage_Event(@RequestParam Map<String, String> params){
 		logger.info("이벤트 관리 페이지 이동");
 		return service.Admin_Manage_Event(params);
-	}		
+	}
+	
+	//쪽지 관리 페이지 이동
+	@RequestMapping(value="/AdminMessage")
+	public ModelAndView AdminMessage(){		
+		logger.info("쪽지 관리 페이지");		
+		return service.AdminMessage();
+	}
+	
+	//관리자 회원관리 페이지
+	@RequestMapping(value="/AdminMemberPage")
+	public ModelAndView AdminMemberPage(){
+		logger.info("관리자 회원 관리 페이지");
+	return service.AdminMemberPage();
+	}
+	
 		
 	//로그인 처리
 	@RequestMapping(value="/login")
@@ -202,6 +217,12 @@ public class MainController {
 		logger.info("삭제 : {}",userId);
 		return service.withdrawa(userId);
 	}
+	//강제 탈퇴
+	@RequestMapping(value = "/withdrawa2")
+	public ModelAndView withdrawa2(@RequestParam("userId") String userId){
+		logger.info("강제 탈퇴기능");
+		return service.withdrawa2(userId);
+	}
 
 	//코디 글쓰기 게시판 Form 이동 + 닉네임 찾기	
 	@RequestMapping(value="/CodiBoard_Write")
@@ -239,9 +260,9 @@ public class MainController {
 	}
 	//게시판 글쓰기(코디 게시판 제외)
 	@RequestMapping(value="/Board_Write")
-	public ModelAndView Board_Write(MultipartHttpServletRequest multi){				
+	public ModelAndView Board_Write(MultipartHttpServletRequest multi,HttpSession session){				
 		logger.info("글쓰기 요청");
-		return service.Board_Write(multi);
+		return service.Board_Write(multi,session);
 	}		
 	
 	//코디게시판  글쓰기
@@ -273,13 +294,6 @@ public class MainController {
 	return service.Find_Pw(params);
 	}
 	
-	//관리자 회원관리 페이지
-	@RequestMapping(value="/AdminMemberPage")
-	public ModelAndView AdminMemberPage(){
-		logger.info("관리자 회원 관리 페이지");
-	return service.AdminMemberPage();
-	}
-	
 	//나만의 옷장 페이지 이동(index 에서)
 	@RequestMapping(value="/My_Calendar")
 	public ModelAndView My_Calendar(@RequestParam ("userId") String userId){
@@ -294,6 +308,7 @@ public class MainController {
 		logger.info("사다리 게임 설정값 넘기기");		
 		return service.Bridge(params);
 	}
+	
 	// 게시물 삭제
 	@RequestMapping(value="/BoardDelete")
 	public ModelAndView BoardDelete(@RequestParam("board_idx") String board_idx,
@@ -308,8 +323,16 @@ public class MainController {
 	public ModelAndView Time(@RequestParam Map<String, String> params){		
 		logger.info("사다리 게임 시간값 넘기기");		
 		return service.Time(params);
+	}	
+	
+	// 마일리지+쿠폰 관리 페이지 이동
+	@RequestMapping(value="/Admin_Mileage")
+	public String Admin_Mileage(){		
+		logger.info("마일리지+쿠폰 관리 페이지 이동");		
+		return "Admin_Manage_Mileage";
 	}
 	
+
 	//마이페이지 쿠폰함 가기
 		@RequestMapping(value="/Mypage_Coupon")
 		public ModelAndView Mypage_Coupon(@RequestParam ("userId") String userId){
@@ -324,6 +347,12 @@ public class MainController {
 			HttpSession session){
 		logger.info("마일리지 사용하기");		
 		return service.usemile(params,session);
-	}	
-	
+	}
+
+	// 회원 관리 리스트 페이지 이동
+	@RequestMapping(value="/Admin_Member")
+	public String Admin_Member(){		
+		logger.info("관리자 회원관리 리스트 페이지 이동");		
+		return "Admin_Manage_Member";
+	}
 }

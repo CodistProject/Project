@@ -6,7 +6,10 @@ import com.project.main.dto.ClothDto;
 import com.project.main.dto.GameDto;
 import com.project.main.dto.MemberInfo;
 import com.project.main.dto.MileageDto;
+import com.project.main.dto.NoteDto;
 import com.project.main.dto.ReplyDto;
+import com.project.main.dto.SelectionDto;
+import com.project.main.dto.WeatherDto;
 import com.project.main.dto.myClothDto;
 
 
@@ -26,7 +29,10 @@ public interface ProjectInterface {
 
 	//회원가입
 	public void memberJoin(MemberInfo info);
-		
+	
+	// 이벤트 쿠폰 생성
+	public void updateCoupon(String id, int idx);
+	
 	// 회원정보 수정 보기
 	public MemberInfo Mem_ModiView(String userId);
 
@@ -74,7 +80,7 @@ public interface ProjectInterface {
 	
 	//게시판 글쓰기
 	public int Board_Write(String nickName, String subject, String content, String filename, String newfilename,
-			String category_name);
+			String category_name,int join_idx);
 	
 	//게시판 추천수 증가
 	public int Board_Uplike(int board_idx);
@@ -159,6 +165,47 @@ public interface ProjectInterface {
 	//마일리지 사용 및 쿠폰증정
 	public int Mileage_use(String userId, int reuslt_Mlieage, String coupon);
 
+	
+	//쪽지 알람기능
+	public int countNote();
+	
+	//쪽지 등록
+	public int RegistNote( String userId,int join_idx, String content);
+	
+	//쪽지 리스트
+	public ArrayList<NoteDto> AdminMessageList();
+	
+	//쪽지 N 알람제거 
+	public int NewUpdate();
+	
+	// 마일리지+쿠폰 리스트
+	public ArrayList<MileageDto> Mileage_List();
+
+	// 전체 회원 리스트(관리자 관리모드)
+	public ArrayList<MemberInfo> Member_list();
+
+	// 마일리지 업데이트(전체 회원 - 관리자모드)
+	public boolean Update_Mileage(String Update_Mileage, String userId);
+	
+	// 이메일 문의 내용에 담을 유저 이메일 찾기(이메일 문의용)
+	public String Find_userEmail(String userId);
+	
+	//날씨 넣기(오늘)
+	public void Weather(String weather);
+	
+	//날씨 넣기(내일)
+	public void Weather2(String weather);
+	
+	//날씨 찾기
+	public WeatherDto Findweather();
+	
+	//일일 이벤트 넣기
+	public int DailyEvent(String file1);
+	
+	//일일 이벤트 찾기
+	public ArrayList<SelectionDto> EventCall();
+	
+	
 	
 }
 

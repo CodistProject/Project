@@ -9,6 +9,11 @@
 		<link rel="stylesheet" type="text/css" href="resources/css/button.css"/>
 		<link rel="stylesheet" type="text/css" href="resources/css/contentView.css"/>
 	</head>
+	<style>
+		.del{
+			display: none;
+		}
+	</style>
 	<body>
 		<jsp:include page="../../resources/include/index.jsp"/>
 		<div class="content">
@@ -42,15 +47,15 @@
 				</td>
 			<tr>
 				<td colspan="6">
-				<a href="javascript:ft_like()" id="ft_like">추천</a>${content.ft_like}
-				<a href="javascript:ft_hate()" id="ft_hate">비추천</a>${content.ft_hate}
+				<a href="javascript:ft_like()" id="ft_like" class="a2">추천</a>${content.ft_like}
+				<a href="javascript:ft_hate()" id="ft_hate" class="a2">비추천</a>${content.ft_hate}
 				</td>
 			</tr>
 			<tr>
 				<td colspan="6">
-				<input type="button" class="bt" onclick="location.href='./FTBoard'" value="목록"/>
-				<input type="button" class="bt" onclick="location.href='./Board_update?board_idx=${content.board_idx}'" value="수정"/>
-				<input type="button" class="bt" onclick="location.href='./deleteFT?board_idx=${content.board_idx}'" value="삭제"/>
+					<input type="button" class="bt" onclick="location.href='./AlterBoard'" value="목록"/>
+					<input type="button" class="bt" onclick="location.href='./Board_update?board_idx=${content.board_idx}'" value="수정"/>
+					<input type="button" class="bt del" onclick="location.href='./BoardDelete?board_idx=${content.board_idx}&category_name=Alter'" value="삭제" />						
 				</td>
 			</tr>
 			
@@ -68,15 +73,17 @@
 			</tr>
 		</table>
 		<!--댓글 리스트  -->
-		<table id="repleZone">
-		
+		<table id="repleZone">		
 		</table>
 		</div>
 	</body>
 	<script>
-
+	// 유저아이디로 찾은(아작스처리한) 닉네임과 content에 담아서 보낸 닉네임 비교하기 위한 변수들
+	var nick = "${content.nickName}";
+	var userNick="";
+	console.log(nick);	
+	
 	// 리플 리스트 실행
-
 	var userId="${sessionScope.userId}";
 	FindNick(userId);
 	replyList();
@@ -177,7 +184,9 @@
 				}
 				
 				if(url == "./rest/FindNick"){
+					userNick = d.userNick;
 					$(".user").html(d.userNick);
+					Show_btn(userNick);
 					}
 				if(url == "./rest/repleDel"){					
 					alert("삭제에 성공하였습니다.");
@@ -202,6 +211,15 @@
 				console.log(e);
 			}				
 		});
+	}
+	
+	// 삭제 버튼 보이기 안보이기 하기	
+	function Show_btn(userNick){
+		if(userNick=="${content.nickName}"){
+			$(".del").css("display", "inline-block");	
+		}else{
+			$(".del").css("display", "none");
+		}		
 	}
 
 	// 리스트 뿌리는 역할 함수

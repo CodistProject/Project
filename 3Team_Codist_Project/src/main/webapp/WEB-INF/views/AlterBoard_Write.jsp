@@ -6,7 +6,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Q & A 게시판 글쓰기 </title>
 		<script src ="//code.jquery.com/jquery-3.1.0.min.js"></script>
-		 <link rel="stylesheet" type="text/css" href="resources/css/board.css"/>
+		 <link rel="stylesheet" type="text/css" href="resources/css/Board.css"/>
 		<link rel="stylesheet" type="text/css" href="resources/css/button.css"/>
 	</head>
 	<body>
@@ -16,7 +16,7 @@
     		<table id="boardwrite">
     			<tr>
     				<td colspan="2">물물 교환</td>
-    				<input type="hidden" name="category" value="AT" />
+    				<input type="hidden" name="category" value="Alter" />
     			</tr>    			
     			<tr>
     				<td>제목</td>

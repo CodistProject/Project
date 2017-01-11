@@ -6,7 +6,9 @@
   		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   		<title>마일리지</title>
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="resources/css/button.css"/>
 		<style>
+<<<<<<< HEAD
 		/* 	table {
 				text-align: center;
 				
@@ -14,11 +16,8 @@
 		.info{
 				width: 490px;               
                 border-style: solid;
-                
                 padding: 25px;
                 text-align: left;
-                
-
 		}
 		#total{
 			position: absolute;
@@ -51,7 +50,7 @@
 		 	     </tr>
 				  	   <tr>
             	  <td class="rig">
-            			<input type="button" onclick="coupon()" value="쿠폰 사용하기"/>
+            			<input type="button" onclick="coupon()" value="쿠폰 교환하기"/>
             	  </td>
             			</tr>
             </table>

@@ -6,10 +6,9 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>코디를 부탁해</title>
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="resources/css/reqBoard.css"/>
+		<link rel="stylesheet" type="text/css" href="resources/css/CoplzBoard.css"/>
 	</head>
 	<body>
-			
      <jsp:include page="../../resources/include/index.jsp"/>
  		<div class="content">
 		<table class="CP_board1" align="center">
@@ -36,12 +35,12 @@
 						</c:if>
 					</td>					
 				</tr>		
-				<tr  class="CP_subject">
-					<td class="CP1">글 번호</td>
-					<td class="CP2">이미지</td>
-		    		<td class="CP3">제목</td>				
-					<td class="CP4">작성자</td>
-					<td class="CP5">조회수</td>
+				<tr class="CP_subject">
+					<td class="CP1" width="60px" height="50px">글 번호</td>
+					<td class="CP2" width="100px">이미지</td>
+		    		<td class="CP3" >제목</td>				
+					<td class="CP4" width="100px">작성자</td>
+					<td class="CP5" width="70px">조회수</td>
 				</tr>
 			</thead>			
 			<tbody id="list">
@@ -103,7 +102,7 @@
 			var content = "";
 			for(var i=0; i<list.length; i++){
 								content +="<tr>"
-											+"<td class='CP1'>"+list[i].board_idx+"</td>"
+											+"<td class='CP1' height='100px' style='text-align:center'>"+list[i].board_idx+"</td>"
 							if(list[i].newfilename != null){
 								content += "<td class='CP2'>" 
 										    +"<img width='15px' src='resources/img/default.jpg'/>";
@@ -111,11 +110,11 @@
 							else
 								{
 								content +="<td class='CP2'>"
-										    +"<img width='150' height='50'  alt='물물교환' src='./resources/upload/"+list[i].newfilename+"'/>";
+										    +"<img width='100' height='100'  alt='물물교환' src='./resources/upload/"+list[i].newfilename+"'/>";
 								}
 								content +=	"</td>"
-											+"	<td class='CP3'>"
-											+"<a href='./Board_Detail?board_idx="+list[i].board_idx+"'>"
+											+"	<td class='CP3' style='text-align: left'>"
+											+"<a class='a2' href='./Board_Detail?board_idx="+list[i].board_idx+"'>"
 											+list[i].subject
 											+"</a>";
 											if(list[i].replies >0){
@@ -123,8 +122,8 @@
 											}
 											
 								content +="</td>" 
-											+"<td class='CP4'>"+list[i].nickName+"</td>"
-											+"<td class='CP5'>"+list[i].bhit+"</td>"
+											+"<td class='CP4'  style='text-align: center'>"+list[i].nickName+"</td>"
+											+"<td class='CP5' style='text-align: center'>"+list[i].bhit+"</td>"
 											+"</tr>";
 			}
 			$("#list").empty();

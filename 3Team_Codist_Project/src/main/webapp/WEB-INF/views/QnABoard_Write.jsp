@@ -6,7 +6,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Q & A 게시판 글쓰기 </title>
 		<script src ="//code.jquery.com/jquery-3.1.0.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="resources/css/board.css"/>
+		<link rel="stylesheet" type="text/css" href="resources/css/Board.css"/>
 		<link rel="stylesheet" type="text/css" href="resources/css/button.css"/>
 	</head>
 	<body>

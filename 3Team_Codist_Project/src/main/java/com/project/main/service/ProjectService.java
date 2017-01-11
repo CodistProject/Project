@@ -27,6 +27,8 @@ import com.project.main.dto.ClothDto;
 import com.project.main.dto.MemberInfo;
 import com.project.main.dto.MileageDto;
 import com.project.main.dto.ReplyDto;
+import com.project.main.dto.SelectionDto;
+import com.project.main.dto.WeatherDto;
 import com.project.main.dto.myClothDto;
 import com.project.main.util.UploadFile;
 
@@ -78,8 +80,7 @@ public class ProjectService {
 		ModelAndView mav = new ModelAndView();		
 		MileageDto mil= new MileageDto();				
 		logger.info("id: {}",id);
-		logger.info("pw: {}",pw);
-		
+		logger.info("pw: {}",pw);		
 		
 		String page = "redirect:/";		
 		if(id == null || pw == null){
@@ -164,6 +165,7 @@ public class ProjectService {
 		info.setGender(params.get("gender"));
 		info.setEmail(params.get("email"));
 		inter.memberJoin(info);
+		inter.updateCoupon(info.getId(),Integer.parseInt(inter.Find_JoinIdx(info.getId())));
 		return info;
 	}
 	
@@ -362,15 +364,25 @@ public class ProjectService {
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		logger.info(userId);
 		inter.withdrawa(userId);		
-		mav.setViewName("redirect:/logout");				
+		mav.setViewName("redirect:/logout");		
+		return mav;
+	}
+	
+	// 강제 탈퇴하기
+	public ModelAndView withdrawa2(String userId) {
+		ModelAndView mav = new ModelAndView();
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		logger.info("강제 탈퇴시킬 유저 아이디:"+userId);
+		inter.withdrawa(userId);		
+		mav.setViewName("Admin_Manage_Member");		
 		return mav;
 	}
 	
 	// 글쓰기
-	public ModelAndView Board_Write(MultipartHttpServletRequest multi)  {		
+	public ModelAndView Board_Write(MultipartHttpServletRequest multi,HttpSession session)  {		
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		ModelAndView mav = new ModelAndView();		
-			
+		String userId= (String) session.getAttribute("userId");
 		String subject = multi.getParameter("subject");
 		String content = multi.getParameter("content");
 		String nickName = multi.getParameter("nickName");	
@@ -378,6 +390,7 @@ public class ProjectService {
 		String newfilename = "";		
 		String category_name = multi.getParameter("category");		
 		
+		int join_idx=Integer.parseInt(inter.Find_JoinIdx(userId));
 		if(filename.equals("")){
 			logger.info("파일이 없어요");
 		}else {
@@ -387,20 +400,25 @@ public class ProjectService {
 			newfilename = upload.fileUp(multi, filename);
 		}		
 		logger.info(nickName+" / "+ subject+" / "+ content+" / "+filename+" / "+ newfilename+" / "+category_name);
-		inter.Board_Write(nickName, subject, content,filename, newfilename,category_name);		
+		inter.Board_Write(nickName, subject, content,filename, newfilename,category_name,join_idx);		
 		String page = "";
+		String msg="";
 			if(category_name.equals("QnA")){
 				page = "QnABoard_Main";
-			}else if(category_name.equals("AT")){
+				msg="QnA글쓰기에 성공 하셨습니다.";
+			}else if(category_name.equals("Alter")){
 				page = "AlterBoard_Main";
+				msg="Alter글쓰기에 성공 하셨습니다.";
 			}else if(category_name.equals("FT")){
 				page = "FT_Board_Main";
+				msg="FT글쓰기에 성공 하셨습니다.";
 			}else if(category_name.equals("CP")){
 				page = "Coplz_Main";
-			}else if(category_name.equals("CB")){
-				page = "CodiBoard_Main";
+				msg="CP글쓰기에 성공 하셨습니다.";
 			}
-		return null;
+			mav.addObject("msg",msg);
+			mav.setViewName(page);
+		return mav;
 }
 
 	
@@ -671,7 +689,7 @@ public class ProjectService {
 			Map<String, ArrayList<ReplyDto>> obj 
 				= new HashMap<String, ArrayList<ReplyDto>>();
 			obj.put("list", inter.replyList(idx));
-			obj.put("userId",inter.FindId(idx) );
+			obj.put("userId",inter.FindId(idx));
 			return obj;
 	}
 	
@@ -710,10 +728,10 @@ public class ProjectService {
 	public Map<String, String> Email(Map<String, String> params) {
 		logger.info("이메일 기능 작동");
 		
-		// 1:1 문의용 관련 정보
-    	final String userEmail = params.get("userEmail"); // 유저 이메일    	
-    	final String content = params.get("content"); // 유저 문의 내용
+		// 1:1 문의용 관련 정보    	    	    	
     	final String userId = params.get("userId"); // 유저 아이디 담기(보낸 이)
+    	final String userEmail = inter.Find_userEmail(userId); // 유저 이메일
+    	final String content = "문의 내용: "+params.get("content")+"/"+"답변 받을 유저메일 주소: "+userEmail; // 유저 문의 내용
     	
     	// 아이디 찾아서 메일로 보내주기 용 관련 정보(내용:유저아이디 / 받을 유저 메일 주소)
     	final String content_userId = params.get("content_userId"); // 유저아이디가 담긴 컨텐트
@@ -731,7 +749,7 @@ public class ProjectService {
     	logger.info("------------1:1 문의용 정보 ---------");
     	logger.info("유저 아이디(보내는 이):"+userId);
     	logger.info("유저 이메일(보내는 이 메일주소):"+userEmail);
-    	logger.info("문의 내용 :"+content);    	
+    	logger.info(content);    	
          
     	// 아이디 찾고 메일 담아 보내주기용 관련정보 체크
     	logger.info("------------아이디 찾아 메일 쏘기 정보 ---------");
@@ -776,24 +794,22 @@ public class ProjectService {
 			message.setFrom(new InternetAddress("0304kiss@gmail.com")); // 작성자 메일주소(유저/보낸사람 이메일주소) - 구글이메일만 가능(하지만 결국 관리자로 할꺼임)
 			
 			// 유저 메일주소(아이디 찾기용)이 빈값이 아닐경우 - 유저 아이디 찾아 보내기용
-			if(content == null && content_userPw1 == null && content_userPw2 == null){
-				logger.info("if문 작동 체크");
+			if(userId == null && content_userPw1 == null && content_userPw2 == null){				
 				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(FindId_userEmail)); // 찾은 아이디 받을 사람(유저 메일주소)
 				message.setSubject("잃어버린 아이디를 찾았습니다. 확인 바랍니다."); // 제목
 				message.setText("찾으시는 아이디 :"+content_userId); // 찾은 유저아이디 담은 내용
 				map.put("msg", "찾으시는 아이디가 이메일로 전송되었습니다.");
 			}
 			// 유저 아이디(로그인한)가 빈값이 아닐 경우  - 1:1 문의용
-			if(content_userId == null && content_userPw1 ==null && content_userPw2 == null){
-				logger.info("if문 작동 체크");
-				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("starcsiran0@naver.com"));  // 관리자 메일주소(받는 사람)
-				message.setSubject(userId+"님께서 1:1 문의를 하셨습니다."); // 제목
-				message.setText(content); // 문의내용
-				map.put("msg", "1:1문의가 이메일로 전송 되었습니다!");
+			if(content_userId == null && content_userPw1 ==null && content_userPw2 == null){									
+					message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("starcsiran0@naver.com"));  // 관리자 메일주소(받는 사람)
+					message.setSubject(userId+"님께서 1:1 문의를 하셨습니다."); // 제목
+					message.setText(content); // 문의내용
+					map.put("msg", "1:1문의가 이메일로 전송 되었습니다!");				
 			}		 
 			
 			// 유저 메일주소(비번 찾기용1)이 빈값이 아닐경우 - 유저 비번 찾아 보내기용
-			if(content==null && content_userId ==null && content_userPw2 ==null){
+			if(userId==null && content_userId ==null && content_userPw2 ==null){
 				logger.info("if문 작동 체크");
 				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(FindPw_userEmail1)); // 찾은 아이디 받을 사람(유저 메일주소)
 				message.setSubject("잃어버린 비밀번호를 찾았습니다. 확인 바랍니다."); // 제목
@@ -801,7 +817,7 @@ public class ProjectService {
 				map.put("msg", "찾으시는 비밀번호가 이메일로 전송되었습니다.");
 			}						
 			// 유저 메일주소(비번 찾기용2)이 빈값이 아닐경우 - 유저 비번 찾아 보내기용
-			if(content==null && content_userId==null && content_userPw1==null){
+			if(userId==null && content_userId==null && content_userPw1==null){
 				logger.info("if문 작동 체크");
 				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(FindPw_userEmail2)); // 찾은 아이디 받을 사람(유저 메일주소)
 				message.setSubject("잃어버린 비밀번호를 찾았습니다. 확인 바랍니다."); // 제목
@@ -921,7 +937,29 @@ public class ProjectService {
 		return mav;
 	}
 	
-	//사다리 게임에 관한 데이터들 찾아오기
+	//일일이벤트
+	public Map<String, String> DailyEvent(Map<String, String> params) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		Map<String, String> map = new HashMap<String, String>();
+		String file1=params.get("choice1");
+		String file2=params.get("choice2");
+		int result1=inter.DailyEvent(file1);
+		int result2=inter.DailyEvent(file2);
+		if( result1== 1&& result2 == 1)
+		{
+			map.put("msg","이벤트 등록에 성공하셨습니다.");
+		}
+		
+		return map;
+	}
+	//일일 이벤트 찾기 
+	public Map<String, ArrayList<SelectionDto>> EventCall() {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		Map<String, ArrayList<SelectionDto>> map = new HashMap<String, ArrayList<SelectionDto>>();
+		map.put("Event",inter.EventCall());
+		return map;
+	}
+	//사다리
 	public ModelAndView Admin_Manage_Event(Map<String, String> params) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		String time_event_name = "사다리";		
@@ -985,6 +1023,13 @@ public class ProjectService {
 		mav.setViewName("Admin_Manage_Member");
 		return mav;
 	}
+	//관리자 쪽지 관리 페이지
+	public ModelAndView AdminMessage() {
+		ModelAndView mav= new ModelAndView();
+		mav.addObject("list",inter.AdminMessageList());
+		mav.setViewName("Admin_Manage_Message");
+		return mav;
+	}
 	
 	//닉네임찾기
 	public Map<String, String> Find_Nick(String userId) {
@@ -1031,8 +1076,7 @@ public class ProjectService {
 		// 로그인시 가능하게 유효성 검사		
 		if(userId==""){
 			String page="ioi";
-			String msg="";
-			logger.info("if가 되는거니?");
+			String msg="";			
 			msg = "로그인이 필요한 서비스입니다!.";
 			mav.addObject("msg", msg);
 			mav.setViewName(page);
@@ -1041,50 +1085,68 @@ public class ProjectService {
 		if(userId!=""){
 			// userId 로 join_idx 찾기
 			String Join_Idx = inter.Find_JoinIdx(userId);
-			logger.info("조인 idx:"+Join_Idx);
+			logger.info("조인 idx:"+Join_Idx);			 
 			// Join_Idx 로 가져올 데이터 찾기(옷+일정) -> obj 담기-> myCalendar 담기
-			obj.put("myCloth", inter.Find_myCloth(Join_Idx));
-			mav.addObject("myCalendar", obj);		
-			mav.setViewName("My_Calendar");			
+			ArrayList<myClothDto> list = new ArrayList<myClothDto>();
+			String msg="";			
+			list=inter.Find_myCloth(Join_Idx);
+			if(list.size()==0){
+				msg = "나만의 옷장에 담긴 데이터가 없습니다. 코디게시판에서 담아오는 서비스가 필요합니다!";
+				mav.addObject("my_msg", msg);
+				mav.setViewName("ioi");
+			}else{
+				obj.put("myCloth",list);
+				mav.addObject("myCalendar", obj);		
+				mav.setViewName("My_Calendar");	
+			}		
 		}
 		return mav;
 	}
 	
-		//게시물 삭제
-		public ModelAndView BoardDelete(String board_idx,String category_name) {
-			inter = sqlSession.getMapper(ProjectInterface.class);
-			ModelAndView mav= new ModelAndView();
-			String msg="삭제에 실패 하셨습니다.";
-			String page="ioi";
-			if(inter.BoardDelete(board_idx)==1)
-			{
-				 msg="삭제에 성공 하셨습니다.";
-				 switch(category_name)
-				 {
-				 case "FT":
-						page="FT_Board_Main";
-					break;
-					
-					case "CP":
-						page="Coplz_Main";
-					break;
-						
-					case 	"QnA":
-						page="QnABoard_Main";
-					break;
-					
-					case "Alter":
-						page="AlterBoard_Main";
-					break;
-				 }
-			}
-		
-			mav.addObject("msg",msg);
-			mav.setViewName(page);
-			return mav;
-		}
+	// 마일리지+쿠폰 리스트 보기
+	public Map<String, ArrayList<MileageDto>> Mileage_list() {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		Map<String, ArrayList<MileageDto>> map = 
+				new HashMap<String, ArrayList<MileageDto>>();
+		map.put("list", inter.Mileage_List());
+		return map;
+	}	
 
-			//사다리 게임에 시간 데이터를 인덱스로 보내기
+	//게시물 삭제
+	public ModelAndView BoardDelete(String board_idx,String category_name) {
+		inter = sqlSession.getMapper(ProjectInterface.class);
+		ModelAndView mav= new ModelAndView();
+		String msg="삭제에 실패 하셨습니다.";
+		String page="ioi";
+		if(inter.BoardDelete(board_idx)==1)
+		{
+			 msg="삭제에 성공 하셨습니다.";
+			 switch(category_name)
+			 {
+			 case "FT":
+					page="FT_Board_Main";
+				break;
+				
+				case "CP":
+					page="Coplz_Main";
+				break;
+					
+				case 	"QnA":
+					page="QnABoard_Main";
+				break;
+				
+				case "Alter":
+					page="AlterBoard_Main";
+				break;
+			 }
+		}
+	mav.addObject("msg",msg);
+	mav.setViewName(page);
+	return mav;
+	}
+
+
+			// 사다리 게임에 시간 데이터를 인덱스로 보내기
 			public ModelAndView TimePop(Map<String, String> params) {
 				inter = sqlSession.getMapper(ProjectInterface.class);			
 				String time_event_name = "사다리";		
@@ -1097,8 +1159,7 @@ public class ProjectService {
 		
 			//유저 마일리지 찾기
 			public ModelAndView MyPage_Mileage(String userId) {
-				inter = sqlSession.getMapper(ProjectInterface.class);
-				MileageDto mdt = new MileageDto();
+				inter = sqlSession.getMapper(ProjectInterface.class);				
 				inter.Find_Mileage(userId);
 				logger.info(userId);				
 				ModelAndView mav = new ModelAndView();
@@ -1131,8 +1192,8 @@ public class ProjectService {
 				Map<String, Integer> map = new HashMap<String, Integer>();
 				map.put("Mileage_put", inter.Mileage_put(userId, reuslt_Mlieage));
 				return map;
-			}
-			
+			}			
+
 			//마이페이지 쿠폰페이지 이동
 			public ModelAndView Mypage_Coupon(String userId) {
 				inter = sqlSession.getMapper(ProjectInterface.class);
@@ -1159,7 +1220,161 @@ public class ProjectService {
 				mav.setViewName("redirect:/MyPage_Mileage?userId="+userId);
 				return mav;
 			}
+			//쪽지 알람
+			public Map<String, Integer> countNote() {
+				Map<String, Integer> map = new HashMap<String, Integer>();
+				inter=sqlSession.getMapper(ProjectInterface.class);
+				int count=0;
+				count=inter.countNote();
+				logger.info("count:{}",count);
+				map.put("count", count);
+				return map;
+			}
+			
+			//쪽지 등록	
+			public Map<String, Integer> RegistNote(String userId, String content) {
+				Map<String, Integer> map = new HashMap<String, Integer>();
+				inter=sqlSession.getMapper(ProjectInterface.class);
+				int join_idx=Integer.parseInt(inter.Find_JoinIdx(userId));
+				logger.info("idx:{}",join_idx);
+				map.put("msg",inter.RegistNote(userId,join_idx,content));
+				return map;
+			}
+			
+			//쪽지 알람 제거
+			public Map<String, Integer> NewUpdate() {
+				Map<String, Integer> map = new HashMap<String, Integer>();
+				inter=sqlSession.getMapper(ProjectInterface.class);
+				map.put("msg",inter.NewUpdate());
+				return map;
+			}
+
+			// 회원관리 리스트(관리자모드)
+			public Map<String, ArrayList<MemberInfo>> Member_list() {
+				inter = sqlSession.getMapper(ProjectInterface.class);
+				Map<String, ArrayList<MemberInfo>> map = new HashMap<String, ArrayList<MemberInfo>>();
+				map.put("list", inter.Member_list());
+				return map;
+			}
+
+			// 마일리지 업데이트(전체 - 관리자모드)
+			public Map<String, Object> Upate_Mileage(Map<String, String> params) {
+				inter = sqlSession.getMapper(ProjectInterface.class);
+				String userId = params.get("userId");
+				String Update_Mileage = params.get("mileage");
+				int Count = Integer.parseInt(params.get("count"));				
+				Map<String, Object> map = new HashMap<String, Object>();
+				String msg ="";				 
+				if(inter.Update_Mileage(Update_Mileage, userId)){
+					msg = "업데이트가 적용되었습니다!.";				
+				}
+				map.put("count", Count);
+				map.put("msg", msg);
+				return map;
+			}
+			//날씨 페이지
+			public Map<String, String> Weather(Map<String, String> params) {
+				inter = sqlSession.getMapper(ProjectInterface.class);
+				Map<String, String> map = new HashMap<String, String>();
+						String Weather1=params.get("Weather1");
+						String Weather2=params.get("Weather2");
+						String Weather3=params.get("Weather3");
+						String Weather4=params.get("Weather4");
+						String Weather5=params.get("Weather5");
+						String Weather6=params.get("Weather6");
+						for(int i=0;i<2;i++)
+						{
+							
+							int random=(int) ((Math.random()*6)+1);
+							switch(random)
+							{
+							case 1:
+								map.put("msg", "날씨 등록에 성공하셨습니다");
+								if(i==0)
+								{
+									inter.Weather(Weather1);
+								}
+								else
+								{
+									inter.Weather2(Weather1);									
+								}
+							break;
+	
+							case 2:
+								map.put("msg", "날씨 등록에 성공하셨습니다");
+								if(i==0)
+								{
+									inter.Weather(Weather2);
+								}
+								else
+								{
+									inter.Weather2(Weather2);									
+								};
+							break;
+							
+							case 3:
+								map.put("msg", "날씨 등록에 성공하셨습니다");
+								if(i==0)
+								{
+									inter.Weather(Weather3);
+								}
+								else
+								{
+									inter.Weather2(Weather3);									
+								}
+							break;
+							
+							case 4:
+								map.put("msg", "날씨 등록에 성공하셨습니다");
+								if(i==0)
+								{
+									inter.Weather(Weather4);
+								}
+								else
+								{
+									inter.Weather2(Weather4);									
+								}
+							break;
+							
+							case 5:
+								map.put("msg", "날씨 등록에 성공하셨습니다");
+								if(i==0)
+								{
+									inter.Weather(Weather5);
+								}
+								else
+								{
+									inter.Weather2(Weather5);									
+								}
+							break;
+							
+							case 6:
+								map.put("msg", "날씨 등록에 성공하셨습니다");
+								if(i==0)
+								{
+									inter.Weather(Weather6);
+								}
+								else
+								{
+									inter.Weather2(Weather6);									
+								}
+							break;
+							}
+						}
+			return map;
+			}
+			
+			//날씨 찾기
+			public Map<String, WeatherDto> Findweather() {
+				inter = sqlSession.getMapper(ProjectInterface.class);
+				Map<String, WeatherDto> map= new HashMap<String, WeatherDto>();
+				map.put("weather", inter.Findweather());
+				
+				return map;
+			}
+		
 			
 }
 	
+
 	

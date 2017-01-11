@@ -5,31 +5,18 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>패션토크 게시판</title>
+		<link rel="stylesheet" type="text/css" href="resources/css/Ftboard.css"/>
+		<link rel="stylesheet" type="text/css" href="resources/css/button.css"/>
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="resources/css/board.css"/>
-		<style>
-		.tog1
-         {
-            visibility: hidden;
-         }
-         .tog2
-         {
-            display: none;
-         }
-         #texta
-         {
-            width: 690px;
-            resize: none;
-         }
-         .user
-         {
-            width: 50px;
-            
-         }
-         .Relecontent
-         {
-            width: 700px;
-         }
+		<style type="text/css">
+			#Ft4{
+			 	text-align : center;
+            	background-color : #434441;
+            	color: white;
+			}
+			.Ft1,.Ft2,.Ft4,.Ft5,.Ft6,.Ft7{
+				text-align: center;	
+			}
 		</style>
 	</head>
 	<body>
@@ -59,15 +46,14 @@
 						</c:if><!-- FTbutton -->
 					</td>					
 				</tr>		
-							
 				<tr class="Ft_subject">
-					<td class="Ft1">글 번호</td>
-					<td class="Ft2">이미지</td>
-		    		<td class="Ft3">제목</td>				
-					<td class="Ft4" id="Ft4">작성자</td>
-					<td class="Ft5">조회수</td>
-					<td class="Ft6">작성일</td>
-					<td class="Ft7">추천수</td>
+					<td class="Ft1" id="Ft4" width="60px" height="50px">글 번호</td>
+					<td class="Ft2" id="Ft4" width="150px">이미지</td>
+		    		<td class="Ft3"  id="Ft4">제목</td>				
+					<td class="Ft4" id="Ft4" width="70px">작성자</td>
+					<td class="Ft5"  id="Ft4" width="60px">조회수</td>
+					<td class="Ft6"  id="Ft4" width="150px">작성일</td>
+					<td class="Ft7"  id="Ft4"width="70px">추천수</td>
 				</tr>
 			</thead>			
 			<tbody id="list">
@@ -304,19 +290,19 @@
 		if(url == "./rest/Board_list"){
 		for(var i=0; i<list.length; i++){
 				content +="<tr>"
-							+"<td id='Idx"+i+"' class='Ft1'>"+list[i].board_idx+"</td>"
-							if(list[i].newfilename != null){
+							+"<td id='Idx"+i+"' class='Ft1' height='100px'>"+list[i].board_idx+"</td>"
+							if(list[i].newfilename == null){
 								content += "<td>" 
 										    +"<img width='15px' src='resources/img/default.jpg'/>";
 								}
 							else
 								{
 								content +="<td class='Ft2'>"
-										    +"<img width='150' height='50'  alt='메인 코디' src='./resources/upload/"+list[i].newfilename+"'/>";
+										    +"<img width='150' height='100px'  alt='메인 코디' src='./resources/upload/"+list[i].newfilename+"'/>";
 								}
 				content +=	"</td>"
 							+"	<td>"
-							+"<a href='javascript:tog("+i+")' style='text-decoration:none'>"
+							+"<a class='subject' href='javascript:tog("+i+")' style='text-decoration:none'>"
 							+list[i].subject
 							+"</a>";
 							if(list[i].replies >0){
@@ -329,7 +315,7 @@
 							+"<td class='Ft7'>"+list[i].ft_like+"</td>"
 							+"</tr>"
 							+"<tr id='T"+i+"'class='tog1'>"
-							+"<td colspan='7' >"
+							+"<td colspan='7'>"
 							+"<div id='"+i+"' class='tog2'>"
 							/* 상세보기 */
 						    +"</div>"
@@ -344,25 +330,28 @@
 		if(url == "./rest/FT_Board_Detail"){
 			content +="내용: "+list.content
 				   		+"<div id='LikeGO'>"
-				   		+"<a href=javascript:UP_like('"+list.board_idx+"')>"
-				   		+"<img width='30px' height='30px' alt='조아요' src='./resources/img/like.PNG'> "
+				   		+"<br/>"
+				   		+"<center>"
+				   		+"<a href=javascript:UP_like('"+list.board_idx+"') style='text-decoration:none'>"
+				   		+"<img width='20px' height='20px' alt='조아요' src='./resources/img/like.PNG'> "
 				   		+"</a>"
 				   		+"<br/>"
-				   		+"<span id='LIKE'>"
+				   		+"<span id='LIKE'>추천 "
 				   		+list.ft_like
 				   		+"</span>"
+				   		+"</center>"
 				   		+"</div>"
-						+"</br>"
-						+"<table>"
+						+"<table class=Ft_board3>"
 						+"<tr>"
-						+"<td class='user'>"
+						+"<td class='user' width='60px' style='background-color:#FBFEC8'>"
 						/* 닉네임 출력 */
+						+list.nickName
 						+"</td>"
 						+"<td class='data'>"
 						+"<textarea id='texta' class='"+list.board_idx+"' rows='3' placeholder='댓글작성이 가능합니다.' ></textarea>"
 						+"</td>"
-						+"<td class='btn'>"
-						+"<button onclick='replyRegist("+list.board_idx+")' >댓글달기</button>"
+						+"<td class='btn' width='80px'>"
+						+"<button class='bt' onclick='replyRegist("+list.board_idx+")' >댓글달기</button>"
 						+"</td>"
 						+"</tr>"
 						+"</table>"
@@ -375,13 +364,14 @@
 	//리플 리스트
 	function printReple(list,userId){
 		$("#texta").val("");
+		console.log(userId);
 		console.log(userId[0].id);
 		var content = "";
 		for(var i=0; i<list.length;i++){
 			content +="<tr>"
-						+"<td class='RepleNick'>"+list[i].nickname+"</td>"
+						+"<td class='RepleNick' width='60px' style='background-color:#FBFEC8'>"+list[i].nickname+"</td>"
 						+"<td class='Relecontent'>"+list[i].reple_content+"</td>"
-						+"<td class='Ft6'>"+list[i].reple_date+"</td>"
+						+"<td class='Ft6' width='120px'>"+list[i].reple_date+"</td>"
 						+"<td class='Ft6'>"
 						+"<a href=javascript:reple_like("+list[i].reple_idx+")>"
 						+"<img width='20' height='20'  alt='좋아요' src='./resources/img/like.PNG'/></a>"+list[i].reple_like
@@ -392,7 +382,7 @@
 						+"</td>";
 				if("${sessionScope.userId}"==userId[0].id)
 						{
-						content +="<td class='Ft7'><a href='javascript:repleDel("+list[i].reple_idx+");' style='text-decoration:none'>삭제</a>"+"</td>";
+						content +="<td class='Ft7' width='40px'><a href='javascript:repleDel("+list[i].reple_idx+");' style='text-decoration:none'>삭제</a>"+"</td>";
 						}
 						content +="</tr>";
 		}
@@ -427,8 +417,8 @@
 		
 		//[< 이전]
 		if(currPage > 5){
-			content +="<a href='#' onclick='listCall("
-				+(start-1)+")'>이전</a> | "
+			content +="<a href='#' class='a2' onclick='listCall("
+				+(start-1)+")'>이전</a> | ";
 		}		
 		
 		 for(var i=start; i<=end;i++)
@@ -438,8 +428,8 @@
 				if(currPage ==i){
 					content +="<b>"+i+"</b>";
 				}else{
-					content += " <a href='#' onclick='listCall("+i+")'>"
-					+i+"</a> "
+					content += " <a href='#' class='a2' onclick='listCall("+i+")'>"
+					+i+"</a> ";
 				}					
 			}			
 		} 
@@ -447,7 +437,7 @@
 		//마지막 페이지가 전체 페이지 수 보다 적으면 다음 링크 생성 [다음>]
 		if(end<pageNum)
 		{
-			content +=" | <a href='#' onclick='listCall("
+			content +=" | <a href='#' class='a2' onclick='listCall("
 					+(end+1)+")'>다음</a> "
 		}
 		

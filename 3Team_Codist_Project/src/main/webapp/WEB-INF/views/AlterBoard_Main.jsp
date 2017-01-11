@@ -37,11 +37,11 @@
                </td>               
             </tr>      
             <tr class="Al_subject">
-               <td class="Al1">글 번호</td>
-               <td class="Al2">이미지</td>
+               <td class="Al1" width="60px" height="50px">글 번호</td>
+               <td class="Al2" width="150px">이미지</td>
                 <td class="Al3">제목</td>            
-               <td class="Al4">작성자</td>
-               <td class="Al5">조회수</td>
+               <td class="Al4" width="100px">작성자</td>
+               <td class="Al5" width="70px">조회수</td>
             </tr>
          </thead>         
          <tbody id="list">
@@ -123,24 +123,24 @@
 		var content = "";
 		for(var i=0; i<list.length; i++){
 							content +="<tr>"
-										+"<td class='Al1'>"+list[i].board_idx
+										+"<td class='Al1' height='100px'>"+list[i].board_idx
 										if(list[i].nickName==userNick)
 										{
 						content +=" <a href='./BoardDelete?board_idx="+list[i].board_idx+"&category_name="+list[i].category_name+"' style='text-decoration:none'>삭제</a>";
 										}
 						content+="	</td>"
-						if(list[i].newfilename != null){
+						if(list[i].newfilename == null){
 							content += "<td class='Al2'>" 
 									    +"<img width='15px' src='resources/img/default.jpg'/>";
 							}
 						else
 							{
 							content +="<td class='Al2'>"
-									    +"<img width='150' height='50'  alt='물물교환' src='./resources/upload/"+list[i].newfilename+"'/>";
+									    +"<img width='150' height='100px'  alt='물물교환' src='./resources/upload/"+list[i].newfilename+"'/>";
 							}
 							content +=	"</td>"
 										+"	<td class='Al3'>"
-										+"<a href='./Board_Detail?board_idx="+list[i].board_idx+"'>"
+										+"<a class='listpage' href='./Board_Detail?board_idx="+list[i].board_idx+"'>"
 										+list[i].subject
 										+"</a>";
 										if(list[i].replies >0){
@@ -148,8 +148,8 @@
 										}
 										
 							content +="</td>" 
-										+"<td class='Al4'>"+list[i].nickName+"</td>"
-										+"<td class='Al5'>"+list[i].bhit+"</td>"
+										+"<td class='Al4' style='text-align: center'>"+list[i].nickName+"</td>"
+										+"<td class='Al5' style='text-align: center'>"+list[i].bhit+"</td>"
 										+"</tr>";
 		}
 		$("#list").empty();
@@ -181,7 +181,7 @@
 		//페이징 표시			
 		//< 이전
 		if(currPage > 5){
-			content +="<a href='javascript:listCall("
+			content +="<a class='a2' href='javascript:listCall("
 				+(start-1)+");'>이전</a> | "
 		}
 		

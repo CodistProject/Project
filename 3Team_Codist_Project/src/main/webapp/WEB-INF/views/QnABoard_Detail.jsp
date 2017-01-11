@@ -41,9 +41,10 @@
 				</td>
 			</tr>
 			<tr>
-				<td id="del" colspan="6">
-				<input type="button" onclick="location.href='./QnABoard'" value="목록"/>
-				<input type="button" onclick="location.href='./Board_update?board_idx=${content.board_idx}'" value="수정"/>
+				<td  id="del" colspan="6">
+				<input type="button" class="bt" onclick="location.href='./QnABoard'" value="목록"/>
+				<input type="button" class="bt"  onclick="location.href='./Board_update?board_idx=${content.board_idx}'" value="수정"/>
+				<input type="button" class="bt"  onclick="location.href='./deleteFT?board_idx=${content.board_idx}'" value="삭제"/>
 				</td>
 			</tr>
 			
@@ -212,7 +213,7 @@
 		var content = "";
 		for(var i=0; i<list.length;i++){
 			content +="<tr>"
-				+"<td class='repleNick'>"+list[i].nickname+"</td>"
+				+"<td class='repleNick' width='50px'>"+list[i].nickname+"</td>"
 				+"<td class='data left'>"+list[i].reple_content+"</td>"
 				+"<td class='RepleQnA'>"+list[i].reple_date+"</td>"
 				+"<td class='RepleQnA'>"
@@ -225,7 +226,7 @@
 				+"</td>";
 				if("${sessionScope.userId}"==userId[0].id)
 					{
-					content +="<td  class='RepleQnA'><a href='javascript:repleDel("+list[i].reple_idx+");' style='text-decoration:none'>삭제</a>"+"</td>";
+					content +="<td class='RepleQnA'><a href='javascript:repleDel("+list[i].reple_idx+");' style='text-decoration:none'>삭제</a>"+"</td>";
 					}
 				content +="</tr>";
 		}

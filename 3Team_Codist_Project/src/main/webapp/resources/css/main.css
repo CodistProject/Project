@@ -5,13 +5,11 @@
 				font-family: 'Jeju Gothic', serif;
 				font-size: '13px';								
 			}
-			
 			div#head {
-				margin-left: 10px;
-				margin-right: 10px;
+				margin-left: 5px;
+				margin-right: 5px;
 				height: 50px;			
 				text-align: center;
-				            
 			}
 			div#weather {
 				position: fixed;
@@ -21,7 +19,7 @@
 				margin-left: 10px;
 				width: 120px;
 				height: 800px;
-				font: bold; 				
+				font: bold; 	
 			}
 			#weather a {
 				padding-top: 5px;
@@ -30,7 +28,7 @@
 				text-align: center;				
 				text-decoration: none;				
 			}
-			
+			/* 
 			#weather a.top:hover {
 				background: #6BADFF;							
 			}
@@ -42,7 +40,7 @@
 			#weather a.bottom:hover {
 				background: #E5FF6B;
 			}
-			
+			 */
 			#weather a:visited {
 				color: black;
 			}
@@ -53,7 +51,6 @@
 				top: 150px;
 				width: 250px;
 				height: 200px;
-				
 			}
 			
 			#extra a.top {
@@ -97,15 +94,17 @@
 			}
 			
 			a.a2{
-			
 			text-decoration: none;
 		    color: black;
 			}
+			
 			div#menu {	
 				width:100%
 				height:100px;	
+				margin: 10px;
 				
 			}
+			
 			/*상단 메뉴  */
 			table.menu{
 				width: 100%;
@@ -198,7 +197,4 @@
 					text-align:right;
 					
 					}					
-			
-				
-		
 		

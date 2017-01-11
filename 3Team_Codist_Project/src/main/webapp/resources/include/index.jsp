@@ -11,7 +11,9 @@
 		<style>
 		#daily_pop{				
 				position:absolute;
-				background-color: #6BADFF;
+				background-color: #F5F5F5;
+				border: 1px solid #bcbcbc;
+				box-shadow: 2px 2px 2px 0px lightgray;
 				z-index:20;
 				width: 400px;
 				height: 200px;				
@@ -22,7 +24,9 @@
 			
 			#tomorrow_pop{				
 				position:absolute;
-				background-color: #E5FF6B;
+				background-color: #F5F5F5;
+				border: 1px solid #bcbcbc;
+				box-shadow: 2px 2px 2px 0px lightgray;
 				z-index:20;
 				width: 400px;
 				height: 200px;				
@@ -69,7 +73,7 @@
 	</head>
 	<body>
 		<div id="head">
-			<a href="./"><img id="logo" alt="로고" src="../../main/resources/img/logo.png"></a>			
+			<a href="./"><img class="logo"id="logo" alt="로고" src="../../main/resources/img/logo.png"></a>			
 		</div>
 		<br/><br/>
 		<div id="weather">
@@ -101,9 +105,9 @@
 				</table>
 			<br/>
 			<div id="ask">
-				<textarea id="askBox" cols="28px" rows="8px" placeholder="답변 받을 이메일 주소 입력 : "></textarea>			
+				<textarea id="askBox" cols="28px" rows="8px" placeholder="관리자에게 문의 하세요!~ : "></textarea>			
 				<div id="ask1">
-				<input  type="button" class="askbtn" value="쪽지" />
+				<input  type="button" class="askbtn" onclick="RegistNote()" value="쪽지" />
 				<input type="button"  class="askbtn" value="이메일" name="email"/>				
 				</div>				
 			</div>
@@ -136,12 +140,55 @@
 			<div id=tomwwe>
 			 날씨
 			</div>
-			<div id="codi1">
+			<div id="codi2">
 			코디
 			</div>		
 		</div>		
 	</body>
 	<script>	
+	sendNote();
+	weather();
+	//쪽지 등록
+	function RegistNote()
+	{
+		var url="./rest/RegistNote";
+		var data={};
+		data.content=$("#askBox").val();
+		data.userId="${sessionScope.userId}";
+		console.log(data.content);
+		if(data.userId=="")
+			{
+			alert("로그인 후 이용 가능합니다!")
+			}
+		else
+			{
+		ajaxCall(url, data);	
+			}
+	}
+	//날씨가져오기
+	function weather()
+	{
+		var url="./rest/Findweather";
+		var data={};
+		ajaxCall(url, data);	
+	}
+	
+	//알람
+	function sendNote(){
+		var url="./rest/countNote";
+		var data={};
+		ajaxCall(url, data);	
+		//10초마다
+		setInterval(function(){
+			var url="./rest/countNote";
+			var data={};
+			ajaxCall(url, data);	
+			
+		}, 10000);
+	}
+			
+	
+	
 		// 당일 마우스 마우스오버
 		$("#daily").hover(function () {
 			var html = "";			
@@ -202,16 +249,20 @@
 		$("input[name='email']").click(function(){
 			console.log("이메일 처리");
 			url = "./rest/Email";
-			data={};
-			data.userId = userId;			
-			data.content=$("#askBox").val();			
-			// console 로 data 담은 것들 제대로 담겼는지 체크
-			// 유저 정보
-			console.log(data.userId);	
-			console.log(data.content);				
-			
-			// 아작스로 보내서 처리(url, data)
-			ajaxCall(url, data);
+			data={};			
+			// 로그인 유효성검사(이메일 문의)
+			if(userId==""){
+				alert("로그인이 필요한 서비스입니다!");
+			}else{
+				data.userId = userId;			
+				data.content=$("#askBox").val();			
+				// console 로 data 담은 것들 제대로 담겼는지 체크
+				// 유저 정보
+				console.log(data.userId);	
+				console.log(data.content);						
+				// 아작스로 보내서 처리(url, data)
+				ajaxCall(url, data);	
+			}
 		});		
 		
 		// 아작스 처리(이메일 문의)
@@ -225,11 +276,37 @@
 				success:function(data){
 					console.log(data);
 					console.log("성공");
-					if(url=="./rest/Email"){									
+					if(reqUrl=="./rest/Email"){									
 						alert("문의하신 내용이 이메일 전송이 완료되었습니다.");
-					}else{
-						alert("이메일 전송이 실패하였습니다!");			
-					}					
+					}
+					if(reqUrl=="./rest/countNote"){
+						var nowNoteCnt=data.count;
+						console.log("현재 쪽지"+nowNoteCnt);
+						if(nowNoteCnt!=0 &&"${sessionScope.userId}"=='ADMIN'){
+							$("#noteImg").css("display","block");
+							$("#noteImg").html("!!!"+nowNoteCnt+"개의 쪽지가 존재합니다!");
+						}else{
+							$("#noteImg").css("display","none");
+						}
+					}
+					if(reqUrl=="./rest/RegistNote")
+						{
+						console.log(data.msg);
+						if(data.msg==1)
+							{
+							alert("관리자에게 쪽지가 전송 되었습니다.!");
+							}
+						}
+					if(reqUrl=="./rest/Findweather")
+						{
+						console.log(data.weather.dailycody);
+						var content = "<img width='250' height='200px'  alt='날씨 코디' src='./resources/upload/"+data.weather.dailycody+"'/>";
+						$("#codi1").empty();
+						$("#codi1").append(content);
+						var content2 = "<img width='250' height='200px'  alt='날씨 코디' src='./resources/upload/"+data.weather.tomrrowCody+"'/>";
+						$("#codi2").empty();
+						$("#codi2").append(content2);
+						}
 				}, error : function(e){
 					console.log("에러");
 				}

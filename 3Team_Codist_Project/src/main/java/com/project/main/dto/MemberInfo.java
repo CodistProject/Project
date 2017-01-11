@@ -1,5 +1,7 @@
 package com.project.main.dto;
 
+import java.sql.Date;
+
 public class MemberInfo {	
 
 	// 로그인, 회원정보 관련	
@@ -12,6 +14,7 @@ public class MemberInfo {
 	private String phone;	//폰번호
 	private String birth;       // 생년월일
 	private String gender;   // 성별
+	private Date reg_date;   // 생성일
 	private String email;    // 이메일	
 	private String PW_QnA;   // 비밀번호 질문
 	private String PW_ANSWER;   // 비밀번호 답	
@@ -82,8 +85,13 @@ public class MemberInfo {
 	}
 	public void setPW_ANSWER(String pW_ANSWER) {
 		PW_ANSWER = pW_ANSWER;
-	}	
+	}
 	
+	public Date getReg_date() {
+		return reg_date;
+	}
 	
-
+	public void setReg_date(Date reg_date) {
+		this.reg_date = reg_date;
+	}
 }
