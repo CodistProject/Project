@@ -1075,8 +1075,7 @@ public class ProjectService {
 		// 로그인시 가능하게 유효성 검사		
 		if(userId==""){
 			String page="ioi";
-			String msg="";
-			logger.info("if가 되는거니?");
+			String msg="";			
 			msg = "로그인이 필요한 서비스입니다!.";
 			mav.addObject("msg", msg);
 			mav.setViewName(page);
@@ -1085,11 +1084,20 @@ public class ProjectService {
 		if(userId!=""){
 			// userId 로 join_idx 찾기
 			String Join_Idx = inter.Find_JoinIdx(userId);
-			logger.info("조인 idx:"+Join_Idx);
+			logger.info("조인 idx:"+Join_Idx);			 
 			// Join_Idx 로 가져올 데이터 찾기(옷+일정) -> obj 담기-> myCalendar 담기
-			obj.put("myCloth", inter.Find_myCloth(Join_Idx));
-			mav.addObject("myCalendar", obj);		
-			mav.setViewName("My_Calendar");			
+			ArrayList<myClothDto> list = new ArrayList<myClothDto>();
+			String msg="";			
+			list=inter.Find_myCloth(Join_Idx);
+			if(list.size()==0){
+				msg = "나만의 옷장에 담긴 데이터가 없습니다. 코디게시판에서 담아오는 서비스가 필요합니다!";
+				mav.addObject("my_msg", msg);
+				mav.setViewName("ioi");
+			}else{
+				obj.put("myCloth",list);
+				mav.addObject("myCalendar", obj);		
+				mav.setViewName("My_Calendar");	
+			}		
 		}
 		return mav;
 	}

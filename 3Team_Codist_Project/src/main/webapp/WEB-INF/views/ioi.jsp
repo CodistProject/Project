@@ -73,6 +73,11 @@
 		
 	</body>
 	<script>
+	// 나만의 옷장에 데이터 없을시 경보 메세지
+	var my_msg = "${my_msg}";
+	if(my_msg=="나만의 옷장에 담긴 데이터가 없습니다. 코디게시판에서 담아오는 서비스가 필요합니다!"){
+		alert(my_msg);
+	}
 	
 	CBlistCall();
 	FTlistCall();

@@ -307,6 +307,7 @@ public class MainController {
 		logger.info("사다리 게임 설정값 넘기기");		
 		return service.Bridge(params);
 	}
+	
 	// 게시물 삭제
 	@RequestMapping(value="/BoardDelete")
 	public ModelAndView BoardDelete(@RequestParam("board_idx") String board_idx,
