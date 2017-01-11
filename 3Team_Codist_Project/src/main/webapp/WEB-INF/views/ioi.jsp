@@ -8,32 +8,7 @@
 		<title>메인 홈페이지</title>
 		<link rel="stylesheet" type="text/css" href="resources/css/ioi.css"/>
 		<style>
-			div.bord{
-				border-top-style: solid;
-				border-top-color: pink;
-				height: 200px;
-		
-			}
-			
-			div.bord1{
-				float: left;	
-				border: 1px solid;
-				width: 47%;
-				height: 150px;
-			}
-			
-			div.bord2{
-			
-				float: right;	
-				border: 1px solid;
-				width: 47%;
-				height: 150px;
-			}
-			.jump
-			{
-				width: 300px;
-				height: 130px;
-			}
+						
 		</style>
 	</head>
 	<body>
@@ -41,7 +16,8 @@
 			<jsp:include page="../../resources/include/index.jsp"></jsp:include>
 		</div>
 		<div class="content">
-			BEST 코디
+			<br/>
+			<span class="fonts">BEST 코디</span>
 			<div class="bord">
 				<table class='BestCody'>
 					<!-- 베스트 코디 리스트  -->
@@ -49,7 +25,7 @@
 			</div>
 			<div class="jump"><!-- 사이간격 --></div>
 			
-			회원 추천 코디
+			<span class="fonts">회원 추천 코디</span>
 			<div class="bord">
 				<table class='Recommend'>
 					<!-- 회원 추천 코디 목록 -->
@@ -57,18 +33,23 @@
 			</div>
 			<div class="jump"><!-- 사이간격 --></div>
 			
+			<div class="bord1-1">
+			<span class="fonts">코디를 부탁해</span> 
 			<div class="bord1">
 				<table class='CoplzBoardlist'>
 					<!-- 코디를 부탁해 게시판 노출 -->
 				</table>
 			</div>
+			</div>
 			
+			<div class="bord2-1">
+			<span class="fonts">Q&A</span>
 			<div class="bord2">
 				<table class='QnABoardlist'>
 					<!-- Q&A 게시판 노출 -->
 				</table>
 			</div>		
-		
+			</div>
 		</div>
 		
 	</body>
@@ -317,10 +298,13 @@
 		console.log(start);
 		console.log(end);
 		var win;
-		if(nowTime>=start && nowTime<=end){						
-			 win	= window.open("TimeEvent", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=200,left=300,width=600,height=500");
-		}else{					
-			win.close();
+		
+		if(nowTime>=start && nowTime<=end){				
+			 win	= window.open("../../main/TimeEvent", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=200,left=300,width=600,height=500");
+		}else{
+			if(win){
+				win.close();
+			}			
 		}
 	}
 	

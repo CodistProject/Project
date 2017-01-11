@@ -8,8 +8,7 @@
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="resources/css/myPage.css"/>
 		<link rel="stylesheet" type="text/css" href="resources/css/button.css"/>
- 	</head>
-  	<body>
+ 	</head> 
    	<body>   	
    	<jsp:include page="../../resources/include/index.jsp"></jsp:include>
   	<div id="in">

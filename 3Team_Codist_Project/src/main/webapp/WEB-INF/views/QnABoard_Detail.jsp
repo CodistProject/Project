@@ -41,7 +41,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="6">
+				<td id="del" colspan="6">
 				<input type="button" onclick="location.href='./QnABoard'" value="목록"/>
 				<input type="button" onclick="location.href='./Board_update?board_idx=${content.board_idx}'" value="수정"/>
 				</td>
@@ -66,13 +66,22 @@
 		</div>
 	</body>
 	<script>
+	//삭제 가능 판단 및 삭제
+	del();
 
+	function del(){
+		var userId="${sessionScope.userId}";	
+		ㅊ
+		
+		console.log("${content.board_idx}");
+		console.log("${content.category_name}");
+	}
 	// 리플 리스트 실행
-
 	var userId="${sessionScope.userId}";
 	FindNick(userId);
 	replyList();
 	var userNick="";
+	
 	$("#go").click(function(){
 		url ="./rest/replyRegist";
 		data ={};

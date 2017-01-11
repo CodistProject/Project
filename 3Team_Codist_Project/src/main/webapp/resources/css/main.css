@@ -3,7 +3,7 @@
 			/*메인 페이지 ui 상단 좌, 우  */
 		html, body,h,h1, h2, h3, h4, h5, h6, li, p, table {
 				font-family: 'Jeju Gothic', serif;
-				font-size: 13pt;
+				font-size: '13px';								
 			}
 			
 			div#head {
@@ -32,7 +32,7 @@
 			}
 			
 			#weather a.top:hover {
-				background: #6BADFF;
+				background: #6BADFF;							
 			}
 			
 			#weather a.middle:hover {
@@ -151,8 +151,7 @@
 				margin-right: 130px;				
 				width: 840px;
 			}
-			#ask{
-				
+			#ask{				
 				width: 220px;
 				height: 150px;
 				box-shadow: 2px 2px 2px 0px lightgray;
@@ -190,15 +189,16 @@
 		      }
 			/* 로그인 박스 */
 			
-			table.login,td.login{
-					padding: 5px;
-					text-align:center;
-					}
-			table.login,td.login{
+			table.login{
 					border-collapse:collapse;
 					padding: 5px;
-					text-align:center;
+					
 					}
+			td.login	{
+					text-align:right;
+					
+					}					
+			
 				
 		
 		

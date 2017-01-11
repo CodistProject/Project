@@ -12,7 +12,7 @@
 		#daily_pop{				
 				position:absolute;
 				background-color: #6BADFF;
-				z-index:2;
+				z-index:20;
 				width: 400px;
 				height: 200px;				
 				top: 180px;
@@ -23,7 +23,7 @@
 			#tomorrow_pop{				
 				position:absolute;
 				background-color: #E5FF6B;
-				z-index:2;
+				z-index:20;
 				width: 400px;
 				height: 200px;				
 				top: 245px;
@@ -71,20 +71,18 @@
 		<div id="head">
 			<a href="./"><img id="logo" alt="로고" src="../../main/resources/img/logo.png"></a>			
 		</div>
+		<br/><br/>
 		<div id="weather">
-			<a class="top" href="javascript:Event();">이벤트</a>			
+			<a class="top" href="javascript:Event();">이벤트</a>	
+			<br/>		
 			<a id="daily" class="top">Daily<br/>Cody</a>
-			<br/>					
-			<a id="tomorrow" class="bottom">Tomrrow Cody</a>			
+			<br/><br/>						
+			<a id="tomorrow" class="bottom">Tomorrow Cody</a>			
 		</div>	
 		<div id="extra">
 			<div id="loginSession">
 				<c:if test="${sessionScope.userId ==null}">
-					<jsp:include page="loginBox.jsp"></jsp:include>
-					<a href="#" class="a2" onclick="location.href='./joinCheck'">회원 가입</a>
-					<br/>
-					<br/>
-					<a href="Find_Id" class="a2">아이디</a><a href="Find_Pw" class="a2">/비밀번호 찾기</a> 
+					<jsp:include page="loginBox.jsp"></jsp:include>					 
 				</c:if>
 				
 				<c:if test="${sessionScope.userId !=null}">

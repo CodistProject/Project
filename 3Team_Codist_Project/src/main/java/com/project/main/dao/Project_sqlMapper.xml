@@ -237,7 +237,7 @@
  		SELECT * FROM TIME_EVENT WHERE TIME_EVENT_NAME = #{param1}
  	</select>
 
- 	<!-- 마일리지 정보 가져오 -->
+ 	<!-- 마일리지 정보 가져오기 -->
  	<select id="Find_Mileage" resultType="com.project.main.dto.MileageDto">
  		SELECT * FROM EVENT_COUPON WHERE USER_ID = #{param1}
   	</select> 	
@@ -245,6 +245,11 @@
  	<!--마일리지 넣기-->
  	<update id="Mileage_put">
  		UPDATE EVENT_COUPON SET MILEAGE = #{param2} WHERE USER_ID = #{param1}
+ 	</update>
+ 	
+ 	<!--마일리지 사용 및 쿠폰저장-->
+ 	<update id="Mileage_use">
+ 		UPDATE EVENT_COUPON SET MILEAGE = #{param2}, ${param3}=${param3}+1 WHERE USER_ID = #{param1}
  	</update>
  	
  	<!-- 베스트 코디 보기 -->

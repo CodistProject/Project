@@ -58,6 +58,7 @@
 	<script>
 	
 	   var currPage = 1;
+	   var userNick = "";
 		
 		listCall(currPage);
 		//페이지 갯수 정하기

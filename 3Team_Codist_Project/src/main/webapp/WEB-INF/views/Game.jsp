@@ -369,7 +369,9 @@ html, body{
     }
 	//조건에 따라 무조건 실행 하도록 만들기
     $('#button').on('click', function(){
-        var member = $('input[name=member]').val();        
+        var member = $('input[name=member]').val();
+        var id = "${sessionScope.userId}";      
+        
         $('#landing').css({
             'opacity': 0
         });
@@ -378,7 +380,10 @@ html, body{
             $('#landing').remove();
             init();
         }, 310)
-		
+		if(id ==""){
+			alert("로그인이 필요한 서비스입니다.");
+			location.href="TimeEvent";
+		}
     });
 	
     function canvasDraw(){
@@ -449,16 +454,16 @@ html, body{
              }else{
             	 alert(val+" 포인트가 증정되었습니다.");
              }   
-             
-             gamemileage(val);
+           
+           	gamemileage(val);                      
             //마일리지 업데이트
              
          	function gamemileage(val){
-        		var url="./rest/gamemileage";
+        		var url="./rest/gamemileage";        		
         		var data = {};
         		data.val = val;
         		data.userId="${sessionScope.userId}";
-        	  	data.userMileage = ${sessionScope.mil};
+        	    data.userMileage = "${sessionScope.mil}";        		     	  	
 		        		if(data.val=="꽝"){
 		        			data.val = 0;
 		        			console.log("당첨 마일리지:"+data.val);

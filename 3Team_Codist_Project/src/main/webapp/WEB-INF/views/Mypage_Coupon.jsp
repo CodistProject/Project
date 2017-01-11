@@ -7,38 +7,39 @@
   		<title>쿠폰</title>
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 		<style>
-			#cou{
-				position :absolute;
-				left: 500px;
-				top: 200px;
-			}
+			
 		</style>
  	</head>
   	<body>   
-   <table id="cou" border="5">
-   
-   		<tr>
-   			<td>NO</td>
-   			
-   			<td>할인</td>
-   			
-   			<td>할인 가능 쇼핑몰</td>
-   		</tr>
-	   <tr>
-	  		<td>1</td> 
-	  		<td>10%</td> 
-	  		<td>멍텅구리</td>
-	   </tr>
-	    <tr>
-	  		<td>2</td> 
-	  		<td>15%</td> 
-	  		<td>어쩌구리</td>
-	   </tr>
-	   	<tr>
-	  		<td>3</td> 
-	  		<td>20%</td> 
-	  		<td>저쩌구리</td>
-	   </tr>
-   	</table>
+   	<jsp:include page="../../resources/include/index.jsp"></jsp:include>
+  	<div id="in">
+  	<jsp:include page="../../resources/include/Mypage.jsp"></jsp:include>
+  	</div>
+  	<div class="content">  	  	
+  	<div class="Mem_Modi_div">
+  		<table id="Mem_Modi_table1">
+ 			<tr>
+ 				<td>
+ 					<p>쿠폰 보유 내역</p>
+ 				</td>
+ 			</tr>
+ 			<tr>
+ 				<td>
+ 					1000원 쿠폰 : ${Find_Mileage.coupon_5} 개
+ 				</td>
+ 			</tr>
+ 			<tr>
+ 				<td>
+ 					2000원 쿠폰 : ${Find_Mileage.coupon_10} 개
+ 				</td>
+ 			</tr>
+ 			<tr>
+ 				<td>
+ 					3000원 쿠폰 : ${Find_Mileage.coupon_15} 개
+ 				</td>
+ 			</tr>						 		
+  		</table>
+  		</div>   	
+  		</div>			
   	 </body>
 </html>

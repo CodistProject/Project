@@ -12,7 +12,7 @@
 				top: 215px;
 				left: 450px;
 				
-			}
+			} 
 			.te{
 				text-align: right;
 			}

@@ -81,7 +81,7 @@ public class ProjectService {
 		logger.info("pw: {}",pw);
 		
 		
-		String page = "ioi";		
+		String page = "redirect:/";		
 		if(id == null || pw == null){
 			mav.addObject("msg","응 여기 안와..");
 		}else{
@@ -95,6 +95,7 @@ public class ProjectService {
 				mil=index_Mileage(id);
 				session.setAttribute("mil",mil.getMileage());
 			}else{
+				page="ioi";
 				mav.addObject("msg","아이디 또는 비밀번호를 확인 하세요");
 			}			
 		}
@@ -1132,6 +1133,32 @@ public class ProjectService {
 				return map;
 			}
 			
+			//마이페이지 쿠폰페이지 이동
+			public ModelAndView Mypage_Coupon(String userId) {
+				inter = sqlSession.getMapper(ProjectInterface.class);
+				MileageDto mdt = new MileageDto();
+				inter.Find_Mileage(userId);
+				logger.info(userId);				
+				ModelAndView mav = new ModelAndView();
+				mav.addObject("Find_Mileage",  inter.Find_Mileage(userId));
+				mav.setViewName("Mypage_Coupon");
+				return mav;	
+			}	
+			
+			///마일리지 사용
+			public ModelAndView usemile(Map<String, String> params, HttpSession session) {
+				inter = sqlSession.getMapper(ProjectInterface.class);
+				String userId = (String) session.getAttribute("userId");
+				int userMileage = (int) session.getAttribute("mil");
+				int useMileage = Integer.parseInt(params.get("won"));
+				int reuslt_Mlieage = userMileage - useMileage;	
+				String coupon = params.get("coupon");
+				session.setAttribute("mil",reuslt_Mlieage);					
+				ModelAndView mav = new ModelAndView();
+				mav.addObject("usemile",  inter.Mileage_use(userId, reuslt_Mlieage, coupon));
+				mav.setViewName("redirect:/MyPage_Mileage?userId="+userId);
+				return mav;
+			}
 			
 }
 	

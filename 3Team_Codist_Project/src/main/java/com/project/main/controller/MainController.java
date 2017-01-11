@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -308,5 +309,21 @@ public class MainController {
 		logger.info("사다리 게임 시간값 넘기기");		
 		return service.Time(params);
 	}
+	
+	//마이페이지 쿠폰함 가기
+		@RequestMapping(value="/Mypage_Coupon")
+		public ModelAndView Mypage_Coupon(@RequestParam ("userId") String userId){
+			logger.info("마이페이지 쿠폰함 가기");
+			logger.info("유저아이디:"+userId);		
+			return service.Mypage_Coupon(userId);
+		}
+	
+	//마일리지 사용하기
+	@RequestMapping(value="/usemile")
+	public ModelAndView usemile(@RequestParam Map<String, String> params, 
+			HttpSession session){
+		logger.info("마일리지 사용하기");		
+		return service.usemile(params,session);
+	}	
 	
 }

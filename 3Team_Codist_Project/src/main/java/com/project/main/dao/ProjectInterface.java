@@ -153,8 +153,12 @@ public interface ProjectInterface {
 	//마일리지 찾기
 	public MileageDto Find_Mileage(String user_Id);
 
-	//사다리게임 마일리지 넣기
+	//마일리지 업데이트
 	public int Mileage_put(String userId, int reuslt_Mlieage);
+
+	//마일리지 사용 및 쿠폰증정
+	public int Mileage_use(String userId, int reuslt_Mlieage, String coupon);
+
 	
 }
 

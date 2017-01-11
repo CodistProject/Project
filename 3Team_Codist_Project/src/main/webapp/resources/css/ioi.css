@@ -1,23 +1,38 @@
 @CHARSET "UTF-8";
 /*메인 페이지 중앙  */
-			div.content{
-				margin: 10px;
-			}
+
 			div.bord{
 				border-top-style: solid;
-				border-top-color: pink;
-				height: 200px;
+				border-top-color: black;
+				height: 200px;		
 			}
-			div.bord1{
+			
+			div.bord1{				
+				border-top-style: solid;
+				border-top-color: black;			
+			}
+			
+			div.bord1-1{
 				float: left;	
-				border: 1px solid;
 				width: 47%;
-				height: 200px;
+				height: 150px;
 			}
-			div.bord2{
+			
+			div.bord2{							
+				border-top-style: solid;
+				border-top-color: black;			
+			}
+						
+			div.bord2-1{
 				float: right;	
-				border: 1px solid;
 				width: 47%;
-				height: 200px;
+				height: 150px;
 			}
-	
+			.jump
+			{
+				width: 300px;
+				height: 150px;
+			}
+			.fonts{
+				font-size: 20px;
+			}
