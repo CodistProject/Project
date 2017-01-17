@@ -131,7 +131,7 @@
 							+"<a class='listpage' href='./Board_Detail?board_idx="+list[i].board_idx+"'>"
 							+list[i].subject
 							+"</a>";
-							if(list[i].newFileName != null){
+							if(list[i].newFileName == null){
 								content += "<h8>[첨부파일]</h8>"				
 								}
 							else

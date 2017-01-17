@@ -12,14 +12,21 @@
             text-decoration: none;
             
          }
-         #o,.p
+         #o
          {
             border:1px solid;
-            border-collapse: collapse;
-            padding: 20px;
-            font-size: 20px;
+            border-collapse: collapse;           
+            font-size: 13px;
             text-align: center;
+            width : 550px;            
          }
+         .p{
+         	border:1px solid;
+            border-collapse: collapse;
+            font-size: 13px;
+            text-align: center;
+            padding: 10px;
+           }
          .l
          {
             background-color: blue;
@@ -27,12 +34,13 @@
          }
          .messageDiv
          {
-         position: absolute;
+         position: absolute;         
          top: 25%;
          left:25%;         
          }
-  
-         
+         .b{
+         	border : 1px solid white;
+         }
       </style>
    </head>
    <body>
@@ -43,7 +51,7 @@
         <table id="o">
            <tr class="l">
             <td class="p">번호</td>
-            <td class="p">ID</td>
+            <td class="p">사용자(ID)</td>
             <td class="p">내용</td>
             <td class="p">작성일</td>
             <td class="p">삭제</td>           

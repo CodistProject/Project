@@ -43,7 +43,8 @@
 			</tr>
 			<tr>
 				<td>첨부파일</td>
-				<td colspan="5" class="left" id="attach" width="30px">	
+				<td colspan="5" class="left" id="attach" width="30px">
+					${content.filename}	
 				</td>
 			<tr>
 				<td colspan="6">
@@ -54,7 +55,7 @@
 			<tr>
 				<td colspan="6">
 					<input type="button" class="bt" onclick="location.href='./AlterBoard'" value="목록"/>
-					<input type="button" class="bt" onclick="location.href='./Board_update?board_idx=${content.board_idx}'" value="수정"/>
+					<input type="hidden" class="bt" onclick="location.href='./Board_update?board_idx=${content.board_idx}'" value="수정"/>
 					<input type="button" class="bt del" onclick="location.href='./BoardDelete?board_idx=${content.board_idx}&category_name=Alter'" value="삭제" />						
 				</td>
 			</tr>

@@ -107,8 +107,8 @@
 	<!-- 글쓰기 -->
  	<insert id="Board_Write">
  		INSERT INTO TOTAL_BOARD(
- 	 		board_idx,  nickname, subject, content, filename, newfilename, category_name,join_idx)VALUES(
- 			seq_total_board.NEXTVAL, #{param1}, #{param2}, #{param3},#{param4},#{param5},#{param6},#{param7})
+ 	 		board_idx,  nickname, subject, content, filename, newfilename, category_name,join_idx,FT_LIKE,FT_HATE,REPLES,BHIT)VALUES(
+ 			seq_total_board.NEXTVAL, #{param1}, #{param2}, #{param3},#{param4},#{param5},#{param6},#{param7},0,0,0,0)
  	</insert>
  	 	
  	<!--코디 글쓰기(메인) -->

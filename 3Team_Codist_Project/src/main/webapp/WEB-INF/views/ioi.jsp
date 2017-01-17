@@ -86,7 +86,7 @@
 		var url="./rest/Board_list";
 		var data = {};
 		data.page = 1;
-		data.pagePerNum = 3;
+		data.pagePerNum = 5;
 		data.category_name='CP';
 		reqServer(url, data);
 	}
@@ -146,7 +146,9 @@
 			content	+="</tr><tr>";
 			}
 			content +="<td>"
+						+"<a href='./CodiBoard_Detail?board_idx="+list[i].board_idx+"'>"
 						+"<img width='275px' height='280px' alt='메인 코디' src='./resources/upload/"+list[i].newfilename+"'/>"
+						+"</a>"	
 						+"</br>"	
 						+list[i].subject
 						+"</br>";

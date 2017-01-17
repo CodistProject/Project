@@ -122,20 +122,28 @@
    })
    
    function upLIke(i){
-      var url="./rest/EventupLike";
-      var data = {};
-      data.userId=userId;
-      if(i==1)
-    	  {
-      		data.selection_name=$("#file1").val();
-    	  }
-      else
-    	  {
-    	  	data.selection_name=$("#file2").val();
-    	  }
-      console.log(userId);
-      console.log(data.selection_name);
-      reqServer(url, data);
+	   if("${sessionScope.userId}"!="")
+       {
+	      var url="./rest/EventupLike";
+	      var data = {};
+	      data.userId=userId;
+	      if(i==1)
+	    	  {
+	      		data.selection_name=$("#file1").val();
+	    	  }
+	      else
+	    	  {
+	    	  	data.selection_name=$("#file2").val();
+	    	  }
+	      console.log(userId);
+	      console.log(data.selection_name);
+	      reqServer(url, data);
+       }
+	   else
+       {
+       alert("로그인 후 사용 가능합니다.");
+       }
+           
    }
    
    

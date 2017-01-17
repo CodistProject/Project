@@ -123,7 +123,7 @@
 		#LikeGO
 		{
 			position: relative;
-			top: 58%;
+			top: 52%;
 			left: 40%;
 		}
 		#LIKE

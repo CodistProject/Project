@@ -274,6 +274,7 @@
 				if(url =="./rest/board_Uplike")
 				{
 				 alert(d.msg);		//확인 누르는 순간 바뀌게 하기
+				 location.href="./FTBoard";
 				}
 				
 				},error:function(e){
