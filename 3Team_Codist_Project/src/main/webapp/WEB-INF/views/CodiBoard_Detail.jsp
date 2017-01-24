@@ -76,7 +76,7 @@
 		.PopUpMaster /* 시방 */
 			{
 			width:100%;
-			height: 80%;
+			height: 100%;
 			}
 		#PopUp2Cloth
 			{
@@ -90,14 +90,22 @@
 			}
 		#PopUpCloth
 			{
+			background-color:white;
 		    position : relative;
-			background-color : yellow;
-			width:250px;
-			left :700px;
+			width:350px;
+			left :550px;
 			top: 400px;
 			padding : 10px;	
 			display: none;
+			border:1px solid;
 			}
+		#PopUp_table
+			{
+			position:relative;
+			left:50px;
+			}
+		
+		
 		.Clothsubject
 			{
 			position:relative;
@@ -123,8 +131,9 @@
 		#LikeGO
 		{
 			position: relative;
-			top: 52%;
-			left: 40%;
+			top: 55%;
+			left: 20%;
+			
 		}
 		#LIKE
 		{
@@ -145,30 +154,41 @@
 	   			<div  class="img2">	
 	   				<img  src="./resources/upload/${dto.newfilename} " width="150" height="150" alt="이미지2"/>
 	   				<br/>${dto.real_name }
+	   				<!-- 외투 -->
+   					<input type="hidden" value="${dto.newfilename}" id="HiddenOutter">
 	   			</div>
 	   		</c:if>
 	   		<c:if test="${dto.category_name =='Top' }">
 		   		<div  class="img3">	
 		   			<img  src="./resources/upload/${dto.newfilename} " width="150" height="150" alt="이미지3"/>
 		   			<br/>${dto.real_name }
+		   			<!-- 상의 -->
+   					<input type="hidden" value="${dto.newfilename}" id="HiddenTop">
 		   		</div>
 	   		</c:if>
 	   		<c:if test="${dto.category_name =='Pants' }">
 		   		<div  class="img4">	
 		   			<img  src="./resources/upload/${dto.newfilename} " width="150" height="150" alt="이미지4"/>
 		 			<br/>${dto.real_name }
+		 			<!-- 하의 -->
+   					<input type="hidden" value="${dto.newfilename}" id="HiddenPants">
 		   		</div>
 	   		</c:if>
+   				
    		</c:forEach>
+   	
+   		
+   		<!-- 좋아요 버튼 -->
    		<div id='likehate'>
 	  		<div id="LikeGO">
 			 	<a href=javascript:UP_like('${content.board_idx}')>
-			 		<img width="200px" height="100px" alt="조아요" src="./resources/img/like.PNG"> 
+			 		<img width="200px" height="100px" alt="조아요" src="./resources/img/like2.png"> 
 			 	</a>
 			 		<br/>
 			 		<span id="LIKE" >${content.ft_like}</span>
 	  		</div>
    		</div>
+   		
    		<div class="det">
    			<table class="table1" >
    				<tr>
@@ -218,7 +238,9 @@
    				<tr>
    					<td id="btn_td" align="right">
    						<input type="button" class="buttonA"  value="수정" />
+   					 	<c:if test="${sessionScope.userId != null}">
    					 	<input type="button" class="buttonA"  onclick="popUp()" value="담기"/>
+   						</c:if>
    					</td>   					
    				</tr>   				
    				</table>
@@ -229,13 +251,66 @@
      	  		<table id="PopUp_table" >
 	   			<tr>
 	   				<td colspan="2">
-	   					<h2 align="center"> ☆나만의 코디☆</h2>
+	   					<h2 align="center"> 나만의 코디 담기</h2>
 	   				</td>
 	   			</tr>
 	   			<tr>
 	   				<td>
-	   					날짜 :  <input type="text"  id="Date" name="Calendar_Date" placeholder="Ex)2016-01-06"/>
-	   			
+	   					날짜 :				
+						<select name="year" class="sel">
+							<option value="">----</option>
+							<option value="2016">2016</option>
+							<option value="2017">2017</option>
+						</select>년
+						<select name="month" class="sel">
+							<option value="">--</option>
+							<option value="12">12</option>
+							<option value="11">11</option>
+							<option value="10">10</option>
+							<option value="9">9</option>
+							<option value="8">8</option>
+							<option value="7">7</option>
+							<option value="6">6</option>
+							<option value="5">5</option>
+							<option	value="4">4</option>
+							<option value="3">3</option>
+							<option value="2">2</option>								
+							<option value="1">1</option>
+						</select>월
+						<select name="day" class="sel">
+							<option value="">--</option>
+							<option value="31">31</option>
+							<option value="30">30</option>
+							<option value="29">29</option>
+							<option value="28">28</option>
+							<option value="27">27</option>
+							<option value="26">26</option>
+							<option value="25">25</option>
+							<option value="24">24</option>
+							<option value="23">23</option>
+							<option value="22">22</option>
+							<option value="21">21</option>
+							<option value="20">20</option>
+							<option value="19">19</option>
+							<option value="18">18</option>
+							<option value="17">17</option>
+							<option value="16">16</option>
+							<option value="15">15</option>
+							<option value="14">14</option>
+							<option value="13">13</option>
+							<option value="12">12</option>
+							<option value="11">11</option>
+							<option value="10">10</option>
+							<option value="9">9</option>
+							<option value="8">8</option>
+							<option value="7">7</option>
+							<option value="6">6</option>
+							<option value="5">5</option>
+							<option value="4">4</option>
+							<option value="3">3</option>
+							<option value="2">2</option>
+							<option value="1">1</option>								
+						</select>일	
 	   				</td>
 	   			</tr>
 	   			<tr>
@@ -273,39 +348,62 @@
    	</div>   
   	</body>
   	<script>	
+ 	 //나온 그림은 빼기,담기에 사용
+	var HOuter=$("#HiddenOutter").val();
+  	var HTop=$("#HiddenTop").val();
+  	var HPants=$("#HiddenPants").val();
   	
   	// 코디 담기 버튼실행- 나만의 옷장으로 보내기 팝업 띄우기(날짜/이름작성 팝업창)
-  	function popUp(){  		
-  		// 나만의 옷장 팝업창 띄우기(캘린더 이동 전)
-  		var view = $("#PopUp2Cloth").css("display");
-  		if(view=="block"){
-  			$("#PopUp2Cloth").css("display", "none");
-  		}
-		$("#PopUpCloth").css("display", "block");  		
-  	}	
+  	function popUp(){
+  		var yn=confirm("해당 코디를 담으시겠습니까?");
+  		if(yn==true)
+  			{
+  			alert("날짜와 제목을 입력해주세요!")
+	  		// 나만의 옷장 팝업창 띄우기(캘린더 이동 전)
+	  		var view = $("#PopUp2Cloth").css("display");
+	  		if(view=="block")
+	  			{
+	  			$("#PopUp2Cloth").css("display", "none");
+	  			}
+			$("#PopUpCloth").css("display", "block");  		
+  			}
+  	};
   	  	
   	// 나만의 옷장에 담기  
   	function RegistCloth(){ 			
-  		
+  		var ROuter = $("input[name='checked_Outer']:checked").val();
+		var RTop = $("input[name='checked_Top']:checked").val();
+		var RPants = $("input[name='checked_Pants']:checked").val();
   	// 동시에 체크한 옷(아웃터, 탑, 팬츠) 데이터+ 제목, 날짜 데이터 담기  		
 		url = "./rest/Put_Cloth";
 		data={};
 		data.Subject = $("input[name='Calendar_Subject']").val();
-		data.Date = $("input[name='Calendar_Date']").val();
-		data.Outer = $("input[name='checked_Outer']:checked").val();
-		data.Top = $("input[name='checked_Top']:checked").val();
-		data.Pants = $("input[name='checked_Pants']:checked").val();
+		data.Date = $("select[name='year']").val()+"-"+$("select[name='month']").val()+"-"+$("select[name='day']").val()
+		if(ROuter==null)
+			{
+			data.Outer = HOuter;
+			}
+		else
+			{
+			data.Outer = ROuter;
+			}
+		if(RTop==null)
+			{
+			data.Top = HTop;
+			}
+		else
+			{
+			data.Top = RTop;
+			}
+		if(RPants==null)
+			{
+			data.Pants = HPants;
+			}
+		else
+			{
+			data.Pants = RPants;
+			}
 		data.userId = "${sessionScope.userId}";
-		
-		if(data.Outer==null){
-			data.Outer = "없음";	
-		}
-		if(data.Top==null){
-			data.Top = "없음";
-		}
-		if(data.Pants==null){
-			data.Pants = "없음";
-		}
 		
 		console.log("url:"+url);
 		console.log("제목:"+data.Subject);
@@ -315,29 +413,17 @@
 		console.log("하의:"+data.Pants);
 		console.log("유저아이디:"+"${sessionScope.userId}");
 		
-		// 나만의 옷장 팝업 띄우기전 담아둔 데이터들 DB에 담기
-	    ajaxCloth(url, data);
-		
-		$("#PopUp2Cloth").css("display", "block");  			
+		if(data.Subject=="" || data.Date=="--")
+			{
+			alert("제목과 날짜를 다시 설정해주세요"); 	
+			}
+		else
+			{
+			// 나만의 옷장 팝업 띄우기전 담아둔 데이터들 DB에 담기
+		   	reqServer(url, data);
+			}
 		$("#PopUpCloth").css("display", "none");
 	}
-  	
-  	 // 나만의 옷장 데이터 담기 (아작스)
-  	function ajaxCloth(reqUrl, reqData){
-  		console.log("url 체크 : "+reqUrl);  		  		
-  		$.ajax({
-  			url : reqUrl,
-  			type : "post",
-  			data : reqData,
-  			dataType : "json",  		
-  			success : function(d){
-  				alert("성공!");
-  			}, error : function(e){
-  				console.log(e);
-  			}
-  		});
-  	};
-  	
   	
   	// 나만의 옷장 글쓰기 취소
   	function cancel(){
@@ -349,6 +435,7 @@
   		$("#PopUp2Cloth").css("display", "none");
   	}
   	
+  	//고른 옷들 내리기
   	$(".td1").click(function(){
   		 $(".td2").slideToggle("slow")
   	 });
@@ -450,62 +537,74 @@
 					{
 					 alert(d.msg);		//확인 누르는 순간 바뀌게 하기
 					}
+				if(url == "./rest/Put_Cloth")
+					{
+					if(d.Put_Cloth==1)
+						{
+						$("#PopUp2Cloth").css("display", "block");  
+						}
+					}
 				},error:function(e){
-						console.log(e)
+					console.log(e)
 					}
 		});
 	}
-	
+
+  	
 	function printList(list,category_name){
+	  	
 		console.log(list);
 		var content = "";
+		var count=5;
 		for(var i=0; i<list.length; i++)
 		{
-			
 			if(i==0)
 				{
 				content +="<table class='fileimg'>"
 							+"<tr>";
 				}
-			if(i%5==0)
+			if(i%count==0)
 				{
 				content +="</tr>"
 							+"<tr>";
+				count=5;
 				}
-			content +="<td>";
-			if(category_name=="Outer")
+			if(HOuter!=list[i].newfilename &&HTop!=list[i].newfilename &&HPants!=list[i].newfilename)
 				{
-				content +="<input type='checkbox' value='"+list[i].newfilename+"' name='checked_Outer'/>";
+				count=6;
+				content +="<td>";
+				if(category_name=="Outer")
+					{
+						content +="<input type='checkbox' value='"+list[i].newfilename+"' name='checked_Outer'/>";
+					}
+				if(category_name=="Top")
+					{
+						content +="<input type='checkbox' value='"+list[i].newfilename+"' name='checked_Top'/>";
+					}
+				if(category_name=="Pants")
+					{
+						content +="<input type='checkbox' value='"+list[i].newfilename+"' name='checked_Pants'/>";
+					}
+					content +="<a href='http://"+list[i].cloth_url+"'>"
+							+"<img width='100' height='100'  alt='메인 코디' src='./resources/upload/"+list[i].newfilename+"'/>"
+							+"</a>"
+							+"</br>"	
+							+"<span class='Clothsubject'>"
+							+list[i].real_name
+							+"</span>"
+							+"</br>"
+							+"<span class='Clothcontent'>"
+							+list[i].cloth_detail
+							+"</span>"
+							+"</td>";
 				}
-			if(category_name=="Top")
-				{
-				content +="<input type='checkbox' value='"+list[i].newfilename+"' name='checked_Top'/>";
-				}
-			if(category_name=="Pants")
-				{
-				content +="<input type='checkbox' value='"+list[i].newfilename+"' name='checked_Pants'/>";
-				}
-				content +="<a href='http://"+list[i].cloth_url+"'>"
-						+"<img width='100' height='100'  alt='메인 코디' src='./resources/upload/"+list[i].newfilename+"'/>"
-						+"</a>"
-						+"</br>"	
-						+"<span class='Clothsubject'>"
-						+list[i].real_name
-						+"</span>"
-						+"</br>"
-						+"<span class='Clothcontent'>"
-						+list[i].cloth_detail
-						+"</span>"
-						+"</td>";
-		
 			if(i==(list.length-1))
 				{
 				content +="</tr>"
 							+"</table>";
-							
 				}
-		
 		}
+		
 		if(category_name=="Outer")
 			{
 			$("#OuterList").append(content);
