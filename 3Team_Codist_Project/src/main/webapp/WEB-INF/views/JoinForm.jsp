@@ -147,8 +147,8 @@
 				</tr>
 				<tr>
 					<td>
-						비밀번호 질문 : <input name="PW_Q" type="text" value="" placeholder="질문을 선택하세요"/>
-						<select name="PW_Qs" class="sel">
+						비밀번호 질문 :<input name="PW_Q" type="text" value="" placeholder="질문을 선택하세요" oninput="change2()"/>
+						<select name="PW_Qs" class="sel" onchange="change()">
 							<option value="">임의로 작성</option>
 							<option value="아버지의 성함은?">아버지의 성함은?</option>
 							<option value="어머니의 성함은?">어머니의 성함은?</option>
@@ -329,8 +329,6 @@
 		function Check(){
 			var PW = $("#Pw").val();
 			var PW_C = $("#PwC").val();
-			console.log(PW);
-			console.log(PW_C);
 		        if(PW==PW_C)
 		            {
 		        	PWChk=true;
@@ -358,7 +356,24 @@
 				alert("숫자만 입력 가능합니다!!");
 				}
 		});
-							
+		//비밀번호 질문 자동삽입
+		function change(){
+		if($("select[name='PW_Qs']").val() != "")
+			{
+			$("input[name='PW_Q']").val($("select[name='PW_Qs']").val());
+			}
+		else
+			{
+			$("input[name='PW_Q']").val("");
+			}
+		}
+		//다를시 '임의로'로 변경
+		function change2(){
+		if($("select[name='PW_Qs']").val() !=$("input[name='PW_Q']").val())
+			{
+			$("select[name='PW_Qs']").val("");
+			}
+		}
 		
 		//유효성 검사
 		function validation(){			
@@ -392,20 +407,13 @@
 			data.id = $("input[name='SignUp_id']").val();
 			data.nickName=$("input[name='SignUp_NickName']").val();
 			data.pw = $("input[name='SignUp_pw']").val();
-			if($("input[name='PW_Qs']").val()=="")
-				{
-				data.PW_QnA=$("input[name='PW_Q']").val();	
-				}
-			else
-				{
-				data.PW_QnA=$("select[name='PW_Qs']").val();	
-				}
+			data.PW_QnA=$("input[name='PW_Q']").val();	
 			data.PW_ANSWER=$("input[name='PW_answer']").val();
 			data.name = $("input[name='SignUp_name']").val();
 			data.phone= $("select[name='PhoneFirst']").val()+"-"+$("input[name='PhoneMiddle']").val()+"-"+$("input[name='PhoneLast']").val();
 			data.birth=$("select[name='year']").val()+"-"+$("select[name='month']").val()+"-"+$("select[name='day']").val()
 			data.gender = $("input[name='SignUp_gender']").val();
-			if($("select[name='mailName']").val()=="")
+			if($("select[name='mailName']").val()=="")//변경 요망
 				{
 				data.email = $("input[name='SignUp_email']").val();
 				}
@@ -415,9 +423,9 @@
 				}
 			console.log(data);
 			
-			if(validation()){
+			 if(validation()){
 				ajaxCall(url, data);
-			}
+			} 
 		});
 		
 		//요청 전송
@@ -464,13 +472,13 @@
 				$("#popup").css("display","block");
 				$("#memberId").html(data.id);
 				$("#memberName").html(data.name);
-				$("#memberNickName").html(data.nickname);
+				$("#memberNickName").html(data.nickName);
 				$("#memberGender").html(data.gender);
 				$("#memberBirth").html(data.birth);
 				$("#memberEmail").html(data.email);
 				$("#memberPhone").html(data.phone);
-				$("#memberPwQ").html(data.pW_qna);
-				$("#memberPwA").html(data.PW_ANSWER);
+				$("#memberPwQ").html(data.pw_QnA);
+				$("#memberPwA").html(data.pw_ANSWER);
 			}
 			
 			

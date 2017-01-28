@@ -8,7 +8,7 @@
 		<title>메인 홈페이지</title>
 		<link rel="stylesheet" type="text/css" href="resources/css/ioi.css"/>
 		<style>
-						
+	
 		</style>
 	</head>
 	<body>

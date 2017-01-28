@@ -13,13 +13,14 @@
 			}
 			div#weather {
 				position: fixed;
-				top: 18%;
+				top: 25%;
 				clear: left;
 				float: left;
 				margin-left: 10px;
 				width: 120px;
 				height: 800px;
-				font: bold; 	
+				font: bold; 
+		
 			}
 			#weather a {
 				padding-top: 5px;
