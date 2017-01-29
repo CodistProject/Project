@@ -164,8 +164,8 @@ public class ProjectService {
 		info.setBirth(params.get("birth"));
 		info.setGender(params.get("gender"));
 		info.setEmail(params.get("email"));
-		//inter.memberJoin(info);
-		//inter.updateCoupon(info.getId(),Integer.parseInt(inter.Find_JoinIdx(info.getId())));
+		inter.memberJoin(info);
+		inter.updateCoupon(info.getId(),Integer.parseInt(inter.Find_JoinIdx(info.getId())));
 		return info;
 	}
 	
