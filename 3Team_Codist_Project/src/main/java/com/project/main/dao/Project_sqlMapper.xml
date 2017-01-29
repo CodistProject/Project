@@ -114,8 +114,8 @@
  	<!--코디 글쓰기(메인) -->
  	<insert id="CB_write">
  		INSERT INTO TOTAL_BOARD(
- 	 		category_name, Board_idx,JOIN_IDX ,subject,sub_subject,filename,newfilename,FT_LIKE,FT_HATE,REPLES,BHIT)
- 	 		VALUES('CB',SEQ_TOTAL_BOARD.NEXTVAL,50,#{param1}, #{param2},#{param3},#{param4},0,0,0,0)
+ 	 		category_name, Board_idx,JOIN_IDX ,subject,sub_subject,filename,newfilename,weather,FT_LIKE,FT_HATE,REPLES,BHIT)
+ 	 		VALUES('CB',SEQ_TOTAL_BOARD.NEXTVAL,1,#{param1}, #{param2},#{param3},#{param4},#{param5},0,0,0,0)
  	</insert>
  	
  	<!--메인 글쓴뒤 idx찾기 -->
@@ -311,7 +311,7 @@
 	<!-- 쪽지 등록 -->
 	<insert id="RegistNote">
 		INSERT INTO NOTE(NOTE_IDX,USER_ID,JOIN_IDX,ADMIN,ADMIN_IDX,LETTER_CONTENT,LETTER_NEW) 
-				VALUES(SEQ_NOTE.NEXTVAL,#{param1},#{param2},'ADMIN',50,#{param3},'Y')
+				VALUES(SEQ_NOTE.NEXTVAL,#{param1},#{param2},'ADMIN',1,#{param3},'Y')
 	</insert>
 	<!-- 쪽지 리스트  -->
 	<select id="AdminMessageList" resultType="com.project.main.dto.NoteDto">

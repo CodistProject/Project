@@ -18,7 +18,6 @@
     		<table class="boardwrite">
     			<tr>
     				<td class="align" colspan="2">코디 게시판</td>
-    				<input type="hidden" name="category" value="CB" />
     			</tr>
     			<tr>
     				<td class="alignleft" colspan="2">    					
@@ -45,6 +44,12 @@
   				<tr>
     				<td id="CB3"  style="display: none">
     				추가 설명:<input name='CBplus' type="text"/>
+    				날씨:<select name="CBweather" >
+							<option value="">선택해주세요</option>
+							<option value="sunny">Sunny</option>
+							<option value="rain">Rain</option>
+							<option value="snow">Snow</option>
+						</select>
     				</td>
     			</tr>
     			</table>

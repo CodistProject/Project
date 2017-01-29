@@ -125,7 +125,7 @@ public interface ProjectInterface {
 	public ArrayList<ReplyDto> FindId(String idx);
 
 	//코디 게시판 글쓰기<메인코디>
-	public void CB_write(String subject, String sub_subject, String cBfilename, String cBnewfilename);
+	public void CB_write(String subject, String sub_subject, String cBfilename, String cBnewfilename, String weather);
 	
 	//글쓰기 위한 idx찾기
 	public int CB_writeFind(String subject, String sub_subject, String cBfilename, String cBnewfilename);

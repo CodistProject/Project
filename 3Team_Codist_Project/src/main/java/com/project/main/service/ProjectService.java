@@ -429,8 +429,9 @@ public class ProjectService {
 		String CBfilename=multi.getParameter("filename1");
 		String subject=multi.getParameter("CBname");
 		String sub_subject=multi.getParameter("CBplus");
+		String weather=multi.getParameter("CBweather");
 		String CBnewfilename = "";		
-		logger.info(CBfilename +"/"+subject+"/"+sub_subject);
+		logger.info(CBfilename +"/"+subject+"/"+sub_subject+"/"+weather);
 		
 		String Outterfilename=multi.getParameter("filename2");
 		String Outtercloth_name=multi.getParameter("OutterCloth");
