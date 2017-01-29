@@ -22,7 +22,7 @@ public class UploadFile {
 	String fullPath = "D:/spring/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/3Team_Codist_Project/resources/upload";
 	
 	//파일 업로드
-	public String fileUp(MultipartHttpServletRequest multi, String filename) {				
+	public String fileUp(MultipartHttpServletRequest multi, String filename, String names) {				
 		
 		String newfilename = "";//변환된 파일 명
 		
@@ -40,13 +40,7 @@ public class UploadFile {
 		}
 		
 		//3. 파일 가져 오기
-		Iterator<String> files = multi.getFileNames();
-		
-			//파일 바이너리 뽑기
-			String uploadFile = files.next();
-			logger.info("uploadFile : "+uploadFile);
-			//파일 메모리 저장
-			MultipartFile mFile = multi.getFile(uploadFile);
+			MultipartFile mFile = multi.getFile(names);
 			
 		//4. 파일 만들기
 			//새로운 파일 생성

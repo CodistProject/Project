@@ -397,7 +397,7 @@ public class ProjectService {
 			//파일 업로드
 			logger.info("파일 업로드");
 			UploadFile upload = new UploadFile();
-			newfilename = upload.fileUp(multi, filename);
+			newfilename = upload.fileUp(multi, filename,"file");
 		}		
 		logger.info(nickName+" / "+ subject+" / "+ content+" / "+filename+" / "+ newfilename+" / "+category_name);
 		inter.Board_Write(nickName, subject, content,filename, newfilename,category_name,join_idx);		
@@ -464,9 +464,9 @@ public class ProjectService {
 			//파일 업로드 
 			logger.info("파일 업로드");
 			UploadFile upload = new UploadFile();
-			CBnewfilename = upload.fileUp(multi, CBfilename);
+			CBnewfilename = upload.fileUp(multi, CBfilename,"file");
 			//메인 코디 등록
-			inter.CB_write(subject, sub_subject,CBfilename,CBnewfilename);
+			inter.CB_write(subject, sub_subject,CBfilename,CBnewfilename,weather);
 			msg="코디 글쓰기에 성공 하셨습니다.";
 		}
 		logger.info(CBnewfilename);
@@ -482,7 +482,7 @@ public class ProjectService {
 			//파일 업로드
 			logger.info("파일 업로드");
 			UploadFile upload = new UploadFile();
-			Outternewfilename = upload.fileUp(multi, Outterfilename);
+			Outternewfilename = upload.fileUp(multi, Outterfilename,"file1");
 			//아우터 등록
 			inter.Cloth_write(Board_idx,"Outer",Outtercloth_name, Outterreal_name,Outtercloth_cloth_url,Outtercloth_detail,Outterfilename,Outternewfilename);
 			//msg="코디 글쓰기에 성공 하셨습니다.";
@@ -496,7 +496,7 @@ public class ProjectService {
 			//파일 업로드
 			logger.info("파일 업로드");
 			UploadFile upload = new UploadFile();
-			Topnewfilename = upload.fileUp(multi, Topfilename);
+			Topnewfilename = upload.fileUp(multi, Topfilename,"file2");
 			//상의 등록
 			inter.Cloth_write(Board_idx,"Top",Topcloth_name, Topreal_name,Topcloth_cloth_url,Topcloth_detail,Topfilename,Topnewfilename);
 			//msg="코디 글쓰기에 성공 하셨습니다.";
@@ -510,7 +510,7 @@ public class ProjectService {
 			//파일 업로드
 			logger.info("파일 업로드");
 			UploadFile upload = new UploadFile();
-			Pantsnewfilename = upload.fileUp(multi, Pantsfilename);
+			Pantsnewfilename = upload.fileUp(multi, Pantsfilename,"file3");
 			//하의 등록
 			inter.Cloth_write(Board_idx,"Pants",Pantscloth_name, Pantsreal_name,Pantscloth_cloth_url,Pantscloth_detail,Pantsfilename,Pantsnewfilename);
 			//msg="코디 글쓰기에 성공 하셨습니다.";
