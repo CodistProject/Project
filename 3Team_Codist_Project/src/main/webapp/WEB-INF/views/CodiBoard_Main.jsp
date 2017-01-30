@@ -54,7 +54,7 @@
 		var currPage=1;
 		
 		listCall(currPage);
-		
+	
 		
 		function listCall(currPage){
 			var url="./rest/Cd_list";
@@ -99,7 +99,6 @@
 			console.log(list);
 			var content = "";
 			var userId ="${sessionScope.userId}";
-			checkList=list.length;
 			console.log(userId);
 			for(var i=0; i<list.length; i++)
 			{
