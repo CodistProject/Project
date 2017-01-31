@@ -99,6 +99,7 @@
 			console.log(list);
 			var content = "";
 			var userId ="${sessionScope.userId}";
+			checkList=list.length;
 			console.log(userId);
 			for(var i=0; i<list.length; i++)
 			{
