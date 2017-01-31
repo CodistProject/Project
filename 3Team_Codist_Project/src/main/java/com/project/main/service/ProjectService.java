@@ -262,6 +262,7 @@ public class ProjectService {
 	public Map<String, BoardDto> FT_Board_Detail(String idx) {
 		Map<String, BoardDto> obj= new HashMap<String, BoardDto>();
 		inter = sqlSession.getMapper(ProjectInterface.class);
+		
 		obj.put("content", inter.Board_Detail(idx));
 		return obj;
 	}
@@ -273,6 +274,11 @@ public class ProjectService {
 		String page="main";
 		switch(inter.CategoryName(board_idx))
 		{
+		case "CB":
+			page="CodiBoard_Update";
+			mav.addObject("subcontent",inter.CodiBoard_Detail(board_idx));
+		break;
+		
 		case "FT":
 			page="FT_Board_Update";
 		break;
@@ -548,6 +554,7 @@ public class ProjectService {
 		Map<String, ArrayList<BoardDto>> obj 
 			= new HashMap<String, ArrayList<BoardDto>>();
 		obj.put("list", inter.Board_list(start, end,category_name));
+		
 		json.put("jsonList", obj);
 		json.put("currPage", currPage);
 		json.put("allCnt", allCnt);		
@@ -647,6 +654,10 @@ public class ProjectService {
 	return mav;
 	}*/
 	
+	//코디 게시판 수정하기& 추가
+	public ModelAndView Codiboard_update(MultipartHttpServletRequest multi) {
+		return null;
+	}
 	//게시판 수정하기
 	public ModelAndView update(Map<String, String> params) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
@@ -1393,6 +1404,7 @@ public class ProjectService {
 				
 				return map;
 			}
+			
 		
 			
 }

@@ -29,7 +29,9 @@ public class MainController {
 	@RequestMapping(value="/")
 	public ModelAndView home(@RequestParam Map<String, String> params){
 		logger.info("메인 페이지 요청");
+		
 		return service.TimePop(params);
+		
 	}
 	
 	//회원가입 약관 이동
@@ -194,13 +196,19 @@ public class MainController {
 		return service.Board_update(board_idx);
 	}
 	
-	//게시판 수정
+	//게시판 수정(코디 제외)
 	@RequestMapping(value="/update")
 	public ModelAndView update(
 			@RequestParam Map<String, String> params
 			){
 		logger.info("수정 요청");
 		return service.update(params);
+	}
+	//코디 게시판 수정
+	@RequestMapping(value="/Codiboard_update")
+	public ModelAndView Codiboard_update(MultipartHttpServletRequest multi){
+		logger.info("코디게시수정 요청");
+		return null;
 	}
 	
 	//탈퇴 페이지 이동

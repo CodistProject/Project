@@ -237,7 +237,10 @@
    				<table class="btn_table">
    				<tr>
    					<td id="btn_td" align="right">
-   						<input type="button" class="buttonA"  value="수정" />
+   						<c:if test="${sessionScope.userId == 'ADMIN'}">
+   						<input type="button" class="buttonA"  onclick="location.href='./Board_update?board_idx=${content.board_idx}'"value="수정" />
+   					 	</c:if>
+   					 	
    					 	<c:if test="${sessionScope.userId != null}">
    					 	<input type="button" class="buttonA"  onclick="popUp()" value="담기"/>
    						</c:if>

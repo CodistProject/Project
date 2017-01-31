@@ -55,7 +55,7 @@
     			</table>
     			
     			<table class="boardwrite" id="outter1" style="display: none"> 
-    			<tr >
+    			<tr>
     				<td class="align">외투</td>
     				<td class="align1" rowspan="4">
     				<input type="file" name="file2" value="첨부" onchange="fileView(this,2)"/>
