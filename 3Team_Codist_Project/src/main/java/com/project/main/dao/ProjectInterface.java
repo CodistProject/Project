@@ -88,8 +88,15 @@ public interface ProjectInterface {
 	//댓글 가져오기
 	public ArrayList<ReplyDto> replyList(String idx);
 
-	//게시판 수정
-	public int update(String subject, String content, String idx, String nickname);
+	//코디게시판 업데이트
+	public void CB_Update(int board_idx, String subject, String sub_subject, String cBfilename, String cBnewfilename, String weather);
+	
+	//코디게시판 업데이트(옷종류)
+	public void Cloth_update(String CC_idx, String string, String outtercloth_name, String outterreal_name,
+			String outtercloth_cloth_url, String outtercloth_detail, String outterfilename, String outternewfilename);
+
+	//게시판 업데이트
+	public int Board_update(String subject, String content, String idx, String nickname);
 	
 	//댓글 쓰기
 	public int replyRegist(int idx, String nick, String content);
@@ -210,9 +217,8 @@ public interface ProjectInterface {
 	
 	//당첨자 후보 업데이트 
 	public int EventupLike(String userId, String selection_name);
-	
-	
-	
+
+
 }
 
 

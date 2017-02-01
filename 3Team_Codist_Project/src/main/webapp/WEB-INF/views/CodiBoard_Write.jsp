@@ -13,7 +13,7 @@
 	<body>
 			<jsp:include page="../../resources/include/index.jsp"></jsp:include>
 		<div class="content">
-			<form action="CodiBoard_Writes" method="post" enctype="multipart/form-data">		
+			<form id="CBfileupload" action="CodiBoard_Writes" method="post" enctype="multipart/form-data">		
 			<!-- 체크박스 -->
     		<table class="boardwrite">
     			<tr>
@@ -159,7 +159,7 @@
     			<table class="boardwrite"> 			
 				<tr>
 				<td align="right" colspan="2">					
-					<input type="submit" class="button" value="등록"/>
+					<input type="button" class="button" value="등록" onclick="Validation()"/>
 					<input type="reset"  class="button" value="취소"/>				
 				</td>
 			</tr>			
@@ -234,8 +234,27 @@
 			$("#Pants1").css("display","none");
 		}		
 	}	
-	
-
+	//코디 게시판 필수사항
+	function Validation()
+	{	
+		if($("input[name='filename1']").val()=="")
+			{
+				alert("메인 코디 파일은 필수사항입니다.");
+			}
+		else if($("input[name='CBname']").val()=="")
+			{
+				alert("메인 코디 제목은 필수사항입니다.");
+			}
+		else if($("input[name='CBplus']").val()=="")
+			{
+				alert("메인 코디 추가설명은 필수사항입니다.");
+			}
+		
+		else
+			{
+				$("#CBfileupload").submit();
+			}
+	}
 	
 	
 

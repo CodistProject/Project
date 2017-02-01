@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -208,7 +207,7 @@ public class MainController {
 	@RequestMapping(value="/Codiboard_update")
 	public ModelAndView Codiboard_update(MultipartHttpServletRequest multi){
 		logger.info("코디게시수정 요청");
-		return null;
+		return service.Codiboard_update(multi);
 	}
 	
 	//탈퇴 페이지 이동

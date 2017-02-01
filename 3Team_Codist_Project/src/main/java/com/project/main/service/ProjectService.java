@@ -656,7 +656,158 @@ public class ProjectService {
 	
 	//코디 게시판 수정하기& 추가
 	public ModelAndView Codiboard_update(MultipartHttpServletRequest multi) {
-		return null;
+		inter = sqlSession.getMapper(ProjectInterface.class);			
+		ModelAndView mav = new ModelAndView();
+		
+		String CBfilename=multi.getParameter("filename1");
+		String subject=multi.getParameter("CBname");
+		String sub_subject=multi.getParameter("CBplus");
+		String weather=multi.getParameter("CBweather");
+		String CBcheck=multi.getParameter("CBcheck");
+		int Board_idx=Integer.parseInt(multi.getParameter("idx"));
+		String CBnewfilename = multi.getParameter("newfilename1");		
+		logger.info(Board_idx+"/"+CBfilename +CBcheck+"/"+"/"+subject+"/"+sub_subject+"/"+weather);
+		
+		String Outterfilename=multi.getParameter("filename2");
+		String Outtercloth_name=multi.getParameter("OutterCloth");
+		String Outterreal_name =multi.getParameter("Outtername");
+		String Outtercloth_detail=multi.getParameter("Outterplus");
+		String Outtercloth_cloth_url=multi.getParameter("OutterUrl");
+		String Outtercheck=multi.getParameter("Outtercheck");
+		String Outter_idx=multi.getParameter("Outter_idx");
+		String Outternewfilename = multi.getParameter("newfilename2");		
+		logger.info(Outterfilename+"/"+Outtercloth_name+"/"+Outterreal_name+"/"+Outtercloth_detail+"/"+Outtercloth_cloth_url);
+		
+		String Topfilename=multi.getParameter("filename3");
+		String Topcloth_name=multi.getParameter("TopCloth");
+		String Topreal_name =multi.getParameter("Topname");
+		String Topcloth_detail=multi.getParameter("Topplus");
+		String Topcloth_cloth_url=multi.getParameter("TopUrl");
+		String Topcheck=multi.getParameter("Topcheck");
+		String Top_idx=multi.getParameter("Top_idx");
+		String Topnewfilename =multi.getParameter("newfilename3");
+		logger.info(Topfilename+"/"+Topcloth_name+"/"+Topreal_name+"/"+Topcloth_detail+"/"+Topcloth_cloth_url);
+		
+		String Pantsfilename=multi.getParameter("filename4");
+		String Pantscloth_name=multi.getParameter("PantsCloth");
+		String Pantsreal_name =multi.getParameter("Pantsname");
+		String Pantscloth_detail=multi.getParameter("Pantsplus");
+		String Pantscloth_cloth_url=multi.getParameter("PantsUrl");
+		String Pantscheck=multi.getParameter("Pantscheck");
+		String Pants_idx=multi.getParameter("Pants_idx");
+		String Pantsnewfilename =multi.getParameter("newfilename4");
+		logger.info(Pantsfilename+"/"+Pantscloth_name+"/"+Pantsreal_name+"/"+Pantscloth_detail+"/"+Pantscloth_cloth_url);
+		String msg="코디 수정에 실패 하셨습니다.";
+		//코디 newfilename 추출
+		logger.info(Outter_idx+"/"+Top_idx+"/"+Pants_idx);
+		if(CBfilename.equals("")){
+			logger.info("파일이 없어요");
+		}else {
+			if(CBcheck.equals(CBfilename))
+			{
+				//메인 코디 업데이트
+				inter.CB_Update(Board_idx,subject, sub_subject,CBfilename,CBnewfilename,weather);
+			}
+			else
+			{
+				//파일 업로드 
+				logger.info("파일 업로드");
+				UploadFile upload = new UploadFile();
+				CBnewfilename = upload.fileUp(multi, CBfilename,"file1");
+				inter.CB_Update(Board_idx,subject, sub_subject,CBfilename,CBnewfilename,weather);
+			}
+			msg="코디 수정에 성공 하셨습니다.";
+		}
+		logger.info(CBnewfilename);
+		
+		//외투 newfilename 추출
+		if(Outterfilename.equals("")){
+			logger.info("파일이 없어요");
+		}else {
+			if(Outtercheck.equals(Outterfilename))
+			{
+				inter.Cloth_update(Outter_idx,"Outer",Outtercloth_name, Outterreal_name,Outtercloth_cloth_url,Outtercloth_detail,Outterfilename,Outternewfilename);
+			}
+			else 
+			{
+				//파일 업로드
+				logger.info("파일 업로드");
+				UploadFile upload = new UploadFile();
+				Outternewfilename = upload.fileUp(multi, Outterfilename,"file2");
+				if(Outtercheck.equals(""))
+				{
+					//아우터 등록
+					inter.Cloth_write(Board_idx,"Outer",Outtercloth_name, Outterreal_name,Outtercloth_cloth_url,Outtercloth_detail,Outterfilename,Outternewfilename);
+					//msg="코디 수정에 성공 하셨습니다.";
+				}
+				else
+				{
+					inter.Cloth_update(Outter_idx,"Outer",Outtercloth_name, Outterreal_name,Outtercloth_cloth_url,Outtercloth_detail,Outterfilename,Outternewfilename);
+				}
+			}
+		}
+		logger.info(Outternewfilename);
+		
+		//상의 newfilename 추출
+		if(Topfilename.equals("")){
+			logger.info("파일이 없어요");
+		}else {
+			if(Topcheck.equals(Topfilename))
+			{
+				inter.Cloth_update(Top_idx,"Top",Topcloth_name, Topreal_name,Topcloth_cloth_url,Topcloth_detail,Topfilename,Topnewfilename);
+			}
+			else
+			{
+				//파일 업로드
+				logger.info("파일 업로드");
+				UploadFile upload = new UploadFile();
+				Topnewfilename = upload.fileUp(multi, Topfilename,"file3");
+				if(Topcheck.equals(""))
+				{
+					//상의 등록
+					inter.Cloth_write(Board_idx,"Top",Topcloth_name, Topreal_name,Topcloth_cloth_url,Topcloth_detail,Topfilename,Topnewfilename);
+					//msg="코디 수정에 성공 하셨습니다.";
+				}
+				else
+				{
+					inter.Cloth_update(Top_idx,"Top",Topcloth_name, Topreal_name,Topcloth_cloth_url,Topcloth_detail,Topfilename,Topnewfilename);	
+				}
+			}
+		}
+		logger.info(Topnewfilename);
+		
+		//하의 newfilename 추출
+		if(Pantsfilename.equals("")){
+			logger.info("파일이 없어요");
+		}else {
+			if(Pantscheck.equals(Pantsfilename))
+			{
+			inter.Cloth_update(Pants_idx,"Pants",Pantscloth_name, Pantsreal_name,Pantscloth_cloth_url,Pantscloth_detail,Pantsfilename,Pantsnewfilename);
+			}
+			else
+			{
+				//파일 업로드
+				logger.info("파일 업로드");
+				UploadFile upload = new UploadFile();
+				Pantsnewfilename = upload.fileUp(multi, Pantsfilename,"file4");
+				if(Pantscheck.equals(Pantsfilename))
+				{
+				//하의 등록
+				inter.Cloth_write(Board_idx,"Pants",Pantscloth_name, Pantsreal_name,Pantscloth_cloth_url,Pantscloth_detail,Pantsfilename,Pantsnewfilename);
+				//msg="코디 수정에 성공 하셨습니다.";
+				}
+				else
+				{
+					inter.Cloth_update(Pants_idx,"Pants",Pantscloth_name, Pantsreal_name,Pantscloth_cloth_url,Pantscloth_detail,Pantsfilename,Pantsnewfilename);	
+				}
+			}
+		}
+		logger.info(Pantsnewfilename);
+		
+		mav.addObject("msg",msg);
+		mav.setViewName("CodiBoard_Main");
+		
+		return mav;
 	}
 	//게시판 수정하기
 	public ModelAndView update(Map<String, String> params) {
@@ -668,7 +819,7 @@ public class ProjectService {
 		String nickname = params.get("nickname");
 		String msg = "수정에 실패 했습니다.";
 		
-		int success = inter.update(subject, content, idx,nickname);
+		int success = inter.Board_update(subject, content, idx,nickname);
 		
 		if(success == 1){
 			msg = "수정에 성공 했습니다.";

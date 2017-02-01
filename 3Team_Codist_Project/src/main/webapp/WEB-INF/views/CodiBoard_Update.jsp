@@ -33,11 +33,14 @@
     				<td class="align1" rowspan="3">
     				<input type="file" name="file1" onchange="fileView(this,1)"/>
 					<input  id="filenames1"  type="hidden"  name="filename1" value="${content.filename}"/>
+					<input  type="hidden"  name="idx" value="${content.board_idx}"/>
+					<input  type="hidden"  name="newfilename1" value="${content.newfilename}"/>
     				</td>
     			</tr>
     			<tr>
     				<td id="CB2">
     				코디 이름:<input name='CBname' type="text" value="${content.subject}" />
+    					<input  name="CBcheck"  type="hidden" value="${content.filename}"/>
     				</td>
   				</tr>
   				<tr>
@@ -58,11 +61,13 @@
     				<td class="align1" rowspan="4">
     				<input type="file" name="file2" value="첨부" onchange="fileView(this,2)"/>
 					<input  id="filenames2"  type="hidden" name="filename2"/>
+					<input  type="hidden"  name="Outter_idx" />
+					<input  type="hidden"  name="newfilename2"/>
     				</td>
     			</tr>
     			<tr>
     				<td id="outter2" style="display: none">
-    				<input  id="OutterClothHidden"  type="hidden" value="${dto.cloth_name}"/>
+    				<input  name="Outtercheck"  type="hidden"/>
     					분류:<select name="OutterCloth" >
 							<option value="">선택해주세요</option>
 							<option value="블레이져/코트">블레이져/코트</option>
@@ -94,11 +99,13 @@
     				<td class="align1" rowspan="4">
     				<input type="file" name="file3" value="첨부" onchange="fileView(this,3)"/>
 					<input  id="filenames3"  type="hidden" name="filename3"/>
+					<input  type="hidden"  name="Top_idx" />
+					<input  type="hidden"  name="newfilename3"/>
     				</td>
     			</tr>
     			<tr >
     				<td id="Top2" style="display: none">
-    				<input  id="TopClothHidden"  type="hidden" value="${dto.cloth_name}"/>
+    				<input  name="Topcheck"  type="hidden">
     				분류:<select name="TopCloth" >
 							<option value="">선택해주세요</option>
 							<option value="KNIT">KNIT</option>
@@ -126,11 +133,13 @@
     				<td class="align1" rowspan="4">
     				<input type="file" name="file4" value="첨부" onchange="fileView(this,4)"/>
 					<input  id="filenames4"  type="hidden" name="filename4"/>
+					<input  type="hidden"  name="newfilename4"/>
     				</td>
     			</tr>
     			<tr>
     				<td  id="Pants2" style="display: none">
-    				<input  id="PantsClothHidden"  type="hidden" value="${dto.cloth_name}"/>
+    				<input  name="Pantscheck"  type="hidden"/>
+    				<input  type="hidden"  name="Pants_idx" />
     				분류:<select name="PantsCloth" >
 							<option value="">선택해주세요</option>
 							<option value="청바지">청바지</option>
@@ -173,6 +182,8 @@
 	var file1="${content.filename}";
 	
 	$(document).ready(function(){
+		
+		console.log("${subcontent[0].category_name}");
 		$("select[name='CBweather']").val(weather);
 		if(${subcontent[0].category_name=="Outer"})
 			{
@@ -181,10 +192,14 @@
 			$("#outter2").css("display","block");
 			$("#outter3").css("display","block");
 			$("#outter4").css("display","block");
-			$("select[name='OutterCloth']").val($("#OutterClothHidden").val());
+			$("#filenames2").val("${subcontent[0].filename}");
+			$("input[name='newfilename2']").val("${subcontent[0].newfilename}");
+			$("select[name='OutterCloth']").val("${subcontent[0].cloth_name}");
 			$("input[name='Outtername']").val("${subcontent[0].real_name}");
 			$("input[name='Outterplus']").val("${subcontent[0].cloth_detail}");
 			$("input[name='OutterUrl']").val("${subcontent[0].cloth_url}");
+			$("input[name='Outtercheck']").val("${subcontent[0].filename}");
+			$("input[name='Outter_idx']").val("${subcontent[0].cc_idx}");
 			}
 		if(${subcontent[1].category_name=="Top"})
 			{
@@ -193,10 +208,14 @@
 			$("#Top2").css("display","block");
 			$("#Top3").css("display","block");
 			$("#Top4").css("display","block");
-			$("select[name='TopCloth']").val($("#TopClothHidden").val());
-			$("input[name='Topname']").val("${subcontent[2].real_name}");
-			$("input[name='Topplus']").val("${subcontent[2].cloth_detail}");
-			$("input[name='TopUrl']").val("${subcontent[2].cloth_url}");
+			$("#filenames3").val("${subcontent[1].filename}");
+			$("input[name='newfilename3']").val("${subcontent[1].newfilename}");
+			$("select[name='TopCloth']").val("${subcontent[1].cloth_name}");
+			$("input[name='Topname']").val("${subcontent[1].real_name}");
+			$("input[name='Topplus']").val("${subcontent[1].cloth_detail}");
+			$("input[name='TopUrl']").val("${subcontent[1].cloth_url}");
+			$("input[name='Topcheck']").val("${subcontent[1].filename}");
+			$("input[name='Top_idx']").val("${subcontent[1].cc_idx}");
 			}
 		if(${subcontent[2].category_name=="Pants"})
 			{
@@ -205,10 +224,14 @@
 			$("#Pants2").css("display","block");
 			$("#Pants3").css("display","block");
 			$("#Pants4").css("display","block");
-			$("select[name='PantsCloth']").val($("#PantsClothHidden").val());
-			$("input[name='Pantsname']").val("${subcontent[1].real_name}");
-			$("input[name='Pantsplus']").val("${subcontent[1].cloth_detail}");
-			$("input[name='PantsUrl']").val("${subcontent[1].cloth_url}");
+			$("#filenames4").val("${subcontent[2].filename}");
+			$("input[name='newfilename4']").val("${subcontent[2].newfilename}");
+			$("select[name='PantsCloth']").val("${subcontent[2].cloth_name}");
+			$("input[name='Pantsname']").val("${subcontent[2].real_name}");
+			$("input[name='Pantsplus']").val("${subcontent[2].cloth_detail}");
+			$("input[name='PantsUrl']").val("${subcontent[2].cloth_url}");
+			$("input[name='Pantscheck']").val("${subcontent[2].filename}");
+			$("input[name='Pants_idx']").val("${subcontent[2].cc_idx}");
 			}
 			
 	});
@@ -220,6 +243,29 @@
 		var filename = fullPath.substring(12);
 		console.log(filename);
 		$("#filenames"+i).val(filename);
+		if(i==1)
+		{
+			$("#CB2").css("display","block");
+			$("#CB3").css("display","block");
+		}
+		if(i==2)
+		{
+			$("#outter2").css("display","block");
+			$("#outter3").css("display","block");
+			$("#outter4").css("display","block");
+		}
+		if(i==3)
+		{
+			$("#Top2").css("display","block");
+			$("#Top3").css("display","block");
+			$("#Top4").css("display","block");
+		}
+		if(i==4)
+		{
+			$("#Pants2").css("display","block");
+			$("#Pants3").css("display","block");
+			$("#Pants4").css("display","block");
+		}
 	}
 	//체크
 	function check() {
@@ -237,21 +283,30 @@
 			bottom = true;
 		}
 
-		if(outter==true){
-			$("#outter1").css("display","inline");
-		}else{
-			$("#outter1").css("display","none");
+		if(${subcontent[0].category_name !="Outer"})
+		{
+			if(outter==true){
+				$("#outter1").css("display","inline");
+			}else{
+				$("#outter1").css("display","none");
+			}
 		}
-		if(top==true){
-			$("#top1").css("display","inline");
-		}else{
-			$("#top1").css("display","none");
-		}		
-		if(bottom==true){
-			$("#Pants1").css("display","inline");
-		}else{			
-			$("#Pants1").css("display","none");
-		}		
+		if(${subcontent[1].category_name !="Top"})
+		{
+			if(top==true){
+				$("#top1").css("display","inline");
+			}else{
+				$("#top1").css("display","none");
+			}		
+		}
+		if(${subcontent[2].category_name !="Pants"})
+		{
+			if(bottom==true){
+				$("#Pants1").css("display","inline");
+			}else{			
+				$("#Pants1").css("display","none");
+			}
+		}
 	}	
 		
 	

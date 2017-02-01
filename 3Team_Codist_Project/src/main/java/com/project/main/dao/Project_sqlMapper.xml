@@ -95,14 +95,24 @@
  	
  	<!--코디게시판 상세보기  -->
  	<select id="CodiBoard_Detail" resultType="com.project.main.dto.ClothDto">
- 		SELECT * FROM CATEGORY_CLOTH WHERE board_idx = #{param1}
+ 		SELECT * FROM CATEGORY_CLOTH WHERE board_idx = #{param1} ORDER BY CC_IDX ASC
  	</select>	
  	
  	<!-- 조회수 증가  -->
  	<!-- <update id="upHit">
  		UPDATE TOTAL_BOARD SET bHit = bHit+1 WHERE idx = #{param1}
  	</update> -->
-
+	<!-- 코디게시판 업데이트 -->
+ 	<update id="CB_Update">
+ 		UPDATE TOTAL_BOARD SET SUBJECT=#{param2}, SUB_SUBJECT= #{param3},FILENAME=#{param4}
+ 					,NEWFILENAME=#{param5},WEATHER=#{param6} WHERE BOARD_IDX=#{param1}
+ 	</update>
+ 	
+ 	<!-- 코디게시판 업데이트(외투,상의,하의) -->
+ 	<update id="Cloth_update">
+ 		UPDATE CATEGORY_CLOTH SET CLOTH_NAME= #{param3}, REAL_NAME=#{param4}
+ 					,CLOTH_URL=#{param5},CLOTH_DETAIL=#{param6},FILENAME=#{param7},NEWFILENAME=#{param8} WHERE CC_IDX=#{param1} AND CATEGORY_NAME=#{param2}
+ 	</update>
  	
 	<!-- 글쓰기 -->
  	<insert id="Board_Write">
@@ -137,7 +147,7 @@
 		 SELECT COUNT(*) FROM TOTAL_BOARD WHERE CATEGORY_NAME = #{category_name}
  	</select>
  		
- 	<!-- 게시판 게시물 수 -->
+ 	<!-- 게시판 옷 게시물 수 -->
  	<select id="ClothCount" resultType="Integer">
 		 SELECT COUNT(*) FROM CATEGORY_CLOTH WHERE CATEGORY_NAME = #{category_name}
  	</select>
@@ -355,5 +365,5 @@
    <select id="Findweather" resultType="com.project.main.dto.WeatherDto">
    		SELECT * FROM WEATHER
    </select>
-   
+
 </mapper>
