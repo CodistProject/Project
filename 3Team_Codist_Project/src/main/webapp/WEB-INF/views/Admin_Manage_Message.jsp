@@ -69,6 +69,7 @@
      </div>
    </body>
    <script>
+   NewUpdate();
    
    function NewUpdate(){
 		var url="./rest/NewUpdate";

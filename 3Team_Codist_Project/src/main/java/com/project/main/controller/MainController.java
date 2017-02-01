@@ -203,6 +203,7 @@ public class MainController {
 		logger.info("수정 요청");
 		return service.update(params);
 	}
+	
 	//코디 게시판 수정
 	@RequestMapping(value="/Codiboard_update")
 	public ModelAndView Codiboard_update(MultipartHttpServletRequest multi){
