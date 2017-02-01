@@ -790,7 +790,7 @@ public class ProjectService {
 				logger.info("파일 업로드");
 				UploadFile upload = new UploadFile();
 				Pantsnewfilename = upload.fileUp(multi, Pantsfilename,"file4");
-				if(Pantscheck.equals(Pantsfilename))
+				if(Pantscheck.equals(""))
 				{
 				//하의 등록
 				inter.Cloth_write(Board_idx,"Pants",Pantscloth_name, Pantsreal_name,Pantscloth_cloth_url,Pantscloth_detail,Pantsfilename,Pantsnewfilename);
@@ -810,22 +810,54 @@ public class ProjectService {
 		return mav;
 	}
 	//게시판 수정하기
-	public ModelAndView update(Map<String, String> params) {
+	public ModelAndView B_update(MultipartHttpServletRequest multi) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		ModelAndView mav = new ModelAndView();		
-		String subject = params.get("subject");
-		String content = params.get("content");
-		String idx = params.get("idx");
-		String nickname = params.get("nickname");
-		String msg = "수정에 실패 했습니다.";
 		
-		int success = inter.Board_update(subject, content, idx,nickname);
+		String idx = multi.getParameter("idx");
+		String subject = multi.getParameter("subject");
+		String content = multi.getParameter("content");
+		String filename = multi.getParameter("fileName");
+		String newfilename=multi.getParameter("newfilename");
+		String filenameCheck=multi.getParameter("filenameCheck");
+		logger.info(idx+"/"+subject+"/"+content+"/"+filename+"/"+newfilename+"/");
+		String msg = "수정에 실패 했습니다.";
+		String page="ioi";
+		int success=0;
+		if(filename.equals(filenameCheck))
+		{
+			success = inter.Board_update(idx,subject, content,filename,newfilename);
+		}
+		else 
+		{
+			//파일 업로드
+			logger.info("파일 업로드");
+			UploadFile upload = new UploadFile();
+			newfilename = upload.fileUp(multi, filename,"file");
+			success = inter.Board_update(idx,subject, content,filename,newfilename);
+		}
 		
 		if(success == 1){
 			msg = "수정에 성공 했습니다.";
 		}
 		mav.addObject("msg", msg);
-		mav.setViewName("list");
+		
+		switch(inter.CategoryName(idx))
+		{
+	
+		case "CP":
+			page="Coplz_Main";
+		break;
+			
+		case "FT":
+			page="FT_Board_Main";
+		break;
+		
+		case "Alter":
+			page="AlterBoard_Main";
+		break;
+		}
+		mav.setViewName(page);
 
 		return mav;
 	}

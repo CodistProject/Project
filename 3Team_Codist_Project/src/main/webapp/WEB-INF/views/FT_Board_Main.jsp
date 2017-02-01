@@ -68,7 +68,12 @@
 		</div>		
 	</body>
 	<script>
-
+	 var msg="${msg}";
+		if(msg !="")
+			{
+			alert(msg);
+			}
+		
 	var userId="${sessionScope.userId}";
 	//댓글 닉네임 찾기
 	function FindNick(userId)
@@ -86,7 +91,11 @@
 	$("#Ft_page").change(function(){
 		listCall(currPage);
 	}); 
-	
+	function Update(board_idx)
+	{
+		console.log("")
+		location.href="./Board_update?board_idx="+board_idx;
+	}
 
 	 //추천 하기
 	function UP_like(board_idx){
@@ -245,6 +254,11 @@
 					}
 				if(url == "./rest/FindNick"){
 					$(".user").html(d.userNick);
+					console.log($("#updateCheck").val());
+					if(d.userNick==$("#updateCheck").val())
+						{
+						$(".FTupdate").css("visibility","visible");
+						}
 					}
 				if(url =="./rest/replyList"){
 					printReple(d.list,d.userId);
@@ -329,6 +343,7 @@
 		}
 		
 		if(url == "./rest/FT_Board_Detail"){
+			console.log(list.nickName);
 			content +="내용: "+list.content
 				   		+"<div id='LikeGO'>"
 				   		+"<br/>"
@@ -341,12 +356,13 @@
 				   		+list.ft_like
 				   		+"</span>"
 				   		+"</center>"
+				   		+"<button class='FTupdate' onclick='Update("+list.board_idx+")'  style='visibility:hidden' >수정</button>"
+				   		+"<input id='updateCheck' type='hidden' value='"+list.nickName+"'/>"
 				   		+"</div>"
 						+"<table class=Ft_board3>"
 						+"<tr>"
 						+"<td class='user' width='60px' style='background-color:#FBFEC8'>"
 						/* 닉네임 출력 */
-						+list.nickName
 						+"</td>"
 						+"<td class='data'>"
 						+"<textarea id='texta' class='"+list.board_idx+"' rows='3' placeholder='댓글작성이 가능합니다.' ></textarea>"
@@ -356,16 +372,16 @@
 						+"</td>"
 						+"</tr>"
 						+"</table>"
-						+"<table id='"+list.board_idx+"'>"
+						+"<table id='l"+list.board_idx+"'>"
 						+"</table>";
 		$("#"+num).empty();					
 		$("#"+num).append(content);
+		console.log($("#updateCheck").val());
 		}
 	}
 	//리플 리스트
 	function printReple(list,userId){
 		$("#texta").val("");
-		console.log(userId);
 		console.log(userId[0].id);
 		var content = "";
 		for(var i=0; i<list.length;i++){
@@ -387,8 +403,8 @@
 						}
 						content +="</tr>";
 		}
-		$("#"+list[0].board_idx).empty();
-		$("#"+list[0].board_idx).append(content);
+		$("#l"+list[0].board_idx).empty();
+		$("#l"+list[0].board_idx).append(content);
 	}
 	
 	

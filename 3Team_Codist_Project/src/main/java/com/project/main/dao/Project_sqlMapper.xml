@@ -113,6 +113,11 @@
  		UPDATE CATEGORY_CLOTH SET CLOTH_NAME= #{param3}, REAL_NAME=#{param4}
  					,CLOTH_URL=#{param5},CLOTH_DETAIL=#{param6},FILENAME=#{param7},NEWFILENAME=#{param8} WHERE CC_IDX=#{param1} AND CATEGORY_NAME=#{param2}
  	</update>
+ 	<!-- 게시판 업데이트  -->
+ 	<update id="Board_update">
+ 		UPDATE TOTAL_BOARD SET SUBJECT=#{param2}, CONTENT= #{param3},FILENAME=#{param4}
+ 					,NEWFILENAME=#{param5} WHERE BOARD_IDX=#{param1}
+ 	</update>
  	
 	<!-- 글쓰기 -->
  	<insert id="Board_Write">

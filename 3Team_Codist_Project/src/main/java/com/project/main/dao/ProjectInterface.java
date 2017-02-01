@@ -96,7 +96,7 @@ public interface ProjectInterface {
 			String outtercloth_cloth_url, String outtercloth_detail, String outterfilename, String outternewfilename);
 
 	//게시판 업데이트
-	public int Board_update(String subject, String content, String idx, String nickname);
+	public int Board_update(String idx, String subject, String content, String filename, String newfilename);
 	
 	//댓글 쓰기
 	public int replyRegist(int idx, String nick, String content);

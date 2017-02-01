@@ -24,6 +24,11 @@ public class MainController {
 	ProjectService service;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+	//파일 업로드 폼 이동	
+		@RequestMapping(value="/uploadForm")
+		public String uploadForm(){				
+			return "uploadForm";
+		}
 	//메인 페이지 이동
 	@RequestMapping(value="/")
 	public ModelAndView home(@RequestParam Map<String, String> params){
@@ -196,12 +201,10 @@ public class MainController {
 	}
 	
 	//게시판 수정(코디 제외)
-	@RequestMapping(value="/update")
-	public ModelAndView update(
-			@RequestParam Map<String, String> params
-			){
+	@RequestMapping(value="/B_update")
+	public ModelAndView update(MultipartHttpServletRequest multi){
 		logger.info("수정 요청");
-		return service.update(params);
+		return service.B_update(multi);
 	}
 	
 	//코디 게시판 수정

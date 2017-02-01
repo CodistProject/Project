@@ -12,7 +12,7 @@
 	<body>
 	<jsp:include page="../../resources/include/index.jsp"></jsp:include>
 	<div class="content">
-	<form action="update" method="post">
+	<form action="B_update" method="post" enctype="multipart/form-data">
 		<table class="detail">
 			<tr>
 				<td>제목</td>
@@ -35,8 +35,11 @@
 			<tr>
 			<td>첨부 파일</td>
 				<td>
+					<div id="photo">첨부된 파일이 없습니다.</div>	
 					<input  type="file"  name="file" value="첨부" onchange="fileView(this)"/>
-					<input id="fileName"  type="hidden" name="fileName"/>
+					<input id="fileName"  type="hidden" name="fileName" value="${content.filename }"/>
+					<input  type="hidden"  name="newfilename"  value="${content.newfilename }"/>
+					<input  type="hidden"  name="filenameCheck"  value="${content.filename }"/>
 				</td>
 			</tr>
 			<tr>
@@ -49,5 +52,39 @@
 		</form>
 		</div>
 	</body>
-	<script></script>
+	<script>
+	var fileMap={};	
+		fileMap["${content.newfilename}"]="${content.filename}";
+	console.log(fileMap);
+	
+	$(document).ready(function(){
+		if(fileMap != null){
+			var ext = "";
+			Object.keys(fileMap).forEach(function(item){
+				console.log(item)
+				console.log(fileMap[item])
+				ext = item.substring(item.lastIndexOf(".")+1);
+				console.log(ext)
+				if(ext=="jpg"||ext=="png"||ext=="gif"){
+					var content ="<img width='400px' src='./resources/upload/"+item+"'/>"
+										+"</br>"
+										+fileMap[item];
+					$("#photo").empty();
+					$("#photo").append(content);
+				}				
+			});
+		}	 			
+	});
+	
+	//파일 이름 가져오기
+	function fileView(elem){
+		console.log(elem.value);
+		var fullPath = elem.value;
+		var filename = fullPath.substring(12);
+		//앞에 12개 fake어쩌구삭제
+		console.log(filename);
+		$("#fileName").val(filename);
+	}
+		
+	</script>
 </html>
