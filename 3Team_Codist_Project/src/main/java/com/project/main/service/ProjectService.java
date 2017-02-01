@@ -224,8 +224,8 @@ public class ProjectService {
 	public ModelAndView Board_Detail(String board_idx) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		ModelAndView mav = new ModelAndView();
-		//조회수
-		//inter.upHit(idx);
+		//조회수 증가
+		inter.upHit(board_idx);
 		//불러오기
 		String page="main";
 		switch(inter.CategoryName(board_idx))
@@ -253,6 +253,9 @@ public class ProjectService {
 	public ModelAndView CodiBoard_Detail(String board_idx) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		ModelAndView mav = new ModelAndView();
+		//조회수 증가
+		inter.upHit(board_idx);
+		
 		mav.addObject("content",inter.Board_Detail(board_idx));
 		mav.addObject("subcontent",inter.CodiBoard_Detail(board_idx));
 		mav.setViewName("CodiBoard_Detail");
@@ -262,6 +265,8 @@ public class ProjectService {
 	public Map<String, BoardDto> FT_Board_Detail(String idx) {
 		Map<String, BoardDto> obj= new HashMap<String, BoardDto>();
 		inter = sqlSession.getMapper(ProjectInterface.class);
+		//조회수 증가
+		inter.upHit(idx);
 		
 		obj.put("content", inter.Board_Detail(idx));
 		return obj;

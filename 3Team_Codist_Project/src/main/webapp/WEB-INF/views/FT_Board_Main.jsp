@@ -101,6 +101,7 @@
 	//페이징 처리
 	var currPage = 1;
 	listCall(currPage);
+	
 	//페이지 갯수 정하기
 	$("#Ft_page").change(function(){
 		listCall(currPage);
