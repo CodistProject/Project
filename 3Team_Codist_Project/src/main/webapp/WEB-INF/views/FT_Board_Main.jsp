@@ -316,7 +316,6 @@
 	function printList(list,url,num){
 		console.log(list);
 		var content = "";
-		var number=0;
 		if(url == "./rest/Board_list"){
 		for(var i=0; i<list.length; i++){
 				content +="<tr>"
