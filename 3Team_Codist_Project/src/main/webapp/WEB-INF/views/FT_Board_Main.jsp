@@ -17,6 +17,10 @@
 			.Ft1,.Ft2,.Ft4,.Ft5,.Ft6,.Ft7{
 				text-align: center;	
 			}
+			#sizeup
+			{
+			position: absolute;
+			}
 		</style>
 	</head>
 	<body>
@@ -47,7 +51,7 @@
 					</td>					
 				</tr>		
 				<tr class="Ft_subject">
-					<td class="Ft1" id="Ft4" width="60px" height="50px">글 번호</td>
+					<td class="Ft1" id="Ft4" width="60px" height="50px" >글 번호</td>
 					<td class="Ft2" id="Ft4" width="150px">이미지</td>
 		    		<td class="Ft3"  id="Ft4">제목</td>				
 					<td class="Ft4" id="Ft4" width="70px">작성자</td>
@@ -73,6 +77,16 @@
 			{
 			alert(msg);
 			}
+		
+	function sizeUp(i){
+		console.log(i);
+		   	$("#size"+i).hover(function(){
+		       $("#sizeup"+i).css("display","block");
+		    },function(){
+		       $("#sizeup"+i).css("display","none");
+		    }); 
+	}
+	
 		
 	var userId="${sessionScope.userId}";
 	//댓글 닉네임 찾기
@@ -312,10 +326,14 @@
 								}
 							else
 								{
-								content +="<td class='Ft2'>"
+								content +="<td class='Ft2' id='size"+i+"'  onmouseover='sizeUp("+i+")'>"
 										    +"<img width='150' height='100px'  alt='메인 코디' src='./resources/upload/"+list[i].newfilename+"'/>";
 								}
-				content +=	"</td>"
+				content +="<div id='sizeup"+i+"' style='position: absolute;display: none;' >"
+							+"<img width='300' height='300px'  alt='메인 코디' src='./resources/upload/"+list[i].newfilename+"'/>"
+							+"</div>"
+							
+				content +="</td>"
 							+"	<td>"
 							+"<a class='subject' href='javascript:tog("+i+")' style='text-decoration:none'>"
 							+list[i].subject
