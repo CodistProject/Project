@@ -291,15 +291,19 @@
 						}
 					}
 				 if(url=="./rest/reple_like"){
-						alert("댓글 추천");
 						if(d.success!=1){
+							alert("댓글 추천");
+						}else{
 							alert("추천 실패");
 						}
 					}
 				if(url=="./rest/reple_hate"){
-					alert("댓글 비추천");
-				}
-				
+						if(d.success!=1){							
+							alert("댓글 추천");
+						}else{
+							alert("추천 실패");
+						}					
+					}
 				if(url =="./rest/board_Uplike")
 				{
 				 alert(d.msg);		//확인 누르는 순간 바뀌게 하기
