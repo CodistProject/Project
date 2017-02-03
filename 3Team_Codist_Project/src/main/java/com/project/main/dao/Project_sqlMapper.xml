@@ -100,7 +100,7 @@
  	
  	<!-- 조회수 증가  -->
  	<update id="upHit">
- 		UPDATE TOTAL_BOARD SET BHit = BHit+1 WHERE idx = #{param1}
+ 		UPDATE TOTAL_BOARD SET BHit = BHit+1 WHERE board_idx = #{param1}
  	</update>
  	
 	<!-- 코디게시판 업데이트 -->

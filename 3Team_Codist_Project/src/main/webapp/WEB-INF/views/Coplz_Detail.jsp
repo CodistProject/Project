@@ -184,14 +184,14 @@
 					}
 				}
 				 if(url=="./rest/reple_like"){
-						if(d.success!=1){
+						if(d.success==1){
 							alert("댓글 추천");
 						}else{
 							alert("추천 실패");
 						}
 					}
 				if(url=="./rest/reple_hate"){
-						if(d.success!=1){							
+						if(d.success==1){							
 							alert("댓글 추천");
 						}else{
 							alert("추천 실패");
