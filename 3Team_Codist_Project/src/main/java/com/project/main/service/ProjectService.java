@@ -411,7 +411,11 @@ public class ProjectService {
 			newfilename = upload.fileUp(multi, filename,"file");
 		}		
 		logger.info(nickName+" / "+ subject+" / "+ content+" / "+filename+" / "+ newfilename+" / "+category_name);
-		inter.Board_Write(nickName, subject, content,filename, newfilename,category_name,join_idx);		
+		inter.Board_Write(nickName, subject, content,filename, newfilename,category_name,join_idx);
+		
+		int Board_idx=inter.Board_writeFind(subject, content, category_name, join_idx);
+		inter.Create_Likevalidataion(Board_idx,userId);
+		
 		String page = "";
 		String msg="";
 			if(category_name.equals("QnA")){
@@ -434,9 +438,10 @@ public class ProjectService {
 
 	
 	//코디 글쓰기
-	public ModelAndView CodiBoard_Writes(MultipartHttpServletRequest multi)  {				
+	public ModelAndView CodiBoard_Writes(MultipartHttpServletRequest multi, HttpSession session)  {				
 		inter = sqlSession.getMapper(ProjectInterface.class);			
 		ModelAndView mav = new ModelAndView();
+		String userId= (String) session.getAttribute("userId");
 		String CBfilename=multi.getParameter("filename1");
 		String subject=multi.getParameter("CBname");
 		String sub_subject=multi.getParameter("CBplus");
@@ -467,6 +472,11 @@ public class ProjectService {
 		String Pantscloth_cloth_url=multi.getParameter("PantsUrl");
 		String Pantsnewfilename ="";
 		logger.info(Pantsfilename+"/"+Pantscloth_name+"/"+Pantsreal_name+"/"+Pantscloth_detail+"/"+Pantscloth_cloth_url);
+		
+		//board_idx찾기(외투,상의,하의에 넣기)
+		int Board_idx=inter.CB_writeFind(subject, sub_subject, CBfilename, CBnewfilename);
+		logger.info("idx : {}",Board_idx);
+		
 		String msg="코디 글쓰기에 실패 하셨습니다.";
 		//코디 newfilename 추출
 		if(CBfilename.equals("")){
@@ -478,13 +488,10 @@ public class ProjectService {
 			CBnewfilename = upload.fileUp(multi, CBfilename,"file1");
 			//메인 코디 등록
 			inter.CB_write(subject, sub_subject,CBfilename,CBnewfilename,weather);
+			inter.Create_Likevalidataion(Board_idx,userId);
 			msg="코디 글쓰기에 성공 하셨습니다.";
 		}
 		logger.info(CBnewfilename);
-		
-		//board_idx찾기(외투,상의,하의에 넣기)
-		int Board_idx=inter.CB_writeFind(subject, sub_subject, CBfilename, CBnewfilename);
-		logger.info("idx : {}",Board_idx);
 		
 		//외투 newfilename 추출
 		if(Outterfilename.equals("")){
@@ -633,31 +640,27 @@ public class ProjectService {
 		return json;
 	}
 	
+
 	//게시글 추천
 	public Map<String, String>  board_Uplike(int board_idx, String userId) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		Map<String, String> obj = new HashMap<String,String>();
 		logger.info("전체 idx:{}",board_idx);
 		logger.info(userId);
-		String msg="댓글 추천에 실패 하셨습니다.";
-		if(inter.Board_Uplike(board_idx) ==1)
+		String msg="이미 추천 하셨습니다.";
+		if(inter.Board_Uplike_check(board_idx,userId).equals("Y"))
 		{
-			 msg="댓글 추천에 성공 하셨습니다.";
+			logger.info("오니");
+			if(inter.Board_Uplike(board_idx) ==1)
+			{
+				inter.Board_Uplike_Update(board_idx, userId);
+				 msg="댓글 추천에 성공 하셨습니다.";
+			}
 		}
-	    obj.put("msg",msg);
+		obj.put("msg",msg);
 		
 		return obj;
 	}
-	
-	/*	//게시글 비추천
-	public ModelAndView  ft_hate(String ft_hate) {
-		inter = sqlSession.getMapper(ProjectInterface.class);
-		ModelAndView mav = new ModelAndView();
-		inter.ft_hate(ft_hate);	
-		//불러오기
-		mav.setViewName("ft_hate");	
-	return mav;
-	}*/
 	
 	//코디 게시판 수정하기& 추가
 	public ModelAndView Codiboard_update(MultipartHttpServletRequest multi) {
@@ -868,17 +871,23 @@ public class ProjectService {
 	}
 	
 	//댓글 등록
-	public Map<String, Integer> replyRegist(Map<String, String> params) {
+	public Map<String, Integer> replyRegist(Map<String, String> params, HttpSession session) {
 			
 			inter = sqlSession.getMapper(ProjectInterface.class);
 			Map<String, Integer> obj = new HashMap<String, Integer>();
 			int idx = Integer.parseInt(params.get("idx"));
 			String nick = params.get("nickname");
 			String content= params.get("content");
+			String userId= (String) session.getAttribute("userId");
+			
 			logger.info("글번호:"+idx);
 			logger.info("닉네임:"+nick);
 			logger.info("내용:"+content);
 			obj.put("msg",inter.replyRegist(idx,nick,content));
+			
+			int reple_idx=inter.reple_writeFind(idx, nick, content);
+			inter.Create_RLikevalidataion(reple_idx,idx ,userId);
+			
 		return obj;
 	}			
 		
@@ -904,21 +913,30 @@ public class ProjectService {
 	}
 	
 	//댓글 추천 기능
-	public Map<String, Integer> reple_like(int reple_idx) {
+	public Map<String, Integer> reple_like(int reple_idx, String userId, String board_idx) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		int success=0;
-		success= inter.reple_like(reple_idx);	
+		if(inter.reple_likeCheck(reple_idx,board_idx,userId).equals("Y"))
+		{
+			success= inter.reple_like(reple_idx);
+			inter.reple_likeCheckUpdate(reple_idx, board_idx, userId);
+		}
 		map.put("success", success);
 		return map;
+		
 	}
 	
 	//댓글 비추 기능
-	public Map<String, Integer> reple_hate(int reple_idx) {
+	public Map<String, Integer> reple_hate(int reple_idx, String userId, String board_idx) {
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		int success=0;
-		success= inter.reple_hate(reple_idx);	
+		if(inter.reple_likeCheck(reple_idx,board_idx,userId).equals("Y"))
+		{
+			success= inter.reple_hate(reple_idx);	
+			inter.reple_likeCheckUpdate(reple_idx, board_idx, userId);
+		}
 		map.put("success", success);
 		return map;
 	}

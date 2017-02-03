@@ -123,15 +123,15 @@
 	<!-- 글쓰기 -->
  	<insert id="Board_Write">
  		INSERT INTO TOTAL_BOARD(
- 	 		board_idx,  nickname, subject, content, filename, newfilename, category_name,join_idx,FT_LIKE,FT_HATE,REPLES,BHIT)VALUES(
- 			seq_total_board.NEXTVAL, #{param1}, #{param2}, #{param3},#{param4},#{param5},#{param6},#{param7},0,0,0,0)
+ 	 		board_idx,  nickname, subject, content, filename, newfilename, category_name,join_idx,FT_LIKE,REPLES,BHIT)VALUES(
+ 			seq_total_board.NEXTVAL, #{param1}, #{param2}, #{param3},#{param4},#{param5},#{param6},#{param7},0,0,0)
  	</insert>
  	 	
  	<!--코디 글쓰기(메인) -->
  	<insert id="CB_write">
  		INSERT INTO TOTAL_BOARD(
- 	 		category_name, Board_idx,JOIN_IDX ,subject,sub_subject,filename,newfilename,weather,FT_LIKE,FT_HATE,REPLES,BHIT)
- 	 		VALUES('CB',SEQ_TOTAL_BOARD.NEXTVAL,1,#{param1}, #{param2},#{param3},#{param4},#{param5},0,0,0,0)
+ 	 		category_name, Board_idx,JOIN_IDX ,subject,sub_subject,filename,newfilename,weather,FT_LIKE,REPLES,BHIT)
+ 	 		VALUES('CB',SEQ_TOTAL_BOARD.NEXTVAL,1,#{param1}, #{param2},#{param3},#{param4},#{param5},0,0,0)
  	</insert>
  	
  	<!--메인 글쓴뒤 idx찾기 -->
@@ -141,11 +141,34 @@
  				AND filename=#{param3} AND newfilename=#{param4}
  	</select>
  	
+ 	<!--글쓰기 후 idx찾기(validation) -->
+ 	<select id="Board_writeFind" resultType="Integer">
+ 		SELECT BOARD_IDX FROM TOTAL_BOARD 
+ 			WHERE SUBJECT=#{param1} AND content=#{param2} 
+ 				AND CATEGORY_NAME=#{param3} AND JOIN_IDX=#{param4}
+ 	</select>
+ 	
+ 	<!--댓글 쓰기 후 repleidx찾기(validation) -->
+ 	<select id="reple_writeFind" resultType="Integer">
+ 		SELECT REPLE_IDX FROM TOTAL_REPLE 
+ 			WHERE BOARD_IDX=#{param1} AND NICKNAME=#{param2} 
+ 				AND REPLE_CONTENT=#{param3}
+ 	</select>
+ 	
  	<!--코디 글쓰기(외투,상의,하의) -->
  	<insert id="Cloth_write">
  		INSERT INTO CATEGORY_CLOTH(
  	 		CC_IDX, BOARD_IDX, CATEGORY_NAME,CLOTH_NAME,REAL_NAME,CLOTH_URL,CLOTH_DETAIL,FILENAME,NEWFILENAME)
  	 		VALUES(SEQ_CATEGORY_CLOTH.NEXTVAL,#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8})
+ 	</insert>
+ 	<!-- 게시판 likeValidation -->
+ 	<insert id="Create_Likevalidataion">
+ 		INSERT INTO Like_Validation VALUES(#{param1},#{param2},'Y')
+ 	</insert>
+ 	
+ 	<!-- 게시판 likeValidation -->
+ 	<insert id="Create_RLikevalidataion">
+ 		INSERT INTO RLike_Validation VALUES(#{param1},#{param2},#{param3},'Y')
  	</insert>
  	
  	<!-- 게시판 게시물 수 -->
@@ -173,10 +196,25 @@
  		DELETE FROM TOTAL_REPLE WHERE REPLE_IDX = #{param1}
  	</delete>
  	
+ 	<!-- 게시글 추천수 체크 -->
+ 	<select id="Board_Uplike_check" resultType="String">
+ 		SELECT FT_LIKE FROM Like_Validation WHERE ID=#{param2} AND BOARD_IDX=#{param1}
+ 	</select>
+ 	
  	<!-- 게시판 추천수 증가  -->
  	<update id="Board_Uplike">
  		UPDATE TOTAL_BOARD SET ft_LIKE= ft_LIKE+1  WHERE BOARD_IDX=#{param1}
  	</update>
+ 	
+  	<!-- 게시판 추천수 증가  업데이트-->
+ 	<update id="Board_Uplike_Update">
+ 		UPDATE Like_Validation SET FT_LIKE= 'N'  WHERE ID=#{param2} AND BOARD_IDX=#{param1}
+ 	</update>
+ 	
+ 	<!-- 댓글 추천(좋아요) 체크 -->
+ 	<select id="reple_likeCheck" resultType="String">
+ 		SELECT REPLE_LIKE FROM RLike_Validation WHERE REPLE_IDX=#{param1} AND BOARD_IDX=#{param2} AND ID=#{param3}
+ 	</select>
  	
  	<!--댓글추천수 증가  -->
  	<update id="reple_like">
@@ -186,6 +224,11 @@
  	<!--비추천수 증가  -->
  	<update id="reple_hate">
  		UPDATE total_reple SET reple_hate = reple_hate+1 WHERE reple_idx = #{param1}
+ 	</update>
+ 	
+ 	<!-- 댓글 추천수  업데이트-->
+ 	<update id="reple_likeCheckUpdate">
+ 		UPDATE RLike_Validation SET REPLE_LIKE= 'N'  WHERE  REPLE_IDX=#{param1} AND BOARD_IDX=#{param2} AND ID=#{param3}
  	</update>
 
  	<!-- 유저 비밀번호 찾기 -->

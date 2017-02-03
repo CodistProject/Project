@@ -448,7 +448,7 @@
   	$(".td5").click(function(){
  		 $(".td6").slideToggle("slow");
  	 });
-  	
+  
 	
 	 //추천 하기
 	function UP_like(board_idx){
@@ -538,7 +538,7 @@
 					}
 				if(url =="./rest/board_Uplike")
 					{
-					 alert(d.msg);		//확인 누르는 순간 바뀌게 하기
+					 alert(d.msg);		
 					}
 				if(url == "./rest/Put_Cloth")
 					{

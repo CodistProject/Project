@@ -121,37 +121,41 @@
 		sendServer(data, url);
 	}
 	
-	 //댓글 추천보내기
-	function reple_like(reple_idx){
+	//댓글 추천보내기
+	function reple_like(reple_idx,board_idx){
 		url = "./rest/reple_like"
 		data = {}; 
 		data.reple_idx = reple_idx;
 		data.nickname=$(".user").html();
+		data.userId= "${sessionScope.userId}";
+		data.board_idx=board_idx
 		if(data.nickname=="")
-		{
-		alert("로그인 후 가능합니다.");
-		}
-	else
-		{
-		sendServer(data,url);
-		}
-	}
+			{
+			alert("로그인 후 가능합니다.");
+			}
+		else
+			{
+			sendServer(date,url);
+			}
+	};
 	 
 	//댓글 비추천 보내기	
-	function reple_hate(reple_idx){
+	function reple_hate(reple_idx,board_idx){
 		url = "./rest/reple_hate"
 		data = {};
 		data.reple_idx = reple_idx;
 		data.nickname=$(".user").html();
+		data.userId= "${sessionScope.userId}";
+		data.board_idx=board_idx;
 		if(data.nickname=="")
 		{
 		alert("로그인 후 가능합니다.");
 		}
 	else
 		{
-		sendServer(data,url);
+		sendServer(date,url);
 		}
-	}	 
+	};	 	 
 	
 	function sendServer(obj, url){
 		console.log(obj);
@@ -183,18 +187,18 @@
 						replyList();
 					}
 				}
-				 if(url=="./rest/reple_like"){
-						if(d.success==1){
-							alert("댓글 추천");
-						}else{
-							alert("추천 실패");
-						}
+				if(url=="./rest/reple_like"){
+					if(d.success==1){
+						alert("댓글 추천에 성공하셧습니다");
+					}else{
+						alert("이미 추천, 비추천을 하셨습니다.");
 					}
+				}
 				if(url=="./rest/reple_hate"){
 						if(d.success==1){							
-							alert("댓글 추천");
+							alert("댓글 비 추천에 성공하셨습니다.");
 						}else{
-							alert("추천 실패");
+							alert("이미 추천, 비추천을 하셨습니다.");
 						}					
 					}
 			},
@@ -214,11 +218,11 @@
 				+"<td class='data left'>"+list[i].reple_content+"</td>"
 				+"<td class='RepleQnA'>"+list[i].reple_date+"</td>"
 				+"<td class='RepleQnA'>"
-				+"<a href=javascript:reple_like("+list[i].reple_idx+")>"
+				+"<a href=javascript:reple_like("+list[i].reple_idx+","+list[i].board_idx+")>"
 				+"<img width='20' height='20'  alt='좋아요' src='./resources/img/like.PNG'/></a>"+list[i].reple_like
 				+"</td>"
 				+"<td class='RepleQnA'>"
-				+"<a href=javascript:reple_hate("+list[i].reple_idx+")>"
+				+"<a href=javascript:reple_hate("+list[i].reple_idx+","+list[i].board_idx+")>"
 				+"<img width='20' height='20'  alt='싫어요' src='./resources/img/hate.PNG'/></a>"+list[i].reple_hate
 				+"</td>";
 				if("${sessionScope.userId}"==userId[0].id)

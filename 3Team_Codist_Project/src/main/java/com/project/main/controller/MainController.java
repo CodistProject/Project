@@ -278,10 +278,10 @@ public class MainController {
 	
 	//코디게시판  글쓰기
 	@RequestMapping(value="/CodiBoard_Writes")
-	public ModelAndView CodiBoard_Writes(MultipartHttpServletRequest multi){				
+	public ModelAndView CodiBoard_Writes(MultipartHttpServletRequest multi,HttpSession session){				
 	logger.info("글쓰기 요청");
 	
-	return service.CodiBoard_Writes(multi);
+	return service.CodiBoard_Writes(multi,session);
 	}	
 	
 	// 이벤트 팝업창 띄우기

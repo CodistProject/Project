@@ -105,9 +105,9 @@ public class RestController {
 	//댓글 등록
 	@RequestMapping(value="/replyRegist")
 	public @ResponseBody Map<String, Integer> replyRegist(
-		@RequestParam Map<String, String> params){
+		@RequestParam Map<String, String> params,HttpSession session){
 		logger.info("댓글 등록 요청");
-		return service.replyRegist(params);
+		return service.replyRegist(params,session);
 	}
 	
 	//댓글 리스트 보기
@@ -139,20 +139,22 @@ public class RestController {
 	//댓글 추천
 	@RequestMapping(value="/reple_like")
 	public @ResponseBody Map<String,Integer> reple_like(
-			@RequestParam  ("reple_idx") int reple_idx){
+			@RequestParam  ("reple_idx") int reple_idx,
+			@RequestParam  ("userId") String userId,
+			@RequestParam  ("board_idx") String board_idx){
 			logger.info("추천수 증가");
-		return service.reple_like(reple_idx);
+		return service.reple_like(reple_idx,userId,board_idx);
 	}
 	
 	//댓글 비추천
 	@RequestMapping(value="/reple_hate")
 	public @ResponseBody Map<String,Integer> reple_hate(
-			@RequestParam  ("reple_idx") int reple_idx){
+			@RequestParam  ("reple_idx") int reple_idx,
+			@RequestParam  ("userId") String userId,
+			@RequestParam  ("board_idx") String board_idx){
 			logger.info("추천수 감소");
-		return service.reple_hate(reple_idx);
+		return service.reple_hate(reple_idx,userId,board_idx);
 	}
-
-	
 	
 	// 이메일 문의(Gmail/이메일 기능)
 	@RequestMapping(value="/Email")

@@ -82,8 +82,14 @@ public interface ProjectInterface {
 	public int Board_Write(String nickName, String subject, String content, String filename, String newfilename,
 			String category_name,int join_idx);
 	
+	//게시판 추천수 증가 체크
+	public String Board_Uplike_check(int board_idx, String userId);
+	
 	//게시판 추천수 증가
 	public int Board_Uplike(int board_idx);
+	
+	//게시판 추천수 증가 업데이트
+	public void Board_Uplike_Update(int board_idx, String userId);
 
 	//댓글 가져오기
 	public ArrayList<ReplyDto> replyList(String idx);
@@ -122,10 +128,16 @@ public interface ProjectInterface {
 	// 댓글 삭제
 	public int repleDel(String reple_idx);
 	
+	//댓글 추천체크
+	public String reple_likeCheck(int reple_idx, String board_idx, String userId);
+
 	//댓글 추천수 증가
 	public int reple_like(int reple_idx);
 	
-	//댓글 추천수 감소
+	//댓글 추천수 증가 업데이트 
+	public void reple_likeCheckUpdate(int reple_idx, String board_idx, String userId);
+	
+	//댓글 비 추천수 증가
 	public int reple_hate(int reple_idx);
 	
 	//아이디 찾기
@@ -136,6 +148,12 @@ public interface ProjectInterface {
 	
 	//글쓰기 위한 idx찾기
 	public int CB_writeFind(String subject, String sub_subject, String cBfilename, String cBnewfilename);
+	
+	//LikeValidation 위한 idx찾기
+	public int Board_writeFind(String subject, String content, String category_name, int join_idx);
+	
+	//RLikeValidation 위한 reple_idx찾기
+	public int reple_writeFind(int idx, String nick, String content);
 	
 	//코디 게시판 글쓰기<외투,상의,하의>
 	public void Cloth_write(int board_idx,String category_name, String cloth_name, String real_name,
@@ -217,7 +235,18 @@ public interface ProjectInterface {
 	
 	//당첨자 후보 업데이트 
 	public int EventupLike(String userId, String selection_name);
+	
+	//LIke_validation생성
+	public void Create_Likevalidataion(int board_idx, String userId);
+	
+	//RLIke_validation생성
+	public void Create_RLikevalidataion(int reple_idx, int idx, String userId);
 
+
+	
+	
+
+	
 
 }
 
