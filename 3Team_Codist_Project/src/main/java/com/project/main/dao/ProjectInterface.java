@@ -26,7 +26,7 @@ public interface ProjectInterface {
 	
 	//닉네임 찾기
 	public String FindNick(String userId);
-
+	
 	//회원가입
 	public void memberJoin(MemberInfo info);
 	

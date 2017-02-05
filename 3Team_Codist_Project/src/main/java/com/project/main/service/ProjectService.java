@@ -96,7 +96,7 @@ public class ProjectService {
 				mil=index_Mileage(id);
 				session.setAttribute("mil",mil.getMileage());
 			}else{
-				page="ioi";
+				page="main";
 				mav.addObject("msg","아이디 또는 비밀번호를 확인 하세요");
 			}			
 		}
@@ -830,7 +830,7 @@ public class ProjectService {
 		String filenameCheck=multi.getParameter("filenameCheck");
 		logger.info(idx+"/"+subject+"/"+content+"/"+filename+"/"+newfilename+"/");
 		String msg = "수정에 실패 했습니다.";
-		String page="ioi";
+		String page="main";
 		int success=0;
 		if(filename.equals(filenameCheck))
 		{
@@ -852,7 +852,9 @@ public class ProjectService {
 		
 		switch(inter.CategoryName(idx))
 		{
-	
+		case "QnA":
+			page="QnABoard_Main";
+		break;
 		case "CP":
 			page="Coplz_Main";
 		break;
@@ -1079,7 +1081,7 @@ public class ProjectService {
 			params.put("content_userId", userId);
 			params.put("FindId_userEmail", userEmail);
 			mav.addObject("Find_Id", Email(params));		
-			mav.setViewName("ioi");
+			mav.setViewName("main");
 		}
 		else
 		{
@@ -1117,7 +1119,7 @@ public class ProjectService {
 				params.put("user_Pw", user_Pw);			
 				params.put("user_Email", user_Email);
 				mav.addObject("Find_Pw", Email(params));			
-				mav.setViewName("ioi");
+				mav.setViewName("main");
 			}
 			
 		}	
@@ -1146,7 +1148,7 @@ public class ProjectService {
 				params.put("content_userPw", userPw);			
 				params.put("FindPw_userEmail", userEmail);
 				mav.addObject("Find_Pw", Email(params));
-				mav.setViewName("ioi");
+				mav.setViewName("main");
 		    }			
 		}else{
 			mav.addObject("error_msg", "입력하신 회원정보가 잘못되었습니다. 다시 확인 바랍니다.");
@@ -1298,7 +1300,7 @@ public class ProjectService {
 		Map<String, ArrayList<myClothDto>> obj = new HashMap<String, ArrayList<myClothDto>>();
 		// 로그인시 가능하게 유효성 검사		
 		if(userId==""){
-			String page="ioi";
+			String page="main";
 			String msg="";			
 			msg = "로그인이 필요한 서비스입니다!.";
 			mav.addObject("msg", msg);
@@ -1316,7 +1318,7 @@ public class ProjectService {
 			if(list.size()==0){
 				msg = "나만의 옷장에 담긴 데이터가 없습니다. 코디게시판에서 담아오는 서비스가 필요합니다!";
 				mav.addObject("my_msg", msg);
-				mav.setViewName("ioi");
+				mav.setViewName("main");
 			}else{
 				obj.put("myCloth",list);
 				mav.addObject("myCalendar", obj);		
@@ -1340,7 +1342,7 @@ public class ProjectService {
 		inter = sqlSession.getMapper(ProjectInterface.class);
 		ModelAndView mav= new ModelAndView();
 		String msg="삭제에 실패 하셨습니다.";
-		String page="ioi";
+		String page="main";
 		if(inter.BoardDelete(board_idx)==1)
 		{
 			 msg="삭제에 성공 하셨습니다.";
@@ -1376,7 +1378,7 @@ public class ProjectService {
 				inter.Find_ladderData(time_event_name);		
 				ModelAndView mav = new ModelAndView();
 				mav.addObject("ladder_Data",  inter.Find_ladderData(time_event_name));
-				mav.setViewName("ioi");
+				mav.setViewName("main");
 				return mav;
 			}			
 		
