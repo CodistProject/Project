@@ -38,14 +38,24 @@
 			<tr>
 				<td>첨부파일</td>
 				<td colspan="5" class="left" id="attach" width="30px">
-				${content.filename}		
+				<c:if test="${content.filename != null}">	
+				${content.filename}	
+				</c:if>
+				<c:if test="${content.filename == null}">	
+				첨부 파일이 없습니다.
+				</c:if>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="6">
+				<a href="javascript:board_Uplike('${content.board_idx}')" id="ft_like" class="a2">추천</a>${content.ft_like}
 				</td>
 			</tr>
 			<tr>
 				<td  id="del" colspan="6">
 				<input type="button" class="bt" onclick="location.href='./QnABoard'" value="목록"/>
-				<input type="hidden" class="bt"  onclick="location.href='./Board_update?board_idx=${content.board_idx}'" value="수정"/>
-				<input type="button" class="bt"  onclick="location.href='./deleteFT?board_idx=${content.board_idx}'" value="삭제"/>
+				<input type="button" class="bt Alter" onclick="location.href='./Board_update?board_idx=${content.board_idx}'" value="수정"/>
+				<input type="button" class="bt del" onclick="location.href='./BoardDelete?board_idx=${content.board_idx}&category_name=QnA'" value="삭제" />						
 				</td>
 			</tr>
 			
@@ -68,21 +78,20 @@
 		</div>
 	</body>
 	<script>
-	//삭제 가능 판단 및 삭제
-	del();
-
-	function del(){
-		var userId="${sessionScope.userId}";	
-		ㅊ
-		
-		console.log("${content.board_idx}");
-		console.log("${content.category_name}");
-	}
+	var msg="${msg}";
+	if(msg !="")
+		{
+		alert(msg);
+		}
+	// 유저아이디로 찾은(아작스처리한) 닉네임과 content에 담아서 보낸 닉네임 비교하기 위한 변수들
+	var nick = "${content.nickName}";
+	var userNick="";
+	console.log(nick);	
+	
 	// 리플 리스트 실행
 	var userId="${sessionScope.userId}";
 	FindNick(userId);
 	replyList();
-	var userNick="";
 	
 	$("#go").click(function(){
 		url ="./rest/replyRegist";
@@ -164,7 +173,24 @@
 		{
 		sendServer(date,url);
 		}
-	};	 	  
+	};	 
+	 //추천 하기
+	function board_Uplike(board_idx){
+		url = "./rest/board_Uplike"
+		data = {}; 
+		data.board_idx = board_idx;
+		data.userId= "${sessionScope.userId}";
+		console.log(board_idx);
+		console.log(data.userId);
+		if(data.userId=="")
+			{
+			alert("로그인 후 가능합니다.");
+			}
+		else
+			{
+			sendServer(data,url);
+			}
+	};
 	
 	function sendServer(obj, url){
 		console.log(obj);
@@ -185,7 +211,9 @@
 				}
 				
 				if(url == "./rest/FindNick"){
+					userNick = d.userNick;
 					$(".user").html(d.userNick);
+					Show_btn(userNick);
 					}
 				if(url == "./rest/repleDel"){					
 					alert("삭제에 성공하였습니다.");
@@ -210,11 +238,25 @@
 							alert("이미 추천, 비추천을 하셨습니다.");
 						}					
 					}
+				if(url=="./rest/board_Uplike"){
+	            	alert(d.msg);
+	            	
+	            }
 			},
 			error:function(e){
 				console.log(e);
 			}				
 		});
+	}
+	// 삭제 버튼 보이기 안보이기 하기	
+	function Show_btn(userNick){
+		if(userNick==nick){
+			$(".Alter").css("display", "inline-block");	
+			$(".del").css("display", "inline-block");	
+		}else{
+			$(".del").css("display", "none");
+			$(".Alter").css("display", "none");
+		}		
 	}
 
 	// 리스트 뿌리는 역할 함수

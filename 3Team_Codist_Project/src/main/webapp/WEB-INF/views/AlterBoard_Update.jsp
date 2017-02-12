@@ -12,7 +12,7 @@
 	<body>
 	<jsp:include page="../../resources/include/index.jsp"></jsp:include>
 	<div class="content">
-	<form action="B_update" method="post">
+	<form action="B_update" method="post" enctype="multipart/form-data">
 		<table class="detail">
 			<tr>
 				<td>제목</td>
@@ -45,7 +45,7 @@
 			<tr>
 				<td colspan="2">
 					<input class="bt" type="submit" value="수정"/>
-					<input class="bt" type="button" onclick="location.href='./qna'"value="취소"/>
+					<input class="bt" type="button" onclick="location.href='./AlterBoard'"value="취소"/>
 				</td>
 			</tr>
 		</table>

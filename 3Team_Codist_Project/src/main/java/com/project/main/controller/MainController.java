@@ -205,7 +205,7 @@ public class MainController {
 	public ModelAndView update(MultipartHttpServletRequest multi){
 		logger.info("수정 요청");
 		return service.B_update(multi);
-	}
+	} 
 	
 	//코디 게시판 수정
 	@RequestMapping(value="/Codiboard_update")

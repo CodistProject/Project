@@ -120,6 +120,7 @@
 		console.log(list);
 		var content = "";
 		for(var i=0; i<list.length; i++){
+				console.log(list[i].newfilename );
 				content +="<tr height='50px'>"
 							+"<td>"+list[i].board_idx
 							if(list[i].nickName==userNick)
@@ -131,7 +132,7 @@
 							+"<a class='listpage' href='./Board_Detail?board_idx="+list[i].board_idx+"'>"
 							+list[i].subject
 							+"</a>";
-							if(list[i].newFileName == null){
+							if(list[i].newfilename != null){
 								content += "<h8>[첨부파일]</h8>"				
 								}
 							else

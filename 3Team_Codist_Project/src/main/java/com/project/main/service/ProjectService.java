@@ -292,7 +292,7 @@ public class ProjectService {
 			page="Coplz_Update";
 		break;
 			
-		case 	"QnA":
+		case "QnA":
 			page="QnABoard_Update";
 		break;
 		
@@ -1356,7 +1356,7 @@ public class ProjectService {
 					page="Coplz_Main";
 				break;
 					
-				case 	"QnA":
+				case "QnA":
 					page="QnABoard_Main";
 				break;
 				
